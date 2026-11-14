@@ -1186,6 +1186,28 @@ section[id]{scroll-margin-top:60px}
 
 .hline{width:100%;height:auto;display:block}
 .hychips{display:flex;flex-wrap:wrap;gap:4px;margin:6px 0 12px}.hychips .tog{font-size:12px;padding:4px 8px}
+.hnav{margin:0 0 14px}.hnav-t{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid var(--rule);padding-bottom:0;-webkit-overflow-scrolling:touch}.hnav-t::-webkit-scrollbar{display:none}
+.hnav-t a{flex:0 0 auto;padding:9px 12px 8px;font-family:var(--f-data);font-size:13px;font-weight:600;color:var(--ink-2);text-decoration:none;border-bottom:3px solid transparent;margin-bottom:-1px;white-space:nowrap}
+.hnav-t a:hover{color:var(--ink)}.hnav-t a[aria-current]{color:var(--ink);border-bottom-color:var(--red)}
+.hcrumb{margin:8px 0 0;font-family:var(--f-data);font-size:12px;color:var(--ink-2)}.hcrumb a{color:var(--ink-2)}
+.hpn{display:flex;justify-content:space-between;gap:8px;margin:4px 0 6px}
+.hfeat{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0 0 24px}@media (max-width:640px){.hfeat{grid-template-columns:1fr}}
+.hf{display:flex;flex-direction:column;gap:3px;padding:14px 16px;border:1px solid var(--rule);border-left:4px solid var(--red);background:var(--paper-2);color:var(--ink);text-decoration:none;border-radius:6px}
+.hf:hover{border-color:var(--ink)}.hf-k{font-family:var(--f-data);font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-2)}.hf b{font-size:20px;font-family:var(--f-display)}.hf span{font-size:13px}.hf-f{color:var(--ink-2);font-family:var(--f-data);font-size:12px!important;margin-top:4px}
+.hyall .tog{font-size:12.5px}
+.hstrip dd{font-size:21px}.hstrip dd small{display:block;margin-top:3px}
+.hgo{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+.hgo a{display:flex;flex-direction:column;gap:4px;padding:14px;border:1px solid var(--rule);border-radius:6px;color:var(--ink);text-decoration:none;background:var(--paper)}
+.hgo a:hover{border-color:var(--ink);background:var(--paper-2)}.hgo b{font-size:15px}.hgo b:after{content:" ›";color:var(--red)}.hgo span{font-size:12.5px;color:var(--ink-2)}
+.hmini{margin:0;padding:0;list-style:none;counter-reset:hm}.hmini li{counter-increment:hm;display:flex;align-items:baseline;gap:6px;padding:7px 0;border-bottom:1px solid var(--rule)}
+.hmini li:before{content:counter(hm);font-family:var(--f-data);font-size:12px;color:var(--ink-2);width:16px}.hmini li b{margin-left:auto;font-family:var(--f-data)}
+.htiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px;margin:0 0 24px}
+.htile{display:flex;flex-direction:column;gap:3px;padding:12px 14px;border:1px solid var(--rule);border-radius:6px;color:var(--ink);text-decoration:none;background:var(--paper)}
+.htile:hover{border-color:var(--ink);background:var(--paper-2)}.htile.live{border-color:var(--red)}
+.ht-y{font-family:var(--f-display);font-size:18px;font-weight:700}.ht-y .tag{font-style:normal;font-size:10px;vertical-align:middle}.ht-c{font-size:13px;font-weight:600}.ht-m{font-size:12.5px;color:var(--ink-2)}.ht-m b{color:var(--ink);font-weight:600}.ht-g{font-family:var(--f-data);font-size:11px;color:var(--ink-2)}
+.hclubs{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px}
+.hclubs a{display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--rule);border-radius:6px;color:var(--ink);text-decoration:none}.hclubs a:hover{border-color:var(--ink);background:var(--paper-2)}
+.hclubs span{display:flex;flex-direction:column}.hclubs b{font-size:14px}.hclubs small{font-family:var(--f-data);font-size:11.5px;color:var(--ink-2)}
 tr.on td{background:color-mix(in srgb,var(--red) 8%,transparent)}
 .hfive{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:0 0 16px}@media (max-width:760px){.hfive{grid-template-columns:repeat(2,1fr)}}
 .hcard{border:1px solid var(--rule);border-radius:12px;padding:10px;background:var(--card);display:flex;flex-direction:column;gap:2px}
@@ -1870,7 +1892,7 @@ function render(keepScroll){
   if (r.indexOf("analitika") === 0) sec = "analitika";
   if (r.indexOf("palyginimas") === 0 || r === "izvalgos") sec = "zaidejai";
   if (r.indexOf("eurolyga") === 0 || r.indexOf("klubas-") === 0) sec = "eurolyga";
-  if (r === "eurolyga-istorija" || /^el[htpcg]-/.test(r)) sec = "elistorija";
+  if (r.indexOf("eurolyga-istorija") === 0 || /^el[htpcgx]-/.test(r)) sec = "elistorija";
   var tm = r.match(/^turas-(\d+)-([a-z]+)$/), mm = r.match(/^mainai-(\d+)-(\d+)$/), er = r.match(/^eurolyga-turas-(\d+)$/);
   setNav(sec);
   if (r === "lentele") html = pageHome() + homeX5();
@@ -1890,7 +1912,7 @@ function render(keepScroll){
   else if (r === "eurolyga-prognoze") html = pageELForecast();
   else if (r === "eurolyga-klubai") html = pageELClubs();
   else if (r === "eurolyga-statistika") html = pageELStats();
-  else if (r === "eurolyga-istorija") html = pageELHistory();
+  else if (r.indexOf("eurolyga-istorija") === 0) html = pageELHistory(r.slice(18));
   else if (r.indexOf("elh-") === 0) html = pageELH(r.slice(4));
   else if (r.indexOf("elt-") === 0) html = pageELT(r.split("-")[1], r.split("-")[2]);
   else if (r.indexOf("elp-") === 0) html = pageELP(r.slice(4));
@@ -7082,23 +7104,72 @@ function hLine(vals, labels, col, title, fmt){
   [iMax, iMin].forEach(function(i){ s += '<text x="' + X(i).toFixed(1) + '" y="' + (Y(vals[i]) - 7).toFixed(1) + '" font-size="11" font-weight="700" text-anchor="middle" fill="var(--ink)">' + fmt(vals[i]) + '</text>'; });
   return s + '</svg>';
 }
-function pageELHistory(){
-  var H = HX(), ss = H.seasons, done = ss.filter(function(s){ return !s.live; }), cur = S.hy || done[done.length - 1].y, sel = ss.filter(function(s){ return s.y === cur; })[0] || done[done.length - 1];
-  var h = '<p class="kicker">Eurolygos istorija · ' + hyLabel(H.first) + ' – ' + hyLabel(H.last) + '</p><h2 class="page">Eurolygos istorija per fantasy prizmę</h2>' +
-    elDeck('Kiekvienas Eurolygos sezonas nuo ' + hyLabel(H.first) + ' perskaičiuotas taip, lyg tada būtų žaidžiamas mūsų BasketNews fantasy: kas būtų buvęs vertingiausias pasirinkimas, kokia būtų tobula sudėtis ir kaip keitėsi fantasy taškai per 26 metus. Duomenys iš Sofascore: reguliariojo sezono statistika, PIR, Sofascore reitingai ir atkrintamųjų medžiai.');
-  /* overview table */
-  h += sect('Visi sezonai', ss.length + ' sezonai', '<div class="tbl"><table class="ag"><thead><tr><th>Sezonas</th><th class="num">Rungt.</th><th>Čempionas</th><th>Geriausias rekordas</th><th>Fantasy MVP</th><th class="num">FPTS/rungt.</th><th>PIR lyderis</th><th>Sofascore reitingo lyderis</th><th class="num">Top 10 vid.</th><th class="num">Taškai/rungt.</th></tr></thead><tbody>' +
-    ss.slice().reverse().map(function(s){ var m = hyRow(s, s.mvp); return '<tr' + (s.y === sel.y ? ' class="on"' : '') + '><td><a href="#eurolyga-istorija" data-hy="' + s.y + '"><b>' + hyLabel(s.y) + '</b></a>' + (s.live ? ' <span class="tag ok">vyksta</span>' : '') + '</td><td class="num">' + s.g + '</td><td>' + (s.champ ? esc(s.champ) : s.y === '19/20' ? '<span class="muted">atšaukta (COVID-19)</span>' : '–') + '</td><td>' + (s.best ? esc(s.best[0]) + ' <span class="muted">' + s.best[1] + '–' + s.best[2] + '</span>' : '<span class="muted">–</span>') + '</td><td>' + (m ? '<a class="cl" href="#elp-' + m.id + '">' + esc(m.n) + '</a><span class="sub">' + esc(m.t) + ' · ' + esc(m.pos) + '</span>' : '–') + '</td><td class="num"><b>' + (m ? nf1(m.f) : '–') + '</b></td><td>' + (s.pirl ? esc(s.pirl[1]) + ' <span class="muted">' + nf1(s.pirl[2]) + '</span>' : '–') + '</td><td>' + (s.rtl ? esc(s.rtl[1]) + ' <span class="muted">' + NF2.format(s.rtl[2]) + '</span>' : '–') + '</td><td class="num">' + nf1(s.top10avg) + '</td><td class="num">' + (s.ppg ? nf1(s.ppg) : '–') + '</td></tr>'; }).join('') +
-    '</tbody></table></div><p class="note">Paspausk sezoną, kad pamatytum jo detales žemiau. Fantasy MVP: didžiausias FPTS vidurkis tarp žaidėjų, sužaidusių bent 60&nbsp;% rungtynių. Ankstyvieji sezonai turėjo mažiau rungtynių ir kitokį formatą (grupės, Top 16), todėl vidurkiai lyginami atsargiai.</p>');
-  /* season detail */
-  var five = sel.five.map(function(id){ return hyRow(sel, id); }).filter(Boolean), cb = sel.cb && hyRow(sel, sel.cb), mvp = hyRow(sel, sel.mvp);
-  h += '<section id="hsel"><h3 class="sect">' + hyLabel(sel.y) + ' sezonas</h3><div class="toggles hychips">' + ss.map(function(s){ return '<button type="button" class="tog" data-hy="' + s.y + '" aria-pressed="' + (s.y === sel.y) + '">' + s.y + '</button>'; }).join('') + '</div>' +
-    '<dl class="strip"><div><dt>Čempionas</dt><dd>' + (sel.champ ? esc(sel.champ) : '–') + '</dd></div><div><dt>Fantasy MVP</dt><dd>' + (mvp ? esc(mvp.n) + '<small>' + nf1(mvp.f) + ' FPTS per rungtynes</small>' : '–') + '</dd></div><div><dt>Čempiono geriausias fantasy žaidėjas</dt><dd>' + (cb ? esc(cb.n) + '<small>' + nf1(cb.f) + ' FPTS, ' + cb.rk + ' vieta</small>' : '–') + '</dd></div><div><dt>Rungtynių</dt><dd>' + sel.g + '<small>' + sel.teams + ' komandos</small></dd></div></dl>' +
-    '<h4 class="mn4">Tobula fantasy sudėtis</h4><div class="hfive">' + five.map(function(r){ return '<div class="hcard"><b>' + esc(r.pos) + '</b><a class="hn cl" href="#elp-' + r.id + '">' + esc(r.n) + '</a><span class="muted">' + esc(r.t) + '</span><em>' + nf1(r.f) + '</em><small>' + nf1(r.pts) + ' tšk. · ' + nf1(r.reb) + ' atk. · ' + nf1(r.ast) + ' perd.</small></div>'; }).join('') + '</div>' +
-    '<div class="tbl"><table class="ag"><thead><tr><th class="num">#</th><th>Žaidėjas</th><th>Klubas</th><th class="num">Rungt.</th><th class="num">Min.</th><th class="num">FPTS</th><th class="num">Iš viso</th><th class="num">FPTS/min</th><th class="num">Tšk.</th><th class="num">Atk.</th><th class="num">Perd.</th><th class="num">Per.</th><th class="num">Blk.</th><th class="num">Kl.</th><th class="num">PIR</th><th class="num">Reitingas</th><th class="num">DD</th></tr></thead><tbody>' +
-    sel.top.map(function(r){ return '<tr' + (sel.five.indexOf(r.id) >= 0 ? ' class="st5"' : '') + '><td class="c"><span class="rk">' + r.rk + '</span></td><td><a class="cl" href="#elp-' + r.id + '">' + esc(r.n) + '</a> <span class="muted">' + esc(r.pos) + '</span></td><td>' + esc(r.t) + '</td><td class="num">' + r.g + '</td><td class="num">' + nf1(r.min) + '</td><td class="num"><b>' + nf1(r.f) + '</b></td><td class="num">' + NF.format(Math.round(r.ft)) + '</td><td class="num">' + NF2.format(r.fpm) + '</td><td class="num">' + nf1(r.pts) + '</td><td class="num">' + nf1(r.reb) + '</td><td class="num">' + nf1(r.ast) + '</td><td class="num">' + nf1(r.stl) + '</td><td class="num">' + nf1(r.blk) + '</td><td class="num">' + nf1(r.tov) + '</td><td class="num">' + (r.pir != null ? nf1(r.pir) : '–') + '</td><td class="num">' + (r.rt != null ? NF2.format(r.rt) : '–') + '</td><td class="num">' + (r.dd != null ? r.dd : '–') + '</td></tr>'; }).join('') +
-    '</tbody></table></div>' + (!sel.exact ? '<p class="note">Šiam sezonui Sofascore neturi PIR ir dublių, todėl išprovokuotos pražangos ir dublių premijos neįskaičiuotos: FPTS mažesni nei tikrieji.</p>' : '') + (sel.live ? '<p class="note">Sezonas vyksta, rodomi pirmųjų ' + sel.g + ' turų duomenys.</p>' : '') + '</section>';
-  /* insights */
+var HTABS = [['', 'Apžvalga'], ['sezonai', 'Sezonai'], ['rekordai', 'Rekordai'], ['legendos', 'Legendos'], ['klubai', 'Klubai'], ['tendencijos', 'Tendencijos'], ['metodika', 'Kaip skaičiuota']];
+function histNav(act, crumbs){
+  return '<nav class="hnav" aria-label="Eurolygos istorijos skiltys"><div class="hnav-t">' + HTABS.map(function(t){ return '<a href="#eurolyga-istorija' + (t[0] ? '-' + t[0] : '') + '"' + (t[0] === act ? ' aria-current="page"' : '') + '>' + t[1] + '</a>'; }).join('') + '</div>' +
+    (crumbs != null ? '<p class="hcrumb"><a href="#eurolyga-istorija">Eurolygos istorija</a>' + crumbs + '</p>' : '') + '</nav>';
+}
+function hPrevNext(y){
+  var ys = HX().seasons.map(function(s){ return s.y; }), i = ys.indexOf(y), p = ys[i - 1], n = ys[i + 1];
+  return '<div class="hpn">' + (p ? '<a class="tog" href="#elh-' + yCode(p) + '">‹ ' + hyLabel(p) + '</a>' : '<span></span>') + (n ? '<a class="tog" href="#elh-' + yCode(n) + '">' + hyLabel(n) + ' ›</a>' : '<span></span>') + '</div>';
+}
+function hTile(s){
+  var m = hyRow(s, s.mvp);
+  return '<a class="htile' + (s.live ? ' live' : '') + '" href="#elh-' + yCode(s.y) + '"><span class="ht-y">' + hyLabel(s.y) + (s.live ? ' <i class="tag ok">vyksta</i>' : '') + '</span>' +
+    '<span class="ht-c">' + (s.champ ? '🏆 ' + esc(s.champ) : s.y === '19/20' ? 'atšaukta (COVID-19)' : s.live ? (s.best ? 'Lyderė: ' + esc(s.best[0]) + ' ' + s.best[1] + '–' + s.best[2] : 'vyksta') : '–') + '</span>' +
+    '<span class="ht-m">' + (m ? '<b>' + esc(m.n) + '</b> ' + nf1(m.f) + ' FPTS' : '&nbsp;') + '</span><span class="ht-g">' + s.g + ' rungt.</span></a>';
+}
+function pageELHistory(sub){
+  var H = HX(), ss = H.seasons, done = ss.filter(function(s){ return !s.live; });
+  sub = sub || '';
+  var title = {'': 'Eurolygos istorija per fantasy prizmę', sezonai: 'Visi Eurolygos sezonai', rekordai: 'Rekordai', legendos: 'Fantasy legendos', klubai: 'Klubai', tendencijos: 'Tendencijos', metodika: 'Kaip skaičiuota'}[sub];
+  if (title == null){ sub = ''; title = 'Eurolygos istorija per fantasy prizmę'; }
+  var h = histNav(sub) + '<h2 class="page">' + title + '</h2>';
+  if (sub === '') return h + hsHub(H, ss, done);
+  if (sub === 'sezonai') return h + hsSeasons(H, ss);
+  if (sub === 'rekordai') return h + hsBest(H) + glRecordsSect();
+  if (sub === 'legendos') return h + hsCareers(H);
+  if (sub === 'klubai') return h + hsClubs();
+  if (sub === 'tendencijos') return h + hsInsights(H, ss, done) + hsTrends(ss);
+  return h + hsMethod();
+}
+function hsHub(H, ss, done){
+  var live = ss.filter(function(s){ return s.live; })[0], last = done[done.length - 1], lm = live && hyRow(live, live.mvp), dm = hyRow(last, last.mvp), c0 = H.career[0], b0 = H.best[0];
+  var champs = {}; done.forEach(function(s){ if (s.champ) champs[s.champ] = (champs[s.champ] || 0) + 1; });
+  var topC = Object.keys(champs).sort(function(a, b){ return champs[b] - champs[a]; })[0];
+  var h = '<p class="deck">Kiekvienas Eurolygos sezonas nuo ' + hyLabel(H.first) + ' perskaičiuotas pagal mūsų BasketNews fantasy taisykles. Pasirink skiltį viršuje arba sezoną žemiau.</p>';
+  h += '<dl class="strip hstrip"><div><dt>Sezonų</dt><dd>' + ss.length + '<small>' + hyLabel(H.first).slice(0, 4) + '–20' + hyLabel(H.last).slice(5) + '</small></dd></div>' +
+    '<div><dt>Daugiausia titulų</dt><dd>' + esc(topC || '–') + '<small>' + (champs[topC] || 0) + ' kartai</small></dd></div>' +
+    '<div><dt>Visų laikų FPTS lyderis</dt><dd>' + (c0 ? '<a class="cl" href="#elp-' + c0[0] + '">' + esc(c0[1]) + '</a><small>' + NF.format(c0[2]) + ' FPTS</small>' : '–') + '</dd></div>' +
+    '<div><dt>Geriausias sezonas</dt><dd>' + (b0 ? '<a class="cl" href="#elp-' + b0[1] + '">' + esc(b0[2]) + '</a><small>' + hyLabel(b0[0]) + ', ' + nf1(b0[6]) + ' FPTS</small>' : '–') + '</dd></div></dl>';
+  h += '<div class="hfeat">';
+  if (live) h += '<a class="hf" href="#elh-' + yCode(live.y) + '"><span class="hf-k">Šis sezonas · ' + hyLabel(live.y) + '</span><b>' + (lm ? esc(lm.n) : '–') + '</b><span>' + (lm ? 'fantasy lyderis, ' + nf1(lm.f) + ' FPTS per rungtynes' : '') + '</span><span class="hf-f">Sužaista ' + live.g + ' turų' + (live.best ? ' · lyderė ' + esc(live.best[0]) + ' ' + live.best[1] + '–' + live.best[2] : '') + '</span></a>';
+  h += '<a class="hf" href="#elh-' + yCode(last.y) + '"><span class="hf-k">Praėjęs sezonas · ' + hyLabel(last.y) + '</span><b>' + (last.champ ? '🏆 ' + esc(last.champ) : '–') + '</b><span>' + (dm ? 'Fantasy MVP ' + esc(dm.n) + ', ' + nf1(dm.f) + ' FPTS' : '') + '</span><span class="hf-f">Tobula sudėtis ir top 20 ›</span></a></div>';
+  h += sect('Sezonai', 'paspausk metus', '<div class="toggles hychips hyall">' + ss.slice().reverse().map(function(s){ return '<a class="tog" href="#elh-' + yCode(s.y) + '">' + hyLabel(s.y) + '</a>'; }).join('') + '</div>');
+  var go = [['sezonai', 'Sezonai', ss.length + ' sezonų kortelės: čempionas, fantasy MVP, tobula sudėtis'], ['rekordai', 'Rekordai', 'Geriausi sezonai ir 50 geriausių vienų rungtynių pasirodymų'], ['legendos', 'Legendos', 'Daugiausiai FPTS per karjerą surinkę žaidėjai'], ['klubai', 'Klubai', 'Kiekvieno klubo sezonai, titulai ir visų laikų lyderiai'], ['tendencijos', 'Tendencijos', 'Kaip keitėsi fantasy taškai ir ką rodo 26 sezonai'], ['metodika', 'Kaip skaičiuota', 'Taisyklės, šaltiniai ir apribojimai']];
+  h += sect('Naršyk', '', '<div class="hgo">' + go.map(function(g){ return '<a href="#eurolyga-istorija-' + g[0] + '"><b>' + g[1] + '</b><span>' + g[2] + '</span></a>'; }).join('') + '</div>');
+  h += '<div class="cols2">' + sect('Top 5 legendos', '', '<ol class="hmini">' + H.career.slice(0, 5).map(function(r){ return '<li><a class="cl" href="#elp-' + r[0] + '">' + esc(r[1]) + '</a><b>' + NF.format(r[2]) + '</b></li>'; }).join('') + '</ol><p class="data"><a class="tog" href="#eurolyga-istorija-legendos">Visos legendos ›</a></p>') +
+    sect('Top 5 sezonai', '', '<ol class="hmini">' + H.best.slice(0, 5).map(function(r){ return '<li><a class="cl" href="#elp-' + r[1] + '">' + esc(r[2]) + '</a> <span class="muted">' + hyLabel(r[0]) + '</span><b>' + nf1(r[6]) + '</b></li>'; }).join('') + '</ol><p class="data"><a class="tog" href="#eurolyga-istorija-rekordai">Visi rekordai ›</a></p>') + '</div>';
+  return h;
+}
+function hsSeasons(H, ss){
+  return '<div class="htiles">' + ss.slice().reverse().map(hTile).join('') + '</div>' + hsOverview(H, ss);
+}
+function hsClubs(){
+  var j = HJ(); if (!j) return hjWait();
+  var list = Object.keys(j.teams).map(function(tid){
+    var t = j.teams[tid], ys = j.years.filter(function(y){ return j.seasons[y].tm[tid]; }), ch = 0, W = 0;
+    ys.forEach(function(y){ var r = j.seasons[y].tm[tid]; W += r[1] || 0; if (j.seasons[y].champ && j.seasons[y].champ === (r[0] || t[0])) ch++; });
+    return [tid, t[0], ys, ch, W];
+  }).filter(function(c){ return c[2].length; }).sort(function(a, b){ return b[3] - a[3] || b[2].length - a[2].length || b[4] - a[4]; });
+  return '<p class="deck">' + list.length + ' klubai, žaidę Eurolygoje nuo ' + hyLabel(j.years[0]) + '. Rikiuota pagal titulus ir sezonus.</p><div class="hclubs">' + list.map(function(c){ return '<a href="#elc-' + c[0] + '">' + hLogo(+c[0], 34) + '<span><b>' + esc(c[1]) + '</b><small>' + c[2].length + ' sez. · ' + hyLabel(c[2][0]).slice(0, 4) + '–' + hyLabel(c[2][c[2].length - 1]).slice(5) + (c[3] ? ' · 🏆 ' + c[3] : '') + '</small></span></a>'; }).join('') + '</div>';
+}
+function hsOverview(H, ss){
+  return sect('Visi sezonai', ss.length + ' sezonai', '<div class="tbl"><table class="ag"><thead><tr><th>Sezonas</th><th class="num">Rungt.</th><th>Čempionas</th><th>Geriausias rekordas</th><th>Fantasy MVP</th><th class="num">FPTS/rungt.</th><th>PIR lyderis</th><th>Sofascore reitingo lyderis</th><th class="num">Top 10 vid.</th><th class="num">Taškai/rungt.</th></tr></thead><tbody>' +
+    ss.slice().reverse().map(function(s){ var m = hyRow(s, s.mvp); return '<tr' + '' + '><td><a href="#eurolyga-istorija" data-hy="' + s.y + '"><b>' + hyLabel(s.y) + '</b></a>' + (s.live ? ' <span class="tag ok">vyksta</span>' : '') + '</td><td class="num">' + s.g + '</td><td>' + (s.champ ? esc(s.champ) : s.y === '19/20' ? '<span class="muted">atšaukta (COVID-19)</span>' : '–') + '</td><td>' + (s.best ? esc(s.best[0]) + ' <span class="muted">' + s.best[1] + '–' + s.best[2] + '</span>' : '<span class="muted">–</span>') + '</td><td>' + (m ? '<a class="cl" href="#elp-' + m.id + '">' + esc(m.n) + '</a><span class="sub">' + esc(m.t) + ' · ' + esc(m.pos) + '</span>' : '–') + '</td><td class="num"><b>' + (m ? nf1(m.f) : '–') + '</b></td><td>' + (s.pirl ? esc(s.pirl[1]) + ' <span class="muted">' + nf1(s.pirl[2]) + '</span>' : '–') + '</td><td>' + (s.rtl ? esc(s.rtl[1]) + ' <span class="muted">' + NF2.format(s.rtl[2]) + '</span>' : '–') + '</td><td class="num">' + nf1(s.top10avg) + '</td><td class="num">' + (s.ppg ? nf1(s.ppg) : '–') + '</td></tr>'; }).join('') +
+    '</tbody></table></div><p class="note">Paspausk sezoną, kad atidarytum jo puslapį. Fantasy MVP: didžiausias FPTS vidurkis tarp žaidėjų, sužaidusių bent 60&nbsp;% rungtynių. Ankstyvieji sezonai turėjo mažiau rungtynių ir kitokį formatą (grupės, Top 16), todėl vidurkiai lyginami atsargiai.</p>');
+}
+function hsInsights(H, ss, done){
   var withC = done.filter(function(s){ return s.champ && s.mvp; }), mvpChamp = withC.filter(function(s){ var m = hyRow(s, s.mvp); return m && (m.t === s.champ || m.t.indexOf(s.champ) === 0 || s.champ.indexOf(m.t) === 0); });
   var posC = {G: 0, F: 0, C: 0}; done.forEach(function(s){ var m = hyRow(s, s.mvp); if (m && posC[m.pos] != null) posC[m.pos]++; });
   var xs = [], ys = []; done.forEach(function(s){ s.top.forEach(function(r){ if (r.rt != null && r.pir != null){ xs.push(r.f); ys.push(r.rt); } }); });
@@ -7108,26 +7179,29 @@ function pageELHistory(){
   var m2x = xs2.reduce(function(a, b){ return a + b; }, 0) / xs2.length, m2y = ys2.reduce(function(a, b){ return a + b; }, 0) / ys2.length, c2 = 0, v2x = 0, v2y = 0;
   xs2.forEach(function(x, i){ c2 += (x - m2x) * (ys2[i] - m2y); v2x += (x - m2x) * (x - m2x); v2y += (ys2[i] - m2y) * (ys2[i] - m2y); });
   var hiS = done.slice().sort(function(a, b){ return b.top10avg - a.top10avg; })[0], loS = done.filter(function(s){ return s.exact; }).sort(function(a, b){ return a.top10avg - b.top10avg; })[0];
-  h += sect('Ką rodo 26 sezonai', '', '<ul class="tdl"><li>Fantasy MVP žaidė čempionų komandoje tik ' + mvpChamp.length + ' kartus iš ' + withC.length + ': geriausias fantasy pasirinkimas dažnai yra silpnesnės komandos lyderis, kuriam tenka daugiau kamuolio.</li><li>Fantasy MVP pozicijos: ' + posC.G + ' gynėjai, ' + posC.F + ' puolėjai ir ' + posC.C + ' centrai. Per pirmus ' + (done.length - 10) + ' sezonus gynėjai MVP tapo ' + done.slice(0, -10).filter(function(s){ var m = hyRow(s, s.mvp); return m && m.pos === 'G'; }).length + ' kartus, per paskutinius 10: ' + done.slice(-10).filter(function(s){ var m = hyRow(s, s.mvp); return m && m.pos === 'G'; }).length + ' kartus. Anksčiau dominavo aukštaūgiai su atkovotais kamuoliais ir dubliais, dabar vis dažniau laimi įžaidėjai, renkantys rezultatyvius perdavimus.</li><li>Ryšys su Sofascore reitingu: koreliacija ' + NF2.format(cov / Math.sqrt(vx * vy)) + ', su PIR ' + NF2.format(c2 / Math.sqrt(v2x * v2y)) + '. Mūsų FPTS beveik tas pats kaip PIR, tik daugiau vertina perdavimus ir perėmimus bei baudžia už klaidas, o Sofascore reitingas labiau atsižvelgia į efektyvumą ir minutes.</li><li>Aukščiausias top 10 vidurkis ' + hyLabel(hiS.y) + ' (' + nf1(hiS.top10avg) + '), žemiausias ' + hyLabel(loS.y) + ' (' + nf1(loS.top10avg) + '). Kai sezone daugiau rungtynių ir platesnės rotacijos, žvaigždės renka mažiau per rungtynes.</li></ul>');
-  /* trends */
+  return sect('Ką rodo 26 sezonai', '', '<ul class="tdl"><li>Fantasy MVP žaidė čempionų komandoje tik ' + mvpChamp.length + ' kartus iš ' + withC.length + ': geriausias fantasy pasirinkimas dažnai yra silpnesnės komandos lyderis, kuriam tenka daugiau kamuolio.</li><li>Fantasy MVP pozicijos: ' + posC.G + ' gynėjai, ' + posC.F + ' puolėjai ir ' + posC.C + ' centrai. Per pirmus ' + (done.length - 10) + ' sezonus gynėjai MVP tapo ' + done.slice(0, -10).filter(function(s){ var m = hyRow(s, s.mvp); return m && m.pos === 'G'; }).length + ' kartus, per paskutinius 10: ' + done.slice(-10).filter(function(s){ var m = hyRow(s, s.mvp); return m && m.pos === 'G'; }).length + ' kartus. Anksčiau dominavo aukštaūgiai su atkovotais kamuoliais ir dubliais, dabar vis dažniau laimi įžaidėjai, renkantys rezultatyvius perdavimus.</li><li>Ryšys su Sofascore reitingu: koreliacija ' + NF2.format(cov / Math.sqrt(vx * vy)) + ', su PIR ' + NF2.format(c2 / Math.sqrt(v2x * v2y)) + '. Mūsų FPTS beveik tas pats kaip PIR, tik daugiau vertina perdavimus ir perėmimus bei baudžia už klaidas, o Sofascore reitingas labiau atsižvelgia į efektyvumą ir minutes.</li><li>Aukščiausias top 10 vidurkis ' + hyLabel(hiS.y) + ' (' + nf1(hiS.top10avg) + '), žemiausias ' + hyLabel(loS.y) + ' (' + nf1(loS.top10avg) + '). Kai sezone daugiau rungtynių ir platesnės rotacijos, žvaigždės renka mažiau per rungtynes.</li></ul>');
+}
+function hsTrends(ss){
   var lab = ss.map(function(s){ return s.y; });
-  h += '<div class="cols2">' + sect('Top 10 fantasy žaidėjų vidurkis', 'FPTS per rungtynes', hLine(ss.map(function(s){ return s.top10avg; }), lab, '#2459e6', 'Top 10 FPTS vidurkis', function(v){ return nf1(v); })) +
+  return '<div class="cols2">' + sect('Top 10 fantasy žaidėjų vidurkis', 'FPTS per rungtynes', hLine(ss.map(function(s){ return s.top10avg; }), lab, '#2459e6', 'Top 10 FPTS vidurkis', function(v){ return nf1(v); })) +
     sect('Komandos taškai per rungtynes', 'Eurolygos vidurkis', hLine(ss.filter(function(s){ return s.ppg; }).map(function(s){ return s.ppg; }), ss.filter(function(s){ return s.ppg; }).map(function(s){ return s.y; }), '#16a34a', 'Taškai per rungtynes', function(v){ return nf1(v); }) + '<p class="note">Sezonams be lentelės duomenų taškas praleistas.</p>') + '</div>';
-  /* all-time best seasons */
-  h += sect('Geriausi visų laikų fantasy sezonai', 'baigti sezonai', '<div class="tbl"><table class="ag"><thead><tr><th class="num">#</th><th>Žaidėjas</th><th>Sezonas</th><th>Klubas</th><th class="num">Rungt.</th><th class="num">FPTS</th><th class="num">Tšk.</th><th class="num">Atk.</th><th class="num">Perd.</th><th class="num">PIR</th></tr></thead><tbody>' +
+}
+function hsBest(H){
+  return sect('Geriausi visų laikų fantasy sezonai', 'baigti sezonai', '<div class="tbl"><table class="ag"><thead><tr><th class="num">#</th><th>Žaidėjas</th><th>Sezonas</th><th>Klubas</th><th class="num">Rungt.</th><th class="num">FPTS</th><th class="num">Tšk.</th><th class="num">Atk.</th><th class="num">Perd.</th><th class="num">PIR</th></tr></thead><tbody>' +
     H.best.slice(0, 25).map(function(r, i){ return '<tr><td class="c"><span class="rk">' + (i + 1) + '</span></td><td><a class="cl" href="#elp-' + r[1] + '">' + esc(r[2]) + '</a> <span class="muted">' + esc(r[4]) + '</span></td><td><a href="#eurolyga-istorija" data-hy="' + r[0] + '">' + hyLabel(r[0]) + '</a></td><td>' + esc(r[3]) + '</td><td class="num">' + r[5] + '</td><td class="num"><b>' + nf1(r[6]) + '</b></td><td class="num">' + nf1(r[7]) + '</td><td class="num">' + nf1(r[8]) + '</td><td class="num">' + nf1(r[9]) + '</td><td class="num">' + (r[10] != null ? nf1(r[10]) : '–') + '</td></tr>'; }).join('') + '</tbody></table></div>');
-  /* careers */
-  h += sect('Fantasy legendos', 'daugiausiai FPTS per visus sezonus', '<div class="tbl"><table class="ag"><thead><tr><th class="num">#</th><th>Žaidėjas</th><th class="num">FPTS iš viso</th><th class="num">Rungt.</th><th class="num">Vidurkis</th><th class="num">Sezonai</th><th class="num">Top 10</th><th class="num">Fantasy MVP</th></tr></thead><tbody>' +
+}
+function hsCareers(H){
+  return sect('Fantasy legendos', 'daugiausiai FPTS per visus sezonus', '<div class="tbl"><table class="ag"><thead><tr><th class="num">#</th><th>Žaidėjas</th><th class="num">FPTS iš viso</th><th class="num">Rungt.</th><th class="num">Vidurkis</th><th class="num">Sezonai</th><th class="num">Top 10</th><th class="num">Fantasy MVP</th></tr></thead><tbody>' +
     H.career.slice(0, 25).map(function(r, i){ return '<tr><td class="c"><span class="rk">' + (i + 1) + '</span></td><td>' + '<a class="cl" href="#elp-' + r[0] + '">' + esc(r[1]) + '</a></td><td class="num"><b>' + NF.format(r[2]) + '</b></td><td class="num">' + r[3] + '</td><td class="num">' + nf1(r[4]) + '</td><td class="num">' + r[5] + '</td><td class="num">' + (r[6] || '–') + '</td><td class="num">' + (r[7] || '–') + '</td></tr>'; }).join('') + '</tbody></table></div><p class="note">Skaičiuojami tik sezonai, kai žaidėjas pateko į kurios nors Sofascore statistikos kategorijos 50 geriausių, todėl ilgos karjeros pradžia ar pabaiga gali būti neįtraukta. Šiemet vykstantis sezonas įskaičiuotas.</p>');
-  h += sect('Kaip skaičiuota', '', '<p class="data">FPTS skaičiuojami pagal tas pačias BasketNews taisykles kaip ir mūsų lygoje: taškai, atkovoti kamuoliai (puolime 1,5), rezultatyvūs perdavimai ir perimti kamuoliai po 1,5, blokai, išprovokuotos pražangos, minus nepataikyti metimai, 1,5 už klaidą ir pusė už užblokuotą metimą, +10 už dvigubą dublį, +30 už trigubą ir ±1,5 už pergalę ar pralaimėjimą. Sofascore pateikia sezono sumas, todėl išprovokuotos pražangos ir užblokuoti metimai atkurti iš PIR, o pergalių premija iš komandos pergalių dalies. Vertinti žaidėjai, patekę bent į vienos iš septynių Sofascore kategorijų (PIR, taškai, atkovoti kamuoliai, perdavimai, reitingas, perimti, dubliai) 50 geriausių. Imamas tik reguliarusis sezonas (su Top 16, kai jis buvo), be atkrintamųjų. Šaltinis: <a href="https://www.sofascore.com/tournament/basketball/international/euroleague/138" rel="noopener">Sofascore, Eurolyga</a>.</p>');
-  h += glRecordsSect();
-  return h;
+}
+function hsMethod(){
+  return sect('Kaip skaičiuota', '', '<p class="data">FPTS skaičiuojami pagal tas pačias BasketNews taisykles kaip ir mūsų lygoje: taškai, atkovoti kamuoliai (puolime 1,5), rezultatyvūs perdavimai ir perimti kamuoliai po 1,5, blokai, išprovokuotos pražangos, minus nepataikyti metimai, 1,5 už klaidą ir pusė už užblokuotą metimą, +10 už dvigubą dublį, +30 už trigubą ir ±1,5 už pergalę ar pralaimėjimą. Sofascore pateikia sezono sumas, todėl išprovokuotos pražangos ir užblokuoti metimai atkurti iš PIR, o pergalių premija iš komandos pergalių dalies. Vertinti žaidėjai, patekę bent į vienos iš septynių Sofascore kategorijų (PIR, taškai, atkovoti kamuoliai, perdavimai, reitingas, perimti, dubliai) 50 geriausių. Imamas tik reguliarusis sezonas (su Top 16, kai jis buvo), be atkrintamųjų. Šaltinis: <a href="https://www.sofascore.com/tournament/basketball/international/euroleague/138" rel="noopener">Sofascore, Eurolyga</a>.</p>');
 }
 function playerHist(id){
   var c0 = HX().site[id]; if (!c0) return ''; var c = c0[1];
   var mx = Math.max.apply(null, c.map(function(s){ return s[3]; }));
   return sect('Eurolygos karjera per fantasy prizmę', c.length + ' sezonai, Sofascore', '<div class="tbl" style="max-width:640px"><table class="ag"><thead><tr><th>Sezonas</th><th>Klubas</th><th class="num">Rungt.</th><th style="width:40%">FPTS per rungtynes</th><th class="num">Vieta sezone</th></tr></thead><tbody>' +
-    c.slice().reverse().map(function(s){ return '<tr><td><a href="#eurolyga-istorija" data-hy="' + s[0] + '">' + hyLabel(s[0]) + '</a></td><td>' + esc(s[1]) + '</td><td class="num">' + s[2] + '</td>' + barCell(s[3], mx, '#2459e6', nf1(s[3])) + '<td class="num">' + (s[4] ? s[4] : '<span class="muted">–</span>') + '</td></tr>'; }).join('') + '</tbody></table></div><p class="data"><a class="tog" href="#elp-' + c0[0] + '">Visas Eurolygos profilis ir kortelės</a></p><p class="note">Ankstesnių sezonų FPTS perskaičiuoti iš Sofascore sezono statistikos pagal mūsų lygos taisykles. Vieta: tarp žaidėjų, sužaidusių bent 60&nbsp;% rungtynių. <a href="#eurolyga-istorija">Visi sezonai</a>.</p>');
+    c.slice().reverse().map(function(s){ return '<tr><td><a href="#eurolyga-istorija" data-hy="' + s[0] + '">' + hyLabel(s[0]) + '</a></td><td>' + esc(s[1]) + '</td><td class="num">' + s[2] + '</td>' + barCell(s[3], mx, '#2459e6', nf1(s[3])) + '<td class="num">' + (s[4] ? s[4] : '<span class="muted">–</span>') + '</td></tr>'; }).join('') + '</tbody></table></div><p class="data"><a class="tog" href="#elp-' + c0[0] + '">Visas Eurolygos profilis ir kortelės</a></p><p class="note">Ankstesnių sezonų FPTS perskaičiuoti iš Sofascore sezono statistikos pagal mūsų lygos taisykles. Vieta: tarp žaidėjų, sužaidusių bent 60&nbsp;% rungtynių. <a href="#eurolyga-istorija-sezonai">Visi sezonai</a>.</p>');
 }
 document.addEventListener('click', function(e){
   var b = e.target.closest && e.target.closest('[data-hy]'); if (!b) return;
@@ -7211,7 +7285,7 @@ function hLegend(){ return '<p class="catleg">' + HBR.map(function(z){ return '<
 function pageELH(code){
   var j = HJ(); if (!j) return '<h2 class="page">Eurolygos istorija</h2>' + hjWait();
   var y = j.byYear[code]; if (!y) return '<h2 class="page">Sezonas nerastas</h2>';
-  var s = j.seasons[y], champ = s.champ, h = '<p class="kicker"><a href="#eurolyga-istorija">Eurolygos istorija</a></p><h2 class="page">' + hyLabel(y) + ' sezonas</h2>' + hChips(y, 'elh-');
+  var s = j.seasons[y], champ = s.champ, h = histNav('sezonai', ' › <a href="#eurolyga-istorija-sezonai">Sezonai</a> › ' + hyLabel(y)) + '<h2 class="page">' + hyLabel(y) + ' sezonas</h2>' + hPrevNext(y) + hChips(y, 'elh-');
   var five = (HX().seasons.filter(function(x){ return x.y === y; })[0] || {five: []}).five;
   h += '<dl class="strip"><div><dt>Čempionas</dt><dd>' + (champ ? esc(champ) : y === '19/20' ? 'atšaukta' : '–') + '</dd></div><div><dt>Komandų</dt><dd>' + Object.keys(s.tm).length + '</dd></div><div><dt>Rungtynių</dt><dd>' + s.g + '</dd></div><div><dt>Žaidėjų</dt><dd>' + s.rows.length + '</dd></div></dl>';
   if (five.length) h += sect('Tobula fantasy sudėtis', '2 gynėjai, 2 puolėjai, centras', '<div class="pcgrid">' + five.map(function(pid){ return hCard(pid, y, {sm: 1, link: 1}); }).join('') + '</div>');
@@ -7233,7 +7307,7 @@ function pageELT(code, tid){
   var j = HJ(); if (!j) return '<h2 class="page">Eurolygos istorija</h2>' + hjWait();
   var y = j.byYear[code], s = y && j.seasons[y]; if (!s) return '<h2 class="page">Nerasta</h2>';
   tid = +tid; var t = s.tm[tid] || [hTeamName(tid), 0, 0, 0, 0], rows = (s.byTeam[tid] || []).slice().sort(function(a, b){ return b[3] - a[3]; });
-  var h = '<p class="kicker"><a href="#eurolyga-istorija">Eurolygos istorija</a> · <a href="#elh-' + code + '">' + hyLabel(y) + '</a> · <a href="#elc-' + tid + '">visa klubo istorija</a></p><h2 class="page hteam">' + hLogo(tid, 48) + ' ' + esc(t[0] || hTeamName(tid)) + ' <small>' + hyLabel(y) + '</small></h2>';
+  var h = histNav('sezonai', ' › <a href="#eurolyga-istorija-sezonai">Sezonai</a> › <a href="#elh-' + code + '">' + hyLabel(y) + '</a> › <a href="#elc-' + tid + '">visa klubo istorija</a>') + '<h2 class="page hteam">' + hLogo(tid, 48) + ' ' + esc(t[0] || hTeamName(tid)) + ' <small>' + hyLabel(y) + '</small></h2>';
   var other = j.years.filter(function(yy){ return j.seasons[yy].tm[tid] || j.seasons[yy].byTeam[tid]; });
   h += '<div class="toggles hychips">' + other.map(function(yy){ return '<a class="tog" href="#elt-' + yCode(yy) + '-' + tid + '" aria-pressed="' + (yy === y) + '">' + yy + '</a>'; }).join('') + '</div>';
   var ft = rows.reduce(function(a, r){ return a + r[4]; }, 0), g = t[1] + t[2];
@@ -7253,7 +7327,7 @@ function pageELP(pid){
   var best = rows.slice().sort(function(a, b){ return (b[1][5] ? 1 : 0) - (a[1][5] ? 1 : 0) || b[1][3] - a[1][3]; })[0];
   var age = p[5] ? Math.floor((Date.now() / 1000 - p[5]) / 31557600) : null, born = p[5] ? new Date(p[5] * 1000) : null;
   var siteId = Object.keys(j.site).filter(function(k){ return String(j.site[k]) === String(pid); })[0];
-  var h = '<p class="kicker"><a href="#eurolyga-istorija">Eurolygos istorija</a> · žaidėjo profilis</p><h2 class="page">' + esc(p[0]) + '</h2>';
+  var h = histNav('legendos', ' › žaidėjo profilis') + '<h2 class="page">' + esc(p[0]) + '</h2>';
   if (p[8]){ var wl = p[8].split(':'), wlang = wl.shift(), wt = wl.join(':'); h += '<p class="wikil"><a href="https://' + wlang + '.wikipedia.org/wiki/' + encodeURIComponent(wt.replace(/ /g, '_')) + '" target="_blank" rel="noopener">' + (wlang === 'lt' ? 'Vikipedija' : 'Wikipedia (EN)') + ' ↗</a></p>'; }
   var tot = rows.reduce(function(a, z){ var r = z[1]; a.g += r[8]; a.f += r[4]; a.pts += r[10]; a.reb += r[21]; a.ast += r[22]; a.stl += r[23]; a.blk += r[24]; a.sec += r[9]; return a; }, {g: 0, f: 0, pts: 0, reb: 0, ast: 0, stl: 0, blk: 0, sec: 0});
   var mvp = HX().seasons.filter(function(s){ return s.mvp === +pid && !s.live; }).map(function(s){ return s.y; }), five = HX().seasons.filter(function(s){ return s.five.indexOf(+pid) >= 0 && !s.live; }).map(function(s){ return s.y; });
@@ -7316,7 +7390,7 @@ function pageELG(yr, code){
   var u = 'hist/g/' + yr + '.json', s = glSeason(yr); if (!s) return '<h2 class="page">Rungtynės</h2>' + glErr(u);
   var g = s.g.filter(function(x){ return String(x[0]) === String(code); })[0]; if (!g) return '<h2 class="page">Rungtynės nerastos</h2>';
   var y = glY(yr), hw = g[6] > g[7];
-  var h = '<p class="kicker"><a href="#eurolyga-istorija">Eurolygos istorija</a> · <a href="#elh-' + yCode(y) + '">' + hyLabel(y) + '</a> · ' + esc(GLPH[g[2]] || g[2]) + (g[3] && (g[2] === 'RS' || g[2] === 'TS') ? ', ' + g[3] + ' turas' : '') + '</p>';
+  var h = histNav('sezonai', ' › <a href="#elh-' + yCode(y) + '">' + hyLabel(y) + '</a> › ' + esc(GLPH[g[2]] || g[2]) + (g[3] && (g[2] === 'RS' || g[2] === 'TS') ? ', ' + g[3] + ' turas' : ''));
   h += '<div class="glhead"><div class="glt' + (hw ? ' w' : '') + '">' + glTLogo(yr, g[4], 44) + '<b>' + glTName(yr, g[4], 1) + '</b></div><div class="gls"><span>' + g[6] + '</span><i>:</i><span>' + g[7] + '</span><small>' + glDate(g[1]) + (g[8].length > 4 ? ' · pratęsimas' : '') + '</small></div><div class="glt' + (!hw ? ' w' : '') + '">' + glTLogo(yr, g[5], 44) + '<b>' + glTName(yr, g[5], 1) + '</b></div></div>';
   if (g[8].length) h += '<div class="tbl"><table class="ag glq"><thead><tr><th></th>' + g[8].map(function(_, i){ return '<th class="num">' + (i < 4 ? (i + 1) + ' k.' : 'Pr' + (i - 3)) + '</th>'; }).join('') + '<th class="num">Iš viso</th></tr></thead><tbody>' +
     [[g[4], g[8], g[6]], [g[5], g[9], g[7]]].map(function(t){ return '<tr><td>' + glTLogo(yr, t[0], 16) + ' ' + glTName(yr, t[0]) + '</td>' + t[1].map(function(v){ return '<td class="num">' + v + '</td>'; }).join('') + '<td class="num"><b>' + t[2] + '</b></td></tr>'; }).join('') + '</tbody></table></div>';
@@ -7401,7 +7475,7 @@ function glPlayerSect(k){
 function pageELPx(k){
   var j = S.hj, n = j.gl && j.gl.names[k]; if (!n) return '<h2 class="page">Žaidėjas nerastas</h2>';
   var age = n[4] ? Math.floor((Date.now() - new Date(n[4]).getTime()) / 31557600000) : null;
-  var h = '<p class="kicker"><a href="#eurolyga-istorija">Eurolygos istorija</a> · žaidėjo profilis</p><h2 class="page">' + esc(n[0]) + '</h2>';
+  var h = histNav('legendos', ' › žaidėjo profilis') + '<h2 class="page">' + esc(n[0]) + '</h2>';
   h += '<dl class="strip hbio"><div><dt>Pozicija</dt><dd>' + esc(POS[n[5]] || '–') + '</dd></div><div><dt>Šalis</dt><dd>' + esc(n[2] || '–') + '</dd></div><div><dt>Ūgis</dt><dd>' + (n[3] ? n[3] + ' cm' : '–') + '</dd></div><div><dt>Gimė</dt><dd>' + (n[4] ? n[4].slice(0, 4) + '<small>' + age + ' m.</small>' : '–') + '</dd></div></dl>';
   return h + glPlayerSect(k);
 }
@@ -7423,7 +7497,7 @@ function pageELC(tid){
   var ys = j.years.filter(function(y){ return j.seasons[y].tm[tid]; });
   var W = 0, L = 0, champs = [];
   ys.forEach(function(y){ var r = j.seasons[y].tm[tid]; W += r[1] || 0; L += r[2] || 0; if (j.seasons[y].champ && j.seasons[y].champ === (r[0] || t[0])) champs.push(y); });
-  var h = '<p class="kicker"><a href="#eurolyga-istorija">Eurolygos istorija</a> · klubo profilis</p><div class="hteamh">' + hLogo(tid, 56) + '<h2 class="page">' + esc(t[0]) + '</h2></div>';
+  var h = histNav('klubai', ' › <a href="#eurolyga-istorija-klubai">Klubai</a> › klubo profilis') + '<div class="hteamh">' + hLogo(tid, 56) + '<h2 class="page">' + esc(t[0]) + '</h2></div>';
   h += '<dl class="strip"><div><dt>Sezonų Eurolygoje</dt><dd>' + ys.length + '<small>' + (ys.length ? ys[0] + '–' + ys[ys.length - 1] : '') + '</small></dd></div><div><dt>Reguliarusis sezonas</dt><dd>' + W + '–' + L + '<small>' + (W + L ? Math.round(W / (W + L) * 100) + '%' : '') + '</small></dd></div><div><dt>Čempionų titulai</dt><dd>' + champs.length + (champs.length ? '<small>' + champs.join(', ') + '</small>' : '') + '</dd></div></dl>';
   h += sect('Visi sezonai', ys.length + ' sezonai', '<div class="tbl"><table class="ag"><thead><tr><th>Sezonas</th><th class="num">P–Pr</th><th class="num">Tšk. už</th><th class="num">Tšk. prieš</th><th>Geriausias fantasy žaidėjas</th><th class="num">FPTS</th></tr></thead><tbody>' +
     ys.slice().reverse().map(function(y){ var s = j.seasons[y], r = s.tm[tid], rows = (s.byTeam[tid] || []).filter(function(x){ return x[2] >= Math.max(3, 0.4 * s.g); }).sort(function(a, b){ return b[3] - a[3]; }), b = rows[0];
