@@ -1424,6 +1424,26 @@ ol.act li.last .aic{color:#ef4444}
   .tools-tg{display:inline-flex}
   .tools:not(.open) .tbtns,.tools:not(.open) #theme-btn{display:none}
 }
+
+.dealtop{margin:18px 0 6px}.dealtop .trade.tx{margin:0;padding:18px 20px;background:var(--card)}
+@media (min-width:980px){.strip.s5{grid-template-columns:repeat(5,minmax(0,1fr))}}
+table.tc td:first-child,table.tc th:first-child{width:34px;padding-right:0}
+table.tc tbody tr{cursor:pointer}
+table.tc tbody tr.on td{background:color-mix(in srgb,var(--bad,#ef4444) 12%,transparent)}
+table.tc tbody tr.on td:first-child{box-shadow:inset 3px 0 0 var(--bad,#ef4444)}
+table.tc input{width:20px;height:20px;accent-color:var(--bad,#ef4444);cursor:pointer}
+#tc-res-s{margin-top:18px}#tc-res .data.muted{padding:14px 16px;border:1px dashed var(--rule);border-radius:14px}
+table.ag tbody tr:has(.tag.out)>td:not(:first-child){opacity:.5}
+table.ag tbody tr:has(.tag.out) .rk{background:transparent!important;color:var(--ink-2)!important;box-shadow:none!important}
+table.ag.board td{min-width:138px;font-size:13.5px}
+table.ag.board td a.cl,table.ag.board td .sub{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:150px}
+table.ag.board td a.cl{display:flex;align-items:center;gap:6px}
+.drec{display:grid;gap:16px}
+.dkpi{display:flex;align-items:baseline;gap:10px}.dkpi b{font-size:34px;font-weight:800;line-height:1}.dkpi span{color:var(--ink-2)}
+.drh{margin:0 0 8px;font-weight:700}.drh small{font-weight:400;color:var(--ink-2);margin-left:6px}
+.dchs{display:flex;flex-wrap:wrap;gap:8px}
+a.drch{display:inline-flex;align-items:center;gap:9px;padding:5px 12px 5px 5px;border-radius:99px;text-decoration:none;color:var(--ink);background:color-mix(in srgb,var(--c) 10%,transparent);border:1px solid color-mix(in srgb,var(--c) 35%,transparent)}
+a.drch span{white-space:nowrap}a.drch b{display:block;font-size:14px;line-height:1.2}a.drch small{display:block;font-size:12px;color:var(--ink-2)}
 </style>
 </head>
 <body>
@@ -1911,7 +1931,7 @@ view.addEventListener("change", function(e){
     tcRefresh();
   }
   if (t.hasAttribute && t.hasAttribute("data-cmp")) cmpChange();
-  if (t.hasAttribute && t.hasAttribute("data-tcp")){
+  if (t.hasAttribute && t.hasAttribute("data-tcp")){ var trr = t.closest("tr"); if (trr) trr.classList.toggle("on", t.checked);
     var tv = t.getAttribute("data-tcp").split(":"), tc2 = tcState(), arr = tv[0] === "a" ? tc2.ga : tc2.gb, ix = arr.indexOf(tv[1]);
     if (t.checked && ix < 0) arr.push(tv[1]);
     if (!t.checked && ix >= 0) arr.splice(ix, 1);
@@ -2610,6 +2630,8 @@ function speakReview(btn){
   btn.textContent = v ? 'Sustabdyti' : 'Sustabdyti (lietuviško balso naršyklėje nėra, skaitys numatytasis)';
 }
 document.addEventListener('click', function(e){
+  var tcr = e.target.closest && !e.target.closest('a,input,label,select') ? e.target.closest('table.tc tbody tr') : null;
+  if (tcr){ var cb = tcr.querySelector('input[data-tcp]'); if (cb){ cb.checked = !cb.checked; cb.dispatchEvent(new Event('change', {bubbles: true})); } }
   var t = e.target.closest ? e.target.closest('[data-act]') : null; if (!t) return;
   var a = t.getAttribute('data-act');
   if (a === 'ics'){ var id = myTeam(); if (!id) return; exportIcs(id).then(function(c){ var m = document.getElementById('ics-msg'); if (m) m.textContent = typeof c === 'number' ? 'Išsaugota: ' + c + ' rungtynės.' : c === 'declined' ? '' : 'Čia .ics failo išsaugoti negalima, naudok nuorodas į Google kalendorių.'; }); }
@@ -3343,8 +3365,8 @@ function pageTrade(w, k){
     deck = 'Kol kas mainus laimi ' + esc(M[lead].first) + ': per ' + t.played + ' ' + plural(t.played, 'turą', 'turus', 'turų') + ' šie mainai jo komandai atnešė ' + n(W1.total) + ' FPTS, o ' + esc(genitive(other)) + ' komandai ' + n(W2.total) + ' FPTS. Skaičiuojami ir žaidėjai, į kuriuos gauti žaidėjai vėliau buvo iškeisti.';
   }
   h += '<p class="deck">' + deck + '</p>';
-  h += '<section style="margin-top:18px">' + dealCard(dl, w, k, true) + '</section>';
-  h += '<dl class="strip">' +
+  h += '<div class="dealtop">' + dealCard(dl, w, k, true) + '</div>';
+  h += '<dl class="strip s5">' +
     '<div><dt>Turai po mainų</dt><dd>' + t.played + '</dd></div>' +
     '<div><dt>' + esc(fa) + ' gavo</dt><dd>' + n(A.total) + ' <small>FPTS</small></dd></div>' +
     '<div><dt>' + esc(fb) + ' gavo</dt><dd>' + n(B.total) + ' <small>FPTS</small></dd></div>' +
@@ -3354,8 +3376,8 @@ function pageTrade(w, k){
   h += tradeSide(t, A) + tradeSide(t, B);
   h += '<p class="note">Skaičiuojama visa grandinė: jei gautas žaidėjas vėliau iškeistas ar išmestas, į jo vietą atėję žaidėjai toliau skaičiuojami šiems mainams. Kai jis atiduotas kartu su kitais žaidėjais, jo dalis padalinama po lygiai, todėl atėjusiems tenka tik dalis (stulpelis Dalis). Turai: kiek turų žaidėjas tuo metu buvo komandoje. Atnešė: kiek taškų per tuos turus įskaityta komandai su kapitono ir suolo daugikliais, padauginus iš dalies.</p>';
   if (t.played){
-    var ca = cum(A.per), cb = cum(B.per);
-    h += '<section><h3 class="sect">Sukaupti taškai po mainų</h3><p class="legend"><span><i class="k-la"></i>' + esc(fa) + '</span><span><i class="k-lb"></i>' + esc(fb) + '</span></p><div id="tc" style="max-width:760px"></div>';
+    var ca = cum(A.per), cb = cum(B.per), one = t.played < 2;
+    h += '<section><h3 class="sect">Sukaupti taškai po mainų</h3>' + (one ? '<p class="data muted">Grafikas atsiras, kai po mainų bus sužaisti bent du turai.</p>' : '<p class="legend"><span><i class="k-la"></i>' + esc(fa) + '</span><span><i class="k-lb"></i>' + esc(fb) + '</span></p><div id="tc" style="max-width:760px"></div>');
     h += '<div class="tbl" style="max-width:760px;margin-top:12px"><table class="ag"><thead><tr><th class="num">Turas</th><th class="num">' + esc(fa) + '</th><th class="num">' + esc(fb) + '</th><th class="num">Skirtumas iš viso</th></tr></thead><tbody>';
     A.per.forEach(function(v, i){ h += '<tr><td class="num">' + (w + i) + '</td><td class="num">' + n(v) + '</td><td class="num">' + n(B.per[i]) + '</td><td class="num">' + sgn(ca[i] - cb[i]) + '</td></tr>'; });
     h += '</tbody></table></div><p class="note">Skirtumas iš viso: ką šie mainai atnešė ' + esc(dative(dl.a)) + ' minus ką jie atnešė ' + esc(dative(dl.b)) + ', sudėjus visus turus po mainų.</p></section>';
@@ -3783,7 +3805,7 @@ function pageELRound(r){
   return h;
 }
 function ownChip(p, extra){ return '<a class="ochip" style="--c:' + (p.cur ? tcol(p.cur) : '#94a3b8') + '" href="#zaidejas-' + p.id + '" title="' + esc((p.full || p.name) + (p.cur ? ', ' + team(p.cur) : '')) + '">' + (p.cd ? '<span class="pphoto pav" style="width:24px;height:24px;background-image:url(cards/' + p.id + '.webp)"></span>' : '') + '<b>' + esc(p.name) + '</b>' + (extra || '') + (p.cur ? '<i>' + teamLogo(p.cur, 14) + esc(M[p.cur].first) + '</i>' : '<i>laisvas</i>') + '</a>'; }
-function pFace(p, px){ return p && p.cd ? '<span class="pphoto pav" style="width:' + px + 'px;height:' + px + 'px;background-image:url(cards/' + p.id + '.webp)"></span>' : ''; }
+function pFace(p, px){ return !p ? '' : p.cd ? '<span class="pphoto pav" style="width:' + px + 'px;height:' + px + 'px;background-image:url(cards/' + p.id + '.webp)"></span>' : playerPhoto(p, px); }
 function teamChip(o){ return o ? '<a class="tchip" style="--c:' + tcol(o) + '" href="#komanda-' + o + '" title="' + esc(team(o) + ', ' + M[o].name) + '">' + teamLogo(o, 18) + esc(team(o)) + '</a>' : '<span class="tchip free">laisvas</span>'; }
 function projChip(v){ return '<span class="l5x ' + (v >= 20 ? 'hot' : v >= 14 ? 'ok' : v < 6 ? 'bad' : 'lo') + '">' + nf1(v) + '</span>'; }
 function clubCellX(c, sub){ return '<td class="tm"><span class="tmrow">' + clubLogo(c, 30) + '<span>' + clubLink(c, EL().clubs[c].short) + '<span class="sub">' + sub + '</span></span></span></td>'; }
@@ -4536,9 +4558,9 @@ function tcSelect(side){
 function pageTradeCalc(){
   var R = EL().next_round;
   var h = '<p class="kicker"><a href="#mainai">Mainai</a></p><h2 class="page">Mainų skaičiuoklė</h2><p class="deck">Pasirinkite dvi komandas ir pažymėkite, kuriuos žaidėjus kiekviena atiduoda. Skaičiuoklė palygina abiejų komandų geriausias sudėtis prieš ir po mainų: kiek jos surinktų per turą likusį sezoną ir ' + R + ' ture.</p>';
+  h += '<section id="tc-res-s"><h3 class="sect">Rezultatas</h3><div id="tc-res">' + tcResult() + '</div><p class="note">Per turą likusį sezoną: geriausios sudėties prognozė vienam turui iki sezono pabaigos, įskaitant žinomus traumų terminus. ' + R + ' turas: geriausios sudėties prognozė kitam turui. Geriausia sudėtis: kapitonas ×2, keturi startiniai ir 6th man po 1, keturi suolo žaidėjai po 0,5, startiniame penkete bent vienas gynėjas, puolėjas ir centras. <a href="#eurolyga-analize">Kaip skaičiuojamos prognozės</a>.</p></section>';
   h += '<div class="cols-even tcw"><section><h3 class="sect">Pirma komanda</h3><p>' + tcSelect("a") + '</p><div id="tc-a">' + tcRoster("a") + '</div></section>' +
     '<section><h3 class="sect">Antra komanda</h3><p>' + tcSelect("b") + '</p><div id="tc-b">' + tcRoster("b") + '</div></section></div>';
-  h += '<section id="tc-res-s"><h3 class="sect">Rezultatas</h3><div id="tc-res">' + tcResult() + '</div><p class="note">Per turą likusį sezoną: geriausios sudėties prognozė vienam turui iki sezono pabaigos, įskaitant žinomus traumų terminus. ' + R + ' turas: geriausios sudėties prognozė kitam turui. Geriausia sudėtis: kapitonas ×2, keturi startiniai ir 6th man po 1, keturi suolo žaidėjai po 0,5, startiniame penkete bent vienas gynėjas, puolėjas ir centras. <a href="#eurolyga-analize">Kaip skaičiuojamos prognozės</a>.</p></section>';
   return h;
 }
 function tcRefresh(){
@@ -7010,7 +7032,10 @@ function draftX6(){
   var keep = rows.filter(function(z){ return z.p.cur === z.x.id; }).length;
   var club = {}; rows.forEach(function(z){ var c = club[z.x.club] = club[z.x.club] || []; c.push(z.x.pick); });
   var cl = Object.keys(club).map(function(c){ var a = club[c]; return {c: c, n: a.length, m: a.reduce(function(s, x){ return s + x; }, 0) / a.length, f: Math.min.apply(null, a)}; }).sort(function(a, b){ return a.m - b.m; });
-  var h = sect('Drafto rekordai', '', '<ul class="tdl"><li>Vis dar pas tą patį vadybininką: ' + keep + ' iš ' + rows.length + ' pasirinkimų.</li><li>Vėlyvi deimantai (pasirinkti po 40 vietos, vidurkis 15+): ' + steal.map(function(z){ return pLk(z.p.id, z.p.name) + ' <span class="muted">(' + z.x.pick + ' vieta, ' + nf1(z.p.avg) + ', ' + esc(M[z.x.id].first) + ')</span>'; }).join(', ') + '.</li><li>Ankstyvi nusivylimai (top 30, mažiausi vidurkiai): ' + bust.map(function(z){ return pLk(z.p.id, z.p.name) + ' <span class="muted">(' + z.x.pick + ' vieta, ' + nf1(z.p.avg) + ')</span>'; }).join(', ') + '.</li></ul>');
+  function dch(z, who){ return '<a class="drch" href="#zaidejas-' + z.p.id + '" style="--c:' + tcol(z.x.id) + '">' + pFace(z.p, 34) + '<span><b>' + esc(z.p.name) + '</b><small>' + z.x.pick + ' šauk. · vid. ' + nf1(z.p.avg) + (who ? ' · ' + esc(M[z.x.id].first) : '') + '</small></span></a>'; }
+  var h = sect('Drafto rekordai', '', '<div class="drec"><div class="dkpi"><b>' + keep + '</b><span>iš ' + rows.length + ' pasirinkimų vis dar pas tą patį vadybininką</span></div>' +
+    '<div><p class="drh">Vėlyvi deimantai <small>pasirinkti po 40 šaukimo, vidurkis 15+</small></p><div class="dchs">' + steal.map(function(z){ return dch(z, true); }).join('') + '</div></div>' +
+    '<div><p class="drh">Ankstyvi nusivylimai <small>top 30 šaukimų, mažiausi vidurkiai</small></p><div class="dchs">' + bust.map(function(z){ return dch(z, true); }).join('') + '</div></div></div>');
   h += sect('Drafto tendencijos pagal klubą', 'kurių klubų žaidėjai išgraibstyti pirmiausia', '<div class="tbl" style="max-width:640px"><table class="ag"><thead><tr><th>Klubas</th><th class="num">Pasirinkta žaidėjų</th><th class="num">Vid. vieta</th><th class="num">Pirmas pasirinktas</th></tr></thead><tbody>' + cl.map(function(z){ return '<tr>' + (EL().clubs[z.c] ? clubCellX(z.c, '') : '<td>' + esc(z.c) + '</td>') + '<td class="num">' + z.n + '</td><td class="num"><b>' + nf1(z.m) + '</b></td><td class="num">' + z.f + '</td></tr>'; }).join('') + '</tbody></table></div>');
   return h;
 }
