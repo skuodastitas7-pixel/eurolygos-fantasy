@@ -7448,10 +7448,11 @@ function srHistEntries(out){
 /* ---------- other leagues: application wizard, encrypted league bundles and the league switcher ---------- */
 var LG = {cur: null, list: null, err: null, busy: false};
 var LG_DEFAULT = 'Eurolygos fantasy';
-function lgStore(){ try { return JSON.parse(localStorage.getItem('efl.lygos') || '{}'); } catch (e){ return {}; } }
-function lgSave(o){ try { localStorage.setItem('efl.lygos', JSON.stringify(o)); } catch (e){} }
-function lgActive(){ try { return localStorage.getItem('efl.lyga') || ''; } catch (e){ return ''; } }
-function lgSetActive(id){ try { if (id) localStorage.setItem('efl.lyga', id); else localStorage.removeItem('efl.lyga'); } catch (e){} }
+function lgStore(){ if (LGMEM.store) return JSON.parse(JSON.stringify(LGMEM.store)); try { return JSON.parse(localStorage.getItem('efl.lygos') || '{}'); } catch (e){ return {}; } }
+function lgSave(o){ LGMEM.store = JSON.parse(JSON.stringify(o)); try { localStorage.setItem('efl.lygos', JSON.stringify(o)); } catch (e){} }
+var LGMEM = {active: null, store: null};
+function lgActive(){ if (LGMEM.active !== null) return LGMEM.active; try { return localStorage.getItem('efl.lyga') || ''; } catch (e){ return ''; } }
+function lgSetActive(id){ LGMEM.active = id || ''; try { if (id) localStorage.setItem('efl.lyga', id); else localStorage.removeItem('efl.lyga'); } catch (e){} }
 function b64u(buf){ var b = ''; var a = new Uint8Array(buf); for (var i = 0; i < a.length; i += 32768) b += String.fromCharCode.apply(null, a.subarray(i, i + 32768)); return btoa(b); }
 function unb64(s){ var b = atob(s), a = new Uint8Array(b.length); for (var i = 0; i < b.length; i++) a[i] = b.charCodeAt(i); return a; }
 /* key from the league password (PBKDF2-SHA256, 250k rounds, per-league salt) */
@@ -7476,8 +7477,14 @@ function lgJoin(code){
   });
 }
 function lgUse(id){
-  if (!id){ lgSetActive(''); location.hash = 'lentele'; location.reload(); return; }
-  lgSetActive(id); location.hash = 'lentele'; location.reload();
+  /* switch in place: no page reload, so it also works where the page cannot keep browser storage between loads */
+  lgSetActive(id || '');
+  var box = document.getElementById('lgdlg'); if (box) box.hidden = true;
+  LG.cur = null; S.reviews = null; S.revLoading = false; S.revErr = null; S.data = null; _OVR = null;
+  document.documentElement.style.removeProperty('--red');
+  try { history.replaceState(null, '', '#lentele'); } catch (e){ location.hash = 'lentele'; }
+  window.scrollTo(0, 0);
+  loadData();
 }
 /* replaces loadData's source when another league is active */
 function lgLoad(){
