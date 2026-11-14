@@ -1183,6 +1183,8 @@ li.wout{color:var(--bad,#d92d20)}
 .secg[hidden],.secg li[hidden]{display:none}
 section[id]{scroll-margin-top:60px}
 @media print{.secnav,.secidx{display:none!important}}
+.tcpos{border:1px solid color-mix(in srgb,#ef4444 50%,var(--rule));background:color-mix(in srgb,#ef4444 10%,transparent);border-radius:12px;padding:12px 14px;max-width:820px}.tcpos p{margin:6px 0 0;font-size:14px}
+
 .navg{display:none}
 @media (min-width:1100px){nav.main .navg{display:block;margin:14px 14px 2px;font-family:var(--f-data);font-size:10.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-2);opacity:.75}nav.main .navg:first-of-type{margin-top:4px}nav.main a{padding:7px 14px}}
 .tsh-gl{grid-column:1/-1;margin:8px 0 0;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}.tsh-g a[aria-current]{background:var(--red);color:var(--on-red,#fff)}
@@ -4610,6 +4612,16 @@ function tcResult(){
   var r = {a: {n0: bestLineupValue(A0, nx), n1: bestLineupValue(A1, nx), s0: bestLineupValue(A0, ss), s1: bestLineupValue(A1, ss), size: A1.length},
            b: {n0: bestLineupValue(B0, nx), n1: bestLineupValue(B1, nx), s0: bestLineupValue(B0, ss), s1: bestLineupValue(B1, ss), size: B1.length}};
   if (!t.ga.length && !t.gb.length) return '<p class="data muted">Pažymėkite, kuriuos žaidėjus komandos atiduoda.</p>';
+  /* BasketNews draft trades must keep positions: a guard for a guard, a forward for a forward, a centre for a centre */
+  var PW = {G: ['gynėją', 'gynėjus', 'gynėjų'], F: ['puolėją', 'puolėjus', 'puolėjų'], C: ['centrą', 'centrus', 'centrų']};
+  function pcount(ids){ var c = {G: 0, F: 0, C: 0}; ids.forEach(function(i){ var p = by[i]; if (p && c[p.pos] != null) c[p.pos]++; }); return c; }
+  function pw(n, k){ return n + ' ' + PW[k][n === 1 ? 0 : (n % 10 === 0 || (n % 100 > 10 && n % 100 < 20)) ? 2 : 1]; }
+  var ca = pcount(t.ga), cb = pcount(t.gb), need = [];
+  ['G', 'F', 'C'].forEach(function(k){ var df = ca[k] - cb[k]; if (df > 0) need.push(esc(team(t.b)) + ' turi atiduoti dar ' + pw(df, k)); else if (df < 0) need.push(esc(team(t.a)) + ' turi atiduoti dar ' + pw(-df, k)); });
+  if (need.length){
+    function lst(c){ return ['G', 'F', 'C'].filter(function(k){ return c[k]; }).map(function(k){ return pw(c[k], k); }).join(', ') || 'nieko'; }
+    return '<div class="tcpos"><b>Tokie mainai negalimi: pozicijos turi sutapti.</b><p>Gynėją galima keisti tik į gynėją, puolėją į puolėją, centrą į centrą. Dabar ' + esc(team(t.a)) + ' atiduoda ' + lst(ca) + ', o ' + esc(team(t.b)) + ' ' + lst(cb) + '.</p><p>Kad mainai būtų galimi: ' + need.join('; ') + ' (arba atžymėkite žaidėjų).</p></div>';
+  }
   function row(id, x){ return '<tr><td class="tm">' + teamLink(id) + '<span class="sub">' + esc(M[id].first) + '</span></td><td class="num">' + nf1(x.s0) + ' → ' + nf1(x.s1) + '</td><td class="num"><b>' + plusN(x.s1 - x.s0) + '</b></td><td class="num">' + nf1(x.n0) + ' → ' + nf1(x.n1) + '</td><td class="num">' + plusN(x.n1 - x.n0) + '</td><td class="num">' + x.size + '</td></tr>'; }
   var da = r.a.s1 - r.a.s0, db = r.b.s1 - r.b.s0, verdict;
   if (Math.abs(da - db) < 0.5) verdict = 'Mainai maždaug lygūs: abi komandos pagal prognozes keičiasi panašiai.';
@@ -4631,7 +4643,7 @@ function tcSelect(side){
 }
 function pageTradeCalc(){
   var R = EL().next_round;
-  var h = '<p class="kicker"><a href="#mainai">Mainai</a></p><h2 class="page">Mainų skaičiuoklė</h2><p class="deck">Pasirinkite dvi komandas ir pažymėkite, kuriuos žaidėjus kiekviena atiduoda. Skaičiuoklė palygina abiejų komandų geriausias sudėtis prieš ir po mainų: kiek jos surinktų per turą likusį sezoną ir ' + R + ' ture.</p>';
+  var h = '<p class="kicker"><a href="#mainai">Mainai</a></p><h2 class="page">Mainų skaičiuoklė</h2><p class="deck">Pasirinkite dvi komandas ir pažymėkite, kuriuos žaidėjus kiekviena atiduoda. Pozicijos turi sutapti: gynėjas keičiamas tik į gynėją, puolėjas į puolėją, centras į centrą. Skaičiuoklė palygina abiejų komandų geriausias sudėtis prieš ir po mainų: kiek jos surinktų per turą likusį sezoną ir ' + R + ' ture.</p>';
   h += '<section id="tc-res-s"><h3 class="sect">Rezultatas</h3><div id="tc-res">' + tcResult() + '</div><p class="note">Per turą likusį sezoną: geriausios sudėties prognozė vienam turui iki sezono pabaigos, įskaitant žinomus traumų terminus. ' + R + ' turas: geriausios sudėties prognozė kitam turui. Geriausia sudėtis: kapitonas ×2, keturi startiniai ir 6th man po 1, keturi suolo žaidėjai po 0,5, startiniame penkete bent vienas gynėjas, puolėjas ir centras. <a href="#eurolyga-analize">Kaip skaičiuojamos prognozės</a>.</p></section>';
   h += '<div class="cols-even tcw"><section><h3 class="sect">Pirma komanda</h3><p>' + tcSelect("a") + '</p><div id="tc-a">' + tcRoster("a") + '</div></section>' +
     '<section><h3 class="sect">Antra komanda</h3><p>' + tcSelect("b") + '</p><div id="tc-b">' + tcRoster("b") + '</div></section></div>';
