@@ -1402,6 +1402,28 @@ table.ag tr.best td{background:color-mix(in srgb,#16a34a 8%,transparent)}
 nav.main a.nav-tp[aria-current="page"]{color:#fff!important;background:#dc2626!important}
 .mebar .lv-b{font-size:10px;padding:1px 6px}
 .story-prev:empty{display:none}.story-prev{margin-top:14px}.story-prev img{display:block;width:min(100%,320px);height:auto;border-radius:16px;box-shadow:0 8px 28px rgba(0,0,0,.35)}
+.actg{margin:14px 0 6px;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+ol.act{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+ol.act li{display:grid;grid-template-columns:26px 30px minmax(0,1fr);gap:10px;align-items:center;padding:9px 12px;border-radius:12px;background:color-mix(in srgb,var(--c) 7%,transparent);border-left:3px solid var(--c)}
+ol.act .aic{font-weight:800;text-align:center;color:var(--c)}
+ol.act .atx{min-width:0}ol.act .atx b{display:block;font-weight:700}ol.act .atx small{display:block;color:var(--ink-2);overflow-wrap:anywhere}
+ol.act li.win{background:color-mix(in srgb,#e8c98a 12%,transparent);border-left-color:#c9a45c}ol.act li.win .aic{color:#c9a45c}
+ol.act li.last .aic{color:#ef4444}
+.tabbar,.tabsheet,.tools-tg{display:none}
+@media (max-width:719px){
+  body{padding-bottom:calc(68px + env(safe-area-inset-bottom))}
+  .tabbar{display:grid;grid-template-columns:repeat(5,1fr);position:fixed;left:0;right:0;bottom:0;z-index:60;padding:6px 4px calc(6px + env(safe-area-inset-bottom));background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid color-mix(in srgb,currentColor 12%,transparent)}
+  .tabbar a,.tabbar button{display:flex;flex-direction:column;align-items:center;gap:2px;padding:4px 0;font-family:inherit;font-size:11px;font-weight:600;line-height:1.2;color:var(--ink-2);text-decoration:none;background:none;border:0;min-height:48px;justify-content:center}
+  .tabbar [aria-current="page"],.tabbar [aria-expanded="true"]{color:var(--red)}
+  .tabbar [aria-current="page"] svg{stroke-width:2.4}
+  .tabsheet:not([hidden]){display:block;position:fixed;inset:0;z-index:59;background:rgba(0,0,0,.45)}
+  .tsh-in{position:absolute;left:0;right:0;bottom:calc(64px + env(safe-area-inset-bottom));max-height:70vh;overflow:auto;padding:16px 16px 18px;border-radius:20px 20px 0 0;background:var(--card)}
+  .tsh-h{margin:0 0 10px;font-weight:800}.tsh-g{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .tsh-g a{padding:12px;border-radius:12px;background:color-mix(in srgb,currentColor 7%,transparent);text-decoration:none;font-weight:600}
+  .chat-fab{bottom:calc(80px + env(safe-area-inset-bottom))!important}.totop{bottom:calc(150px + env(safe-area-inset-bottom))!important}
+  .tools-tg{display:inline-flex}
+  .tools:not(.open) .tbtns,.tools:not(.open) #theme-btn{display:none}
+}
 </style>
 </head>
 <body>
@@ -1440,7 +1462,7 @@ nav.main a.nav-tp[aria-current="page"]{color:#fff!important;background:#dc2626!i
       <a href="#apzvalgos" data-sec="apzvalgos">Apžvalgos</a>
       <a href="#taisykles" data-sec="taisykles">Taisyklės</a>
     </nav>
-    <div class="tools"><label>Mano komanda<select id="me-sel"></select></label><button type="button" class="tog" id="theme-btn">Tamsus režimas</button><div class="tbtns"><a class="tog" href="#kalendorius">Rungtynių kalendorius</a><button type="button" class="tog" data-act="story">Turo paveikslėlis</button><button type="button" class="tog" data-act="story-table">Lentelės paveikslėlis</button><button type="button" class="tog" data-act="story-both">Turo ir lentelės paveikslėlis</button><button type="button" class="tog" data-act="print">Spausdinti</button><button type="button" class="tog" id="inst-btn" hidden>Įdiegti programėlę</button></div></div>
+    <div class="tools"><label>Mano komanda<select id="me-sel"></select></label><button type="button" class="tog tools-tg" id="tools-tg" aria-expanded="false">Įrankiai ▾</button><button type="button" class="tog" id="theme-btn">Tamsus režimas</button><div class="tbtns"><a class="tog" href="#kalendorius">Rungtynių kalendorius</a><button type="button" class="tog" data-act="story">Turo paveikslėlis</button><button type="button" class="tog" data-act="story-table">Lentelės paveikslėlis</button><button type="button" class="tog" data-act="story-both">Turo ir lentelės paveikslėlis</button><button type="button" class="tog" data-act="print">Spausdinti</button><button type="button" class="tog" id="inst-btn" hidden>Įdiegti programėlę</button></div></div>
   </header>
 
   <div id="mebar" class="mebar" hidden></div>
@@ -1828,6 +1850,7 @@ function render(keepScroll){
   else if (r.indexOf("elg-") === 0) html = pageELG(r.split("-")[1], r.split("-")[2]);
   else if (r === "pagalba") html = pageHelp();
   else if (r === "kas-naujo") html = pageChanges();
+  else if (r === "veikla") html = pageActivity();
   else if (r === "nauja-lyga") html = pageNewLeague();
   else if (r === "apie") html = pageAbout();
   else if (r === "eurolyga-analize") html = pageELAnalysis();
@@ -1863,7 +1886,7 @@ function render(keepScroll){
   if (mm){ drawTrade(); }
   if (r.indexOf("palyginimas") === 0){ drawCompare(); }
   if (r.indexOf("komanda-") === 0){ drawTeamRounds(); }
-  toolsInit(); applyMe(); tickCountdown(); try { postRender(r); } catch (e){ if (window.console) console.error(e); }
+  toolsInit(); applyMe(); try { tabBar(); tabSync(); } catch (e){} tickCountdown(); try { postRender(r); } catch (e){ if (window.console) console.error(e); }
   var tl = document.querySelector('.tools'); if (tl) tl.hidden = r !== 'lentele';
   if (!keepScroll) window.scrollTo(0, 0);
   srScroll();
@@ -2008,7 +2031,7 @@ function pageHome(){
     '<div class="hx-k"><span><b>' + n(L1.total) + '</b>taškų</span><span><b>+' + n(Math.round((L1.total - L2.total) * 100) / 100) + '</b>prieš ' + esc(M[L2.id].first) + '</span><span><b>' + M[L1.id].wins + '</b>turų pergalės</span><span><b>' + (d.rounds_total - d.rounds_played) + '</b>turų liko</span></div></div>' +
     '<div class="hx-l">' + teamLogo(L1.id, 120) + '<span class="hx-n">' + esc(team(L1.id)) + '</span></div></div>';
   h += '<div class="cols"><div>' + liveSect();
-  h += '<section aria-labelledby="t-st"><h3 class="sect" id="t-st">Lentelė <small>po ' + d.rounds_played + ' turo iš ' + d.rounds_total + '</small></h3>' + standingsTable() + '</section>' + forecastBars();
+  h += '<section aria-labelledby="t-st"><h3 class="sect" id="t-st">Lentelė <small>po ' + d.rounds_played + ' turo iš ' + d.rounds_total + '</small></h3>' + standingsTable() + '</section>' + forecastBars() + actSection();
   h += '</div><aside>' + nextRoundBox() + roundWidget() + watchBox() + '<section><h3 class="sect">Galios reitingas</h3><div class="data">' + powerTable(d.rounds_played).slice(0, 3).map(function(x){ return '<p><b>' + x.rk + '.</b> ' + teamLink(x.id) + ' <span class="muted">3 turų vid. ' + nf1(x.l3) + '</span></p>'; }).join('') + '<p><a href="#galios-reitingas">Visas galios reitingas</a></p></div></section>';
   var wcap = lineupCaptain(last.winner), lcap = lineupCaptain(last.last);
   h += '<section class="rres rwin" style="--c:' + tcol(last.winner) + '"><h3 class="sect">' + last.round + ' turo nugalėtojas</h3><p class="big">' + esc(who(last.winner)) + '</p><div class="data"><p>' + teamLink(last.winner) + ' · ' + n(last.winner_score) + ' FPTS · ' + d.prize_per_round + ' €</p>' +
@@ -2255,6 +2278,8 @@ function toolsInit(){
     sel.value = myTeam() || "";
     sel.addEventListener("change", function(){ lsSet("ef-me", sel.value || null); if (current() === "kalendorius") render(true); else applyMe(); });
   }
+  var tg = document.getElementById("tools-tg");
+  if (tg && !tg.getAttribute("data-on")){ tg.setAttribute("data-on", "1"); tg.addEventListener("click", function(){ var t = tg.closest(".tools"), o = t.classList.toggle("open"); tg.setAttribute("aria-expanded", String(o)); tg.textContent = o ? "Įrankiai ▴" : "Įrankiai ▾"; }); }
   if (btn && !btn.getAttribute("data-on")){
     btn.setAttribute("data-on", "1");
     var t = lsGet("ef-theme"); if (t) document.documentElement.setAttribute("data-theme", t);
@@ -6645,7 +6670,7 @@ function pageHelp(){
   h += sect('Žodynėlis', GLOSSARY.length + ' terminai', '<dl class="gloss">' + GLOSSARY.map(function(z){ return '<dt>' + esc(z[0]) + '</dt><dd>' + esc(z[1]) + '</dd>'; }).join('') + '</dl>');
   return h;
 }
-var CHANGES = [["2026-11-12", "Galios reitingas su istorija, turo akimirkos pagrindiniame puslapyje, karštų naujienų juosta, stebimi žaidėjai, grafikų kūrėjas, apžvalgų numeriai ir skaitymo laikas, apžvalgos komandų puslapiuose, formos juosta."], ["2026-11-11", "Kitos lygos: paraiška vienos nuorodos ir kelių klausimų pagrindu, užšifruotos lygos ir lygų perjungiklis (kiekviena lyga matoma tik su jos kodu)."], ["2026-11-11", "Paieškoje rasi istorinius žaidėjus, klubus ir komandų sezonus; nauji klubų visų laikų profiliai."], ["2026-11-11", "Visų Eurolygos rungtynių nuo 2000–2001 sezono žurnalai per fantasy prizmę: kiekvienų rungtynių puslapis su FPTS, sezonų ir komandų rungtynių sąrašai, žaidėjų rungtynių žurnalai ir visų laikų rekordai."], ["2026-11-11", "Istorijos žaidėjų profiliuose trūkstama šalis, ūgis ir gimimo data papildyti iš Vikipedijos, pridėtos nuorodos į Vikipedijos straipsnius."], ["2026-11-11", "Istorijoje: kiekvieno sezono komandų puslapiai su visa sudėtimi, 3 079 žaidėjų profiliai su nuotraukomis ir MyTeam kortelėmis, klubų logotipai."], ["2026-11-11", "Eurolygos istorija nuo 2000–2001 sezono per fantasy prizmę (Sofascore), karjeros lentelės žaidėjų puslapiuose."], ["2026-11-11", "Analitikoje: skilčių juosta kiekviename skirtuke ir „Visos skiltys“ su paieška per visus skirtukus."], ["2026-11-11", "Atviros lažybos su gyva tikimybe; Analitikos skirtukų juosta vėl telpa į rėmelį."], ["2026-11-11", "Sudėties patikra, statistikos kategorijos, sezono rekordai ir Survivor, ženkliukai lentelėje, žaidimai ir spėjimai, drafto rekordai, FPTS išskaidymas žaidėjų puslapiuose."], ["2026-11-11", "Įmokos (po 150 €) ir sezono prizai (400, 230, 110 €) pinigų balanse, taisyklėse ir koeficientuose."], ["2026-11-11", "Eurolygos lentelės prognozė, rungtynių linijos, klubų kelionės ir statistika, PIR lyderiai, daugiau koeficientų rinkų, pinigų skiltis, apžvalgų turinys ir nuorodos į pastraipas, pagalbos, „Apie“ ir šis puslapis."], ["2026-11-11", "Prognozės perskaičiuotos su visu Eurolygos tvarkaraščiu; išbandyti teisėjų ir žaidėjų sąveikos priedai."], ["2026-11-10", "Teisėjų poveikio modelis, žaidėjų sąveikos aikštėje modelis, Triple Captain ir Bench Boost planas, lygos pokalbis."], ["2026-11-09", "Paieška, lygos logotipas, analitikos skyrius su dešimtimis naujų lentelių."], ["2026-11-08", "Atšaukti mainai paslėpti, atnaujintas traumų ir mainų puslapių dizainas."]];
+var CHANGES = [["2026-11-14", "Programėlė telefonui ir kompiuteriui (įdiegiama iš savo adreso), apatinė skyrių juosta telefone, lygos veiklos srautas, nauji turo ir lentelės paveikslėliai, bendras turo ir lentelės paveikslėlis."], ["2026-11-12", "Galios reitingas su istorija, turo akimirkos pagrindiniame puslapyje, karštų naujienų juosta, stebimi žaidėjai, grafikų kūrėjas, apžvalgų numeriai ir skaitymo laikas, apžvalgos komandų puslapiuose, formos juosta."], ["2026-11-11", "Kitos lygos: paraiška vienos nuorodos ir kelių klausimų pagrindu, užšifruotos lygos ir lygų perjungiklis (kiekviena lyga matoma tik su jos kodu)."], ["2026-11-11", "Paieškoje rasi istorinius žaidėjus, klubus ir komandų sezonus; nauji klubų visų laikų profiliai."], ["2026-11-11", "Visų Eurolygos rungtynių nuo 2000–2001 sezono žurnalai per fantasy prizmę: kiekvienų rungtynių puslapis su FPTS, sezonų ir komandų rungtynių sąrašai, žaidėjų rungtynių žurnalai ir visų laikų rekordai."], ["2026-11-11", "Istorijos žaidėjų profiliuose trūkstama šalis, ūgis ir gimimo data papildyti iš Vikipedijos, pridėtos nuorodos į Vikipedijos straipsnius."], ["2026-11-11", "Istorijoje: kiekvieno sezono komandų puslapiai su visa sudėtimi, 3 079 žaidėjų profiliai su nuotraukomis ir MyTeam kortelėmis, klubų logotipai."], ["2026-11-11", "Eurolygos istorija nuo 2000–2001 sezono per fantasy prizmę (Sofascore), karjeros lentelės žaidėjų puslapiuose."], ["2026-11-11", "Analitikoje: skilčių juosta kiekviename skirtuke ir „Visos skiltys“ su paieška per visus skirtukus."], ["2026-11-11", "Atviros lažybos su gyva tikimybe; Analitikos skirtukų juosta vėl telpa į rėmelį."], ["2026-11-11", "Sudėties patikra, statistikos kategorijos, sezono rekordai ir Survivor, ženkliukai lentelėje, žaidimai ir spėjimai, drafto rekordai, FPTS išskaidymas žaidėjų puslapiuose."], ["2026-11-11", "Įmokos (po 150 €) ir sezono prizai (400, 230, 110 €) pinigų balanse, taisyklėse ir koeficientuose."], ["2026-11-11", "Eurolygos lentelės prognozė, rungtynių linijos, klubų kelionės ir statistika, PIR lyderiai, daugiau koeficientų rinkų, pinigų skiltis, apžvalgų turinys ir nuorodos į pastraipas, pagalbos, „Apie“ ir šis puslapis."], ["2026-11-11", "Prognozės perskaičiuotos su visu Eurolygos tvarkaraščiu; išbandyti teisėjų ir žaidėjų sąveikos priedai."], ["2026-11-10", "Teisėjų poveikio modelis, žaidėjų sąveikos aikštėje modelis, Triple Captain ir Bench Boost planas, lygos pokalbis."], ["2026-11-09", "Paieška, lygos logotipas, analitikos skyrius su dešimtimis naujų lentelių."], ["2026-11-08", "Atšaukti mainai paslėpti, atnaujintas traumų ir mainų puslapių dizainas."]];
 var PLANNED = ["Komentarai, reakcijos ir balsavimai po apžvalgomis (reikia bendros duomenų bazės, kurios vieša svetainė dabar neturi).", "Virtualios lažybos su kreditais ir rungtynių spėjimų konkursas tarp narių.", "Vadybininkų profiliai su mėgstamu klubu ir šūkiu (laukiame narių atsakymų).", "Pusės sezono ir sezono pabaigos apžvalgų archyvas.", "Lygos taisyklių pakeitimų istorija ir ginčų sprendimo tvarka (komisaro sprendimai)."];
 function pageChanges(){
   var h = '<p class="kicker">Svetainė · versija ' + SITE_VER + '</p><h2 class="page">Kas naujo</h2><p class="deck">Svetainės atnaujinimų žurnalas ir planuojami dalykai.</p>';
@@ -7942,13 +7967,83 @@ function pageTips(){
   return h;
 }
 document.addEventListener('click', function(e){ var b = e.target.closest && e.target.closest('[data-tp]'); if (!b) return; S.tpT = b.getAttribute('data-tp'); history.replaceState(null, '', '#turo-patarejas~' + S.tpT); render(true); });
+/* ---------- league activity feed (Sleeper style) and the mobile tab bar ---------- */
+function actItems(){
+  var d = S.data, out = [], hi = -1, lo = 1e9;
+  (d.transfers || []).forEach(function(g){ (g.deals || []).forEach(function(x){
+    if (x.undo) return;
+    if (x.kind === 'trade') out.push({r: x.round, k: 1, t: x.date, ic: '⇄', cls: 'tr', ids: [x.a, x.b],
+      h: teamLink(x.a) + ' ir ' + teamLink(x.b) + ' susimainė',
+      s: esc(M[x.a].first) + ' atidavė ' + esc(x.a_gives.join(', ')) + (x.a_pays > 0 ? ' ir ' + x.a_pays + ' kred.' : '') + ', gavo ' + esc(x.b_gives.join(', ')) + (x.a_pays < 0 ? ' ir ' + (-x.a_pays) + ' kred.' : '')});
+    else if (x.kind === 'fa') out.push({r: x.round, k: 1, t: x.date, ic: '+', cls: 'fa', ids: [x.team],
+      h: teamLink(x.team) + ' paėmė ' + esc(x.in), s: 'Vietoj ' + esc(x.out) + (x.credits ? ' · ' + x.credits + ' kred.' : '')});
+  }); });
+  (d.specials || []).forEach(function(x){ out.push({r: x.round, k: 5, t: '', ic: '★', cls: 'cd', ids: [x.team], h: teamLink(x.team) + ' panaudojo ' + esc(x.card), s: esc(x.note || '')}); });
+  d.rounds.forEach(function(r){
+    var rec = r.winner_score > hi && r.round > 1, low = r.last_score < lo && r.round > 1;
+    out.push({r: r.round, k: 9, t: '', ic: '🏆', cls: 'win', ids: [r.winner], h: teamLink(r.winner) + ' laimėjo ' + r.round + ' turą', s: n(r.winner_score) + ' FPTS' + (rec ? ' · naujas lygos rekordas' : '') + ' · +' + (r.prize || d.prize_per_round || 20) + ' €'});
+    out.push({r: r.round, k: 8, t: '', ic: '↓', cls: 'last', ids: [r.last], h: teamLink(r.last) + ' paskutinis ' + r.round + ' ture', s: n(r.last_score) + ' FPTS' + (low ? ' · prasčiausias sezono turas' : '')});
+    hi = Math.max(hi, r.winner_score); lo = Math.min(lo, r.last_score);
+  });
+  out.sort(function(a, b){ return b.r - a.r || b.k - a.k || (b.t > a.t ? 1 : b.t < a.t ? -1 : 0); });
+  return out;
+}
+function actFeed(limitRounds, filt){
+  var items = actItems(), maxR = S.data.rounds_played, h = '', grp = null;
+  items.forEach(function(x){
+    if (limitRounds && x.r < maxR - limitRounds + 1) return;
+    if (filt && x.ids.indexOf(filt) < 0) return;
+    var g = x.k === 1 ? 'Prieš ' + x.r + ' turą' : x.r + ' turas';
+    if (g !== grp){ if (grp) h += '</ol>'; h += '<p class="actg">' + g + '</p><ol class="act">'; grp = g; }
+    h += '<li class="' + x.cls + '" style="--c:' + tcol(x.ids[0]) + '"><span class="aic">' + x.ic + '</span>' + teamLogo(x.ids[0], 30) + '<span class="atx"><b>' + x.h + '</b><small>' + x.s + (x.t ? ' · ' + esc(x.t) : '') + '</small></span></li>';
+  });
+  return h ? h + '</ol>' : '<p class="muted">Veiklos nėra.</p>';
+}
+function actSection(){
+  return '<section aria-labelledby="t-act"><h3 class="sect" id="t-act">Lygos veikla <small>mainai, laisvieji agentai, kortelės, turų rezultatai</small></h3>' + actFeed(2) + '<p class="note"><a href="#veikla">Visa sezono veikla</a></p></section>';
+}
+function pageActivity(){
+  var f = (location.hash.split('~')[1] || ''), d = S.data;
+  var chips = '<div class="filters" style="margin-top:0"><a class="tog"' + (f ? '' : ' aria-current="page"') + ' href="#veikla">Visos komandos</a>' + d.standings.map(function(s){ return '<a class="tog"' + (f === s.id ? ' aria-current="page"' : '') + ' href="#veikla~' + s.id + '">' + esc(M[s.id].first) + '</a>'; }).join('') + '</div>';
+  return '<p class="kicker">Lyga</p><h2 class="page">Lygos veikla</h2><p class="deck">Visas sezono įvykių srautas: mainai, laisvųjų agentų pirkimai, specialios kortelės ir kiekvieno turo nugalėtojai bei paskutinės vietos. Naujausi viršuje.</p><section>' + chips + actFeed(0, f && M[f] ? f : null) + '</section>';
+}
+function tabBar(){
+  if (document.getElementById('tabbar')) return;
+  var me = myTeam(), nb = document.createElement('nav');
+  nb.id = 'tabbar'; nb.className = 'tabbar'; nb.setAttribute('aria-label', 'Pagrindiniai skyriai');
+  var I = {
+    t: '<path d="M4 5h16M4 10h16M4 15h10M4 20h7"/>',
+    r: '<rect x="4" y="5" width="16" height="15" rx="3"/><path d="M4 10h16M9 3v4M15 3v4"/>',
+    m: '<path d="M12 3l7 3v5c0 5-3.2 8.3-7 10-3.8-1.7-7-5-7-10V6z"/>',
+    p: '<circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/>',
+    x: '<circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/>'
+  };
+  function it(href, sec, ic, lab){ return '<a href="' + href + '" data-tab="' + sec + '"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + I[ic] + '</svg><span>' + lab + '</span></a>'; }
+  nb.innerHTML = it('#lentele', 'lentele', 't', 'Lentelė') + it('#turai', 'turai', 'r', 'Turai') + it(me ? '#komanda-' + me : '#komandos', 'mano', 'm', 'Mano') + it('#zaidejai', 'zaidejai', 'p', 'Žaidėjai') +
+    '<button type="button" data-tab="more" aria-expanded="false"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">' + I.x + '</svg><span>Daugiau</span></button>';
+  document.body.appendChild(nb);
+  var sh = document.createElement('div'); sh.id = 'tabsheet'; sh.className = 'tabsheet'; sh.hidden = true; document.body.appendChild(sh);
+  nb.querySelector('[data-tab="more"]').addEventListener('click', function(){
+    if (!sh.hidden){ sh.hidden = true; this.setAttribute('aria-expanded', 'false'); return; }
+    sh.innerHTML = '<div class="tsh-in"><p class="tsh-h">Visi skyriai</p><div class="tsh-g">' + Array.prototype.map.call(document.querySelectorAll('nav.main a'), function(a){ return a.hidden ? '' : '<a href="' + a.getAttribute('href') + '">' + esc(a.textContent) + '</a>'; }).join('') + '<a href="#veikla">Lygos veikla</a><a href="#kalendorius">Rungtynių kalendorius</a><a href="#pagalba">Pagalba</a></div></div>';
+    sh.hidden = false; this.setAttribute('aria-expanded', 'true');
+  });
+  sh.addEventListener('click', function(e){ if (e.target === sh || (e.target.closest && e.target.closest('a'))){ sh.hidden = true; nb.querySelector('[data-tab="more"]').setAttribute('aria-expanded', 'false'); } });
+}
+function tabSync(){
+  var nb = document.getElementById('tabbar'); if (!nb) return;
+  var r = current(), me = myTeam(), mine = nb.querySelector('[data-tab="mano"]');
+  if (mine) mine.setAttribute('href', me ? '#komanda-' + me : '#komandos');
+  var on = r === 'lentele' ? 'lentele' : r === 'turai' || r.indexOf('turas-') === 0 ? 'turai' : (me && r === 'komanda-' + me) ? 'mano' : r.indexOf('zaidej') === 0 ? 'zaidejai' : null;
+  nb.querySelectorAll('[data-tab]').forEach(function(a){ if (a.getAttribute('data-tab') === on) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
+}
 function enhanceView(root){
   if (!root || !S.data) return;
   setTimeout(function(){ try { stackTables(root); } catch (e) {} try { fixInk(root); } catch (e) {} }, 30);
   root.querySelectorAll('a[href^="#komanda-"]').forEach(function(a){
     if (a.getAttribute("data-en")) return; a.setAttribute("data-en", "1");
     var id = a.getAttribute("href").slice(9);
-    if (!M[id] || a.querySelector("svg") || a.closest(".tmrow,.fcx,.wlx,.phead,.en-h,.mv-w,.ach-h,.tmc,.stk-h,.tchip,.ochip,.kicker,.toggles,nav,svg,.mtc,.ach,h2,h3,.deck,option,.tools")) return;
+    if (!M[id] || a.querySelector("svg") || a.closest(".tmrow,.act,.fcx,.wlx,.phead,.en-h,.mv-w,.ach-h,.tmc,.stk-h,.tchip,.ochip,.kicker,.toggles,nav,svg,.mtc,.ach,h2,h3,.deck,option,.tools")) return;
     var cell = a.closest("td,th,li,dd");
     a.classList.add("has-ic");
     a.insertAdjacentHTML("afterbegin", teamLogo(id, cell ? 20 : 17).replace('class="tlogo"', 'class="tlogo tl-i"'));
