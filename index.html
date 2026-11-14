@@ -8242,7 +8242,11 @@ function tabSync(){
 }
 /* ---------- neutral start page (#pradzia): no league is shown, only "join with a code" and "apply for your league" ---------- */
 var LANDING = /^#pradzia/.test(location.hash);
+/* someone who already joined a league on this device skips the start page and opens that league straight away */
+(function(){ if (!LANDING) return; try { var id = localStorage.getItem('efl.lyga'), o = JSON.parse(localStorage.getItem('efl.lygos') || '{}'); if (id && o[id]){ LANDING = false; history.replaceState(null, '', location.pathname + location.search + '#lentele'); } } catch (e){} })();
 if (LANDING) document.documentElement.classList.add('landing');
+/* ask the browser to keep this site's storage, so the saved league code is not cleared */
+try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(function(){}); } catch (e){}
 function landingSync(r){
   if (!LANDING) return;
   if (r === 'pradzia' || r === 'nauja-lyga') document.documentElement.classList.add('landing');
