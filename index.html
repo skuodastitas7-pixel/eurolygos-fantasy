@@ -1452,6 +1452,7 @@ b.dpill.n{background:color-mix(in srgb,#ef4444 16%,transparent);color:#f87171}
 .sub.crs{white-space:nowrap;font-size:12px}
 .crp{display:inline-block;min-width:38px;padding:2px 9px;border-radius:8px;font-weight:700;text-align:center;background:color-mix(in srgb,#c9a45c 18%,transparent)}
 .crp.free{background:color-mix(in srgb,#16a34a 16%,transparent);font-weight:600;font-size:13px}
+.lgwarn{margin:0;padding:10px 12px;border-radius:10px;background:color-mix(in srgb,#f59e0b 16%,transparent);border:1px solid color-mix(in srgb,#f59e0b 45%,transparent);font-size:14px}
 </style>
 </head>
 <body>
@@ -7472,7 +7473,7 @@ function lgJoin(code){
   var id = code.slice(0, i).toLowerCase(), pw = code.slice(i + 1);
   return getJSON('lygos/' + id + '.json').catch(function(){ throw new Error('Tokios lygos nėra. Patikrink kodą.'); }).then(function(b){
     return lgKey(pw, b.salt).then(function(k){ return crypto.subtle.decrypt({name: 'AES-GCM', iv: unb64(b.iv)}, k, unb64(b.ct)).then(function(pt){
-      return crypto.subtle.exportKey('raw', k).then(function(raw){ var o = lgStore(), j = JSON.parse(new TextDecoder().decode(pt)); o[id] = {k: b64u(raw), n: (j.data && j.data.league_name) || id}; lgSave(o); return id; }); }); })
+      return crypto.subtle.exportKey('raw', k).then(function(raw){ var o = lgStore(), j = JSON.parse(new TextDecoder().decode(pt)); o[id] = {k: b64u(raw), n: (j.data && j.data.league_name) || id, c: pw}; lgSave(o); return id; }); }); })
       .catch(function(e){ if (e && /Kodas|Tokios/.test(e.message)) throw e; throw new Error('Neteisingas slaptažodis.'); });
   });
 }
@@ -7492,8 +7493,14 @@ function lgUse(id){
 function lgLoad(){
   var id = lgActive(), o = lgStore();
   if (!id || !o[id]) return null;
-  return lgOpen(id, o[id].k).then(function(j){ LG.cur = {id: id, name: (j.data && j.data.league_name) || o[id].n}; S.reviews = j.reviews || []; return j.data; })
-    .catch(function(){ lgSetActive(''); return getJSON('data.json'); });
+  function done(j){ LG.cur = {id: id, name: (j.data && j.data.league_name) || o[id].n}; S.reviews = j.reviews || []; return j.data; }
+  return lgOpen(id, o[id].k).then(done)
+    .catch(function(){
+      /* the league file was re-encrypted after an update: derive the key again from the saved code, or ask for the code */
+      if (o[id].c) return lgJoin(id + '-' + o[id].c).then(function(){ return lgOpen(id, lgStore()[id].k); }).then(done);
+      throw new Error('relogin');
+    })
+    .catch(function(){ lgSetActive(''); LG.relogin = id; setTimeout(function(){ try { lgDialog(); } catch (e){} }, 400); return getJSON('data.json'); });
 }
 function lgName(){ return (S.data && S.data.league_name) || LG_DEFAULT; }
 function lgBrand(){
@@ -7519,7 +7526,7 @@ function lgDialog(){
       var u = e.target.closest('[data-lguse]'); if (u){ lgUse(u.getAttribute('data-lguse')); return; }
       var f = e.target.closest('[data-lgforget]'); if (f){ var s = lgStore(); delete s[f.getAttribute('data-lgforget')]; lgSave(s); if (lgActive() === f.getAttribute('data-lgforget')) lgUse(''); else lgDialog(); return; }
       if (e.target.closest('[data-lgjoin]')){ var inp = box.querySelector('#lg-code'), msg = box.querySelector('#lg-msg'); msg.textContent = 'Tikrinama…';
-        lgJoin(inp.value).then(function(id){ lgUse(id); }).catch(function(err){ msg.textContent = err.message; }); }
+        lgJoin(inp.value).then(function(id){ LG.relogin = null; lgUse(id); }).catch(function(err){ msg.textContent = err.message; }); }
       if (e.target.closest('[data-lgnew]')){ box.hidden = true; location.hash = 'nauja-lyga'; }
     });
     box.addEventListener('keydown', function(e){ if (e.key === 'Escape') box.hidden = true; if (e.key === 'Enter' && e.target.id === 'lg-code'){ box.querySelector('[data-lgjoin]').click(); } });
@@ -7527,7 +7534,7 @@ function lgDialog(){
   box.innerHTML = '<div class="srch-bg" data-lgclose="1"></div><div class="srch-box lgbox" role="dialog" aria-modal="true" aria-label="Lygos"><div class="lgin"><h3>Lygos</h3>' +
     '<button type="button" class="lgit' + (!act ? ' on' : '') + '" data-lguse=""><b>' + esc(LG_DEFAULT) + '</b><small>Pagrindinė lyga</small></button>' +
     ids.map(function(id){ return '<div class="lgrow"><button type="button" class="lgit' + (act === id ? ' on' : '') + '" data-lguse="' + esc(id) + '"><b>' + esc(o[id].n) + '</b><small>Kodas ' + esc(id) + '</small></button><button type="button" class="tog" data-lgforget="' + esc(id) + '" title="Pamiršti šiame įrenginyje">✕</button></div>'; }).join('') +
-    '<label class="lgl">Prisijungti prie kitos lygos<input id="lg-code" type="text" autocomplete="off" placeholder="lygosID-slaptažodis"></label><button type="button" class="btn" data-lgjoin="1">Atidaryti lygą</button><p id="lg-msg" class="muted" aria-live="polite"></p>' +
+    (LG.relogin ? '<p class="lgwarn">Lygos ' + esc((o[LG.relogin] || {}).n || LG.relogin) + ' duomenys atnaujinti. Įvesk jos kodą dar kartą (tik vieną kartą).</p>' : '') + '<label class="lgl">Prisijungti prie kitos lygos<input id="lg-code" type="text" autocomplete="off" placeholder="lygosID-slaptažodis" value="' + (LG.relogin ? esc(LG.relogin) + '-' : '') + '"></label><button type="button" class="btn" data-lgjoin="1">Atidaryti lygą</button><p id="lg-msg" class="muted" aria-live="polite"></p>' +
     '<p class="note">Kiekviena lyga užrakinta savo kodu: be jo jos duomenų pamatyti neįmanoma, net žinant nuorodą. Kodą duoda lygos komisaras.</p>' +
     '<button type="button" class="tog" data-lgnew="1">Nori tokios svetainės savo lygai? Užpildyk paraišką</button></div></div>';
   box.hidden = false; setTimeout(function(){ var i = box.querySelector('#lg-code'); if (i) i.focus(); }, 30);
