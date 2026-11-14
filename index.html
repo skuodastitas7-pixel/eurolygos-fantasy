@@ -1453,6 +1453,19 @@ b.dpill.n{background:color-mix(in srgb,#ef4444 16%,transparent);color:#f87171}
 .crp{display:inline-block;min-width:38px;padding:2px 9px;border-radius:8px;font-weight:700;text-align:center;background:color-mix(in srgb,#c9a45c 18%,transparent)}
 .crp.free{background:color-mix(in srgb,#16a34a 16%,transparent);font-weight:600;font-size:13px}
 .lgwarn{margin:0;padding:10px 12px;border-radius:10px;background:color-mix(in srgb,#f59e0b 16%,transparent);border:1px solid color-mix(in srgb,#f59e0b 45%,transparent);font-size:14px}
+html.landing .wrap>header,html.landing #hotbar,html.landing #mebar,html.landing #tabbar,html.landing .chat-fab,html.landing #totop,html.landing .secnav,html.landing .shr{display:none!important}
+html.landing .wrap{max-width:900px}html.landing main#view{margin:0 auto;padding-top:28px;grid-column:1/-1}
+html.landing body{padding-bottom:0}
+html.landing .wrap{display:block}
+.start{text-align:center;padding:10px 0 40px}.start .st-logo{display:block;margin:0 auto 10px;width:180px;height:auto;border-radius:18px}
+.start .deck{max-width:640px;margin:8px auto 22px}
+.st-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;text-align:left}
+.st-c{display:flex;flex-direction:column;gap:10px}.st-c .btn{align-self:flex-start;display:inline-block;text-decoration:none}
+.st-c input{font:inherit;padding:10px 12px;border-radius:10px;border:1px solid var(--rule);background:var(--paper);color:var(--ink)}
+html.landing footer,html.landing .foot{display:none!important}
+.st-c .btn{font-size:15px;line-height:1.2;background:var(--red);color:var(--on-red,#fff);border:0;padding:12px 20px;border-radius:12px;font-weight:700;letter-spacing:.02em;text-transform:none;cursor:pointer}
+.st-c .btn:hover{filter:brightness(1.08)}
+.st-c input{font-size:16px}
 </style>
 </head>
 <body>
@@ -1846,6 +1859,7 @@ function render(keepScroll){
   if (S.err){ view.setAttribute("aria-busy", "false"); view.innerHTML = errorBox("Nepavyko įkelti lygos duomenų.", "data"); setNav(""); return; }
   if (!S.data) return;
   var r = current(), sec = r, html = "";
+  try { landingSync(r); } catch (e){}
   if (r.indexOf("komanda-") === 0) sec = "komandos";
   if (r.indexOf("zaidejai") === 0) sec = "zaidejai";
   if (r.indexOf("apzvalga-") === 0) sec = "apzvalgos";
@@ -1882,6 +1896,7 @@ function render(keepScroll){
   else if (r.indexOf("elg-") === 0) html = pageELG(r.split("-")[1], r.split("-")[2]);
   else if (r === "pagalba") html = pageHelp();
   else if (r === "kas-naujo") html = pageChanges();
+  else if (r === "pradzia") html = pageStart();
   else if (r === "veikla") html = pageActivity();
   else if (r === "nauja-lyga") html = pageNewLeague();
   else if (r === "apie") html = pageAbout();
@@ -8091,6 +8106,28 @@ function tabSync(){
   var on = r === 'lentele' ? 'lentele' : r === 'turai' || r.indexOf('turas-') === 0 ? 'turai' : (me && r === 'komanda-' + me) ? 'mano' : r.indexOf('zaidej') === 0 ? 'zaidejai' : null;
   nb.querySelectorAll('[data-tab]').forEach(function(a){ if (a.getAttribute('data-tab') === on) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
 }
+/* ---------- neutral start page (#pradzia): no league is shown, only "join with a code" and "apply for your league" ---------- */
+var LANDING = /^#pradzia/.test(location.hash);
+if (LANDING) document.documentElement.classList.add('landing');
+function landingSync(r){
+  if (!LANDING) return;
+  if (r === 'pradzia' || r === 'nauja-lyga') document.documentElement.classList.add('landing');
+  else { LANDING = false; document.documentElement.classList.remove('landing'); }
+}
+function pageStart(){
+  return '<div class="start"><img class="st-logo" src="brand/logo.svg" alt="Asociacija Fantasy Lietuva" width="200" height="171">' +
+    '<h2 class="page">Eurolygos fantasy lygų svetainės</h2><p class="deck">Kiekviena BasketNews Fantasy lyga gali turėti savo svetainę: lentelę, turus, mainus, draftą, prognozes ir koeficientus. Kiekviena lyga užrakinta savo kodu.</p>' +
+    '<div class="st-g"><section class="st-c"><h3 class="sect">Prisijungti prie lygos</h3><p class="data">Įvesk kodą, kurį gavai iš savo lygos komisaro.</p>' +
+    '<input id="st-code" type="text" autocomplete="off" placeholder="lygosID-slaptažodis" aria-label="Lygos kodas"><button type="button" class="btn" data-stjoin="1">Atidaryti lygą</button><p id="st-msg" class="muted" aria-live="polite"></p></section>' +
+    '<section class="st-c"><h3 class="sect">Sukurti svetainę savo lygai</h3><p class="data">Įklijuok savo BasketNews lygos nuorodą ir atsakyk į kelis klausimus. Gausi paraiškos kodą, kurį nusiųsi svetainės kūrėjui.</p><a class="btn" href="#nauja-lyga">Pildyti paraišką</a></section></div>' +
+    '<p class="note">Lygų duomenys užšifruoti: be kodo jų pamatyti neįmanoma, net žinant nuorodą.</p></div>';
+}
+document.addEventListener('click', function(e){
+  var b = e.target.closest && e.target.closest('[data-stjoin]'); if (!b) return;
+  var inp = document.getElementById('st-code'), msg = document.getElementById('st-msg'); msg.textContent = 'Tikrinama…';
+  lgJoin(inp.value).then(function(id){ LANDING = false; document.documentElement.classList.remove('landing'); lgUse(id); }).catch(function(err){ msg.textContent = err.message; });
+});
+document.addEventListener('keydown', function(e){ if (e.key === 'Enter' && e.target && e.target.id === 'st-code'){ var b = document.querySelector('[data-stjoin]'); if (b) b.click(); } });
 function enhanceView(root){
   if (!root || !S.data) return;
   setTimeout(function(){ try { stackTables(root); } catch (e) {} try { fixInk(root); } catch (e) {} }, 30);
