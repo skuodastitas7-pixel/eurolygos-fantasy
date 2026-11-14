@@ -1858,7 +1858,7 @@ function loadData(){
   S.err = null; skeleton("home");
   (lgLoad() || getJSON("data.json")).then(function(d){
     S.data = d; M = {}; d.managers.forEach(function(m){ M[m.id] = m; }); indexPlayers();
-    fillMast(); try { visitInit(); settingsApply(); } catch (e){} render(); try { chLink(); reviewUnread(); } catch (e){}
+    fillMast(); try { visitInit(); settingsApply(); } catch (e){} render(); try { reviewUnread(); } catch (e){}
   }).catch(function(e){ S.err = e; try { console.error(e); } catch (x){} render(); });
 }
 function loadReviews(){
@@ -5828,7 +5828,7 @@ var SR_PAGES = [
   ["agentai", "Laisvieji agentai", "Laisvi žaidėjai ir įsigijimai", pageFreeAgents], ["draftas", "Draftas", "Drafto lenta ir pervertinimas", pageDraft],
   ["eurolyga", "Eurolygos lentelė", "Eurolyga", pageEL], ["eurolyga-kitas", "Kitas turas", "Eurolyga: rungtynės ir mūsų žaidėjai", pageELNext], ["eurolyga-tvarkarastis", "Tvarkaraščio sunkumas", "Eurolyga: artimiausi 5 turai", pageELSchedule],
   ["eurolyga-analize", "Fantasy analizė", "Eurolyga: kapitonai, laisvieji agentai, forma", pageELAnalysis], ["eurolyga-traumos", "Traumos ir naujienos", "Eurolyga: traumų sąrašas", pageELInjuries],
-  ["kalendorius", "Rungtynių kalendorius", "Mūsų žaidėjų rungtynės", pageCalendar], ["pokalbis", "Lygos pokalbis", "Messenger stiliaus pokalbis visai lygai", null], ["apzvalgos", "Apžvalgos", "Turų apžvalgos", null], ["taisykles", "Taisyklės", "FPTS skaičiavimas ir lygos taisyklės", pageRules],
+  ["kalendorius", "Rungtynių kalendorius", "Mūsų žaidėjų rungtynės", pageCalendar], ["apzvalgos", "Apžvalgos", "Turų apžvalgos", null], ["taisykles", "Taisyklės", "FPTS skaičiavimas ir lygos taisyklės", pageRules],
   ["analitika-sudetys", "Analitika: Sudėtys", "Suolas, efektyvumas, geriausia sudėtis", function(){ return pageLab('sudetys'); }], ["analitika-kapitonai", "Analitika: Kapitonai", "Kapitonų taiklumas ir rekordai", function(){ return pageLab('kapitonai'); }],
   ["analitika-kortos", "Analitika: Kortos", "Triple Captain ir Bench Boost", function(){ return pageLab('kortos'); }], ["analitika-lenteles", "Analitika: Alternatyvios lentelės", "Lentelė pagal kitas taisykles", function(){ return pageLab('lenteles'); }],
   ["analitika-turai", "Analitika: Turų statistika", "Turų herojai ir skirtumai", function(){ return pageLab('turai'); }], ["analitika-vietos", "Analitika: Vietos ir serijos", "Vietos, serijos, laiko mašina", function(){ return pageLab('vietos'); }],
@@ -5919,7 +5919,7 @@ function srHistLoad(){
 }
 function srClose(){ var o = document.getElementById('srch'); if (o) o.hidden = true; document.documentElement.classList.remove('srch-open'); }
 function srGo(e){
-  srClose(); if (e.r === 'pokalbis'){ window.open(CHAT_URL, '_blank', 'noopener'); return; } S.srchSec = e.sec || null;
+  srClose(); S.srchSec = e.sec || null;
   if (location.hash === '#' + e.r){ render(); } else location.hash = e.r;
 }
 function srScroll(){
@@ -5933,182 +5933,6 @@ document.addEventListener('keydown', function(e){
   if (e.key === '/' && !/INPUT|TEXTAREA|SELECT/.test(tag) && !e.target.isContentEditable){ e.preventDefault(); srOpen(); }
 });
 document.addEventListener('click', function(e){ if (e.target.closest && e.target.closest('#srch-btn')) srOpen(); });
-
-/* ---------- league chat (Messenger style): db chat/<uid> holds each person's messages, room presence shows who is online ---------- */
-var CH = {db: null, user: null, uid: null, docs: {}, msgs: [], open: false, ready: false, err: null, canWrite: null, me: null, sending: false, queue: [], room: null, peers: [], typing: {}, unsub: null, loadTimer: null, stale: false, owner: false};
-var CH_EMO = ['👍', '❤️', '😂', '🔥', '😮', '😢'];
-var CH_PICK = ['😀', '😂', '🤣', '😅', '😎', '🤔', '😤', '😭', '🔥', '💪', '👏', '🙏', '🏀', '🏆', '💸', '🤡', '👀', '💀', '🍕', '🎯'];
-function chTime(t){ var d = new Date(t), now = new Date(), hm = ('0' + d.getHours()).slice(-2) + ':' + ('0' + d.getMinutes()).slice(-2); if (d.toDateString() === now.toDateString()) return hm; var y = new Date(now - 86400000); if (d.toDateString() === y.toDateString()) return 'vakar ' + hm; return MONTHS[d.getMonth()] + ' ' + d.getDate() + ' d. ' + hm; }
-function chSeen(){ try { return +localStorage.getItem('lyga-chat-seen') || 0; } catch (e){ return 0; } }
-function chSetSeen(t){ try { localStorage.setItem('lyga-chat-seen', String(t)); } catch (e){} }
-function chMgrPref(){ try { return localStorage.getItem('lyga-chat-mgr') || S.me || ''; } catch (e){ return S.me || ''; } }
-var CHAT_URL = 'https://claude.ai/artifact/9AHdL5V6U1YcNk1WDTiUT2';
-function chLink(){
-  if (document.getElementById('chat-fab') || LG.cur) return;
-  var a = document.createElement('a'); a.id = 'chat-fab'; a.className = 'chat-fab'; a.href = CHAT_URL; a.target = '_blank'; a.rel = 'noopener'; a.title = 'Lygos pokalbis'; a.setAttribute('aria-label', 'Lygos pokalbis');
-  a.innerHTML = '<svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path fill="currentColor" d="M12 2C6.36 2 2 6.13 2 11.7c0 2.91 1.19 5.44 3.14 7.17.16.14.26.35.27.57l.05 1.78c.02.57.6.94 1.12.71l1.98-.87c.17-.08.36-.09.53-.04.91.25 1.87.38 2.91.38 5.64 0 10-4.13 10-9.7S17.64 2 12 2zm6 7.46-2.94 4.66c-.47.74-1.47.93-2.17.4l-2.34-1.75a.6.6 0 0 0-.72 0l-3.16 2.4c-.42.32-.97-.18-.69-.63l2.94-4.66c.47-.74 1.47-.93 2.17-.4l2.34 1.75a.6.6 0 0 0 .72 0l3.16-2.4c.42-.32.97.18.69.63z"/></svg>';
-  document.body.appendChild(a);
-}
-function chInit(){
-  if (CH.started || !window.claude || !window.claude.use) return; CH.started = true;
-  chButton();
-  Promise.all([claude.use('db'), claude.use('user')]).then(function(r){
-    CH.db = r[0]; CH.user = r[1];
-    if (!CH.db){ CH.err = 'signed-out'; chPaint(); return; }
-    var idp = CH.user && CH.user.id ? CH.user.id() : Promise.resolve(null);
-    try { CH.owner = CH.user && CH.user.isOwner ? !!CH.user.isOwner() : false; } catch (e){}
-    Promise.resolve(idp).then(function(uid){
-      CH.uid = uid;
-      try { var c = CH.user && CH.user.can ? CH.user.can('data.write') : null; CH.canWrite = c === false ? false : c; } catch (e){}
-      CH.loadTimer = setTimeout(function(){ if (!CH.ready){ CH.stale = true; chPaint(); } }, 10000);
-      CH.unsub = CH.db.collection('chat').onSnapshot(function(snap){
-        var docs = {}; snap.docs.forEach(function(d){ docs[d.id] = d.data(); });
-        CH.docs = docs; chMerge();
-        if (!snap.metadata.fromCache){ CH.ready = true; CH.stale = false; clearTimeout(CH.loadTimer); }
-        if (uid && docs[uid] && docs[uid].mgr) CH.me = docs[uid].mgr;
-        chPaint(); chBadge();
-      }, function(e){ CH.err = e && e.code || 'unavailable'; clearTimeout(CH.loadTimer); chPaint(); });
-    });
-  }).catch(function(){ CH.err = 'unavailable'; chPaint(); });
-  claude.use('room').then(function(room){
-    if (!room) return; CH.room = room;
-    try { room.onPeers(function(ch){ CH.peers = (ch && ch.peers) || []; chPaint(true); }, function(){}); } catch (e){}
-  }).catch(function(){});
-}
-function chMerge(){
-  var out = [], reacts = {};
-  Object.keys(CH.docs).forEach(function(uid){ var d = CH.docs[uid] || {}; (d.msgs || []).forEach(function(m){ if (m && m.id && m.x) out.push({uid: uid, mgr: d.mgr, id: m.id, t: m.t || 0, x: String(m.x).slice(0, 2000), rp: m.rp || null}); });
-    var r = d.reacts || {}; Object.keys(r).forEach(function(k){ (reacts[k] = reacts[k] || []).push({uid: uid, mgr: d.mgr, e: r[k]}); }); });
-  out.sort(function(a, b){ return a.t - b.t; });
-  out.forEach(function(m){ m.re = reacts[m.uid + ':' + m.id] || []; });
-  CH.msgs = out;
-}
-function chButton(){
-  if (document.getElementById('chat-fab')) return;
-  var b = document.createElement('button'); b.type = 'button'; b.id = 'chat-fab'; b.className = 'chat-fab'; b.setAttribute('aria-label', 'Lygos pokalbis');
-  b.innerHTML = '<svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path fill="currentColor" d="M12 2C6.36 2 2 6.13 2 11.7c0 2.91 1.19 5.44 3.14 7.17.16.14.26.35.27.57l.05 1.78c.02.57.6.94 1.12.71l1.98-.87c.17-.08.36-.09.53-.04.91.25 1.87.38 2.91.38 5.64 0 10-4.13 10-9.7S17.64 2 12 2zm6 7.46-2.94 4.66c-.47.74-1.47.93-2.17.4l-2.34-1.75a.6.6 0 0 0-.72 0l-3.16 2.4c-.42.32-.97-.18-.69-.63l2.94-4.66c.47-.74 1.47-.93 2.17-.4l2.34 1.75a.6.6 0 0 0 .72 0l3.16-2.4c.42-.32.97.18.69.63z"/></svg><span class="chat-badge" hidden></span>';
-  b.addEventListener('click', function(){ CH.open ? chClose() : chOpen(); });
-  document.body.appendChild(b);
-}
-function chBadge(){
-  var b = document.querySelector('#chat-fab .chat-badge'); if (!b) return;
-  var seen = chSeen(), n = CH.open ? 0 : CH.msgs.filter(function(m){ return m.t > seen && m.uid !== CH.uid; }).length;
-  b.hidden = !n; b.textContent = n > 9 ? '9+' : n;
-}
-function chOpen(){
-  CH.open = true; var p = document.getElementById('chat');
-  if (!p){
-    p = document.createElement('div'); p.id = 'chat'; p.className = 'chat'; p.setAttribute('role', 'dialog'); p.setAttribute('aria-label', 'Lygos pokalbis');
-    p.innerHTML = '<div class="chat-h"><span class="chat-av"><img src="brand/mark.svg" alt=""></span><div><b>Lygos pokalbis</b><small id="chat-on"></small></div><button type="button" class="chat-x" data-chx="1" aria-label="Uždaryti">×</button></div>' +
-      '<div class="chat-who" id="chat-who" hidden></div><div class="chat-body" id="chat-body"></div><div class="chat-typ" id="chat-typ"></div>' +
-      '<div class="chat-rep" id="chat-rep" hidden></div><div class="chat-emo" id="chat-emo" hidden>' + CH_PICK.map(function(e){ return '<button type="button" data-chpick="' + e + '">' + e + '</button>'; }).join('') + '</div>' +
-      '<form class="chat-f" id="chat-f"><button type="button" class="chat-eb" data-chemo="1" aria-label="Jaustukai">😊</button><textarea id="chat-in" rows="1" maxlength="2000" placeholder="Rašyk žinutę..."></textarea><button type="submit" class="chat-send" aria-label="Siųsti"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M3.4 20.4 21 12 3.4 3.6 3.4 10.2 15 12 3.4 13.8z"/></svg></button></form>';
-    document.body.appendChild(p);
-    p.addEventListener('click', chClick);
-    var inp = p.querySelector('#chat-in');
-    inp.addEventListener('keydown', function(e){ if (e.key === 'Enter' && !e.shiftKey){ e.preventDefault(); chSend(); } if (e.key === 'Escape') chClose(); });
-    inp.addEventListener('input', function(){ inp.style.height = 'auto'; inp.style.height = Math.min(120, inp.scrollHeight) + 'px'; chTyping(); });
-    p.querySelector('#chat-f').addEventListener('submit', function(e){ e.preventDefault(); chSend(); });
-  }
-  p.hidden = false; document.documentElement.classList.add('chat-open');
-  chPaint(); setTimeout(function(){ var b = document.getElementById('chat-body'); if (b) b.scrollTop = b.scrollHeight; var i = document.getElementById('chat-in'); if (i && window.innerWidth > 700) i.focus(); }, 30);
-  if (CH.msgs.length) chSetSeen(CH.msgs[CH.msgs.length - 1].t); chBadge();
-}
-function chClose(){ CH.open = false; var p = document.getElementById('chat'); if (p) p.hidden = true; document.documentElement.classList.remove('chat-open'); chBadge(); }
-function chName(mgr){ return mgr && M[mgr] ? M[mgr].first : 'Svečias'; }
-function chPaint(peersOnly){
-  var p = document.getElementById('chat'); if (!p || p.hidden) return;
-  var on = document.getElementById('chat-on'), others = CH.peers.filter(function(x){ return !x.isMe && x.kind !== 'agent'; }), seenM = {};
-  var online = others.map(function(x){ return x.presence && x.presence.mgr; }).filter(function(m){ if (!m || seenM[m]) return false; seenM[m] = 1; return true; });
-  on.textContent = online.length ? 'Dabar čia: ' + online.map(chName).join(', ') : (CH.ready ? M_count() + ' lygos dalyviai' : 'Jungiamasi...');
-  var typ = document.getElementById('chat-typ'), ty = others.filter(function(x){ return x.presence && x.presence.typing && Date.now() - x.presence.typing < 6000; }).map(function(x){ return chName(x.presence.mgr); });
-  typ.innerHTML = ty.length ? '<span class="chat-dots"><i></i><i></i><i></i></span>' + esc(ty.join(', ')) + ' rašo...' : '';
-  if (peersOnly) return;
-  var who = document.getElementById('chat-who'), body = document.getElementById('chat-body'), form = document.getElementById('chat-f');
-  var needMe = CH.uid && !CH.me && CH.canWrite !== false && !CH.err;
-  who.hidden = !needMe;
-  if (needMe){ var pref = chMgrPref(); who.innerHTML = '<p>Kas tu? Pasirink savo komandą, kad kiti matytų, kas rašo.</p><div class="chat-mgrs">' + S.data.standings.map(function(s){ return '<button type="button" data-chme="' + s.id + '" class="' + (s.id === pref ? 'on' : '') + '" style="--c:' + tcol(s.id) + '">' + teamLogo(s.id, 22) + esc(M[s.id].first) + '</button>'; }).join('') + '</div>'; }
-  var ro = CH.err || CH.canWrite === false || !CH.uid;
-  form.hidden = !!ro && !(CH.canWrite === null && CH.uid);
-  var note = '';
-  if (CH.err === 'signed-out' || (!CH.uid && CH.db)) note = 'Prisijunk prie claude.ai, kad matytum ir rašytum pokalbyje.';
-  else if (CH.err === 'readonly' || CH.canWrite === false) note = 'Tu gali skaityti, bet rašyti negali: komisaras turi suteikti tau rašymo teisę.';
-  else if (CH.err && CH.err !== 'readonly') note = 'Pokalbis šiuo metu nepasiekiamas. Pabandyk vėliau.';
-  else if (CH.stale) note = 'Nepavyksta pasiekti pokalbio. Žinutės gali būti pasenusios.';
-  if (!CH.ready && !CH.err && !CH.stale){ body.innerHTML = '<p class="chat-sys">Kraunamos žinutės...</p>'; return; }
-  var atBottom = body.scrollHeight - body.scrollTop - body.clientHeight < 80;
-  var h = '', prev = null, lastDay = '';
-  if (!CH.msgs.length) h += '<div class="chat-empty">' + '<span>👋</span><b>Čia dar tylu</b><p>Parašyk pirmą žinutę visai lygai.</p></div>';
-  CH.msgs.forEach(function(m, i){
-    var day = new Date(m.t).toDateString(); if (day !== lastDay){ h += '<p class="chat-day">' + chTime(m.t).replace(/\s?\d\d:\d\d$/, '') .replace(/^$/, 'Šiandien') + '</p>'; lastDay = day; prev = null; }
-    var mine = m.uid === CH.uid, nx = CH.msgs[i + 1], first = !prev || prev.uid !== m.uid || m.t - prev.t > 300000, last = !nx || nx.uid !== m.uid || nx.t - m.t > 300000 || new Date(nx.t).toDateString() !== day;
-    var col = m.mgr ? tcol(m.mgr) : '#94a3b8', rp = m.rp ? CH.msgs.filter(function(z){ return z.uid + ':' + z.id === m.rp; })[0] : null;
-    var rc = {}; m.re.forEach(function(r){ rc[r.e] = (rc[r.e] || 0) + 1; });
-    h += '<div class="chm' + (mine ? ' me' : '') + (first ? ' f' : '') + (last ? ' l' : '') + '" data-mk="' + esc(m.uid + ':' + m.id) + '" style="--c:' + col + '">' +
-      (!mine ? '<span class="chm-av">' + (last ? (m.mgr ? teamLogo(m.mgr, 30) : '👤') : '') + '</span>' : '') +
-      '<div class="chm-w">' + (first && !mine ? '<span class="chm-n">' + esc(chName(m.mgr)) + '</span>' : '') +
-      (rp ? '<span class="chm-rp">↩ ' + esc(chName(rp.mgr)) + ': ' + esc(rp.x.slice(0, 60)) + '</span>' : '') +
-      '<div class="chm-b" title="' + esc(chTime(m.t)) + '">' + chText(m.x) + '</div>' +
-      (Object.keys(rc).length ? '<span class="chm-re">' + Object.keys(rc).map(function(e){ return e + (rc[e] > 1 ? '<small>' + rc[e] + '</small>' : ''); }).join('') + '</span>' : '') +
-      (last ? '<span class="chm-t">' + chTime(m.t) + '</span>' : '') + '</div>' +
-      '<span class="chm-act">' + CH_EMO.map(function(e){ return '<button type="button" data-chre="' + e + '">' + e + '</button>'; }).join('') + '<button type="button" data-chrp="1" title="Atsakyti">↩</button>' + (mine || CH.owner ? '<button type="button" data-chdel="1" title="Ištrinti">🗑</button>' : '') + '</span></div>';
-    prev = m;
-  });
-  if (note) h += '<p class="chat-sys">' + note + '</p>';
-  body.innerHTML = h;
-  if (atBottom || !body.dataset.init){ body.scrollTop = body.scrollHeight; body.dataset.init = '1'; }
-  if (CH.open && CH.msgs.length){ chSetSeen(CH.msgs[CH.msgs.length - 1].t); chBadge(); }
-}
-function M_count(){ return S.data ? S.data.standings.length : 10; }
-function chText(x){
-  return esc(x).replace(/(https?:\/\/[^\s<]+)/g, '<a href="$1" target="_blank" rel="noopener">$1</a>').replace(/\n/g, '<br>');
-}
-function chMyDoc(){ return CH.docs[CH.uid] || {}; }
-function chWrite(patch){
-  /* one write at a time to our own document */
-  CH.queue.push(patch); if (CH.sending) return; chFlush();
-}
-function chFlush(){
-  if (!CH.queue.length){ CH.sending = false; return; }
-  CH.sending = true; var fn = CH.queue.shift(), cur = chMyDoc(), next = fn(JSON.parse(JSON.stringify(cur)));
-  if (!next){ chFlush(); return; }
-  CH.db.collection('chat').doc(CH.uid).set(next).then(function(){ CH.docs[CH.uid] = next; chFlush(); }, function(e){
-    CH.sending = false; CH.queue = [];
-    if (e && e.code === 'invalid_argument'){ CH.canWrite = false; CH.err = 'readonly'; }
-    else if (e && e.code === 'quota_exceeded') alert2('Pokalbio vieta baigėsi. Komisaras turi išvalyti senas žinutes.');
-    chPaint();
-  });
-}
-function alert2(t){ var s = document.getElementById('chat-body'); if (s) s.insertAdjacentHTML('beforeend', '<p class="chat-sys">' + esc(t) + '</p>'); }
-function chSend(){
-  var inp = document.getElementById('chat-in'), x = (inp.value || '').trim(); if (!x || !CH.db || !CH.uid) return;
-  var mgr = CH.me || chMgrPref();
-  if (!mgr){ var w = document.getElementById('chat-who'); if (w){ w.hidden = false; w.classList.add('shake'); setTimeout(function(){ w.classList.remove('shake'); }, 600); } return; }
-  var rp = CH.reply || null; CH.reply = null; document.getElementById('chat-rep').hidden = true;
-  inp.value = ''; inp.style.height = 'auto'; document.getElementById('chat-emo').hidden = true;
-  chWrite(function(d){ d.mgr = d.mgr || mgr; d.msgs = (d.msgs || []).concat([{id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6), t: Date.now(), x: x.slice(0, 2000), rp: rp}]).slice(-250); d.reacts = d.reacts || {}; return d; });
-  if (CH.room) try { CH.room.presence({mgr: mgr, typing: 0}); } catch (e){}
-}
-var chTypT = 0;
-function chTyping(){ if (!CH.room || Date.now() - chTypT < 2500) return; chTypT = Date.now(); try { CH.room.presence({mgr: CH.me || chMgrPref() || null, typing: Date.now()}); } catch (e){} }
-function chClick(e){
-  var t = e.target.closest('button,[data-mk]'); if (!t) return;
-  if (t.hasAttribute('data-chx')){ chClose(); return; }
-  if (t.hasAttribute('data-chemo')){ var em = document.getElementById('chat-emo'); em.hidden = !em.hidden; return; }
-  if (t.hasAttribute('data-chpick')){ var i = document.getElementById('chat-in'); i.value += t.getAttribute('data-chpick'); i.focus(); return; }
-  if (t.hasAttribute('data-chme')){ var mg = t.getAttribute('data-chme'); try { localStorage.setItem('lyga-chat-mgr', mg); } catch (e2){} CH.me = mg;
-    chWrite(function(d){ d.mgr = mg; d.msgs = d.msgs || []; d.reacts = d.reacts || {}; return d; }); if (CH.room) try { CH.room.presence({mgr: mg, typing: 0}); } catch (e3){} chPaint(); return; }
-  var row = t.closest('[data-mk]'); if (!row) return; var key = row.getAttribute('data-mk');
-  if (t.hasAttribute('data-chre')){ var emo = t.getAttribute('data-chre'); if (!CH.uid || !(CH.me || chMgrPref())) return;
-    chWrite(function(d){ d.reacts = d.reacts || {}; d.msgs = d.msgs || []; d.mgr = d.mgr || CH.me || chMgrPref(); if (d.reacts[key] === emo) delete d.reacts[key]; else d.reacts[key] = emo; return d; }); return; }
-  if (t.hasAttribute('data-chrp')){ var m = CH.msgs.filter(function(z){ return z.uid + ':' + z.id === key; })[0]; if (!m) return; CH.reply = key; var r = document.getElementById('chat-rep'); r.hidden = false; r.innerHTML = '<span>Atsakai ' + esc(chName(m.mgr)) + ': ' + esc(m.x.slice(0, 70)) + '</span><button type="button" data-chrpx="1">×</button>'; document.getElementById('chat-in').focus(); return; }
-  if (t.hasAttribute('data-chrpx')){ CH.reply = null; document.getElementById('chat-rep').hidden = true; return; }
-  if (t.hasAttribute('data-chdel')){ var parts = key.split(':'), owner2 = parts[0], mid = parts.slice(1).join(':');
-    if (owner2 === CH.uid) chWrite(function(d){ d.msgs = (d.msgs || []).filter(function(z){ return z.id !== mid; }); return d; });
-    else if (CH.owner){ var od = JSON.parse(JSON.stringify(CH.docs[owner2] || {})); od.msgs = (od.msgs || []).filter(function(z){ return z.id !== mid; }); CH.db.collection('chat').doc(owner2).set(od).catch(function(){}); }
-    return; }
-  row.classList.toggle('act');
-}
 
 /* ---------- Analitika: referees model (data.refs from build/refs.py) ---------- */
 var REF_CC = {ESP: 'ES', ITA: 'IT', SRB: 'RS', GRE: 'GR', TUR: 'TR', LTU: 'LT', LAT: 'LV', EST: 'EE', CRO: 'HR', SLO: 'SI', FRA: 'FR', GER: 'DE', ISR: 'IL', POR: 'PT', UKR: 'UA', MNE: 'ME', BIH: 'BA', POL: 'PL', CZE: 'CZ', SWE: 'SE', GBR: 'GB', BUL: 'BG', HUN: 'HU', ROU: 'RO', MKD: 'MK', BEL: 'BE', NED: 'NL', SUI: 'CH', AUT: 'AT', FIN: 'FI', SVK: 'SK', ARG: 'AR', USA: 'US', CYP: 'CY', DEN: 'DK', NOR: 'NO', IRL: 'IE', GEO: 'GE', ALB: 'AL', KOS: 'XK', MDA: 'MD', BLR: 'BY', RUS: 'RU', AZE: 'AZ', ARM: 'AM', LUX: 'LU', ISL: 'IS', MLT: 'MT'};
