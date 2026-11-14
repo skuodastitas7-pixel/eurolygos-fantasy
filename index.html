@@ -1498,6 +1498,7 @@ html.landing footer,html.landing .foot{display:none!important}
       <a href="#komandos" data-sec="komandos">Komandos</a>
       <a href="#zaidejai" data-sec="zaidejai">Žaidėjai</a>
       <a href="#eurolyga" data-sec="eurolyga">Eurolyga</a>
+      <a href="#eurolyga-istorija" data-sec="elistorija">Eurolygos istorija</a>
       <a href="#mainai" data-sec="mainai">Mainai</a>
       <a href="#agentai" data-sec="agentai">Laisvieji agentai</a>
       <a href="#draftas" data-sec="draftas">Draftas</a>
@@ -1869,6 +1870,7 @@ function render(keepScroll){
   if (r.indexOf("analitika") === 0) sec = "analitika";
   if (r.indexOf("palyginimas") === 0 || r === "izvalgos") sec = "zaidejai";
   if (r.indexOf("eurolyga") === 0 || r.indexOf("klubas-") === 0) sec = "eurolyga";
+  if (r === "eurolyga-istorija" || /^el[htpcg]-/.test(r)) sec = "elistorija";
   var tm = r.match(/^turas-(\d+)-([a-z]+)$/), mm = r.match(/^mainai-(\d+)-(\d+)$/), er = r.match(/^eurolyga-turas-(\d+)$/);
   setNav(sec);
   if (r === "lentele") html = pageHome() + homeX5();
@@ -3767,7 +3769,7 @@ function formChips(c, k){
 function streakTxt(s){ return s == null || s === 0 ? '–' : (s > 0 ? s + ' P' : (-s) + ' Pr'); }
 function elTabs(on){
   var L = S.data.rounds_played;
-  return '<nav class="ptabs" aria-label="Eurolygos skyrius">' + [["table", "#eurolyga", "Lentelė"], ["round", "#eurolyga-turas-" + Math.min(38, L + 1), "Rungtynės"], ["next", "#eurolyga-kitas", "Kitas turas"], ["sched", "#eurolyga-tvarkarastis", "Tvarkaraštis"], ["an", "#eurolyga-analize", "Fantasy analizė"], ["inj", "#eurolyga-traumos", "Traumos ir naujienos"], ["prog", "#eurolyga-prognoze", "Lentelės prognozė"], ["klubai", "#eurolyga-klubai", "Klubai"], ["stat", "#eurolyga-statistika", "Statistika"], ["hist", "#eurolyga-istorija", "Istorija 2000–2026"]].map(function(x){
+  return '<nav class="ptabs" aria-label="Eurolygos skyrius">' + [["table", "#eurolyga", "Lentelė"], ["round", "#eurolyga-turas-" + Math.min(38, L + 1), "Rungtynės"], ["next", "#eurolyga-kitas", "Kitas turas"], ["sched", "#eurolyga-tvarkarastis", "Tvarkaraštis"], ["an", "#eurolyga-analize", "Fantasy analizė"], ["inj", "#eurolyga-traumos", "Traumos ir naujienos"], ["prog", "#eurolyga-prognoze", "Lentelės prognozė"], ["klubai", "#eurolyga-klubai", "Klubai"], ["stat", "#eurolyga-statistika", "Statistika"]].map(function(x){
     return '<a class="tog" href="' + x[1] + '"' + (x[0] === on ? ' aria-current="page"' : '') + '>' + x[2] + '</a>';
   }).join("") + '</nav>';
 }
@@ -7082,7 +7084,7 @@ function hLine(vals, labels, col, title, fmt){
 }
 function pageELHistory(){
   var H = HX(), ss = H.seasons, done = ss.filter(function(s){ return !s.live; }), cur = S.hy || done[done.length - 1].y, sel = ss.filter(function(s){ return s.y === cur; })[0] || done[done.length - 1];
-  var h = '<p class="kicker">Eurolyga · ' + hyLabel(H.first) + ' – ' + hyLabel(H.last) + '</p><h2 class="page">Eurolygos sezonai per fantasy prizmę</h2>' + elTabs("hist") +
+  var h = '<p class="kicker">Eurolygos istorija · ' + hyLabel(H.first) + ' – ' + hyLabel(H.last) + '</p><h2 class="page">Eurolygos istorija per fantasy prizmę</h2>' +
     elDeck('Kiekvienas Eurolygos sezonas nuo ' + hyLabel(H.first) + ' perskaičiuotas taip, lyg tada būtų žaidžiamas mūsų BasketNews fantasy: kas būtų buvęs vertingiausias pasirinkimas, kokia būtų tobula sudėtis ir kaip keitėsi fantasy taškai per 26 metus. Duomenys iš Sofascore: reguliariojo sezono statistika, PIR, Sofascore reitingai ir atkrintamųjų medžiai.');
   /* overview table */
   h += sect('Visi sezonai', ss.length + ' sezonai', '<div class="tbl"><table class="ag"><thead><tr><th>Sezonas</th><th class="num">Rungt.</th><th>Čempionas</th><th>Geriausias rekordas</th><th>Fantasy MVP</th><th class="num">FPTS/rungt.</th><th>PIR lyderis</th><th>Sofascore reitingo lyderis</th><th class="num">Top 10 vid.</th><th class="num">Taškai/rungt.</th></tr></thead><tbody>' +
