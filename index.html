@@ -3100,7 +3100,7 @@ function pageDraft(){
   var autos = order.filter(function(id){ return st[id].auto; }).sort(function(a, b){ return st[b].auto - st[a].auto; });
   var mx = Math.max.apply(null, order.map(function(id){ return st[id].kept; })), mn = Math.min.apply(null, order.map(function(id){ return st[id].kept; }));
   function names(v){ return order.filter(function(id){ return st[id].kept === v; }).map(function(id){ return esc(M[id].first); }).join(', '); }
-  var h = '<p class="kicker">' + d.season + ' sezonas</p><h2 class="page">Draftas</h2><p class="deck">Gyvas draftas BasketNews platformoje: ' + nr + ' ratų po 10 šaukimų. Nelyginiuose ratuose renkamasi pirmojo rato tvarka, lyginiuose atvirkščiai.' +
+  var h = '<p class="kicker">' + d.season + ' sezonas</p><h2 class="page">Draftas</h2><p class="deck">Gyvas draftas BasketNews platformoje: ' + nr + ' ratų po ' + NT() + ' šaukimų. Nelyginiuose ratuose renkamasi pirmojo rato tvarka, lyginiuose atvirkščiai.' +
     (autos.length ? ' Automatiškai parinkta: ' + autos.map(function(id){ return esc(M[id].first) + ' ' + st[id].auto; }).join(', ') + '.' : '') + '</p>';
   h += '<dl class="strip">' +
     '<div><dt>Daugiausiai savo drafto žaidėjų</dt><dd>' + names(mx) + ' <small>' + mx + ' iš 13</small></dd></div>' +
@@ -7037,7 +7037,7 @@ document.addEventListener('click', function(e){
 function draftX6(){
   var d = S.data, P = allPlayers(), by = {}; P.forEach(function(p){ by[p.name + '|' + p.club] = p; });
   var rows = d.draft.map(function(x){ return {x: x, p: by[x.name + '|' + x.club]}; }).filter(function(z){ return z.p; });
-  var val = rows.filter(function(z){ return z.p.gp >= 3; }).map(function(z){ return {z: z, v: (z.p.avg || 0) - (40 - z.x.pick / 130 * 30) / 2}; });
+  var val = rows.filter(function(z){ return z.p.gp >= 3; }).map(function(z){ return {z: z, v: (z.p.avg || 0) - (40 - z.x.pick / (d.draft.length || 130) * 30) / 2}; });
   var steal = rows.filter(function(z){ return z.x.pick > 40 && (z.p.avg || 0) >= 15; }).sort(function(a, b){ return b.x.pick - a.x.pick; }).slice(0, 5);
   var bust = rows.filter(function(z){ return z.x.pick <= 30; }).sort(function(a, b){ return (a.p.avg || 0) - (b.p.avg || 0); }).slice(0, 5);
   var keep = rows.filter(function(z){ return z.p.cur === z.x.id; }).length;
