@@ -2676,7 +2676,7 @@ function standingsTable(){
   return h + '</tbody></table></div><p class="note">Pokytis rodo, kiek vietų komanda pakilo ar nukrito per paskutinį turą. Forma: paskutinių penkių turų taškai, mėlynai turo pergalė, pilkai paskutinė vieta.' + (d.prize_per_round ? ' Turo nugalėtojas gauna ' + d.prize_per_round + ' €.' : '') + '</p>';
 }
 function togglesHtml(){
-  if (!S.sel) S.sel = S.data.standings[0].id;
+  if (!S.sel || !M[S.sel]) S.sel = S.data.standings[0].id;
   var h = '<div class="toggles" role="group" aria-label="Paryškinti komandą">';
   S.data.standings.forEach(function(s){ h += '<button type="button" class="tog tog-t" style="--c:' + tcol(s.id) + '" data-sel="' + s.id + '" aria-pressed="' + (s.id === S.sel) + '">' + teamLogo(s.id, 20) + esc(M[s.id].first) + '</button>'; });
   return h + '</div>';
@@ -2687,12 +2687,12 @@ function syncToggles(){
 }
 function drawBump(){
   var el = document.getElementById("bump"); if (!el) return;
-  var d = S.data, hist = d.history, sel = S.sel || d.standings[0].id, sc = tcol(sel);
+  var d = S.data, hist = d.history, sel = S.sel && M[S.sel] ? S.sel : d.standings[0].id, sc = tcol(sel);
   var W = Math.max(300, Math.round(el.clientWidth || 700)), small = W < 560;
   var H = small ? 340 : 420, ml = small ? 28 : 40, mr = small ? 112 : 170, mt = 18, mb = 36;
   var r0 = hist[0].round, r1 = hist[hist.length-1].round;
   function x(r){ return ml + (r - r0) * (W - ml - mr) / (r1 - r0); }
-  function y(p){ return mt + (p - 1) * (H - mt - mb) / 9; }
+  function y(p){ return mt + (p - 1) * (H - mt - mb) / Math.max(1, NT() - 1); }
   var pts = {};
   hist.forEach(function(hh){ hh.order.forEach(function(id, i){ (pts[id] = pts[id] || []).push([hh.round, i + 1]); }); });
   var have = {}; hist.forEach(function(hh){ have[hh.round] = true; });
@@ -7480,7 +7480,9 @@ function lgUse(id){
   /* switch in place: no page reload, so it also works where the page cannot keep browser storage between loads */
   lgSetActive(id || '');
   var box = document.getElementById('lgdlg'); if (box) box.hidden = true;
-  LG.cur = null; S.reviews = null; S.revLoading = false; S.revErr = null; S.data = null; _OVR = null;
+  LG.cur = null; _OVR = null;
+  Object.keys(S).forEach(function(k){ delete S[k]; });
+  S.data = null; S.reviews = null; S.err = null; S.revErr = null; S.sel = null; S.revLoading = false; S.lr = {};
   document.documentElement.style.removeProperty('--red');
   try { history.replaceState(null, '', '#lentele'); } catch (e){ location.hash = 'lentele'; }
   window.scrollTo(0, 0);
