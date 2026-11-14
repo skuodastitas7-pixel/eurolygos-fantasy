@@ -803,7 +803,7 @@ table.cmp td.hi::after{content:" ▲";font-size:10px}
 .stk-h{display:flex;align-items:center;gap:10px;margin-bottom:12px}
 .stk-h b{display:block;font-size:15.5px}.stk-h b a{text-decoration:none}.stk-h .sub{display:block;font-size:12px;color:var(--ink-2)}
 .stk-n{margin-left:auto;font-weight:900;font-size:20px;letter-spacing:.04em;color:var(--c)}
-.stk-p{display:flex;gap:8px;justify-content:center}.stk-p .mtc.sm{--w:92px}
+.stk-p{display:flex;gap:8px;justify-content:center}.stk-p{container-type:inline-size}.stk-p .mtc.sm{--w:min(110px,calc((100cqw - (var(--n,3) - 1) * 8px) / var(--n,3)));margin:0}
 .stk-f{margin-top:10px;font-size:13px;color:var(--ink-2);text-align:center}
 .cmpv{display:inline-block;padding:2px 9px;border-radius:7px;font-weight:700}
 .cmpv.w{color:#fff}.cmpv.w.k0{background:#94a3b8;color:#0f172a}.cmpv.w.k1{background:var(--red)}.cmpv.w.k2{background:#f59e0b;color:#1f1300}
@@ -1183,6 +1183,17 @@ li.wout{color:var(--bad,#d92d20)}
 .secg[hidden],.secg li[hidden]{display:none}
 section[id]{scroll-margin-top:60px}
 @media print{.secnav,.secidx{display:none!important}}
+.navg{display:none}
+@media (min-width:1100px){nav.main .navg{display:block;margin:14px 14px 2px;font-family:var(--f-data);font-size:10.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-2);opacity:.75}nav.main .navg:first-of-type{margin-top:4px}nav.main a{padding:7px 14px}}
+.tsh-gl{grid-column:1/-1;margin:8px 0 0;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}.tsh-g a[aria-current]{background:var(--red);color:var(--on-red,#fff)}
+.pnav{position:sticky;top:0;z-index:40;display:flex;align-items:center;gap:6px;overflow-x:auto;scrollbar-width:none;padding:8px 2px;margin:2px 0 14px;background:color-mix(in srgb,var(--paper) 94%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--rule)}
+.pnav::-webkit-scrollbar{display:none}
+.pnav-l{flex:none;font-family:var(--f-data);font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-2);margin-right:4px}
+.pnav .tog,.secnav .tog{flex:none;white-space:nowrap;font-size:12.5px;padding:5px 11px;text-decoration:none}
+#view .pnav a.tog[aria-current],#view .secnav a.tog[aria-current]{background:var(--red)!important;border-color:var(--red)!important;color:#fff!important;-webkit-text-fill-color:#fff}@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) #view .pnav a.tog[aria-current],:root:not([data-theme="light"]) #view .secnav a.tog[aria-current]{color:#0c1120!important;-webkit-text-fill-color:#0c1120}}[data-theme="dark"] #view .pnav a.tog[aria-current],[data-theme="dark"] #view .secnav a.tog[aria-current]{color:#0c1120!important;-webkit-text-fill-color:#0c1120}
+@media (max-width:719px){.pnav-l{display:none}}
+@media print{.pnav{display:none!important}}
+
 
 .hline{width:100%;height:auto;display:block}
 .hychips{display:flex;flex-wrap:wrap;gap:4px;margin:6px 0 12px}.hychips .tog{font-size:12px;padding:4px 8px}
@@ -1443,9 +1454,11 @@ ol.act li.last .aic{color:#ef4444}
   .tsh-h{margin:0 0 10px;font-weight:800}.tsh-g{display:grid;grid-template-columns:1fr 1fr;gap:8px}
   .tsh-g a{padding:12px;border-radius:12px;background:color-mix(in srgb,currentColor 7%,transparent);text-decoration:none;font-weight:600}
   .chat-fab{bottom:calc(80px + env(safe-area-inset-bottom))!important}.totop{bottom:calc(150px + env(safe-area-inset-bottom))!important}
-  .tools-tg{display:inline-flex}
-  .tools:not(.open) .tbtns,.tools:not(.open) #theme-btn{display:none}
+  nav.main{display:none!important}
 }
+.tools .tools-tg{display:inline-flex;justify-content:center}
+.tools:not(.open) .tbtns,.tools:not(.open) #theme-btn{display:none}
+.tools.open .tbtns{display:flex;flex-direction:column;gap:6px}.tools .tbtns .tog{text-align:left}
 
 .dealtop{margin:18px 0 6px}.dealtop .trade.tx{margin:0;padding:18px 20px;background:var(--card)}
 @media (min-width:980px){.strip.s5{grid-template-columns:repeat(5,minmax(0,1fr))}}
@@ -1510,21 +1523,25 @@ html.landing footer,html.landing .foot{display:none!important}
     <button type="button" class="srch-btn" id="srch-btn" aria-label="Paieška"><span aria-hidden="true">🔍</span><span class="srch-l">Paieška</span><kbd>/</kbd></button>
     <nav class="main" aria-label="Skyriai">
       <a href="#turo-patarejas" data-sec="turo-patarejas" id="nav-tp" class="nav-tp" hidden>Turo patarėjas</a>
+      <span class="navg">Lyga</span>
       <a href="#lentele" data-sec="lentele">Lentelė</a>
       <a href="#turai" data-sec="turai">Turai</a>
-      <a href="#istorija" data-sec="istorija">Istorija</a>
-      <a href="#galios-reitingas" data-sec="galios-reitingas">Galios reitingas</a>
-      <a href="#sprendimai" data-sec="sprendimai">Sprendimai</a>
-      <a href="#analitika" data-sec="analitika">Analitika</a>
-      <a href="#koeficientai" data-sec="koeficientai">Koeficientai</a>
       <a href="#komandos" data-sec="komandos">Komandos</a>
-      <a href="#zaidejai" data-sec="zaidejai">Žaidėjai</a>
-      <a href="#eurolyga" data-sec="eurolyga">Eurolyga</a>
-      <a href="#eurolyga-istorija" data-sec="elistorija">Eurolygos istorija</a>
       <a href="#mainai" data-sec="mainai">Mainai</a>
       <a href="#agentai" data-sec="agentai">Laisvieji agentai</a>
       <a href="#draftas" data-sec="draftas">Draftas</a>
       <a href="#apzvalgos" data-sec="apzvalgos">Apžvalgos</a>
+      <a href="#istorija" data-sec="istorija">Istorija</a>
+      <span class="navg">Analizė</span>
+      <a href="#galios-reitingas" data-sec="galios-reitingas">Galios reitingas</a>
+      <a href="#sprendimai" data-sec="sprendimai">Sprendimai</a>
+      <a href="#analitika" data-sec="analitika">Analitika</a>
+      <a href="#koeficientai" data-sec="koeficientai">Koeficientai</a>
+      <a href="#zaidejai" data-sec="zaidejai">Žaidėjai</a>
+      <span class="navg">Eurolyga</span>
+      <a href="#eurolyga" data-sec="eurolyga">Eurolyga</a>
+      <a href="#eurolyga-istorija" data-sec="elistorija">Eurolygos istorija</a>
+      <span class="navg">Kita</span>
       <a href="#taisykles" data-sec="taisykles">Taisyklės</a>
     </nav>
     <div class="tools"><label>Mano komanda<select id="me-sel"></select></label><button type="button" class="tog tools-tg" id="tools-tg" aria-expanded="false">Įrankiai ▾</button><button type="button" class="tog" id="theme-btn">Tamsus režimas</button><div class="tbtns"><a class="tog" href="#kalendorius">Rungtynių kalendorius</a><button type="button" class="tog" data-act="story">Turo paveikslėlis</button><button type="button" class="tog" data-act="story-table">Lentelės paveikslėlis</button><button type="button" class="tog" data-act="story-both">Turo ir lentelės paveikslėlis</button><button type="button" class="tog" data-act="print">Spausdinti</button><button type="button" class="tog" id="inst-btn" hidden>Įdiegti programėlę</button></div></div>
@@ -1634,7 +1651,7 @@ var TCOL = {vakaris: "#22c55e", titas: "#8b5cf6", dovydas: "#ef4444", lukas: "#0
 function ntW(){ var k = NT(); return k === 10 ? '10 komandų' : k + ' komandos'; }
 function NT(){ return S.data && S.data.managers ? S.data.managers.length : 10; }
 function tidx(id){ var m = S.data && S.data.managers || []; for (var i = 0; i < m.length; i++) if (m[i].id === id) return i; return 0; }
-function tcol(id){ return TCOL[id] || LOGO_C[tidx(id) % LOGO_C.length]; }
+function tcol(id){ var e = LG.cur && mEmb(id); if (e) return e.bg; return (!LG.cur && TCOL[id]) || LOGO_C[tidx(id) % LOGO_C.length]; }
 function teamLogoAt(id, x, y, px){ return teamLogo(id, px).replace('<svg class="tlogo"', '<svg x="' + x + '" y="' + y + '"'); }
 var EMB_SHAPE = {
   hex: '<path d="M24 2.5 L43 13.25 V34.75 L24 45.5 L5 34.75 V13.25 Z"/>',
@@ -1659,6 +1676,11 @@ function embIcon(ic, c){
     case "bolt": return '<path fill="' + c.ring + '" d="M27.5 8 L14.5 27 H22.5 L19.5 40 L33.5 20 H25.5 Z"/>';
     case "plots": return '<rect x="12.5" y="12.5" width="10" height="10" rx="1.5" fill="' + w + '"/><rect x="25.5" y="12.5" width="10" height="10" rx="1.5" fill="' + c.ring + '"/><rect x="12.5" y="25.5" width="10" height="10" rx="1.5" fill="' + c.ring + '"/><rect x="25.5" y="25.5" width="10" height="10" rx="1.5" fill="' + w + '"/>';
     case "rooster": return '<circle cx="18.6" cy="15.6" r="4.2" fill="#b91c1c"/><circle cx="23.8" cy="12.6" r="4.6" fill="#b91c1c"/><circle cx="29" cy="15.2" r="3.8" fill="#b91c1c"/><circle cx="24" cy="25.5" r="9.4" fill="' + w + '"/><path fill="#facc15" d="M31.5 22.5 L39 25 L31.5 27.5 Z"/><path fill="#dc2626" d="M27 31.5 C28.6 35.5 26.5 38 24.6 37.6 C23.6 35 24.6 33 27 31.5 Z"/><circle cx="26.3" cy="23.3" r="1.6" fill="#111827"/>';
+    case "anchor": return '<circle cx="24" cy="12.5" r="3.6" fill="none" stroke="' + w + '" stroke-width="2.6"/><rect x="22.6" y="15.5" width="2.8" height="21" fill="' + w + '"/><rect x="16" y="20" width="16" height="2.8" rx="1.2" fill="' + c.ring + '"/><path d="M12 27 C12.5 34.5 18 38.5 24 38.5 C30 38.5 35.5 34.5 36 27" fill="none" stroke="' + w + '" stroke-width="2.8" stroke-linecap="round"/><path fill="' + w + '" d="M9.5 28.5 L12 24 L14.5 28.5 Z M33.5 28.5 L36 24 L38.5 28.5 Z"/>';
+    case "house": return '<path fill="' + w + '" d="M24 10 L38 22 H34.5 V37 H13.5 V22 H10 Z"/><rect x="20.5" y="27" width="7" height="10" fill="' + c.bg + '"/><rect x="29" y="12" width="4" height="7" fill="' + c.ring + '"/>';
+    case "horns": return '<path fill="' + c.ring + '" d="M13 21 C9 15 10 9 13.5 6.5 C13.5 11 16 14.5 19.5 16.5 Z M35 21 C39 15 38 9 34.5 6.5 C34.5 11 32 14.5 28.5 16.5 Z"/><circle cx="24" cy="27" r="11" fill="' + w + '"/><path fill="' + c.bg + '" d="M17.5 24 L22 26 L18 27.5 Z M30.5 24 L26 26 L30 27.5 Z M19 31 Q24 35.5 29 31 Q24 33.4 19 31 Z"/>';
+    case "bread": return '<path fill="' + c.ring + '" d="M10 26 C10 17 17 12.5 24 12.5 C31 12.5 38 17 38 26 V35 C38 36.5 37 37.5 35.5 37.5 H12.5 C11 37.5 10 36.5 10 35 Z"/><path d="M17 18.5 L20 23 M23.5 16.5 L26.5 21 M30 18.5 L33 23" stroke="' + c.bg + '" stroke-width="2.2" stroke-linecap="round"/>';
+    case "ball": return '<circle cx="24" cy="24" r="12.5" fill="#f97316"/><path d="M11.5 24 H36.5 M24 11.5 V36.5 M15 15 C19.5 19.5 19.5 28.5 15 33 M33 15 C28.5 19.5 28.5 28.5 33 33" stroke="#1f2937" stroke-width="1.6" fill="none"/>';
     case "star": return '<path fill="' + w + '" d="M24 9.5 L28.3 19.2 L38.8 20.1 L30.8 27 L33.2 37.3 L24 31.9 L14.8 37.3 L17.2 27 L9.2 20.1 L19.7 19.2 Z"/>';
     case "bomb": return '<circle cx="22" cy="28" r="10" fill="' + w + '"/><rect x="25.5" y="15" width="6" height="6" rx="1" transform="rotate(45 28.5 18)" fill="' + w + '"/><path d="M30 15 Q32 10 36 11" stroke="' + c.ring + '" stroke-width="2.2" fill="none" stroke-linecap="round"/><path fill="' + c.ring + '" d="M37 6.5 L38.2 9.6 L41.5 10 L38.9 12 L39.6 15.2 L37 13.4 L34.4 15.2 L35.1 12 L32.5 10 L35.8 9.6 Z"/><circle cx="18.5" cy="25" r="2.6" fill="' + c.bg + '" opacity=".35"/>';
     case "flame": return '<path fill="' + c.ring + '" d="M24 7 C28.5 14.5 35.5 18.5 33.6 29 C32.6 35.6 28 39.8 24 39.8 C19 39.8 14.3 35.8 14.3 29.2 C14.3 23 19.4 20.8 19.2 14.6 C22.2 17.6 23.2 19.8 24 22.2 C26.2 18 25.4 12.4 24 7 Z"/><path fill="#fb923c" d="M24 24 C26.5 28 29.5 30 28.6 33.8 C28 36.4 26 37.6 24 37.6 C21.8 37.6 19.6 36 19.6 33.2 C19.6 30.4 22.4 29 24 24 Z"/>';
@@ -1666,8 +1688,9 @@ function embIcon(ic, c){
   }
   return '<text x="24" y="29" text-anchor="middle" font-size="15" font-weight="800" fill="#fff">' + esc(logoMono(team(ic))) + '</text>';
 }
+function mEmb(id){ if (!LG.cur) return EMB[id]; var m = (S.data && S.data.managers || []).filter(function(x){ return x.id === id; })[0]; return m && m.emb; }
 function teamLogo(id, px){
-  var c = EMB[id] || {bg: LOGO_C[tidx(id) % LOGO_C.length], ring: "#fff", shape: ["circle", "shield", "hex", "square", "diamond"][tidx(id) % 5], ic: id}, s = px || 28;
+  var c = mEmb(id) || {bg: LOGO_C[tidx(id) % LOGO_C.length], ring: "#fff", shape: ["circle", "shield", "hex", "square", "diamond"][tidx(id) % 5], ic: id}, s = px || 28;
   return '<svg class="tlogo" width="' + s + '" height="' + s + '" viewBox="0 0 48 48" role="img" aria-label="' + esc(team(id)) + ' emblema">' +
     '<g fill="' + c.bg + '">' + EMB_SHAPE[c.shape] + '</g>' +
     '<g fill="none" stroke="' + c.ring + '" stroke-width="1.8">' + EMB_INNER[c.shape] + '</g>' +
@@ -1893,7 +1916,7 @@ function render(keepScroll){
   if (r.indexOf("palyginimas") === 0 || r === "izvalgos") sec = "zaidejai";
   if (r.indexOf("eurolyga") === 0 || r.indexOf("klubas-") === 0) sec = "eurolyga";
   if (r.indexOf("eurolyga-istorija") === 0 || /^el[htpcgx]-/.test(r)) sec = "elistorija";
-  var tm = r.match(/^turas-(\d+)-([a-z]+)$/), mm = r.match(/^mainai-(\d+)-(\d+)$/), er = r.match(/^eurolyga-turas-(\d+)$/);
+  var tm = r.match(/^turas-(\d+)-([a-z0-9-]+)$/), mm = r.match(/^mainai-(\d+)-(\d+)$/), er = r.match(/^eurolyga-turas-(\d+)$/);
   setNav(sec);
   if (r === "lentele") html = pageHome() + homeX5();
   else if (r === "turai") html = pageRounds();
@@ -2335,7 +2358,7 @@ function pageInsights(){
   d.standings.forEach(function(s){ var c = {}; d.rosters[s.id].forEach(function(p){ (c[p.club] = c[p.club] || []).push(p); }); Object.keys(c).forEach(function(k){ if (c[k].length >= 3) stack.push({id: s.id, club: k, ps: c[k]}); }); });
   stack.sort(function(a, b){ return b.ps.length - a.ps.length; });
   h += '<section><h3 class="sect">Klubų koncentracija <small>3 ir daugiau žaidėjų iš to paties klubo</small></h3>' + (false ? '<div class="tbl"><table class="ag"><tbody>' +
-    '</tbody></table></div>' : '') + (stack.length ? '<div class="stkx">' + stack.map(function(x){ var ni = nextInfo(x.club); return '<div class="stk" style="--c:' + tcol(x.id) + '"><div class="stk-h">' + teamLogo(x.id, 34) + '<div><b>' + teamLink(x.id) + '</b><span class="sub">' + x.ps.length + ' žaidėjai iš ' + clubLink(x.club) + '</span></div><span class="stk-n">' + esc(x.club) + '</span></div><div class="stk-p">' + x.ps.map(function(p){ return playerCard(p, {sm: 1, link: 1}); }).join('') + '</div><div class="stk-f">Kitas: ' + (ni ? (ni.home ? 'namie prieš ' : 'išvykoje prieš ') + clubLink(ni.opp) + ' · ' + esc(ni.when.short) : '–') + '</div></div>'; }).join('') + '</div>' : '<p class="data muted">Nė viena komanda neturi 3 žaidėjų iš to paties klubo.</p>') + '<p class="note">Kai daug žaidėjų iš vieno klubo, jų rezultatai susiję: prastas klubo vakaras ar lengvos klubo rungtynės paveikia kelis žaidėjus iš karto.</p></section>';
+    '</tbody></table></div>' : '') + (stack.length ? '<div class="stkx">' + stack.map(function(x){ var ni = nextInfo(x.club); return '<div class="stk" style="--c:' + tcol(x.id) + '"><div class="stk-h">' + teamLogo(x.id, 34) + '<div><b>' + teamLink(x.id) + '</b><span class="sub">' + x.ps.length + ' žaidėjai iš ' + clubLink(x.club) + '</span></div><span class="stk-n">' + esc(x.club) + '</span></div><div class="stk-p" style="--n:' + x.ps.length + '">' + x.ps.map(function(p){ return playerCard(p, {sm: 1, link: 1}); }).join('') + '</div><div class="stk-f">Kitas: ' + (ni ? (ni.home ? 'namie prieš ' : 'išvykoje prieš ') + clubLink(ni.opp) + ' · ' + esc(ni.when.short) : '–') + '</div></div>'; }).join('') + '</div>' : '<p class="data muted">Nė viena komanda neturi 3 žaidėjų iš to paties klubo.</p>') + '<p class="note">Kai daug žaidėjų iš vieno klubo, jų rezultatai susiję: prastas klubo vakaras ar lengvos klubo rungtynės paveikia kelis žaidėjus iš karto.</p></section>';
   return h;
 }
 /* ---------- my team, theme toggle, countdown (per-viewer conveniences in localStorage) ---------- */
@@ -6776,6 +6799,31 @@ function labIndex(){
     out.push({tab: t[0], name: t[1], secs: secs}); });
   LABIDX = {data: S.data, list: out}; return LABIDX;
 }
+function pageNav(r){
+  var view2 = document.getElementById('view'); if (view2.querySelector('.secnav,.pnav')) return;
+  var hs = Array.prototype.filter.call(view2.querySelectorAll('section > h3.sect'), function(h3){ return h3.parentNode.id && !h3.closest('details:not([open]),[hidden]'); });
+  if (hs.length < 3) return;
+  var first = hs[0].parentNode; while (first.parentNode && first.parentNode !== view2) first = first.parentNode;
+  if (first.parentNode !== view2) return;
+  var nav2 = document.createElement('nav'); nav2.className = 'pnav'; nav2.setAttribute('aria-label', 'Šio puslapio skiltys');
+  nav2.innerHTML = '<span class="pnav-l">Šiame puslapyje</span>' + hs.map(function(h3){ return '<a class="tog" href="#' + r + '~' + h3.parentNode.id + '" data-jump="' + h3.parentNode.id + '">' + esc(secTitle(h3)) + '</a>'; }).join('');
+  view2.insertBefore(nav2, first);
+}
+var PNAV_IO = null;
+function pnavSpy(){
+  if (PNAV_IO){ PNAV_IO.disconnect(); PNAV_IO = null; }
+  var bar = document.querySelector('#view .pnav,#view .secnav'); if (!bar || !window.IntersectionObserver) return;
+  var links = bar.querySelectorAll('a[data-jump]'), vis = {};
+  PNAV_IO = new IntersectionObserver(function(es){
+    es.forEach(function(e){ vis[e.target.id] = e.isIntersecting; });
+    var on = null; for (var i = 0; i < links.length; i++){ if (vis[links[i].getAttribute('data-jump')]){ on = links[i]; break; } }
+    if (!on) return;
+    links.forEach(function(l){ if (l === on) l.setAttribute('aria-current', 'true'); else l.removeAttribute('aria-current'); });
+    var bl = bar.scrollLeft, br = bl + bar.clientWidth;
+    if (on.offsetLeft < bl + 40 || on.offsetLeft + on.offsetWidth > br - 40) bar.scrollTo({left: Math.max(0, on.offsetLeft - 60), behavior: 'auto'});
+  }, {rootMargin: '-80px 0px -55% 0px'});
+  links.forEach(function(l){ var el = document.getElementById(l.getAttribute('data-jump')); if (el) PNAV_IO.observe(el); });
+}
 function secNav(r){
   var view2 = document.getElementById('view'), deck = view2.querySelector('p.deck'); if (!deck || view2.querySelector('.secnav')) return;
   var hs = view2.querySelectorAll('section > h3.sect'); if (hs.length < 2) return;
@@ -6834,7 +6882,8 @@ function postRender(r){
     var sec = h3.parentNode; if (!sec.id) sec.id = secSlug(h3, used);
     if (!h3.querySelector('.anch')){ var a = document.createElement('a'); a.className = 'anch'; a.href = '#' + current() + '~' + sec.id; a.textContent = '#'; a.title = 'Nuoroda į šią skiltį'; a.setAttribute('aria-label', 'Nuoroda į skiltį'); h3.appendChild(a); }
   });
-  if (r.indexOf('analitika') === 0) secNav(r);
+  if (r.indexOf('analitika') === 0) secNav(r); else pageNav(r);
+  pnavSpy();
   /* share button by the page title */
   var h2 = document.querySelector('#view h2.page');
   if (h2 && !h2.querySelector('.shbtn')){ var b = document.createElement('button'); b.type = 'button'; b.className = 'shbtn'; b.setAttribute('data-act', 'share'); b.title = 'Dalintis šiuo puslapiu'; b.textContent = 'Dalintis'; h2.appendChild(b); }
@@ -8140,11 +8189,12 @@ function actItems(){
   out.sort(function(a, b){ return b.r - a.r || b.k - a.k || (b.t > a.t ? 1 : b.t < a.t ? -1 : 0); });
   return out;
 }
-function actFeed(limitRounds, filt){
-  var items = actItems(), maxR = S.data.rounds_played, h = '', grp = null;
+function actFeed(limitRounds, filt, maxN){
+  var items = actItems(), maxR = S.data.rounds_played, h = '', grp = null, cnt = 0;
   items.forEach(function(x){
     if (limitRounds && x.r < maxR - limitRounds + 1) return;
     if (filt && x.ids.indexOf(filt) < 0) return;
+    if (maxN && cnt >= maxN) return; cnt++;
     var g = x.k === 1 ? 'Prieš ' + x.r + ' turą' : x.r + ' turas';
     if (g !== grp){ if (grp) h += '</ol>'; h += '<p class="actg">' + g + '</p><ol class="act">'; grp = g; }
     h += '<li class="' + x.cls + '" style="--c:' + tcol(x.ids[0]) + '"><span class="aic">' + x.ic + '</span>' + teamLogo(x.ids[0], 30) + '<span class="atx"><b>' + x.h + '</b><small>' + x.s + (x.t ? ' · ' + esc(x.t) : '') + '</small></span></li>';
@@ -8152,7 +8202,7 @@ function actFeed(limitRounds, filt){
   return h ? h + '</ol>' : '<p class="muted">Veiklos nėra.</p>';
 }
 function actSection(){
-  return '<section aria-labelledby="t-act"><h3 class="sect" id="t-act">Lygos veikla <small>mainai, laisvieji agentai, kortelės, turų rezultatai</small></h3>' + actFeed(2) + '<p class="note"><a href="#veikla">Visa sezono veikla</a></p></section>';
+  return '<section aria-labelledby="t-act"><h3 class="sect" id="t-act">Lygos veikla <small>mainai, laisvieji agentai, kortelės, turų rezultatai</small></h3>' + actFeed(2, null, 8) + '<p class="data"><a class="tog" href="#veikla">Visa sezono veikla ›</a></p></section>';
 }
 function pageActivity(){
   var f = (location.hash.split('~')[1] || ''), d = S.data;
@@ -8177,7 +8227,7 @@ function tabBar(){
   var sh = document.createElement('div'); sh.id = 'tabsheet'; sh.className = 'tabsheet'; sh.hidden = true; document.body.appendChild(sh);
   nb.querySelector('[data-tab="more"]').addEventListener('click', function(){
     if (!sh.hidden){ sh.hidden = true; this.setAttribute('aria-expanded', 'false'); return; }
-    sh.innerHTML = '<div class="tsh-in"><p class="tsh-h">Visi skyriai</p><div class="tsh-g">' + Array.prototype.map.call(document.querySelectorAll('nav.main a'), function(a){ return a.hidden ? '' : '<a href="' + a.getAttribute('href') + '">' + esc(a.textContent) + '</a>'; }).join('') + '<a href="#veikla">Lygos veikla</a><a href="#kalendorius">Rungtynių kalendorius</a><a href="#pagalba">Pagalba</a></div></div>';
+    sh.innerHTML = '<div class="tsh-in"><p class="tsh-h">Visi skyriai</p><div class="tsh-g">' + Array.prototype.map.call(document.querySelectorAll('nav.main a, nav.main .navg'), function(a){ if (a.classList.contains('navg')) return '<p class="tsh-gl">' + esc(a.textContent) + '</p>'; return a.hidden ? '' : '<a href="' + a.getAttribute('href') + '"' + (a.getAttribute('aria-current') ? ' aria-current="page"' : '') + '>' + esc(a.textContent) + '</a>'; }).join('') + '<p class="tsh-gl">Daugiau</p><a href="#veikla">Lygos veikla</a><a href="#kalendorius">Rungtynių kalendorius</a><a href="#pagalba">Pagalba</a></div></div>';
     sh.hidden = false; this.setAttribute('aria-expanded', 'true');
   });
   sh.addEventListener('click', function(e){ if (e.target === sh || (e.target.closest && e.target.closest('a'))){ sh.hidden = true; nb.querySelector('[data-tab="more"]').setAttribute('aria-expanded', 'false'); } });
