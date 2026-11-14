@@ -1597,7 +1597,7 @@ var NF1 = new Intl.NumberFormat("lt-LT", {minimumFractionDigits:1, maximumFracti
 var NF2 = new Intl.NumberFormat("lt-LT", {minimumFractionDigits:2, maximumFractionDigits:2});
 var MONTHS = ["sausio","vasario","kovo","balandžio","gegužės","birželio","liepos","rugpjūčio","rugsėjo","spalio","lapkričio","gruodžio"];
 var TIMES = {1:"vieną kartą",2:"du kartus",3:"tris kartus",4:"keturis kartus",5:"penkis kartus",6:"šešis kartus",7:"septynis kartus",8:"aštuonis kartus",9:"devynis kartus"};
-var POS = {G:"Gynėjas", F:"Puolėjas", C:"Centras"};
+var POS = {G:"Gynėjas", F:"Puolėjas", C:"Centras", "": "pozicija nežinoma", "undefined": "pozicija nežinoma", "null": "pozicija nežinoma"};
 var STATUS = {out:"Nežais", uncertain:"Neaišku", doubtful:"Abejotinas", expected:"Turėtų žaisti", gametime:"Spręs prieš rungtynes"};
 var M = {};
 
@@ -4505,7 +4505,7 @@ function pageELInjuries(){
   var h = '<p class="kicker">Eurolyga · prieš ' + R + ' turą</p><h2 class="page">Traumos ir naujienos</h2>' + elTabs("inj") +
     '<p class="deck">BasketNews traumų ir sudėčių sąrašas, atnaujintas ' + mdDate(m.updated) + ' ' + esc(m.updated.slice(11)) + ', ir svarbiausios fantasy naujienos iš BasketNews, Eurohoops ir BasketballSphere. Prognozėse traumų sąrašas jau įvertintas: žaidėjai, kurie nežais, gauna nulį.</p>';
   h += '<section><h3 class="sect">Mūsų lygos komandų žaidėjai sąraše <small>' + own.length + '</small></h3>' + (own.length ? injTable(own, true) : '<p class="data muted">Nė vieno.</p>') +
-    '<p class="note">Būsenos: nežais, abejotinas (greičiausiai nežais), neaišku, pasiruošęs. Įrašai su pažyma „10 turui“ dar neatnaujinti po 10 turo: jei nenurodyta ilgesnė trauma, 11 turui modelis vertina pagal tai, kaip dažnai po praleisto turo žaidžia panašūs žaidėjai. Žais: modelio tikimybė, kad žaidėjas žais ' + R + ' ture.</p></section>';
+    '<p class="note">Būsenos: nežais, abejotinas (greičiausiai nežais), neaišku, pasiruošęs. Įrašai su pažyma „' + (R - 1) + ' turui“ dar neatnaujinti po ' + (R - 1) + ' turo: jei nenurodyta ilgesnė trauma, ' + R + ' turui modelis vertina pagal tai, kaip dažnai po praleisto turo žaidžia panašūs žaidėjai. Žais: modelio tikimybė, kad žaidėjas žais ' + R + ' ture.</p></section>';
   h += shiftSection();
   h += '<section><h3 class="sect">Naujienos</h3>' + newsList() + '</section>';
   var clubs = []; es.forEach(function(e){ if (clubs.indexOf(e.club) < 0) clubs.push(e.club); });
@@ -5949,7 +5949,8 @@ function labRefs(){
   var fouls = R.games.map(function(g){ return g.pf; }), ft = R.games.map(function(g){ return g.f; });
   h += '<dl class="strip an" style="margin:6px 0 18px"><div><dt>Rungtynių</dt><dd>' + R.games_n + '</dd></div><div><dt>Teisėjų</dt><dd>' + R.refs.length + '</dd></div><div><dt>Pražangų per rungtynes</dt><dd>' + nf1(lg.pf * 2) + '</dd></div><div><dt>Baudų metimų</dt><dd>' + nf1(lg.fta * 2) + '</dd></div><div><dt>FPTS per rungtynes</dt><dd>' + NF.format(Math.round(lg.f * 2)) + ' <small>abiejų komandų</small></dd></div><div><dt>Pražangos ir FPTS</dt><dd>' + NF.format(Math.round(corr(fouls, ft) * 100) / 100) + ' <small>koreliacija</small></dd></div></dl>';
   /* next round crews */
-  if (R.next.length){
+  if (R.next.length && R.next[0].r < EL().next_round) h += sect('Kito turo teisėjai', EL().next_round + ' turui', '<p class="data">' + EL().next_round + ' turo teisėjų brigados dar nepaskelbtos: Eurolyga jas skelbia likus maždaug dienai iki rungtynių. Kai paskelbs, čia bus matyti, kurios brigados palankiausios fantasy taškams.</p>');
+  else if (R.next.length){
     var cards = R.next.map(function(g){
       var crew = g.refs.map(function(i){ return RI[i]; }).filter(Boolean), sum = function(k){ return crew.reduce(function(s, r){ return s + r.e[k]; }, 0); };
       var dF = sum('f'), dPF = sum('pf'), dFT = sum('fta'), dHB = sum('hb'), pos = {G: sum('G'), F: sum('F'), C: sum('C')};
