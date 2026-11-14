@@ -1594,7 +1594,10 @@ var EMB = {
   kornelijus: {bg: "#374151", ring: "#facc15", shape: "square", ic: "bars"}
 };
 var TCOL = {vakaris: "#22c55e", titas: "#8b5cf6", dovydas: "#ef4444", lukas: "#06b6d4", martynas: "#84cc16", tadas: "#f97316", aidenas: "#3b82f6", dominykas: "#f59e0b", emilis: "#f43f5e", kornelijus: "#a3a3a3"};
-function tcol(id){ return TCOL[id] || "#2459e6"; }
+function ntW(){ var k = NT(); return k === 10 ? '10 komandų' : k + ' komandos'; }
+function NT(){ return S.data && S.data.managers ? S.data.managers.length : 10; }
+function tidx(id){ var m = S.data && S.data.managers || []; for (var i = 0; i < m.length; i++) if (m[i].id === id) return i; return 0; }
+function tcol(id){ return TCOL[id] || LOGO_C[tidx(id) % LOGO_C.length]; }
 function teamLogoAt(id, x, y, px){ return teamLogo(id, px).replace('<svg class="tlogo"', '<svg x="' + x + '" y="' + y + '"'); }
 var EMB_SHAPE = {
   hex: '<path d="M24 2.5 L43 13.25 V34.75 L24 45.5 L5 34.75 V13.25 Z"/>',
@@ -1627,7 +1630,7 @@ function embIcon(ic, c){
   return '<text x="24" y="29" text-anchor="middle" font-size="15" font-weight="800" fill="#fff">' + esc(logoMono(team(ic))) + '</text>';
 }
 function teamLogo(id, px){
-  var c = EMB[id] || {bg: "#2459e6", ring: "#fff", shape: "circle", ic: id}, s = px || 28;
+  var c = EMB[id] || {bg: LOGO_C[tidx(id) % LOGO_C.length], ring: "#fff", shape: ["circle", "shield", "hex", "square", "diamond"][tidx(id) % 5], ic: id}, s = px || 28;
   return '<svg class="tlogo" width="' + s + '" height="' + s + '" viewBox="0 0 48 48" role="img" aria-label="' + esc(team(id)) + ' emblema">' +
     '<g fill="' + c.bg + '">' + EMB_SHAPE[c.shape] + '</g>' +
     '<g fill="none" stroke="' + c.ring + '" stroke-width="1.8">' + EMB_INNER[c.shape] + '</g>' +
@@ -2104,7 +2107,7 @@ function formBars(id){
   var W = 62, H = 26, bw = 10, gap = 3, s = '<svg class="form" width="' + W + '" height="' + H + '" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Paskutinių ' + rs.length + ' turų taškai: ' + rs.map(function(r){ return n(r.scores[id]); }).join(', ') + '">';
   rs.forEach(function(r, i){
     var v = r.scores[id] || 0, h = Math.max(2, Math.round(v / mx * (H - 2)));
-    s += '<rect class="' + (r.places[id] === 1 ? 'w' : r.places[id] === 10 ? 'l' : 'b') + '" x="' + (i * (bw + gap)) + '" y="' + (H - h) + '" width="' + bw + '" height="' + h + '"><title>' + r.round + ' turas: ' + n(v) + ' FPTS, ' + r.places[id] + ' vieta</title></rect>';
+    s += '<rect class="' + (r.places[id] === 1 ? 'w' : r.places[id] === NT() ? 'l' : 'b') + '" x="' + (i * (bw + gap)) + '" y="' + (H - h) + '" width="' + bw + '" height="' + h + '"><title>' + r.round + ' turas: ' + n(v) + ' FPTS, ' + r.places[id] + ' vieta</title></rect>';
   });
   return s + '</svg>';
 }
@@ -2146,7 +2149,7 @@ function drawTeamRounds(){
   rs.forEach(function(r, i){
     var v = r.scores[id], p = r.places[id], cx = ml + slot * (i + 0.5);
     if (v == null) return;
-    s += '<a href="#turas-' + r.round + '-' + id + '"><rect class="' + (p === 1 ? 'w' : p === 10 ? 'l' : 'b') + '" x="' + f(cx - bw / 2) + '" y="' + f(y(Math.max(0, v))) + '" width="' + f(bw) + '" height="' + f(Math.max(1, y(0) - y(Math.max(0, v)))) + '"><title>' + r.round + ' turas: ' + n(v) + ' FPTS, ' + p + ' vieta</title></rect></a>';
+    s += '<a href="#turas-' + r.round + '-' + id + '"><rect class="' + (p === 1 ? 'w' : p === NT() ? 'l' : 'b') + '" x="' + f(cx - bw / 2) + '" y="' + f(y(Math.max(0, v))) + '" width="' + f(bw) + '" height="' + f(Math.max(1, y(0) - y(Math.max(0, v)))) + '"><title>' + r.round + ' turas: ' + n(v) + ' FPTS, ' + p + ' vieta</title></rect></a>';
     if (slot >= 26) s += '<text class="pl" x="' + f(cx) + '" y="' + f(y(Math.max(0, v)) - 5) + '" text-anchor="middle">' + p + '</text>';
     s += '<text x="' + f(cx) + '" y="' + (H - 8) + '" text-anchor="middle">' + r.round + '</text>';
   });
@@ -2389,7 +2392,7 @@ function achievements(){
       if (s >= 250) add(id, 'Turas su 250+ FPTS', r.round);
       run3[id] = p <= 3 ? (run3[id] || 0) + 1 : 0; if (run3[id] >= 3) add(id, '3 turai iš eilės trejetuke', r.round);
       runW[id] = p === 1 ? (runW[id] || 0) + 1 : 0; if (runW[id] >= 2) add(id, '2 turo pergalės iš eilės', r.round);
-      if (p === 10) add(id, 'Turo pralaimėtojas', r.round);
+      if (p === NT()) add(id, 'Turo pralaimėtojas', r.round);
     });
     var lead = ids.slice().sort(function(a, b){ return cum[b] - cum[a]; })[0]; add(lead, 'Lyderis po turo', r.round);
   });
@@ -2615,7 +2618,7 @@ function storyBoth(rn){
     ord.forEach(function(id, k){
       var rp = r.places[id];
       sgRow(x, A, id, Y, RH, {pos: k + 1, mv: T.mv[id], hi: k === 0, sub: M[id].name, nameW: 330,
-        cols: [{x: 790, t: sgNum(r.scores[id]), s: 32, c: rp === 1 ? SG.gold2 : SG.cream, sub: rp + ' vieta ture', sc: rp === 1 ? SG.gold2 : rp === 10 ? '#f87171' : SG.mute},
+        cols: [{x: 790, t: sgNum(r.scores[id]), s: 32, c: rp === 1 ? SG.gold2 : SG.cream, sub: rp + ' vieta ture', sc: rp === 1 ? SG.gold2 : rp === NT() ? '#f87171' : SG.mute},
                {x: 984, t: sgNum(T.cum[id]), sub: k ? '−' + sgNum(T.cum[lead] - T.cum[id]) : 'lyderis', sc: k ? SG.mute : SG.gold2}]});
       Y += RH;
     });
@@ -2670,7 +2673,7 @@ function standingsTable(){
       '<td class="num hm">' + s.wins + '</td>' +
       '<td class="num hm">' + (s.prize ? s.prize + " €" : "") + '</td></tr>';
   });
-  return h + '</tbody></table></div><p class="note">Pokytis rodo, kiek vietų komanda pakilo ar nukrito per paskutinį turą. Forma: paskutinių penkių turų taškai, mėlynai turo pergalė, pilkai paskutinė vieta. Turo nugalėtojas gauna ' + d.prize_per_round + ' €.</p>';
+  return h + '</tbody></table></div><p class="note">Pokytis rodo, kiek vietų komanda pakilo ar nukrito per paskutinį turą. Forma: paskutinių penkių turų taškai, mėlynai turo pergalė, pilkai paskutinė vieta.' + (d.prize_per_round ? ' Turo nugalėtojas gauna ' + d.prize_per_round + ' €.' : '') + '</p>';
 }
 function togglesHtml(){
   if (!S.sel) S.sel = S.data.standings[0].id;
@@ -2696,7 +2699,7 @@ function drawBump(){
   function path(a){ var q = ''; for (var i = 0; i < a.length; i++){ var X = x(a[i][0]), Y = y(a[i][1]); if (!i) q += 'M' + X + ' ' + Y; else { var px = x(a[i-1][0]), py = y(a[i-1][1]), mx = (px + X) / 2; q += 'C' + mx + ' ' + py + ' ' + mx + ' ' + Y + ' ' + X + ' ' + Y; } } return q; }
   var s = '<svg class="bump2" viewBox="0 0 ' + W + ' ' + H + '" width="' + W + '" height="' + H + '" role="img" aria-label="Komandų vietos lentelėje po kiekvieno turo, paryškinta ' + esc(team(sel)) + '">';
   s += '<rect class="podium" x="' + ml + '" y="' + (y(1) - 13) + '" width="' + (W - ml - mr) + '" height="' + (y(3) - y(1) + 26) + '" rx="10"/>';
-  for (var p = 1; p <= 10; p++){
+  for (var p = 1; p <= NT(); p++){
     s += '<line class="grid" x1="' + ml + '" x2="' + (W - mr) + '" y1="' + y(p) + '" y2="' + y(p) + '" opacity=".35"/>';
     s += '<text class="ax" x="' + (ml - 14) + '" y="' + (y(p) + 4) + '" text-anchor="end">' + p + '</text>';
   }
@@ -2741,7 +2744,7 @@ function pageRounds(){
     function side(id, v, cls){ return '<span class="wl-s ' + cls + '" style="--c:' + tcol(id) + '">' + teamLogo(id, 30) + '<span class="wl-t">' + teamLink(id) + '<span class="sub">' + esc(who(id)) + '</span></span>' + rlink(r.round, id, n(v), "wl-v") + '</span>'; }
     h += '<li><span class="wl-r"><b>' + r.round + '</b>turas</span>' + side(r.winner, r.winner_score, 'w') + side(r.last, r.last_score, 'l') + '<span class="wl-g" title="Skirtumas tarp nugalėtojo ir paskutinės vietos">' + n(Math.round((r.winner_score - r.last_score) * 100) / 100) + '<small>skirtumas</small></span></li>';
   });
-  h += '</ol><p class="lgx"><span><i class="lg-w"></i>turo nugalėtojas, 20 €</span><span><i class="lg-l"></i>paskutinė vieta</span></p></section>';
+  h += '</ol><p class="lgx"><span><i class="lg-w"></i>turo nugalėtojas' + (S.data.prize_per_round ? ', ' + S.data.prize_per_round + ' €' : '') + '</span><span><i class="lg-l"></i>paskutinė vieta</span></p></section>';
   h += '<section><h3 class="sect">Specialūs ėjimai <small>panaudota ' + d.specials.length + ' iš ' + (d.managers.length * 4) + '</small></h3>' + specialsTracker() + '<div class="data" style="margin-top:12px">';
   d.specials.forEach(function(x){ h += '<p><b>' + x.round + ' turas, ' + esc(M[x.team].first) + ', ' + esc(x.card) + '.</b> <span class="muted">' + esc(x.note) + '</span></p>'; });
   h += '</div></section></div>';
@@ -3051,7 +3054,7 @@ function bestPlayer(id){ return S.data.rosters[id][0]; }
 function missing(id){ return S.data.rosters[id].filter(function(p){ return p.status === "out" || p.status === "uncertain" || p.status === "doubtful" || p.status === "gametime"; }).length; }
 function pageTeams(){
   var d = S.data;
-  var h = '<p class="kicker">10 komandų</p><h2 class="page">Komandos</h2><p class="deck">Sudėtys pagal BasketNews ' + ltDate(d.updated) + ' Žaidėjo vidurkis skaičiuojamas iš 1–' + d.rounds_played + ' turų rungtynių, kuriose jis žaidė, o sudėties vidurkis yra žaidėjų vidurkių vidurkis. Kiekvieno žaidėjo taškai per turus: skyrius <a href="#zaidejai">Žaidėjai</a>.</p>';
+  var h = '<p class="kicker">' + ntW() + '</p><h2 class="page">Komandos</h2><p class="deck">Sudėtys pagal BasketNews ' + ltDate(d.updated) + ' Žaidėjo vidurkis skaičiuojamas iš 1–' + d.rounds_played + ' turų rungtynių, kuriose jis žaidė, o sudėties vidurkis yra žaidėjų vidurkių vidurkis. Kiekvieno žaidėjo taškai per turus: skyrius <a href="#zaidejai">Žaidėjai</a>.</p>';
   var top = d.standings[0].total, ravg = d.standings.map(function(x){ return M[x.id].roster_avg; }), rmax = Math.max.apply(null, ravg);
   h += '<section style="margin-top:22px"><div class="tmx">';
   d.standings.forEach(function(s){
@@ -4965,7 +4968,7 @@ function pageRules(){
   (lineupOf("emilis", 9) || []).forEach(function(r){ if (r.name === "F. Petrusev") ex = r; });
   var champ = d.champion_prev;
   var h = '<p class="kicker">Kaip skaičiuojami taškai</p><h2 class="page">Taisyklės</h2><div class="cols" style="margin-top:22px"><div class="prose"><ol>' +
-    '<li><b>Lyga</b>Draft lyga BasketNews Fantasy platformoje. Dešimt komandų, ' + seasonWord(d.season_no).toLowerCase() + ' sezonas. Komandos surinktos gyvame drafte, todėl kiekvienas žaidėjas gali priklausyti tik vienai komandai. Žaidžiama iki Eurolygos reguliariojo sezono pabaigos, o jis turi ' + d.rounds_total + ' turus.</li>' +
+    '<li><b>Lyga</b>Draft lyga BasketNews Fantasy platformoje. ' + cap1(ntW()) + ', ' + seasonWord(d.season_no).toLowerCase() + ' sezonas. Komandos surinktos gyvame drafte, todėl kiekvienas žaidėjas gali priklausyti tik vienai komandai. Žaidžiama iki Eurolygos reguliariojo sezono pabaigos, o jis turi ' + d.rounds_total + ' turus.</li>' +
     '<li><b>Sudėtis</b>Komandoje 13 žaidėjų: 5 startiniame penkete, 5 ant suolo ir 3 neaktyvūs. Sudėtyje turi būti bent po vieną gynėją, puolėją ir centrą.</li>' +
     '<li><b>Taškai</b>Žaidėjo FPTS skaičiuojami pagal moderniąją BasketNews sistemą, ji pateikta lentelėje. Startinio penketo taškai skaičiuojami visi. Kapitono taškai dvigubinami, o kapitoną galima keisti tarp turo žaidimo dienų. Pirmo suolo žaidėjo (6th man) taškai skaičiuojami visi, kitų keturių suolo žaidėjų po pusę. Neaktyvių žaidėjų taškai neskaičiuojami.' +
       (ex ? ' Pavyzdys iš ' + d.rounds_played + ' turo: Petruševas ant Emilio suolo surinko ' + n(ex.pts) + ' FPTS, komandai įskaityta ' + n(ex.counted) + '.' : '') + '</li>' +
@@ -4973,7 +4976,7 @@ function pageRules(){
     '<li><b>Mainai</b>Komandos keičiasi žaidėjais tarpusavyje ir gali pridėti kreditų. Laisvuosius agentus perka už kreditus. Mainai surašyti skyriuje <a href="#mainai">Mainai</a>, o laisvųjų agentų įsigijimai skyriuje <a href="#agentai">Laisvieji agentai</a>.</li>' +
     '<li><b>Prizai</b>Kiekvienas dalyvis įmoka po ' + (d.fees ? d.fees.entry : 150) + ' €. Kiekvieno turo nugalėtojas gauna ' + d.prize_per_round + ' €, o sezono pabaigoje lygos nugalėtojas gauna ' + (d.fees ? d.fees.season[0] : 400) + ' €, antra vieta ' + (d.fees ? d.fees.season[1] : 230) + ' €, trečia ' + (d.fees ? d.fees.season[2] : 110) + ' €. Lažybos tarp narių yra jų pačių reikalas, svetainė jas tik užrašo.</li>' +
     '<li><b>Duomenys</b>Galioja BasketNews taškai. Po statistikos pataisų jie kartais pasikeičia: prieš 7 turą Dovydui buvo pridėti 2 taškai. Lygos nustatymus tvarko komisaras.</li>' +
-    '<li><b>Istorija</b>' + champ.season + ' sezono čempionas: ' + esc(who(champ.id)) + ', prizas ' + champ.eur + ' €.</li>' +
+    (champ ? '<li><b>Istorija</b>' + champ.season + ' sezono čempionas: ' + esc(who(champ.id)) + ', prizas ' + champ.eur + ' €.</li>' : '') +
     '</ol></div><aside><section><h3 class="sect">FPTS skaičiavimas <small>moderni sistema</small></h3><div class="tbl"><table class="ag"><thead><tr><th>Veiksmas</th><th class="num">FPTS</th></tr></thead><tbody>';
   SCORING.forEach(function(r){ h += '<tr><td>' + r[0] + '</td><td class="num">' + r[1] + '</td></tr>'; });
   return h + '</tbody></table></div><p class="note">Dvigubas dublis: dvi statistikos kategorijos po 10 ir daugiau, pavyzdžiui 12 taškų ir 11 rezultatyvių perdavimų.</p></section></aside></div>';
@@ -5368,7 +5371,7 @@ function labPlaces(){
   var rows = ids.map(function(t){ var p = pl[t], m = p.reduce(function(a, x){ return a + x; }, 0) / p.length, sd = Math.sqrt(p.reduce(function(a, x){ return a + (x - m) * (x - m); }, 0) / p.length);
     var ws = 0, c = 0; p.forEach(function(x){ c = x === 1 ? c + 1 : 0; ws = Math.max(ws, c); });
     var nb = 0; c = 0; p.forEach(function(x){ c = x !== 10 ? c + 1 : 0; nb = Math.max(nb, c); });
-    return {id: t, w: p.filter(function(x){ return x === 1; }).length, l: p.filter(function(x){ return x === 10; }).length, t3: p.filter(function(x){ return x <= 3; }).length, sd: sd, up: streak(t, function(t2, r){ return SC(t2, r) > avgR[r]; }), dn: streak(t, function(t2, r){ return SC(t2, r) < avgR[r]; }), ws: ws, nb: nb, peak: Math.max.apply(null, R.map(function(r){ return SC(t, r); })), low: Math.min.apply(null, R.map(function(r){ return SC(t, r); })) }; });
+    return {id: t, w: p.filter(function(x){ return x === 1; }).length, l: p.filter(function(x){ return x === NT(); }).length, t3: p.filter(function(x){ return x <= 3; }).length, sd: sd, up: streak(t, function(t2, r){ return SC(t2, r) > avgR[r]; }), dn: streak(t, function(t2, r){ return SC(t2, r) < avgR[r]; }), ws: ws, nb: nb, peak: Math.max.apply(null, R.map(function(r){ return SC(t, r); })), low: Math.min.apply(null, R.map(function(r){ return SC(t, r); })) }; });
   h += sect('Turų pergalės, dugnai ir serijos', '', rankTbl(rows.sort(function(a, b){ return b.w - a.w || b.t3 - a.t3; }), [
     ['Pergalės', function(x){ return x.w ? '<b>' + x.w + '</b>' : '<span class="muted">0</span>'; }, 1], ['Trejete', function(x){ return x.t3; }, 1], ['Dugnai', function(x){ return x.l ? '<span class="crx n">' + x.l + '</span>' : '<span class="muted">0</span>'; }, 1],
     ['Pergalių serija', function(x){ return x.ws; }, 1], ['Be dugno iš eilės', function(x){ return x.nb; }, 1], ['Virš vid. iš eilės', function(x){ return '<span class="sgn p">' + x.up + '</span>'; }, 1], ['Žemiau vid. iš eilės', function(x){ return '<span class="sgn n">' + x.dn + '</span>'; }, 1],
@@ -5684,7 +5687,7 @@ function labAwards(){
   ids.forEach(function(t){
     var p = R.map(function(r){ return d.rounds[r - 1].places[t]; }), c = 0;
     p.forEach(function(x, i){ c = x === 1 ? c + 1 : 0; if (c >= 2) give(t, '👑', 'Dvigubas karalius', 'du turus iš eilės pirma vieta'); if (c >= 3) give(t, '🏆', 'Trys iš eilės', 'trys turų pergalės iš eilės'); });
-    c = 0; p.forEach(function(x){ c = x === 10 ? c + 1 : 0; if (c >= 2) give(t, '💀', 'Dugno abonementas', 'du turų dugnai iš eilės'); });
+    c = 0; p.forEach(function(x){ c = x === NT() ? c + 1 : 0; if (c >= 2) give(t, '💀', 'Dugno abonementas', 'du turų dugnai iš eilės'); });
     R.forEach(function(r){
       var x = HS(t, r), rd = d.rounds[r - 1];
       if (rd.winner === t && rd.winner_score === rec) give(t, '🚀', 'Sezono rekordas', r + ' ture ' + NF.format(rec) + ' FPTS');
@@ -7012,7 +7015,7 @@ function pageGames(){
   h += sect('Viktorina', 'žaidėjai, komandos ir turai', '<div id="gqbox">' + gameHtml() + '</div>');
   h += sect('Sezono pabaigos lentelės spėjimas', '', '<p class="data">Įrašyk, kurioje vietoje kiekviena komanda baigs sezoną. Palyginsime su dabartine lentele.</p><div class="tbl" style="max-width:640px"><table class="ag"><thead><tr><th>Komanda</th><th class="num">Tavo spėjimas</th><th class="num">Dabar</th><th class="num">Skirtumas</th></tr></thead><tbody>' +
     d.standings.map(function(s){ var v = g.t && g.t[s.id]; return '<tr>' + tmCell(s.id, esc(M[s.id].first)) + '<td class="num"><input class="gin" type="number" min="1" max="10" data-guess="t:' + s.id + '" value="' + (v || '') + '"></td><td class="num">' + s.pos + '</td><td class="num">' + (v ? (v === s.pos ? '<span class="tag ok">taip</span>' : Math.abs(v - s.pos)) : '') + '</td></tr>'; }).join('') +
-    '</tbody></table></div>' + (g.t && Object.keys(g.t).length === 10 ? '<p class="data">Bendras skirtumas: <b>' + d.standings.reduce(function(s2, s){ return s2 + Math.abs((g.t[s.id] || 0) - s.pos); }, 0) + '</b> vietų (0 būtų tobula).</p>' : ''));
+    '</tbody></table></div>' + (g.t && Object.keys(g.t).length === NT() ? '<p class="data">Bendras skirtumas: <b>' + d.standings.reduce(function(s2, s){ return s2 + Math.abs((g.t[s.id] || 0) - s.pos); }, 0) + '</b> vietų (0 būtų tobula).</p>' : ''));
   if (me){ var st = d.standings.filter(function(s){ return s.id === me; })[0], gl = g.goal || {};
     h += sect('Mano tikslai', esc(team(me)), '<p class="data"><label>Mano ' + R + ' turo vieta: <input class="gin" type="number" min="1" max="10" data-guess="r' + R + '" value="' + (g['r' + R] || '') + '"></label> ' + (g['r' + (R - 1)] ? '<span class="muted">Praeitą turą spėjai ' + g['r' + (R - 1)] + ', buvo ' + d.rounds[R - 2].places[me] + '.</span>' : '') + '</p>' +
       '<p class="data"><label>Sezono tikslas, vieta: <input class="gin" type="number" min="1" max="10" data-guess="goal" value="' + (g.goal || '') + '"></label> ' + (g.goal ? (st.pos <= g.goal ? '<span class="tag ok">šiuo metu pasiektas</span>' : 'Dabar ' + st.pos + ' vieta, iki ' + g.goal + ' vietos trūksta ' + NF.format(d.standings[g.goal - 1].total - st.total) + ' FPTS.') : '') + '</p>'); }
@@ -7022,7 +7025,7 @@ function pageGames(){
 document.addEventListener('change', function(e){
   var t = e.target; if (!t || !t.hasAttribute) return;
   if (t.hasAttribute('data-lct')){ S.lcT = t.value; var y = window.scrollY; render(true); window.scrollTo(0, y); }
-  if (t.hasAttribute('data-guess')){ var g = guessGet(), k = t.getAttribute('data-guess'), v = parseInt(t.value, 10); v = v >= 1 && v <= 10 ? v : null; if (k.indexOf('t:') === 0){ g.t = g.t || {}; if (v) g.t[k.slice(2)] = v; else delete g.t[k.slice(2)]; } else { if (v) g[k] = v; else delete g[k]; } lsSet('ef-guess', JSON.stringify(g)); var y2 = window.scrollY; render(true); window.scrollTo(0, y2); }
+  if (t.hasAttribute('data-guess')){ var g = guessGet(), k = t.getAttribute('data-guess'), v = parseInt(t.value, 10); v = v >= 1 && v <= NT() ? v : null; if (k.indexOf('t:') === 0){ g.t = g.t || {}; if (v) g.t[k.slice(2)] = v; else delete g.t[k.slice(2)]; } else { if (v) g[k] = v; else delete g[k]; } lsSet('ef-guess', JSON.stringify(g)); var y2 = window.scrollY; render(true); window.scrollTo(0, y2); }
 });
 document.addEventListener('click', function(e){
   var b = e.target.closest && e.target.closest('[data-gq]'); if (!b) return;
@@ -7493,6 +7496,8 @@ function lgBrand(){
   if (LG.cur && d.logo && lg){ var im = lg.querySelector('img'); if (im) im.src = d.logo; }
   if (LG.cur && d.accent) document.documentElement.style.setProperty('--red', d.accent);
   var b = document.getElementById('lg-btn'); if (b) b.querySelector('b').textContent = lgName();
+  var dn = document.querySelector('nav.main a[data-sec="draftas"]'); if (dn) dn.hidden = !(d.draft && d.draft.length);
+  var ap = document.querySelector('nav.main a[data-sec="apzvalgos"]'); if (ap) ap.hidden = !!LG.cur && !(S.reviews && S.reviews.length);
 }
 function lgComm(){ return (S.data && S.data.commissioner) || 'Titas Skuodas'; }
 /* switcher dialog */
