@@ -977,6 +977,7 @@ html.chat-open .chat-fab{transform:scale(.9)}
 .srch-btn:hover{color:var(--ink);border-color:color-mix(in srgb,var(--red) 50%,var(--rule))}.srch-btn .srch-l{flex:1}
 .srch-btn kbd,.srch kbd{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;padding:0 5px;border-radius:5px;border:1px solid var(--rule);background:color-mix(in srgb,var(--ink) 5%,transparent);font:600 11px/1 var(--f-data,inherit);color:var(--ink-2)}
 .srch{position:fixed;inset:0;z-index:200;display:flex;justify-content:center;align-items:flex-start;padding:8vh 16px 16px}.srch[hidden]{display:none}
+.tphbox{width:min(560px,100%);max-height:92vh}.tph-in{padding:16px 18px 18px;overflow:auto}.tph-top{display:flex;justify-content:space-between;align-items:center}.tph-top h3{margin:0}.tph-x{background:none;border:0;font-size:20px;color:var(--ink-2);cursor:pointer;padding:6px}.tph-ctl{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:12px 0}#tph-r{font:inherit;padding:6px 10px;border-radius:10px;border:1px solid var(--rule);background:var(--card);color:var(--ink)}.tph-img{display:block;width:100%;height:auto;border-radius:12px}.tph-out .note{margin:8px 0 0}.tph-act{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}.tph-cta{margin:10px 0 0}
 .srch-bg{position:absolute;inset:0;background:rgba(5,8,18,.55);backdrop-filter:blur(3px)}
 .srch-box{position:relative;width:min(680px,100%);max-height:80vh;display:flex;flex-direction:column;border-radius:18px;background:var(--card);border:1px solid var(--rule);box-shadow:0 24px 70px rgba(0,0,0,.45);overflow:hidden}
 .srch-top{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid var(--rule)}
@@ -3215,6 +3216,7 @@ function pageTeam(id){
   var pick = draftStats()[id] ? draftStats()[id].first : null;
   var h = '<p class="kicker"><a href="#komandos">Visos komandos</a></p><div class="phead">' + teamLogo(id, 84) + '<h2 class="page">' + esc(m.team) + '</h2></div><p class="deck">' + esc(m.name) + (m.note ? '. ' + esc(m.note) : '') + '.' +
     (pick ? ' Pirmasis pasirinkimas drafte: ' + esc(pick.name) + ' (' + pick.pick + ' šaukimas).' : '') + '</p>';
+  h += '<p class="tph-cta"><button type="button" class="btn" data-tphoto="' + id + '">📸 Komandos nuotrauka</button></p>';
   h += '<dl class="strip">' +
     '<div><dt>Vieta</dt><dd>' + st.pos + ' <small>' + (st.move ? signed(st.move) + ' per turą' : 'be pokyčio') + '</small></dd></div>' +
     '<div><dt>Taškai</dt><dd>' + n(st.total) + '</dd></div>' +
@@ -7506,6 +7508,116 @@ function lgBrand(){
   var ap = document.querySelector('nav.main a[data-sec="apzvalgos"]'); if (ap) ap.hidden = !!LG.cur && !(S.reviews && S.reviews.length);
 }
 function lgComm(){ return (S.data && S.data.commissioner) || 'Titas Skuodas'; }
+/* team photo: shareable PNG of a team (round lineup or whole roster) */
+var TPH = {id: null, mode: 'round', r: null};
+function tphImg(src){ return new Promise(function(res){ var im = new Image(); im.decoding = 'async'; im.onload = function(){ res(im); }; im.onerror = function(){ res(null); }; im.src = src; }); }
+function tphRounds(id){ var L = (S.data.lineups || {})[id] || {}; return Object.keys(L).map(Number).filter(function(r){ return L[r] && L[r].length; }).sort(function(a, b){ return a - b; }); }
+function tphRR(c, x, y, w, h, r){ c.beginPath(); c.moveTo(x + r, y); c.arcTo(x + w, y, x + w, y + h, r); c.arcTo(x + w, y + h, x, y + h, r); c.arcTo(x, y + h, x, y, r); c.arcTo(x, y, x + w, y, r); c.closePath(); }
+function tphFit(c, t, max){ t = String(t); if (c.measureText(t).width <= max) return t; while (t.length > 1 && c.measureText(t + '…').width > max) t = t.slice(0, -1); return t + '…'; }
+function tphDraw(){
+  var id = TPH.id, d = S.data, m = M[id], st = d.standings.filter(function(s){ return s.id === id; })[0], col = tcol(id);
+  var W = 1080, H = 1350, cv = document.createElement('canvas'); cv.width = W; cv.height = H; var c = cv.getContext('2d');
+  var cs = getComputedStyle(document.documentElement), FD = (cs.getPropertyValue('--f-display') || 'sans-serif').trim(), FB = '"Plus Jakarta Sans",system-ui,sans-serif';
+  var rows = [], title = '', sub = '';
+  if (TPH.mode === 'round'){
+    var r = TPH.r, L = d.lineups[id][r], rd = d.rounds.filter(function(z){ return z.round === r; })[0], order = {C: 0, T: 0, S: 1, B6: 2, B: 3, I: 4};
+    rows = L.map(function(x){ var p = PKEY[x.name + '|' + x.club]; return {p: p, name: x.name, club: x.club, pos: x.pos, slot: x.slot, val: x.counted, raw: x.pts}; })
+      .sort(function(a, b){ return order[a.slot] - order[b.slot] || (b.val || 0) - (a.val || 0); });
+    var tot = rows.reduce(function(s, z){ return s + (z.val || 0); }, 0), pl = rd && rd.places ? rd.places[id] : null;
+    title = r + ' turas'; sub = n(Math.round(tot * 100) / 100) + ' FPTS' + (pl ? ' · ' + pl + ' vieta ture' : '') + (rd && rd.winner === id ? ' · turo laimėtojas' : '');
+  } else {
+    rows = (d.rosters[id] || []).slice().sort(function(a, b){ return (b.avg || 0) - (a.avg || 0); }).map(function(p){ return {p: p, name: p.name, club: p.club, pos: p.pos, slot: 'R', val: p.avg}; });
+    title = 'Sudėtis po ' + d.rounds_played + ' turo'; sub = 'Sudėties vidurkis ' + NF1.format(m.roster_avg) + ' FPTS · ' + m.roster_avg_rank + ' vieta lygoje';
+  }
+  var logoSvg = teamLogo(id, 150).replace('<svg class="tlogo"', '<svg xmlns="http://www.w3.org/2000/svg" class="tlogo"');
+  var jobs = [tphImg('data:image/svg+xml;charset=utf-8,' + encodeURIComponent(logoSvg))].concat(rows.map(function(z){ return z.p && z.p.cd ? tphImg('cards/' + z.p.id + '.webp') : Promise.resolve(null); }));
+  var fonts = document.fonts && document.fonts.load ? Promise.all(['800 60px ' + FB, '700 30px ' + FB, '800 60px ' + FD].map(function(f){ return document.fonts.load(f).catch(function(){}); })) : Promise.resolve();
+  return fonts.then(function(){ return Promise.all(jobs); }).then(function(im){
+    var logo = im[0], ph = im.slice(1);
+    /* background */
+    var g = c.createLinearGradient(0, 0, W, H); g.addColorStop(0, col); g.addColorStop(0.42, '#0d1222'); g.addColorStop(1, '#070a14'); c.fillStyle = g; c.fillRect(0, 0, W, H);
+    c.globalAlpha = 0.07; c.strokeStyle = '#fff'; c.lineWidth = 3; c.beginPath(); c.arc(W / 2, H + 120, 520, Math.PI, 2 * Math.PI); c.stroke(); c.beginPath(); c.arc(W / 2, H + 120, 230, Math.PI, 2 * Math.PI); c.stroke(); c.globalAlpha = 1;
+    /* header */
+    if (logo) c.drawImage(logo, 60, 56, 150, 150);
+    c.fillStyle = '#fff'; c.textBaseline = 'alphabetic';
+    c.font = '800 66px ' + FB; c.fillText(tphFit(c, m.team, W - 300), 236, 128);
+    c.font = '600 32px ' + FB; c.fillStyle = 'rgba(255,255,255,.78)'; c.fillText(tphFit(c, m.name + ' · ' + (st ? st.pos + ' vieta lygoje · ' + n(st.total) + ' tšk.' : ''), W - 300), 238, 178);
+    tphRR(c, 60, 236, W - 120, 84, 22); c.fillStyle = 'rgba(255,255,255,.1)'; c.fill();
+    c.font = '800 38px ' + FB; c.fillStyle = '#fff'; c.fillText(title, 92, 291);
+    c.font = '600 27px ' + FB; c.fillStyle = 'rgba(255,255,255,.85)'; c.textAlign = 'right'; c.fillText(tphFit(c, sub, W - 360), W - 92, 289); c.textAlign = 'left';
+    /* cards */
+    function card(z, im2, x, y, w, h, big){
+      tphRR(c, x, y, w, h, 22); c.fillStyle = z.slot === 'I' ? 'rgba(255,255,255,.05)' : 'rgba(255,255,255,.1)'; c.fill();
+      if (z.slot === 'C' || z.slot === 'T'){ c.lineWidth = 4; c.strokeStyle = '#f59e0b'; c.stroke(); }
+      var phH = big ? h - 118 : h - 92, phW = phH * 0.8;
+      c.save(); tphRR(c, x + (w - phW) / 2, y + 14, phW, phH, 16); c.clip();
+      if (im2) c.drawImage(im2, x + (w - phW) / 2, y + 14, phW, phH);
+      else { c.fillStyle = 'rgba(255,255,255,.12)'; c.fillRect(x + (w - phW) / 2, y + 14, phW, phH); c.fillStyle = 'rgba(255,255,255,.3)'; c.beginPath(); c.arc(x + w / 2, y + 14 + phH * .38, phH * .17, 0, 7); c.fill(); c.beginPath(); c.arc(x + w / 2, y + 14 + phH * 1.02, phH * .4, Math.PI, 2 * Math.PI); c.fill(); }
+      c.restore();
+      var tag = {C: 'K ×2', T: 'K ×3', B6: '6-as', B: 'Suolas', I: 'Neaktyvus'}[z.slot];
+      if (tag){ c.font = '800 ' + (big ? 24 : 20) + 'px ' + FB; var tw = c.measureText(tag).width + 20; tphRR(c, x + 12, y + 12, tw, big ? 36 : 30, 10); c.fillStyle = z.slot === 'C' || z.slot === 'T' ? '#f59e0b' : 'rgba(10,14,28,.78)'; c.fill(); c.fillStyle = z.slot === 'C' || z.slot === 'T' ? '#1a1205' : '#fff'; c.fillText(tag, x + 22, y + (big ? 38 : 34)); }
+      c.textAlign = 'center'; c.fillStyle = '#fff'; c.font = '700 ' + (big ? 30 : 24) + 'px ' + FB; c.fillText(tphFit(c, z.name, w - 20), x + w / 2, y + h - (big ? 66 : 52));
+      c.font = '600 ' + (big ? 22 : 19) + 'px ' + FB; c.fillStyle = 'rgba(255,255,255,.7)';
+      var val = z.val == null ? '–' : NF1.format(z.val);
+      c.fillText(z.club + (z.pos ? ' · ' + z.pos : ''), x + w / 2 - (big ? 50 : 40), y + h - (big ? 28 : 20));
+      c.font = '800 ' + (big ? 38 : 30) + 'px ' + FB; c.fillStyle = z.slot === 'I' ? 'rgba(255,255,255,.5)' : '#fff'; c.textAlign = 'right'; c.fillText(val, x + w - 18, y + h - (big ? 24 : 18)); c.textAlign = 'left';
+    }
+    var top = 350;
+    if (TPH.mode === 'round'){
+      var main = rows.filter(function(z){ return /^(C|T|S|B6)$/.test(z.slot); }), rest = rows.filter(function(z){ return !/^(C|T|S|B6)$/.test(z.slot); });
+      var cw = (W - 120 - 2 * 24) / 3, chh = 330;
+      main.slice(0, 6).forEach(function(z, i){ card(z, ph[rows.indexOf(z)], 60 + (i % 3) * (cw + 24), top + Math.floor(i / 3) * (chh + 22), cw, chh, true); });
+      var y2 = top + 2 * (chh + 22) + 4, half = Math.ceil(rest.length / 2), rh = Math.min(56, Math.floor((H - 112 - y2) / Math.max(1, half)) - 8), colw = (W - 120 - 24) / 2;
+      rest.forEach(function(z, i){ var x = 60 + Math.floor(i / half) * (colw + 24), y = y2 + (i % half) * (rh + 8), im2 = ph[rows.indexOf(z)], off = z.slot === 'I';
+        tphRR(c, x, y, colw, rh, 14); c.fillStyle = off ? 'rgba(255,255,255,.05)' : 'rgba(255,255,255,.1)'; c.fill();
+        c.save(); c.beginPath(); c.arc(x + 8 + (rh - 12) / 2, y + rh / 2, (rh - 12) / 2, 0, 7); c.clip(); if (im2){ var dd = rh - 12, iw = dd * 1.9, ih = iw * 1.25; c.drawImage(im2, x + 8 + dd / 2 - iw / 2, y + rh / 2 - ih * 0.43, iw, ih); } else { c.fillStyle = 'rgba(255,255,255,.2)'; c.fillRect(x, y, rh, rh); } c.restore();
+        var tx = x + rh + 8, tag = off ? 'NEAKT.' : 'SUOL.'; c.font = '800 16px ' + FB; c.fillStyle = 'rgba(255,255,255,.55)'; c.fillText(tag, tx, y + rh / 2 + 6); tx += c.measureText(tag).width + 10;
+        c.font = '600 17px ' + FB; var clw = c.measureText(z.club).width; c.font = '700 23px ' + FB; c.fillStyle = off ? 'rgba(255,255,255,.65)' : '#fff'; c.fillText(tphFit(c, z.name, (x + colw - 92 - clw - 14) - tx), tx, y + rh / 2 + 8);
+        c.textAlign = 'right'; c.font = '800 26px ' + FB; c.fillText(z.val == null ? '–' : NF1.format(z.val), x + colw - 16, y + rh / 2 + 9);
+        c.font = '600 17px ' + FB; c.fillStyle = 'rgba(255,255,255,.55)'; c.fillText(z.club, x + colw - 92, y + rh / 2 + 7); c.textAlign = 'left'; });
+    } else {
+      var cols = 4, gw = (W - 120 - (cols - 1) * 18) / cols, gh = Math.min(226, Math.floor((H - 100 - top - 3 * 18) / 4));
+      rows.slice(0, 16).forEach(function(z, i){ card(z, ph[i], 60 + (i % cols) * (gw + 18), top + Math.floor(i / cols) * (gh + 18), gw, gh, false); });
+    }
+    /* footer */
+    c.font = '600 26px ' + FB; c.fillStyle = 'rgba(255,255,255,.6)'; c.fillText('Eurolygos fantasy lyga ' + (d.season || ''), 60, H - 44);
+    c.textAlign = 'right'; c.fillText(TPH.mode === 'round' ? 'Kapitono taškai ×2, suolas ×0,5' : 'Skaičius: vidurkis per rungtynes', W - 60, H - 44); c.textAlign = 'left';
+    return cv;
+  });
+}
+function tphRender(){
+  var box = document.getElementById('tphdlg'), out = box.querySelector('.tph-out'), rs = tphRounds(TPH.id);
+  box.querySelectorAll('[data-tphmode]').forEach(function(b){ b.setAttribute('aria-pressed', String(b.getAttribute('data-tphmode') === TPH.mode)); });
+  var sel = box.querySelector('#tph-r'); sel.hidden = TPH.mode !== 'round' || !rs.length;
+  out.innerHTML = '<p class="data muted">Kuriama nuotrauka…</p>';
+  tphDraw().then(function(cv){
+    var url; try { url = cv.toDataURL('image/png'); } catch (e){ out.innerHTML = '<p class="data">Nepavyko sukurti nuotraukos šiame naršyklės lange.</p>'; return; }
+    TPH.cv = cv; out.innerHTML = '<img class="tph-img" src="' + url + '" alt="' + esc(team(TPH.id)) + ' nuotrauka"><p class="note">Telefone gali ir ilgai paspausti nuotrauką ir ją išsaugoti.</p>';
+  });
+}
+function tphOpen(id){
+  var rs = tphRounds(id); TPH.id = id; TPH.mode = rs.length ? 'round' : 'roster'; TPH.r = rs.length ? rs[rs.length - 1] : null;
+  var box = document.getElementById('tphdlg');
+  if (!box){ box = document.createElement('div'); box.id = 'tphdlg'; box.className = 'srch'; document.body.appendChild(box);
+    box.addEventListener('click', function(e){
+      if (e.target.closest('[data-tphclose]')){ box.hidden = true; return; }
+      var mb = e.target.closest('[data-tphmode]'); if (mb){ TPH.mode = mb.getAttribute('data-tphmode'); tphRender(); return; }
+      if (e.target.closest('[data-tphsave]') && TPH.cv){ var a = document.createElement('a'); a.download = (team(TPH.id) + (TPH.mode === 'round' ? ' ' + TPH.r + ' turas' : ' sudetis')).replace(/[^\wąčęėįšųūž -]/gi, '') + '.png'; a.href = TPH.cv.toDataURL('image/png'); document.body.appendChild(a); a.click(); a.remove(); return; }
+      if (e.target.closest('[data-tphshare]') && TPH.cv){ TPH.cv.toBlob(function(b){ var f = new File([b], 'komanda.png', {type: 'image/png'});
+        if (navigator.canShare && navigator.canShare({files: [f]})) navigator.share({files: [f], title: team(TPH.id)}).catch(function(){});
+        else box.querySelector('[data-tphsave]').click(); }, 'image/png'); }
+    });
+    box.addEventListener('change', function(e){ if (e.target.id === 'tph-r'){ TPH.r = +e.target.value; tphRender(); } });
+    box.addEventListener('keydown', function(e){ if (e.key === 'Escape') box.hidden = true; });
+  }
+  box.innerHTML = '<div class="srch-bg" data-tphclose="1"></div><div class="srch-box tphbox" role="dialog" aria-modal="true" aria-label="Komandos nuotrauka"><div class="tph-in">' +
+    '<div class="tph-top"><h3>Komandos nuotrauka</h3><button type="button" class="tph-x" data-tphclose="1" aria-label="Uždaryti">✕</button></div>' +
+    '<div class="tph-ctl"><div class="toggles" role="group" aria-label="Nuotraukos tipas">' + (rs.length ? '<button type="button" class="tog" data-tphmode="round">Turo sudėtis</button>' : '') + '<button type="button" class="tog" data-tphmode="roster">Visa sudėtis</button></div>' +
+    '<select id="tph-r" aria-label="Turas">' + rs.slice().reverse().map(function(r){ return '<option value="' + r + '"' + (r === TPH.r ? ' selected' : '') + '>' + r + ' turas</option>'; }).join('') + '</select></div>' +
+    '<div class="tph-out"></div><div class="tph-act"><button type="button" class="btn" data-tphshare="1">Dalintis</button><button type="button" class="btn ghost" data-tphsave="1">Atsisiųsti PNG</button></div></div></div>';
+  box.hidden = false; tphRender();
+}
+document.addEventListener('click', function(e){ var b = e.target.closest && e.target.closest('[data-tphoto]'); if (b){ e.preventDefault(); tphOpen(b.getAttribute('data-tphoto')); } });
 /* switcher dialog */
 function lgDialog(){
   var o = lgStore(), ids = Object.keys(o), act = lgActive();
