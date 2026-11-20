@@ -1507,7 +1507,37 @@ html.landing footer,html.landing .foot{display:none!important}
 .mp-ctl{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin:12px 0 10px;font-family:var(--f-data);font-size:14px}
 .mp-era{display:flex;align-items:center;gap:8px;flex:1 1 200px}.mp-era input{flex:1;min-width:110px;accent-color:#9a2b1c}
 .mp-seg{display:inline-flex;gap:0}.mp-seg .tog{border-radius:0}.mp-seg .tog:first-child{border-radius:6px 0 0 6px}.mp-seg .tog:last-child{border-radius:0 6px 6px 0}
-.mp-seg .tog.on,.mp-tool .tog.on{background:#3b2412;color:#f3e3bd}
+.mp-seg .tog.on,.mp-tool .tog.on,.m3-bar .tog.on{background:#3b2412;color:#f3e3bd}
+.mp-wrap.is3d{cursor:default;background:#9fc0bd}
+.mp-wrap.is3d~.mp-mini{top:42px}
+@media (max-width:600px){.mp-wrap.is3d~.mp-mini{display:none}}
+.m3.tc .m3-help{top:auto;bottom:128px}
+.m3{position:relative;line-height:1.3;outline:none;user-select:none;-webkit-user-select:none;overflow:hidden}
+.m3 canvas{display:block;width:100%;touch-action:none;cursor:grab}.m3 canvas:active{cursor:grabbing}
+.m3:focus-visible{box-shadow:inset 0 0 0 3px #f2c230}
+.m3-lb{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.m3-l{position:absolute;left:0;top:0;display:none;text-align:center;white-space:nowrap;font-weight:600;font-family:system-ui,sans-serif;line-height:1.2;color:#fff;text-shadow:0 1px 1px #000,0 0 3px rgba(0,0,0,.6);will-change:transform;overflow:hidden}
+.m3-cap{font-family:Georgia,serif;font-weight:700}.m3-cap::before{content:'';display:inline-block;width:.5em;height:.5em;border-radius:50%;background:var(--c);border:1px solid #fff;margin-right:.25em;vertical-align:.05em}
+.m3-l.me{color:#ffe27a}.m3-mk{color:#ffe9a8}
+.m3-cmp{position:absolute;left:0;right:0;top:0;height:34px;background:linear-gradient(rgba(20,14,8,.6),rgba(20,14,8,0));pointer-events:none;overflow:hidden}
+.m3-ci{position:absolute;top:3px;height:13px;overflow:hidden;transform:translateX(-50%);font:600 11px/13px system-ui,sans-serif;color:#fff;text-shadow:0 1px 2px #000;white-space:nowrap}
+.m3-ci.r2{top:18px;height:13px}.m3-ci.cd{font-size:12px;color:#ffe27a}.m3-ci.tg{color:#ffd24a}.m3-ci.me{color:#ffb1a6}
+.m3-tick{position:absolute;left:50%;top:0;width:2px;height:7px;margin-left:-1px;background:#fff}
+.m3-rg{position:absolute;left:50%;top:40px;transform:translate(-50%,-6px);text-align:center;opacity:0;transition:opacity .5s,transform .5s;pointer-events:none;color:#fff;text-shadow:0 1px 3px #000;width:max-content;max-width:86%}
+.m3-rg.on{opacity:1;transform:translate(-50%,0)}
+.m3-rg b{display:block;font:700 22px/1.15 Georgia,serif;border-bottom:2px solid var(--c,#fff);padding-bottom:2px}
+.m3-rg .kick{display:block;font:600 11px/1.3 system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase}.m3-rg .sm{display:block;font:500 12.5px/1.4 system-ui,sans-serif}
+.m3-pr{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);background:rgba(20,14,8,.8);color:#fff;border:1px solid #ffe27a;border-radius:4px;padding:7px 12px;font:600 13px/1.2 system-ui,sans-serif;cursor:pointer;max-width:80%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.m3.tc .m3-pr{left:auto;right:10px;transform:none;max-width:52%}
+.m3-pr[hidden],.m3-joy[hidden],.m3-help[hidden]{display:none}
+.m3-joy{position:absolute;left:16px;bottom:16px;width:100px;height:100px;border-radius:50%;border:2px solid rgba(255,255,255,.55);background:rgba(0,0,0,.14);pointer-events:none;opacity:.7}
+.m3-joy.on{opacity:1}.m3-joy span{position:absolute;left:28px;top:28px;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.7)}
+.m3-help{position:absolute;right:10px;top:42px;max-width:270px;background:rgba(20,14,8,.85);color:#fff;padding:10px 12px;border-radius:4px;font:500 12.5px/1.45 system-ui,sans-serif}
+.m3-help b{display:block;margin-bottom:2px}.m3-help span{display:block;margin-bottom:8px}
+.m3.tc .m3-help{left:10px;right:10px;max-width:none}
+.m3-st{margin:0;padding:6px 8px;font:500 12.5px/1.45 system-ui,sans-serif;background:#f4ead0;color:#3b2412;border-top:1px solid #8a6a44}
+.m3-bar{display:flex;flex-wrap:wrap;gap:6px;padding:6px 8px 8px;background:#f4ead0;line-height:1.2}
+.m3-no{padding:40px 16px;line-height:1.4;text-align:center;background:#f4ead0;margin:0}
 .mp-find{display:flex;gap:6px;flex:1 1 220px}.mp-find input{flex:1;min-width:0;font:inherit;padding:5px 8px;border:1px solid var(--rule,#bbb);border-radius:6px;background:var(--paper,#fff);color:inherit}
 .mp-sel{display:inline-flex;align-items:center;gap:6px}.mp-sel select,.mp-pinf select,.mp-chip select{font:inherit;padding:3px 4px;max-width:150px}
 .mp-stage{position:relative}
@@ -6266,6 +6296,7 @@ function mapSvg(era, W){
   if (closed.length) h += '<mask id="mp-fm"><rect width="' + VW + '" height="' + VH + '" fill="#000"/>' + closed.map(function(id){ return '<path d="' + WD[E.ids.indexOf(id)] + '" fill="#fff"/>'; }).join('') + '<circle cx="' + mR(G.cx) + '" cy="' + mR(G.cy) + '" r="' + mR(G.plateau * 1.25) + '" fill="#000"/><circle cx="' + mR(G.harbor[0]) + '" cy="' + mR(G.harbor[1]) + '" r="' + (G.hr + 12) + '" fill="#000"/></mask>' +
     '<g clip-path="url(#mp-land)" mask="url(#mp-fm)"><rect width="' + VW + '" height="' + VH + '" fill="#e9dfc8" opacity=".86"/><rect width="' + VW + '" height="' + VH + '" filter="url(#mp-cloud)" opacity=".9"/></g>';
   if (night) h += '<rect width="' + VW + '" height="' + VH + '" fill="#13213f" opacity=".4"/>';
+  var tr3 = pref.trail3; if (L.pins && tr3 && tr3.o === (port ? 'p' : 'l') && tr3.pts.length > 1) h += '<path d="M' + tr3.pts.map(function(p){ return p[0] + ' ' + p[1]; }).join('L') + '" fill="none" stroke="#c0262d" stroke-width="2" stroke-dasharray="1 4" stroke-linecap="round" opacity=".85"/>';
   h += '</g><g id="mp-poi">' + mapPoiSvg(E, P, G, col, night) + '</g>';
   h += mapFurniture(G, era, season);
   return h + '</svg>';
@@ -6324,6 +6355,7 @@ function mapPoiSvg(E, P, G, col, night){
   if (L.pins) (pref.pins || []).forEach(function(p, k){ if (p.o !== (port ? 'p' : 'l')) return;
     var shp = {pin: '<path d="M0 0c-6 -8 -6 -14 0 -16c6 2 6 8 0 16z" fill="' + p.c + '" stroke="#3b2412"/><circle cy="-10" r="2" fill="#fff"/>', star: '<path d="M0 -9l2.6 5.4 5.9.8-4.3 4.1 1 5.8L0 4.3-5.2 7.1l1-5.8-4.3-4.1 5.9-.8z" fill="' + p.c + '" stroke="#3b2412"/>', warn: '<path d="M0 -9l9 15h-18z" fill="' + p.c + '" stroke="#3b2412"/><path d="M0 -4v5" stroke="#3b2412" stroke-width="1.6"/>', flag: '<path d="M-3 7V-10M-3 -10h10l-3 4 3 4h-10" fill="' + p.c + '" stroke="#3b2412"/>'}[p.s] || '';
     h += '<g class="mp-p mp-pin" data-pin="' + k + '" data-lod="0" data-pr="2" style="--x:' + mR(p.x) + 'px;--y:' + mR(p.y) + 'px">' + shp + (p.n ? tx('mp-l', -4, p.n, 2, 9, 'start') : '') + '</g>'; });
+  var p3 = pref.p3; if (L.pins && p3 && p3.o === (port ? 'p' : 'l')) h += '<g class="mp-p mp-pin mp-me3" data-lod="0" data-pr="2" style="--x:' + mR(p3.x) + 'px;--y:' + mR(p3.z) + 'px"><circle r="4.5" fill="#c0262d" stroke="#fff" stroke-width="1.6"/>' + tx('mp-l', 3.5, 'Čia baigei 3D', 2, 8, 'start') + '</g>';
   return h;
 }
 /* ---------- underground floor (59, 60) ---------- */
@@ -6375,7 +6407,7 @@ function mapFixLabels(){
 }
 var MAP_FIXT = 0;
 function mapLater(){ clearTimeout(MAP_FIXT); MAP_FIXT = setTimeout(mapFixLabels, 90); }
-function mapFly(x, y, k, ms){ var c = MAPS.cam, G = MAPS.cur.G, k1 = Math.max(1, Math.min(6, k || c.k)), x1 = G.VW / 2 - x * k1, y1 = G.VH / 2 - y * k1, x0 = c.x, y0 = c.y, k0 = c.k, t0 = performance.now(), dur = ms == null ? 450 : ms;
+function mapFly(x, y, k, ms){ if (MAPS.floor === '3d' && M3){ m3Go(x, y); return; } var c = MAPS.cam, G = MAPS.cur.G, k1 = Math.max(1, Math.min(6, k || c.k)), x1 = G.VW / 2 - x * k1, y1 = G.VH / 2 - y * k1, x0 = c.x, y0 = c.y, k0 = c.k, t0 = performance.now(), dur = ms == null ? 450 : ms;
   if (mapPref().still || !dur){ c.x = x1; c.y = y1; c.k = k1; mapApplyCam(); mapLater(); return; }
   (function step(t){ var u = Math.min(1, (t - t0) / dur), e = u < .5 ? 2 * u * u : 1 - Math.pow(-2 * u + 2, 2) / 2; c.k = k0 + (k1 - k0) * e; c.x = x0 + (x1 - x0) * e; c.y = y0 + (y1 - y0) * e; mapApplyCam(); if (u < 1) requestAnimationFrame(step); else mapLater(); })(t0); }
 function mapZoomAt(fx, fy, f){ var c = MAPS.cam, k1 = Math.max(1, Math.min(6, c.k * f)); c.x = fx - (fx - c.x) * k1 / c.k; c.y = fy - (fy - c.y) * k1 / c.k; c.k = k1; mapApplyCam(); mapLater(); }
@@ -6393,6 +6425,7 @@ function mapMini(){
   var s = '<svg viewBox="0 0 ' + G.VW + ' ' + G.VH + '" width="' + w + '" height="' + mR(w * G.VH / G.VW) + '" aria-hidden="true"><rect width="' + G.VW + '" height="' + G.VH + '" fill="' + (MAPS.cur.under ? '#1d1712' : '#9fc0bd') + '"/><g transform="rotate(' + mR(rot) + ' ' + G.VW / 2 + ' ' + G.VH / 2 + ')"><clipPath id="mp-mc"><path d="' + mapSmooth(G.land) + '"/></clipPath><path d="' + mapSmooth(G.land) + '" fill="' + (MAPS.cur.under ? '#2b2119' : '#efdcb2') + '"/><g clip-path="url(#mp-mc)">' +
     E.ids.map(function(id, i){ return P.polys[i].length > 2 ? '<path d="' + mapPolyD(P.polys[i]) + '" fill="' + (mapPref().cb ? MAP_CB[i % 12] : tcol(id)) + '" fill-opacity=".45" stroke="#3b2412" stroke-width="2"/>' : ''; }).join('') + '</g>';
   if (me && E.pos[me]){ [[me, '#c0262d', 24], [E.order[E.pos[me] - 2], '#f2c230', 18], [E.order[E.pos[me]], '#6b2b7b', 18]].forEach(function(z){ var a = z[0] && g.nodes[z[0]]; if (a) s += '<circle cx="' + mR(a[0]) + '" cy="' + mR(a[1]) + '" r="' + z[2] + '" fill="' + z[1] + '" stroke="#fff" stroke-width="6"/>'; }); }
+  if (MAPS.floor === '3d' && M3 && M3.x != null){ var hd = M3.yaw * 180 / Math.PI; s += '<g transform="translate(' + mR(M3.x) + ' ' + mR(M3.z) + ') rotate(' + mR(hd) + ')"><path d="M0 -38L24 26L0 12L-24 26Z" fill="#c0262d" stroke="#fff" stroke-width="7"/></g></g></svg>'; box.innerHTML = s; return; }
   s += '<rect x="' + mR(-c.x / c.k) + '" y="' + mR(-c.y / c.k) + '" width="' + mR(G.VW / c.k) + '" height="' + mR(G.VH / c.k) + '" fill="none" stroke="#c0262d" stroke-width="8"/></g></svg>';
   box.innerHTML = s;
 }
@@ -6432,7 +6465,7 @@ function pageMap(){
     '<div id="mp-new"></div>' +
     '<div class="mp-ctl"><button type="button" class="btn mp-play" id="mp-play">▶ Sezonas</button>' +
     '<label class="mp-era">Po <b id="mp-era-v">' + MAPS.era + '</b> turo<input type="range" id="mp-era" min="1" max="' + R + '" value="' + MAPS.era + '" step="1" aria-label="Turas"></label>' +
-    '<span class="mp-seg" role="group" aria-label="Aukštas">' + [['surface', 'Paviršius'], ['under', 'Požemiai']].map(function(f){ return '<button type="button" class="tog' + (MAPS.floor === f[0] ? ' on' : '') + '" data-floor="' + f[0] + '" aria-pressed="' + (MAPS.floor === f[0]) + '">' + f[1] + '</button>'; }).join('') + '</span></div>' +
+    '<span class="mp-seg" role="group" aria-label="Aukštas">' + [['surface', 'Paviršius'], ['under', 'Požemiai'], ['3d', '3D']].map(function(f){ return '<button type="button" class="tog' + (MAPS.floor === f[0] ? ' on' : '') + '" data-floor="' + f[0] + '" aria-pressed="' + (MAPS.floor === f[0]) + '">' + f[1] + '</button>'; }).join('') + '</span></div>' +
     '<div class="mp-ctl mp-ctl2"><form class="mp-find" id="mp-find" role="search"><input type="search" id="mp-q" list="mp-ql" placeholder="Ieškoti vietos ar žaidėjo" aria-label="Ieškoti žemėlapyje"><datalist id="mp-ql">' + places.map(function(p){ return '<option value="' + esc(p) + '">'; }).join('') + '</datalist><button type="submit" class="tog">Rasti</button></form>' +
     '<label class="mp-sel">Kelias iki <select id="mp-route"><option value="">tikslo</option><option value="summit">Taurės kalnas</option><option value="harbor">Drafto uostas</option>' + opts + '</select></label>' +
     '<label class="mp-sel">Keliauti į <select id="mp-ft"><option value="">vietą</option><option value="summit">Taurės kalnas</option><option value="harbor">Drafto uostas</option>' + opts + '</select></label></div>' +
@@ -6449,7 +6482,7 @@ function pageMap(){
     '<label class="mp-chip">Permatomumas <input type="range" min="0.4" max="1" step="0.05" value="' + pref.mini.op + '" data-mpm="op"></label>' + chk('data-mpm', 'rot', pref.mini.rot, 'Sukti pagal tikslą') + '</div>' +
     '<p class="data"><button type="button" class="tog" id="mp-reveal">Atverti visą žemėlapį</button> <button type="button" class="tog" id="mp-reset">Pamiršti atradimus</button> <button type="button" class="tog" id="mp-tour-b">Kaip naudotis</button></p></details>' +
     '<div id="mp-pins"></div>' +
-    '<section><h3 class="sect">Legenda</h3><div class="mp-legs">' + mapLegend() + '</div><p class="note">Valdų plotas atitinka surinktus taškus (lyderiui žemės duodama daugiau nei proporcingai, kad skirtumai matytųsi), o „Lygūs plotai“ parodo sąžiningą padalijimą: visos sostinės vienodai nutolusios nuo Taurės kalno. Sostinės matomos ir per rūką. Klavišai: M atidaro žemėlapį, rodyklės tempia, + ir − artina, 0 grąžina visą vaizdą. Veikia ir žaidimų pultas.</p></section>';
+    '<section><h3 class="sect">Legenda</h3><div class="mp-legs">' + mapLegend() + '</div><p class="note">Valdų plotas atitinka surinktus taškus (lyderiui žemės duodama daugiau nei proporcingai, kad skirtumai matytųsi), o „Lygūs plotai“ parodo sąžiningą padalijimą: visos sostinės vienodai nutolusios nuo Taurės kalno. Sostinės matomos ir per rūką. 3D rodinyje eik W A S D arba rodyklėmis, dairykis pele, Shift bėga, F skrenda, E aplanko vietą, Esc grįžta. Klavišai: M atidaro žemėlapį, rodyklės tempia, + ir − artina, 0 grąžina visą vaizdą. Veikia ir žaidimų pultas.</p></section>';
 }
 function mapLegend(){
   function it(svg, t){ return '<div class="mp-li"><svg viewBox="-12 -14 24 24" width="26" height="26" aria-hidden="true">' + svg + '</svg><span>' + t + '</span></div>'; }
@@ -6462,6 +6495,10 @@ function mapLegend(){
 }
 function drawMap(){
   var wrap = document.getElementById('mp-wrap'); if (!wrap) return; var t0 = performance.now();
+  wrap.classList.toggle('is3d', MAPS.floor === '3d');
+  if (MAPS.floor === '3d'){ mapSvg(MAPS.era, wrap.clientWidth || 720); var cv = document.getElementById('m3c');
+    if (M3 && cv && M3.cv === cv) m3Load(); else { wrap.innerHTML = m3Html(); m3Init(); }
+    var cb = document.getElementById('mp-comp'); if (cb) cb.hidden = true; mapInfo(); mapPinsList(); mapMini(); MAPS.drawMs = Math.round(performance.now() - t0); return; }
   wrap.innerHTML = MAPS.floor === 'under' ? mapUnderSvg(MAPS.era, wrap.clientWidth || 720) : mapSvg(MAPS.era, wrap.clientWidth || 720);
   mapApplyCam(); mapFixLabels(); mapInfo(); mapPinsList(); MAPS.drawMs = Math.round(performance.now() - t0);
 }
@@ -6535,20 +6572,20 @@ function mapPing(x, y, share){
     try { navigator.clipboard.writeText(url).then(function(){ say(true); }, function(){ say(false); }); } catch (e){ say(false); } }
 }
 function mapTour(){ var box = document.getElementById('mp-info'); if (!box) return;
-  var steps = ['Tempk žemėlapį pele ar pirštu, artink ratuku, dviem pirštais arba + ir − mygtukais. Kuo arčiau, tuo daugiau vietų ir pavadinimų matyti.', 'Paspausk regioną: pamatysi valdovą, taškus, užduotis ir kiek jau ištyrinėjai. Kol nepaspaudi, regioną dengia rūkas.', 'Klaustukai yra paslaptys: lobiai ir urvai su mįslėmis. Apžvalgos bokštai atidengia kaimynus, o Požemiuose slepiasi suolas ir slaptos praėjos.', 'Viršuje gali ieškoti vietos, nusibrėžti kelią iki varžovo, dėti savo žymeklius ir siųsti signalą. Slankiklis rodo, kaip pasaulis keitėsi per sezoną.'];
+  var steps = ['Tempk žemėlapį pele ar pirštu, artink ratuku, dviem pirštais arba + ir − mygtukais. Kuo arčiau, tuo daugiau vietų ir pavadinimų matyti.', 'Paspausk regioną: pamatysi valdovą, taškus, užduotis ir kiek jau ištyrinėjai. Kol nepaspaudi, regioną dengia rūkas.', 'Klaustukai yra paslaptys: lobiai ir urvai su mįslėmis. Apžvalgos bokštai atidengia kaimynus, o Požemiuose slepiasi suolas ir slaptos praėjos.', 'Mygtukas 3D leidžia vaikščioti po tą patį pasaulį: W A S D arba pirštu eini, pele dairaisi, artėjant prie vietos paspausk E. Įžengus į regioną jis atsiveria.', 'Viršuje gali ieškoti vietos, nusibrėžti kelią iki varžovo, dėti savo žymeklius ir siųsti signalą. Slankiklis rodo, kaip pasaulis keitėsi per sezoną.'];
   var k = 0; (function show(){ box.innerHTML = '<div class="mp-card" style="--c:#9a2b1c"><p class="mp-nm">Kaip naudotis · ' + (k + 1) + '/' + steps.length + '</p><p class="data">' + steps[k] + '</p><p class="mp-acts"><button type="button" class="btn" id="mp-tn">' + (k < steps.length - 1 ? 'Toliau' : 'Pradėti') + '</button> <button type="button" class="tog" id="mp-ts">Praleisti</button></p></div>';
     document.getElementById('mp-tn').onclick = function(){ k++; if (k < steps.length) show(); else { mapPref().tour = 1; mapSave(); mapInfo(); } };
     document.getElementById('mp-ts').onclick = function(){ mapPref().tour = 1; mapSave(); mapInfo(); }; })(); }
 function mapBind(){
   var wrap = document.getElementById('mp-wrap'); if (!wrap || wrap.mpBound) return; wrap.mpBound = 1;
   var view = document.getElementById('view'), ptrs = {}, drag = null, moved = false, downT = null;
-  wrap.addEventListener('pointerdown', function(e){ downT = e.target; try { wrap.setPointerCapture(e.pointerId); } catch (x){} ptrs[e.pointerId] = mapPt(e); moved = false; drag = {p: mapPt(e), c: {x: MAPS.cam.x, y: MAPS.cam.y}, d0: null}; });
-  wrap.addEventListener('pointermove', function(e){ if (!ptrs[e.pointerId] || !drag) return; ptrs[e.pointerId] = mapPt(e); var ks = Object.keys(ptrs);
+  wrap.addEventListener('pointerdown', function(e){ if (MAPS.floor === '3d') return; downT = e.target; try { wrap.setPointerCapture(e.pointerId); } catch (x){} ptrs[e.pointerId] = mapPt(e); moved = false; drag = {p: mapPt(e), c: {x: MAPS.cam.x, y: MAPS.cam.y}, d0: null}; });
+  wrap.addEventListener('pointermove', function(e){ if (MAPS.floor === '3d') return; if (!ptrs[e.pointerId] || !drag) return; ptrs[e.pointerId] = mapPt(e); var ks = Object.keys(ptrs);
     if (ks.length === 2){ var a = ptrs[ks[0]], b = ptrs[ks[1]], dd = Math.hypot(a[0] - b[0], a[1] - b[1]); if (!drag.d0){ drag.d0 = dd; drag.k0 = MAPS.cam.k; } mapZoomAt((a[0] + b[0]) / 2, (a[1] + b[1]) / 2, drag.k0 * dd / drag.d0 / MAPS.cam.k); moved = true; return; }
     var p = mapPt(e), dx = p[0] - drag.p[0], dy = p[1] - drag.p[1]; if (Math.abs(dx) + Math.abs(dy) > 5) moved = true; if (!moved) return; MAPS.cam.x = drag.c.x + dx; MAPS.cam.y = drag.c.y + dy; mapApplyCam(); });
-  function up(e){ delete ptrs[e.pointerId]; if (!Object.keys(ptrs).length){ if (moved) mapLater(); drag = null; } else if (drag) { drag.d0 = null; var k = Object.keys(ptrs)[0]; drag.p = ptrs[k]; drag.c = {x: MAPS.cam.x, y: MAPS.cam.y}; } }
+  function up(e){ if (MAPS.floor === '3d') return; delete ptrs[e.pointerId]; if (!Object.keys(ptrs).length){ if (moved) mapLater(); drag = null; } else if (drag) { drag.d0 = null; var k = Object.keys(ptrs)[0]; drag.p = ptrs[k]; drag.c = {x: MAPS.cam.x, y: MAPS.cam.y}; } }
   wrap.addEventListener('pointerup', up); wrap.addEventListener('pointercancel', up);
-  wrap.addEventListener('click', function(e){ if (moved){ moved = false; return; } if (!MAPS.cur) return; var w = mapWorld(mapPt(e)), t = downT || e.target;
+  wrap.addEventListener('click', function(e){ if (MAPS.floor === '3d') return; if (moved){ moved = false; return; } if (!MAPS.cur) return; var w = mapWorld(mapPt(e)), t = downT || e.target;
     if (MAPS.tool === 'pin'){ var pp = mapPref(); pp.pins = pp.pins || []; pp.pins.push({x: Math.round(w[0]), y: Math.round(w[1]), s: document.getElementById('mp-ps').value, c: document.getElementById('mp-pc').value, n: document.getElementById('mp-pn').value.trim(), o: MAPS.cur.G.port ? 'p' : 'l'}); mapSave(); mapRedraw(); return; }
     if (MAPS.tool === 'ping'){ mapPing(w[0], w[1], true); return; }
     if (t.closest && t.closest('[data-pin]')) return;
@@ -6557,14 +6594,15 @@ function mapBind(){
     if (q){ MAPS.poi = q; mapTone(q.p + 3); mapInfo(); document.getElementById('mp-info').scrollIntoView({block: 'nearest', behavior: 'smooth'}); return; }
     var own = MAPS.cur.under ? -1 : mapOwnAt(MAPS.cur.P, MAPS.cur.G, w[0], w[1]);
     if (own >= 0 && mapInPoly(w[0], w[1], MAPS.cur.G.land)){ var id = MAPS.cur.E.ids[own]; mapSelect(id === MAPS.sel && !MAPS.poi ? null : id); } else if (MAPS.sel || MAPS.poi) mapSelect(null); });
-  wrap.addEventListener('wheel', function(e){ e.preventDefault(); var p = mapPt(e); mapZoomAt(p[0], p[1], e.deltaY < 0 ? 1.2 : 1 / 1.2); }, {passive: false});
-  wrap.addEventListener('dblclick', function(e){ var p = mapPt(e); mapZoomAt(p[0], p[1], 1.8); });
-  wrap.addEventListener('keydown', function(e){ var c = MAPS.cam, G = MAPS.cur.G;
+  wrap.addEventListener('wheel', function(e){ if (MAPS.floor === '3d') return; e.preventDefault(); var p = mapPt(e); mapZoomAt(p[0], p[1], e.deltaY < 0 ? 1.2 : 1 / 1.2); }, {passive: false});
+  wrap.addEventListener('dblclick', function(e){ if (MAPS.floor === '3d') return; var p = mapPt(e); mapZoomAt(p[0], p[1], 1.8); });
+  wrap.addEventListener('keydown', function(e){ if (MAPS.floor === '3d') return; var c = MAPS.cam, G = MAPS.cur.G;
     if (e.key === 'ArrowLeft') c.x += 40; else if (e.key === 'ArrowRight') c.x -= 40; else if (e.key === 'ArrowUp') c.y += 40; else if (e.key === 'ArrowDown') c.y -= 40;
     else if (e.key === '+' || e.key === '='){ e.preventDefault(); mapZoomAt(G.VW / 2, G.VH / 2, 1.3); return; } else if (e.key === '-'){ e.preventDefault(); mapZoomAt(G.VW / 2, G.VH / 2, 1 / 1.3); return; }
     else if (e.key === '0'){ c.x = 0; c.y = 0; c.k = 1; } else if (e.key === 'Enter'){ var w = mapCenter(), o = mapOwnAt(MAPS.cur.P, G, w[0], w[1]); if (o >= 0) mapSelect(MAPS.cur.E.ids[o]); return; } else return;
     e.preventDefault(); mapApplyCam(); mapLater(); });
   view.querySelector('.mp-zoom').addEventListener('click', function(e){ var b = e.target.closest('[data-z]'); if (!b || !MAPS.cur) return; var z = b.getAttribute('data-z'), G = MAPS.cur.G, c = mapCenter();
+    if (MAPS.floor === '3d' && M3){ if (z === 'in') M3.fov = Math.max(0.55, M3.fov - 0.15); if (z === 'out') M3.fov = Math.min(1.35, M3.fov + 0.15); if (z === 'home') m3Act('view'); if (z === 'me') m3Act('home'); return; }
     if (z === 'in') mapFly(c[0], c[1], MAPS.cam.k * 1.5); if (z === 'out') mapFly(c[0], c[1], MAPS.cam.k / 1.5); if (z === 'home') mapFly(G.VW / 2, G.VH / 2, 1);
     if (z === 'me'){ var me = myTeam(), a = me && MAPS.cur.graph.nodes[me]; a = a || G.harbor; mapFly(a[0], a[1], 2.4); } });
   document.getElementById('mp-mini').addEventListener('click', function(e){ if (mapPref().mini.rot || !MAPS.cur) return; var r = this.getBoundingClientRect(), G = MAPS.cur.G; mapFly((e.clientX - r.left) / r.width * G.VW, (e.clientY - r.top) / r.height * G.VH, Math.max(2, MAPS.cam.k)); });
@@ -6578,7 +6616,7 @@ function mapBind(){
     mapFly(hit.x, hit.y, 2.8); if (hit.t === 'capital') setTimeout(function(){ mapSelect(hit.id); }, 480); else if (hit.t){ MAPS.poi = hit; mapInfo(); } });
   var ro = 0; if (!MAPS.resizeBound) window.addEventListener('resize', function(){ clearTimeout(ro); ro = setTimeout(function(){ var w = document.getElementById('mp-wrap'); if (!w || !MAPS.cur) return; if ((w.clientWidth < 560) !== !!MAPS.cur.G.port){ MAPS.cam = {x: 0, y: 0, k: 1}; drawMap(); } else { mapApplyCam(); mapFixLabels(); } }, 200); }); MAPS.resizeBound = 1;
   (function pad(){ if (!document.getElementById('mp-wrap')) return; var gp = navigator.getGamepads ? Array.prototype.filter.call(navigator.getGamepads(), Boolean)[0] : null; /* gamepad (76) */
-    if (gp && MAPS.cur){ var ax = gp.axes, c = MAPS.cam, mv = false, G = MAPS.cur.G; if (Math.abs(ax[0]) > 0.2){ c.x -= ax[0] * 12; mv = true; } if (Math.abs(ax[1]) > 0.2){ c.y -= ax[1] * 12; mv = true; }
+    if (gp && MAPS.cur && MAPS.floor !== '3d'){ var ax = gp.axes, c = MAPS.cam, mv = false, G = MAPS.cur.G; if (Math.abs(ax[0]) > 0.2){ c.x -= ax[0] * 12; mv = true; } if (Math.abs(ax[1]) > 0.2){ c.y -= ax[1] * 12; mv = true; }
       if (gp.buttons[7] && gp.buttons[7].pressed) mapZoomAt(G.VW / 2, G.VH / 2, 1.03); if (gp.buttons[6] && gp.buttons[6].pressed) mapZoomAt(G.VW / 2, G.VH / 2, 1 / 1.03);
       var A = gp.buttons[0] && gp.buttons[0].pressed; if (A && !MAPS.padA){ var w = mapCenter(), o = mapOwnAt(MAPS.cur.P, G, w[0], w[1]); if (o >= 0) mapSelect(MAPS.cur.E.ids[o]); } MAPS.padA = A;
       if (mv){ mapApplyCam(); mapLater(); } }
@@ -6619,6 +6657,349 @@ function mapOpen(){
   if (!mapPref().tour) mapTour();
 }
 
+/* ---------- 3D pasaulis (205, 206, 249): walk the same island in WebGL, no libraries ----------
+   World units are the 2D map units: X = map x (east), Z = map y (south), Y = height. One unit is about 5 m.
+   Built from MAPS.cur (same seed, realms, roads, places), so 2D and 3D never disagree. */
+var M3 = null, M3HS = 60, M3U = 5;
+var M3G = {ledynai: '#dfe7ec', taiga: '#62804f', kalnynas: '#958569', giria: '#55823d', vynuogynai: '#93884a', dykuma: '#d8b676', savana: '#b9a656', pelkes: '#5f7349', pievos: '#79a24c', vulkanai: '#654c41'};
+var M3SKY = {ledynai: [0.78, 0.86, 0.95], taiga: [0.72, 0.82, 0.88], kalnynas: [0.8, 0.82, 0.86], giria: [0.74, 0.84, 0.8], vynuogynai: [0.88, 0.84, 0.76], dykuma: [0.95, 0.85, 0.7], savana: [0.92, 0.86, 0.7], pelkes: [0.66, 0.72, 0.62], pievos: [0.76, 0.86, 0.9], vulkanai: [0.78, 0.66, 0.6]};
+function m3Hex(h){ h = (h || '#888').replace('#', ''); if (h.length === 3) h = h.replace(/(.)/g, '$1$1'); var n = parseInt(h, 16); return [(n >> 16 & 255) / 255, (n >> 8 & 255) / 255, (n & 255) / 255]; }
+function m3Mix(a, b, t){ return [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t]; }
+function m3Mul(a, b){ var o = new Float32Array(16); for (var i = 0; i < 4; i++) for (var j = 0; j < 4; j++){ var s = 0; for (var k = 0; k < 4; k++) s += a[k * 4 + j] * b[i * 4 + k]; o[i * 4 + j] = s; } return o; }
+function m3Persp(fov, asp, n, f){ var t = 1 / Math.tan(fov / 2), o = new Float32Array(16); o[0] = t / asp; o[5] = t; o[10] = (f + n) / (n - f); o[11] = -1; o[14] = 2 * f * n / (n - f); return o; }
+function m3Look(e, d){ var f = d, l = Math.hypot(f[0], f[1], f[2]); f = [f[0] / l, f[1] / l, f[2] / l]; var s = [f[1] * 0 - f[2] * 1, f[2] * 0 - f[0] * 0, f[0] * 1 - f[1] * 0], sl = Math.hypot(s[0], s[1], s[2]) || 1; s = [s[0] / sl, s[1] / sl, s[2] / sl];
+  var u = [s[1] * f[2] - s[2] * f[1], s[2] * f[0] - s[0] * f[2], s[0] * f[1] - s[1] * f[0]], o = new Float32Array(16);
+  o[0] = s[0]; o[4] = s[1]; o[8] = s[2]; o[1] = u[0]; o[5] = u[1]; o[9] = u[2]; o[2] = -f[0]; o[6] = -f[1]; o[10] = -f[2]; o[15] = 1;
+  o[12] = -(s[0] * e[0] + s[1] * e[1] + s[2] * e[2]); o[13] = -(u[0] * e[0] + u[1] * e[1] + u[2] * e[2]); o[14] = f[0] * e[0] + f[1] * e[1] + f[2] * e[2]; return o; }
+function m3Inv(m){ var a = m, o = new Float32Array(16),
+  b00 = a[0] * a[5] - a[1] * a[4], b01 = a[0] * a[6] - a[2] * a[4], b02 = a[0] * a[7] - a[3] * a[4], b03 = a[1] * a[6] - a[2] * a[5], b04 = a[1] * a[7] - a[3] * a[5], b05 = a[2] * a[7] - a[3] * a[6],
+  b06 = a[8] * a[13] - a[9] * a[12], b07 = a[8] * a[14] - a[10] * a[12], b08 = a[8] * a[15] - a[11] * a[12], b09 = a[9] * a[14] - a[10] * a[13], b10 = a[9] * a[15] - a[11] * a[13], b11 = a[10] * a[15] - a[11] * a[14],
+  det = b00 * b11 - b01 * b10 + b02 * b09 + b03 * b08 - b04 * b07 + b05 * b06; if (!det) return o; det = 1 / det;
+  o[0] = (a[5] * b11 - a[6] * b10 + a[7] * b09) * det; o[1] = (a[2] * b10 - a[1] * b11 - a[3] * b09) * det; o[2] = (a[13] * b05 - a[14] * b04 + a[15] * b03) * det; o[3] = (a[10] * b04 - a[9] * b05 - a[11] * b03) * det;
+  o[4] = (a[6] * b08 - a[4] * b11 - a[7] * b07) * det; o[5] = (a[0] * b11 - a[2] * b08 + a[3] * b07) * det; o[6] = (a[14] * b02 - a[12] * b05 - a[15] * b01) * det; o[7] = (a[8] * b05 - a[10] * b02 + a[11] * b01) * det;
+  o[8] = (a[4] * b10 - a[5] * b08 + a[7] * b06) * det; o[9] = (a[1] * b08 - a[0] * b10 - a[3] * b06) * det; o[10] = (a[12] * b04 - a[13] * b02 + a[15] * b00) * det; o[11] = (a[9] * b02 - a[8] * b04 - a[11] * b00) * det;
+  o[12] = (a[5] * b07 - a[4] * b09 - a[6] * b06) * det; o[13] = (a[0] * b09 - a[1] * b07 + a[2] * b06) * det; o[14] = (a[13] * b01 - a[12] * b03 - a[14] * b00) * det; o[15] = (a[8] * b03 - a[9] * b01 + a[10] * b00) * det; return o; }
+/* height of the world: same elevation field as the contours, plus the free-agent isles and the crater lake */
+function m3H(x, z){ var c = MAPS.cur, G = c.G, e = x < 0 || z < 0 || x > G.VW || z > G.VH ? -0.26 : G.elev(x, z);
+  if (!c.m3isle){ c.m3isle = G.isles.map(function(P){ var b = [1e9, -1e9, 1e9, -1e9], m = [0, 0]; P.forEach(function(p){ b[0] = Math.min(b[0], p[0]); b[1] = Math.max(b[1], p[0]); b[2] = Math.min(b[2], p[1]); b[3] = Math.max(b[3], p[1]); m[0] += p[0] / P.length; m[1] += p[1] / P.length; }); return {P: P, b: b, m: m, r: Math.max(b[1] - b[0], b[3] - b[2]) / 2}; });
+    var ly = 1e9; G.lake.forEach(function(p){ ly = Math.min(ly, G.elev(p[0], p[1])); }); c.m3lake = ly * M3HS + 0.4; }
+  c.m3isle.forEach(function(I){ if (x > I.b[0] - 4 && x < I.b[1] + 4 && z > I.b[2] - 4 && z < I.b[3] + 4 && mapInPoly(x, z, I.P)) e = Math.max(e, 0.04 + 0.16 * Math.max(0, 1 - Math.hypot(x - I.m[0], z - I.m[1]) / I.r)); });
+  var y = (e + 0.012) * M3HS;
+  if (mapInPoly(x, z, G.lake)) y = Math.min(y, c.m3lake - 2.2);
+  return y; }
+function m3Ground(x, z){ var c = MAPS.cur; if (!c || !c.m3hg) return m3H(x, z); var g = c.m3hg, gx = (x - g.x0) / g.s, gz = (z - g.z0) / g.s; if (gx < 0 || gz < 0 || gx >= g.nx - 1 || gz >= g.nz - 1) return -0.26 * M3HS;
+  var i = gx | 0, j = gz | 0, fx = gx - i, fz = gz - j, Y = g.y; return (Y[j * g.nx + i] * (1 - fx) + Y[j * g.nx + i + 1] * fx) * (1 - fz) + (Y[(j + 1) * g.nx + i] * (1 - fx) + Y[(j + 1) * g.nx + i + 1] * fx) * fz; }
+function m3Region(x, z){ var c = MAPS.cur, G = c.G; if (m3Ground(x, z) < 0) return {k: 'sea', nm: Math.hypot(x - G.ic[0], z - G.ic[1] - 22) < 70 ? 'Laisvųjų salos' : 'Atvira jūra'};
+  if (Math.hypot(x - G.cx, z - G.cy) < G.plateau) return {k: 'summit', nm: 'Taurės kalnas'}; if (Math.hypot(x - G.harbor[0], z - G.harbor[1]) < G.hr) return {k: 'harbor', nm: 'Drafto uostas'};
+  if (Math.hypot(x - G.ic[0], z - G.ic[1] - 22) < 70) return {k: 'isles', nm: 'Laisvųjų salos'};
+  var o = mapOwnAt(c.P, G, x, z); return o >= 0 ? {k: c.E.ids[o], i: o, nm: M[c.E.ids[o]].team, b: G.biome[o]} : {k: 'wild', nm: 'Pakrantė'}; }
+/* ---------- mesh helpers: flat-shaded triangles with colour and glow ---------- */
+function m3Buf(){ return {p: [], n: [], c: []}; }
+function m3Tri(B, a, b, d, col, em){ var ux = b[0] - a[0], uy = b[1] - a[1], uz = b[2] - a[2], vx = d[0] - a[0], vy = d[1] - a[1], vz = d[2] - a[2], nx = uy * vz - uz * vy, ny = uz * vx - ux * vz, nz = ux * vy - uy * vx, l = Math.hypot(nx, ny, nz) || 1;
+  if (ny < 0 && Math.abs(ny) > Math.abs(nx) + Math.abs(nz)){ nx = -nx; ny = -ny; nz = -nz; }
+  [a, b, d].forEach(function(v){ B.p.push(v[0], v[1], v[2]); B.n.push(nx / l, ny / l, nz / l); B.c.push(col[0], col[1], col[2], em || 0); }); }
+function m3Quad(B, a, b, c, d, col, em){ m3Tri(B, a, b, c, col, em); m3Tri(B, a, c, d, col, em); }
+function m3Box(B, x, y, z, w, h, d, col, em, rot){ var cs = Math.cos(rot || 0), sn = Math.sin(rot || 0), P = [[-w, -d], [w, -d], [w, d], [-w, d]].map(function(q){ return [x + (q[0] * cs - q[1] * sn) / 2, z + (q[0] * sn + q[1] * cs) / 2]; });
+  var lo = P.map(function(q){ return [q[0], y, q[1]]; }), hi = P.map(function(q){ return [q[0], y + h, q[1]]; }), sh = m3Mix(col, [0, 0, 0], 0.12);
+  for (var i = 0; i < 4; i++){ var j = (i + 1) % 4; m3Quad(B, lo[i], lo[j], hi[j], hi[i], i % 2 ? sh : col, em); }
+  m3Quad(B, hi[0], hi[1], hi[2], hi[3], m3Mix(col, [1, 1, 1], 0.08), em); }
+function m3Cyl(B, x, y, z, r, h, n, col, em, r2){ r2 = r2 == null ? r : r2; for (var i = 0; i < n; i++){ var a = i / n * 6.2832, b = (i + 1) / n * 6.2832, A = [x + Math.cos(a) * r, y, z + Math.sin(a) * r], Bq = [x + Math.cos(b) * r, y, z + Math.sin(b) * r], C = [x + Math.cos(b) * r2, y + h, z + Math.sin(b) * r2], D = [x + Math.cos(a) * r2, y + h, z + Math.sin(a) * r2];
+    m3Quad(B, A, Bq, C, D, i % 2 ? m3Mix(col, [0, 0, 0], 0.1) : col, em); if (r2 > 0) m3Tri(B, [x, y + h, z], D, C, m3Mix(col, [1, 1, 1], 0.08), em); } }
+function m3Cone(B, x, y, z, r, h, n, col, em, rot){ for (var i = 0; i < n; i++){ var a = i / n * 6.2832 + (rot || 0), b = (i + 1) / n * 6.2832 + (rot || 0); m3Tri(B, [x + Math.cos(a) * r, y, z + Math.sin(a) * r], [x + Math.cos(b) * r, y, z + Math.sin(b) * r], [x, y + h, z], i % 2 ? m3Mix(col, [0, 0, 0], 0.1) : col, em); } }
+function m3Flag(B, x, y, z, h, col){ m3Cyl(B, x, y, z, 0.16, h, 4, [0.35, 0.25, 0.16]); var a = [x, y + h - 0.2, z], b = [x + 2.6, y + h - 0.7, z + 0.3], c = [x, y + h - 1.6, z]; m3Tri(B, a, b, c, col, 0.15); m3Tri(B, a, c, b, col, 0.15); }
+/* ---------- buildings: each faction keeps its own silhouette (115) and leaders build taller (117) ---------- */
+function m3Capital(B, q, col, rank, n){ var x = q.x, z = q.y, y = m3Ground(x, z) - 0.3, s = 0.85 + (n - rank) / n * 0.7, st = [0.82, 0.78, 0.7], wd = [0.5, 0.33, 0.2], win = [1, 0.82, 0.42];
+  if (q.style === 'tower'){ m3Box(B, x, y, z, 7 * s, 2, 7 * s, st); m3Cyl(B, x, y + 2, z, 2.4 * s, 15 * s, 8, st); m3Cone(B, x, y + 2 + 15 * s, z, 3.1 * s, 5.5 * s, 8, col); m3Box(B, x + 2.3 * s, y + 9 * s, z, 0.2, 1.2, 0.8, win, 1); m3Flag(B, x, y + 7.5 + 20 * s, z, 3, col); }
+  else if (q.style === 'hall'){ var L = 13 * s, W = 6.5 * s, H = 5 * s; m3Box(B, x, y, z, L, H, W, wd); var r0 = y + H, ry = r0 + 3.4 * s;
+    m3Quad(B, [x - L / 2 - 0.5, r0, z - W / 2 - 0.5], [x + L / 2 + 0.5, r0, z - W / 2 - 0.5], [x + L / 2 + 0.5, ry, z], [x - L / 2 - 0.5, ry, z], col); m3Quad(B, [x + L / 2 + 0.5, r0, z + W / 2 + 0.5], [x - L / 2 - 0.5, r0, z + W / 2 + 0.5], [x - L / 2 - 0.5, ry, z], [x + L / 2 + 0.5, ry, z], m3Mix(col, [0, 0, 0], 0.15));
+    m3Tri(B, [x - L / 2, r0, z - W / 2], [x - L / 2, r0, z + W / 2], [x - L / 2, ry, z], wd); m3Tri(B, [x + L / 2, r0, z + W / 2], [x + L / 2, r0, z - W / 2], [x + L / 2, ry, z], wd);
+    for (var k = -1; k <= 1; k++) m3Box(B, x + k * L / 3.4, y + 1.6 * s, z + W / 2, 1, 1.3, 0.2, win, 1); m3Flag(B, x + L / 2, ry - 1, z, 4, col); }
+  else if (q.style === 'dome'){ m3Box(B, x, y, z, 9 * s, 5.5 * s, 9 * s, [0.9, 0.85, 0.74]); m3Cyl(B, x, y + 5.5 * s, z, 3.9 * s, 1, 10, [0.9, 0.85, 0.74]); m3Cyl(B, x, y + 6.5 * s, z, 3.9 * s, 3.2 * s, 10, col, 0, 2.2 * s); m3Cone(B, x, y + 6.5 * s + 3.2 * s, z, 2.2 * s, 2.4 * s, 10, col); m3Cyl(B, x, y + 12 * s, z, 0.2, 2.2, 4, [0.91, 0.77, 0.19], 0.4);
+    [[-1, -1], [1, -1], [1, 1], [-1, 1]].forEach(function(o){ m3Cyl(B, x + o[0] * 4.8 * s, y, z + o[1] * 4.8 * s, 0.7, 9 * s, 6, [0.9, 0.85, 0.74]); }); m3Box(B, x, y + 1.6, z + 4.6 * s, 1.4, 2, 0.2, win, 1); }
+  else if (q.style === 'tent'){ [[0, 0, 3.6, col], [-5, 3, 2.6, [0.92, 0.88, 0.8]], [4.5, 3.5, 2.8, [0.92, 0.88, 0.8]], [0.5, -5, 2.4, col]].forEach(function(t){ m3Cone(B, x + t[0] * s, y, z + t[1] * s, t[2] * s, t[2] * 1.7 * s, 7, t[3]); }); m3Flag(B, x, y + 6 * s, z, 3, col); m3Cone(B, x + 2 * s, y, z - 1.5 * s, 0.6, 1, 5, [1, 0.55, 0.2], 1); }
+  else { var K = 7 * s; m3Box(B, x, y, z, K, 9 * s, K, st); m3Cone(B, x, y + 9 * s, z, K * 0.75, 4 * s, 4, col, 0, 0.785);
+    [[-1, -1], [1, -1], [1, 1], [-1, 1]].forEach(function(o){ var tx = x + o[0] * K * 0.62, tz = z + o[1] * K * 0.62; m3Cyl(B, tx, y, tz, 1.6 * s, 11.5 * s, 7, st); m3Cone(B, tx, y + 11.5 * s, tz, 2.1 * s, 3.2 * s, 7, col); });
+    m3Box(B, x, y + 4.5 * s, z + K / 2 + 0.05, 1, 1.6, 0.2, win, 1); m3Box(B, x, y, z + K / 2, 2.2, 3, 0.4, wd); m3Flag(B, x, y + 13 * s, z, 4, col); }
+  /* low wall around the capital */
+  var wr = 13 * s; for (var i = 0; i < 18; i++){ if (i === 4) continue; var a = i / 18 * 6.2832, bx = x + Math.cos(a) * wr, bz = z + Math.sin(a) * wr; m3Box(B, bx, m3Ground(bx, bz) - 0.4, bz, wr * 0.36, 1.8, 0.8, [0.7, 0.66, 0.58], 0, a + 1.5708); } }
+function m3House(B, x, z, k){ var y = m3Ground(x, z) - 0.2, w = 2.6 + (k % 3) * 0.5, h = 2.2 + (k % 2) * 0.8, r = (k * 1.3) % 3.14; m3Box(B, x, y, z, w, h, w * 0.85, [0.9, 0.85, 0.74], 0, r); m3Cone(B, x, y + h, z, w * 0.82, 1.9, 4, [0.62, 0.27, 0.16], 0, r + 0.785); m3Box(B, x + Math.cos(r) * 0.2, y + 0.8, z + Math.sin(r) * 0.2, 0.5, 0.6, w * 0.87, [1, 0.82, 0.42], 0.7, r); }
+function m3Tree(B, t, glyph, season, R){ var x = t[0], z = t[1], y = m3Ground(x, z) - 0.25; if (y < 1.4) return; var s = 0.8 + t[3] * 0.7, aut = season === 'ruduo', win = season === 'žiema', spr = season === 'pavasaris', tr = [0.38, 0.26, 0.16];
+  var leaf = aut && glyph === 'tree' ? (t[3] > 0.5 ? [0.82, 0.44, 0.16] : [0.85, 0.63, 0.24]) : spr && glyph === 'tree' && t[3] > 0.72 ? [0.95, 0.72, 0.78] : win && glyph === 'tree' ? [0.55, 0.5, 0.42] : [0.24, 0.45, 0.2];
+  if (glyph === 'pine'){ m3Cyl(B, x, y, z, 0.25 * s, 1.2 * s, 4, tr); m3Cone(B, x, y + 1 * s, z, 1.7 * s, 3.4 * s, 6, [0.16, 0.34, 0.2]); m3Cone(B, x, y + 2.8 * s, z, 1.2 * s, 2.6 * s, 6, win ? [0.94, 0.96, 0.98] : [0.19, 0.38, 0.22]); }
+  else if (glyph === 'tree' || glyph === 'vine'){ if (glyph === 'vine'){ if (t[3] < 0.5) return; m3Box(B, x, y, z, 4 * s, 1, 0.8, [0.3, 0.5, 0.2]); m3Box(B, x, y, z + 2, 4 * s, 1, 0.8, [0.36, 0.48, 0.18]); m3Box(B, x + 1, y + 0.9, z + 2, 1.2, 0.5, 0.9, [0.45, 0.2, 0.35]); return; }
+    m3Cyl(B, x, y, z, 0.3 * s, 2.2 * s, 4, tr); m3Cone(B, x, y + 2 * s, z, 1.9 * s, 1.6 * s, 6, leaf); m3Cone(B, x, y + 2 * s, z, 1.9 * s, -1.1 * s, 6, m3Mix(leaf, [0, 0, 0], 0.15)); m3Cone(B, x, y + 3.2 * s, z, 1.3 * s, 1.6 * s, 6, leaf); }
+  else if (glyph === 'acacia'){ m3Cyl(B, x, y, z, 0.25 * s, 3 * s, 4, tr); m3Cyl(B, x, y + 3 * s, z, 2.6 * s, 0.7 * s, 7, [0.42, 0.5, 0.22], 0, 2 * s); }
+  else if (glyph === 'peak'){ m3Cone(B, x, y - 0.3, z, 2.2 * s, 2.8 * s, 5, [0.55, 0.52, 0.48], 0, t[3] * 3); if (win || t[2] > 0.7) m3Cone(B, x, y + 1.7 * s, z, 0.9 * s, 1.1 * s, 5, [0.95, 0.96, 0.98], 0, t[3] * 3); }
+  else if (glyph === 'reed'){ for (var k = 0; k < 3; k++) m3Box(B, x + k * 0.7 - 0.7, y, z + (k % 2) * 0.6, 0.18, 1.6 + k * 0.3, 0.18, [0.5, 0.55, 0.3]); }
+  else if (glyph === 'grass'){ if (t[3] > 0.6) m3Cone(B, x, y, z, 0.9 * s, 1 * s, 5, spr ? [0.95, 0.8, 0.3] : [0.42, 0.6, 0.26]); }
+  else if (glyph === 'volcano'){ m3Cone(B, x, y - 0.3, z, 2 * s, 2.4 * s, 5, [0.3, 0.24, 0.22]); if (t[3] > 0.8) m3Cone(B, x, y + 1.6 * s, z, 0.5, 0.5, 5, [1, 0.35, 0.1], 1); }
+  else if (glyph === 'dune' && t[3] > 0.82){ m3Cyl(B, x, y, z, 0.4, 2.4, 5, [0.36, 0.5, 0.3]); m3Box(B, x, y + 1.2, z, 1.8, 0.4, 0.4, [0.36, 0.5, 0.3]); } }
+function m3Edges(e){ var v = (e.d.match(/-?\d+(?:\.\d+)?/g) || []).map(Number), pts = []; if (v.length < 6) return pts; var A = [v[0], v[1]], C = [v[2], v[3]], Bp = [v[4], v[5]];
+  for (var t = 0; t <= 1.0001; t += 0.02){ var u = 1 - t; pts.push([u * u * A[0] + 2 * u * t * C[0] + t * t * Bp[0], u * u * A[1] + 2 * u * t * C[1] + t * t * Bp[1]]); }
+  if (v.length >= 8){ var L = [v[6], v[7]]; for (var k = 1; k <= 10; k++) pts.push([Bp[0] + (L[0] - Bp[0]) * k / 10, Bp[1] + (L[1] - Bp[1]) * k / 10]); } return pts; }
+/* ---------- the world as GPU buffers ---------- */
+function m3Build(){ var c = MAPS.cur, G = c.G, E = c.E, P = c.P, pref = mapPref(), season = mapSeason(MAPS.era), night = mapNight(), me = myTeam(), cb = pref.cb, n = E.ids.length;
+  var col = function(i){ return m3Hex(cb ? MAP_CB[i % MAP_CB.length] : tcol(E.ids[i])); };
+  /* terrain grid */
+  var s = 5, x0 = -220, z0 = -220, nx = Math.ceil((G.VW + 440) / s) + 1, nz = Math.ceil((G.VH + 440) / s) + 1, N = nx * nz, Y = new Float32Array(N), OW = new Int16Array(N), i, j, k;
+  c.m3hg = null; for (j = 0; j < nz; j++) for (i = 0; i < nx; i++){ var x = x0 + i * s, z = z0 + j * s; Y[j * nx + i] = m3H(x, z); }
+  G.rivers.forEach(function(r){ r.pts.forEach(function(p){ var gi = Math.round((p[0] - x0) / s), gj = Math.round((p[1] - z0) / s); if (gi > 0 && gj > 0 && gi < nx && gj < nz){ var q = gj * nx + gi; if (Y[q] > 1.2) Y[q] -= 0.8; } }); });
+  c.m3hg = {x0: x0, z0: z0, s: s, nx: nx, nz: nz, y: Y};
+  for (j = 0; j < nz; j++) for (i = 0; i < nx; i++){ var q2 = j * nx + i, xx = x0 + i * s, zz = z0 + j * s; OW[q2] = Y[q2] > 0.4 && xx > 0 && zz > 0 && xx < G.VW && zz < G.VH && Math.hypot(xx - G.cx, zz - G.cy) > G.plateau && Math.hypot(xx - G.harbor[0], zz - G.harbor[1]) > G.hr ? mapOwnAt(P, G, xx, zz) : -1; }
+  var stamp = new Uint8Array(N); /* 1 road, 2 trade road, 3 river */
+  function put(px, pz, v){ var gi = Math.round((px - x0) / s), gj = Math.round((pz - z0) / s); if (gi >= 0 && gj >= 0 && gi < nx && gj < nz && (!stamp[gj * nx + gi] || v < stamp[gj * nx + gi])) stamp[gj * nx + gi] = v; }
+  G.rivers.forEach(function(r){ r.pts.forEach(function(p){ put(p[0], p[1], 3); }); });
+  if (pref.L.roads) c.graph.edges.forEach(function(e){ if (e.kind === 'secret') return; var v = e.kind === 'trade' ? 2 : 1; m3Edges(e).forEach(function(p, k2, a){ put(p[0], p[1], v); if (k2) put((p[0] + a[k2 - 1][0]) / 2, (p[1] + a[k2 - 1][1]) / 2, v); }); });
+  var pos = new Float32Array(N * 3), nrm = new Float32Array(N * 3), cl = new Float32Array(N * 4), sand = m3Hex('#e3cf9c'), rock = [0.55, 0.52, 0.48], snow = [0.95, 0.96, 0.98], stone = m3Hex('#cbbd9b'), dock = m3Hex('#d6c497'), ink = m3Hex('#3b2412');
+  c.m3own = OW;
+  for (j = 0; j < nz; j++) for (i = 0; i < nx; i++){ var q = j * nx + i, X = x0 + i * s, Z = z0 + j * s, y = Y[q], o = OW[q], h = mapHash(i + ',' + j) / 4294967296, cc;
+    pos[q * 3] = X; pos[q * 3 + 1] = y; pos[q * 3 + 2] = Z;
+    var yl = Y[j * nx + Math.max(0, i - 1)], yr = Y[j * nx + Math.min(nx - 1, i + 1)], yu = Y[Math.max(0, j - 1) * nx + i], yd = Y[Math.min(nz - 1, j + 1) * nx + i], nn = [yl - yr, 2 * s, yu - yd], ln = Math.hypot(nn[0], nn[1], nn[2]);
+    nrm[q * 3] = nn[0] / ln; nrm[q * 3 + 1] = nn[1] / ln; nrm[q * 3 + 2] = nn[2] / ln;
+    if (y < 0) cc = m3Mix(m3Hex('#7cc4b8'), m3Hex('#173f52'), Math.min(1, -y / 13)); /* water colour shows depth (145) */
+    else if (y < 1.6) cc = sand;
+    else if (Math.hypot(X - G.cx, Z - G.cy) < G.plateau) cc = stone;
+    else if (Math.hypot(X - G.harbor[0], Z - G.harbor[1]) < G.hr) cc = dock;
+    else if (o >= 0){ var b = G.biome[o], id = E.ids[o], base = m3Hex(M3G[b.id] || '#7a9a50'); cc = m3Mix(base, col(o), MAPS.sel === id ? 0.42 : 0.2);
+      if (pref.fog && !c.open[id]) cc = m3Mix(m3Mix(cc, [0.62, 0.62, 0.6], 0.72), [0.85, 0.85, 0.85], 0.15); /* unexplored realms stay misty */
+      if (b.snow && y > 18) cc = m3Mix(cc, snow, Math.min(1, (y - 18) / 8)); }
+    else cc = m3Mix(sand, m3Hex('#86a35a'), Math.min(1, (y - 1.6) / 4));
+    if (y > 40) cc = m3Mix(cc, rock, Math.min(1, (y - 40) / 9)); if (y > 52 || (season === 'žiema' && y > 34)) cc = m3Mix(cc, snow, Math.min(1, (y - (season === 'žiema' ? 34 : 52)) / 5));
+    var st = stamp[q]; if (st === 3) cc = m3Hex('#5d90a9'); else if (st === 1) cc = m3Mix(cc, m3Hex('#8a6a44'), 0.75); else if (st === 2) cc = m3Mix(cc, m3Hex('#9a4a30'), 0.55);
+    if (o >= 0){ var nb = [OW[j * nx + Math.min(nx - 1, i + 1)], OW[Math.min(nz - 1, j + 1) * nx + i]]; if (nb.some(function(v){ return v >= 0 && v !== o; })) cc = m3Mix(cc, ink, 0.5); }
+    var f = 0.93 + h * 0.14; cl[q * 4] = cc[0] * f; cl[q * 4 + 1] = cc[1] * f; cl[q * 4 + 2] = cc[2] * f; cl[q * 4 + 3] = 0; }
+  var idx = new Uint16Array((nx - 1) * (nz - 1) * 6), w = 0; for (j = 0; j < nz - 1; j++) for (i = 0; i < nx - 1; i++){ var a = j * nx + i; idx[w++] = a; idx[w++] = a + nx; idx[w++] = a + 1; idx[w++] = a + 1; idx[w++] = a + nx; idx[w++] = a + nx + 1; }
+  /* objects */
+  var B = m3Buf(), A = m3Buf(), pois = c.pois, found = pref.found || {}, labels = [];
+  var rank = {}; E.order.forEach(function(id, r){ rank[id] = r; }); var colz = c.m3col = [];
+  pois.forEach(function(q){ var rr = {capital: 6.5 * (0.85 + (n - (rank[q.id] || 0)) / n * 0.7), summit: 5, town: 4.5, watch: 2, ruin: 3.5, statue: 2.4, arena: 0, market: 3.5}[q.t]; if (rr) colz.push([q.x, q.y, rr]); });
+  pois.forEach(function(q, k2){ var gy = m3Ground(q.x, q.y), hid = q.hidden && pref.fog && !found[q.t + '-' + q.id];
+    if (q.t === 'capital'){ var ci = E.ids.indexOf(q.id); m3Capital(B, q, col(ci), rank[q.id], n); labels.push({x: q.x, z: q.y, y: gy + 22, t: q.name, cls: 'cap', pr: 0, d: 4000, k: k2, c: cb ? MAP_CB[ci % 12] : tcol(q.id), me: q.id === me}); return; }
+    if (q.t === 'summit'){ m3Cyl(B, q.x, gy - 0.5, q.y, 7, 2.2, 12, [0.75, 0.7, 0.6]); m3Cyl(B, q.x, gy + 1.7, q.y, 1.2, 5, 8, [0.91, 0.77, 0.19], 0.35); m3Cone(B, q.x, gy + 6.7, q.y, 4.2, -3.2, 12, [0.94, 0.8, 0.22], 0.35); m3Cyl(B, q.x, gy + 6.6, q.y, 4.2, 1.6, 12, [0.94, 0.8, 0.22], 0.35, 4.6);
+      labels.push({x: q.x, z: q.y, y: gy + 13, t: q.name, cls: 'cap', pr: 0, d: 4000, k: k2, c: '#e8c531'}); return; }
+    if (q.t === 'harbor'){ var hx = q.x, hz = q.y; for (var p2 = 0; p2 < 5; p2++){ var px = hx - 12 + p2 * 6; m3Box(B, px, -1, hz + 14, 2.4, 1.8, 18, [0.48, 0.33, 0.2]); }
+      var lx = hx + 22, lz = hz + 10; for (var b2 = 0; b2 < 4; b2++) m3Cyl(B, lx, m3Ground(lx, lz) - 0.5 + b2 * 3.2, lz, 1.8 - b2 * 0.15, 3.2, 8, b2 % 2 ? [0.75, 0.15, 0.13] : [0.95, 0.94, 0.9], 0, 1.65 - b2 * 0.15);
+      m3Box(B, lx, m3Ground(lx, lz) + 12.3, lz, 1.4, 1.4, 1.4, [1, 0.88, 0.5], 1); c.m3light = [lx, m3Ground(lx, lz) + 13, lz];
+      for (var bt = 0; bt < 3; bt++){ var bx = hx - 18 + bt * 14, bz = hz + 30 + bt * 5; m3Box(B, bx, -0.4, bz, 6, 1.4, 2.4, [0.42, 0.28, 0.17], 0, 0.3 * bt); m3Cyl(B, bx, 1, bz, 0.15, 5, 4, [0.35, 0.25, 0.16]); m3Tri(B, [bx, 1.6, bz], [bx, 5.8, bz], [bx + 2.4, 2, bz], [0.95, 0.92, 0.84]); m3Tri(B, [bx, 1.6, bz], [bx + 2.4, 2, bz], [bx, 5.8, bz], [0.95, 0.92, 0.84]); }
+      labels.push({x: hx, z: hz, y: gy + 9, t: q.name, cls: 'cap', pr: 0, d: 4000, k: k2, c: '#2f7a3a'}); return; }
+    if (q.t === 'arena'){ for (var a2 = 0; a2 < 14; a2++){ var an = a2 / 14 * 6.2832; m3Box(B, q.x + Math.cos(an) * 7, gy - 0.4, q.y + Math.sin(an) * 7, 3, 4 + (a2 % 2), 1.2, [0.85, 0.78, 0.64], 0, an + 1.5708); } labels.push({x: q.x, z: q.y, y: gy + 8, t: q.name, cls: 'poi', pr: 2, d: 260, k: k2}); return; }
+    if (q.t === 'town'){ for (var t2 = 0; t2 < 4; t2++) m3House(B, q.x + Math.cos(t2 * 1.9 + k2) * (2 + t2 * 2.2), q.y + Math.sin(t2 * 1.9 + k2) * (2 + t2 * 2.2), t2 + k2); labels.push({x: q.x, z: q.y, y: gy + 7, t: q.name, cls: 'poi', pr: 2, d: 230, k: k2}); return; }
+    if (q.t === 'watch'){ m3Cyl(B, q.x, gy - 0.3, q.y, 1.1, 10, 6, [0.5, 0.35, 0.2]); m3Box(B, q.x, gy + 9.7, q.y, 3.6, 0.6, 3.6, [0.55, 0.4, 0.24]); m3Cone(B, q.x, gy + 11.6, q.y, 2.4, 2.2, 4, [0.62, 0.27, 0.16], 0, 0.785); labels.push({x: q.x, z: q.y, y: gy + 15, t: q.name, cls: 'poi', pr: 3, d: 200, k: k2}); return; }
+    if (q.t === 'ruin'){ for (var r2 = 0; r2 < 4; r2++) m3Box(B, q.x + (r2 % 2) * 3 - 1.5, gy - 0.3, q.y + (r2 > 1 ? 2.5 : -1), 1.2, 1 + ((r2 * 7 + k2) % 4), 2.6, [0.62, 0.6, 0.56], 0, r2); labels.push({x: q.x, z: q.y, y: gy + 6, t: 'Griuvėsiai', cls: 'poi', pr: 4, d: 160, k: k2}); return; }
+    if (q.t === 'statue'){ m3Box(B, q.x, gy - 0.3, q.y, 2.4, 2.2, 2.4, [0.8, 0.76, 0.68]); m3Cyl(B, q.x, gy + 1.9, q.y, 0.6, 3, 6, [0.55, 0.42, 0.22], 0.1); m3Cyl(B, q.x, gy + 4.9, q.y, 0.55, 0.9, 6, [0.55, 0.42, 0.22], 0.1); labels.push({x: q.x, z: q.y, y: gy + 8, t: 'Kapitono statula', cls: 'poi', pr: 4, d: 160, k: k2}); return; }
+    if (q.t === 'fire'){ m3Cone(B, q.x, gy, q.y, 0.9, 1.6, 5, [1, 0.5, 0.15], 1); for (var f2 = 0; f2 < 3; f2++) m3Box(B, q.x + Math.cos(f2 * 2.1) * 2.6, gy - 0.2, q.y + Math.sin(f2 * 2.1) * 2.6, 2.2, 0.6, 0.6, [0.42, 0.28, 0.16], 0, f2 * 2.1); labels.push({x: q.x, z: q.y, y: gy + 4, t: 'Stovyklavietė', cls: 'poi', pr: 4, d: 160, k: k2}); return; }
+    if (q.t === 'market'){ [[0, 0, [0.75, 0.2, 0.15]], [3.4, 1.2, [0.95, 0.85, 0.3]], [-3, 1.6, [0.2, 0.4, 0.7]]].forEach(function(m2){ m3Box(B, q.x + m2[0], gy - 0.2, q.y + m2[1], 2.4, 1.4, 2, [0.6, 0.45, 0.28]); m3Cone(B, q.x + m2[0], gy + 1.2, q.y + m2[1], 1.9, 1.3, 4, m2[2], 0, 0.785); }); labels.push({x: q.x, z: q.y, y: gy + 5, t: 'Turgus', cls: 'poi', pr: 3, d: 180, k: k2}); return; }
+    /* game markers float as signs (quests, dangers, events, treasures) */
+    var glyph = {quest: '!', side: '?', camp: '⚑', danger: '☠', event: '✉', eye: '◉', treasure: hid ? '?' : '◆', cave: hid ? '?' : '◗', secret: '⋯'}[q.t] || '•', mc = {quest: [0.92, 0.75, 0.15], side: [0.4, 0.62, 0.9], camp: [0.6, 0.2, 0.55], danger: [0.75, 0.12, 0.1], event: [0.9, 0.9, 0.85], treasure: [0.93, 0.78, 0.2], cave: [0.4, 0.33, 0.28]}[q.t] || [0.8, 0.8, 0.8];
+    if (q.t === 'cave' && !hid){ m3Cone(B, q.x, gy - 0.5, q.y, 4, 4, 6, [0.45, 0.42, 0.4]); m3Box(B, q.x, gy - 0.4, q.y + 3.2, 1.8, 1.8, 0.3, [0.08, 0.06, 0.05]); }
+    else if (q.t === 'treasure' && !hid) m3Box(B, q.x, gy - 0.2, q.y, 1.6, 1.1, 1, [0.6, 0.36, 0.16], 0.1);
+    else m3Cyl(B, q.x, gy - 0.3, q.y, 0.18, 3.4, 4, [0.4, 0.3, 0.2]);
+    m3Box(B, q.x, gy + 3.2, q.y, 1.2, 1.2, 1.2, mc, hid ? 0.9 : 0.5, 0.785);
+    labels.push({x: q.x, z: q.y, y: gy + 6, t: glyph + ' ' + (hid ? 'Neatrasta vieta' : q.name || ''), cls: 'mk', pr: 3, d: 170, k: k2}); });
+  /* trees and rocks (10): quiet areas around places */
+  var R = mapRng(mapHash('m3trees')), res = pois.map(function(q){ return [q.x, q.y, q.t === 'capital' ? 17 : q.t === 'harbor' ? 34 : q.t === 'summit' ? 10 : 7]; });
+  if (pref.L.terrain) G.T.forEach(function(t){ for (var r = 0; r < res.length; r++) if (Math.abs(t[0] - res[r][0]) < res[r][2] && Math.abs(t[1] - res[r][1]) < res[r][2]) return; var o = mapOwnAt(P, G, t[0], t[1]); if (o < 0) return; m3Tree(B, t, G.biome[o].glyph, season, R);
+    if (R() < 0.45){ var t2 = [t[0] + (R() - 0.5) * 9, t[1] + (R() - 0.5) * 9, t[2], R()]; if (mapOwnAt(P, G, t2[0], t2[1]) === o) m3Tree(B, t2, G.biome[o].glyph, season, R); } });
+  /* pins */
+  if (pref.L.pins) (pref.pins || []).forEach(function(p){ if (p.o !== (G.port ? 'p' : 'l')) return; var gy = m3Ground(p.x, p.y); m3Cyl(B, p.x, gy - 0.3, p.y, 0.2, 6, 4, [0.3, 0.2, 0.15]); m3Box(B, p.x, gy + 5.6, p.y, 1.4, 1.4, 1.4, m3Hex(p.c), 0.6, 0.785); labels.push({x: p.x, z: p.y, y: gy + 8.5, t: p.n || 'Mano žymeklis', cls: 'pin', pr: 1, d: 700, c: p.c}); });
+  /* glowing route on the ground (230), can be switched off (231) */
+  var rt = c.rt, glow = m3Buf(); if (rt && pref.m3line !== 0){ [[rt, [1, 0.88, 0.45]]].concat(rt.alt ? [[rt.alt, [0.45, 0.7, 1]]] : []).forEach(function(z){ z[0].used.forEach(function(ei){ var pts = m3Edges(c.graph.edges[ei]);
+    for (var k3 = 1; k3 < pts.length; k3++){ var a3 = pts[k3 - 1], b3 = pts[k3], dx = b3[0] - a3[0], dz = b3[1] - a3[1], l3 = Math.hypot(dx, dz) || 1, ox = -dz / l3 * 0.8, oz = dx / l3 * 0.8, ya = m3Ground(a3[0], a3[1]) + 0.45, yb = m3Ground(b3[0], b3[1]) + 0.45;
+      m3Quad(glow, [a3[0] - ox, ya, a3[1] - oz], [b3[0] - ox, yb, b3[1] - oz], [b3[0] + ox, yb, b3[1] + oz], [a3[0] + ox, ya, a3[1] + oz], z[1], 1); } }); }); }
+  /* light pillar above the target (113) */
+  var tg = c.graph.nodes[mapTarget()]; if (tg){ var ty = m3Ground(tg[0], tg[1]); m3Cyl(A, tg[0], ty, tg[1], 2.2, 220, 8, [1, 0.85, 0.4], 1, 1.4); c.m3tgt = [tg[0], ty, tg[1]]; }
+  /* water: open sea plus the crater lake */
+  var Wt = m3Buf(), big = 3000; m3Quad(Wt, [-big, 0, -big], [big, 0, -big], [big, 0, big], [-big, 0, big], [0.2, 0.45, 0.52]);
+  var lc = [0, 0]; G.lake.forEach(function(p){ lc[0] += p[0] / G.lake.length; lc[1] += p[1] / G.lake.length; }); G.lake.forEach(function(p, k4){ var p2 = G.lake[(k4 + 1) % G.lake.length]; m3Tri(Wt, [lc[0], c.m3lake, lc[1]], [p2[0], c.m3lake, p2[1]], [p[0], c.m3lake, p[1]], [0.3, 0.55, 0.6]); });
+  c.m3labels = labels;
+  return {pos: pos, nrm: nrm, col: cl, idx: idx, obj: B, add: A, glow: glow, water: Wt, season: season, night: night};
+}
+/* ---------- GL plumbing ---------- */
+function m3Prog(gl, vs, fs){ function sh(t, s){ var o = gl.createShader(t); gl.shaderSource(o, s); gl.compileShader(o); if (!gl.getShaderParameter(o, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(o)); return o; }
+  var p = gl.createProgram(); gl.attachShader(p, sh(gl.VERTEX_SHADER, vs)); gl.attachShader(p, sh(gl.FRAGMENT_SHADER, fs)); gl.linkProgram(p); if (!gl.getProgramParameter(p, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(p));
+  var u = {}, n = gl.getProgramParameter(p, gl.ACTIVE_UNIFORMS); for (var i = 0; i < n; i++){ var a = gl.getActiveUniform(p, i); u[a.name] = gl.getUniformLocation(p, a.name); } p.u = u; return p; }
+var M3VS = 'attribute vec3 p;attribute vec3 n;attribute vec4 c;uniform mat4 vp;varying vec4 vc;varying vec3 vn;varying vec3 vw;void main(){vc=c;vn=n;vw=p;gl_Position=vp*vec4(p,1.);}';
+var M3FS = 'precision highp float;varying vec4 vc;varying vec3 vn;varying vec3 vw;uniform vec3 sun;uniform vec3 sunC;uniform vec3 amb;uniform vec3 fogC;uniform vec3 cam;uniform float fogD;uniform float night;uniform float alpha;uniform float two;uniform float grain;' +
+  'void main(){vec3 N=normalize(vn);float dn=dot(N,sun);float d=two>.5?abs(dn)*.9:max(dn,0.);vec3 col=vc.rgb*(amb+sunC*d);col*=1.+grain*(sin(vw.x*1.7+sin(vw.z*.9))*sin(vw.z*1.9+sin(vw.x*.7))*.06+sin(vw.x*.31+vw.z*.37)*.05);col=mix(col,vc.rgb*(1.+night*.5),vc.a*(.35+.65*night));float f=1.-exp(-pow(length(vw-cam)/fogD,1.7));gl_FragColor=vec4(mix(col,fogC,clamp(f,0.,1.)*(1.-vc.a*.4)),alpha);}';
+var M3WFS = 'precision highp float;varying vec4 vc;varying vec3 vn;varying vec3 vw;uniform vec3 sun;uniform vec3 sunC;uniform vec3 fogC;uniform vec3 sky;uniform vec3 cam;uniform float fogD;uniform float night;uniform float t;' +
+  'void main(){vec3 N=normalize(vec3(sin(vw.x*.21+t*1.3)*.07+sin(vw.z*.13-t*.8)*.05,1.,cos(vw.z*.23+t*1.1)*.07+cos(vw.x*.11+t*.6)*.05));vec3 V=normalize(cam-vw);float fr=pow(1.-max(dot(N,V),0.),3.);vec3 R=reflect(-V,N);float sp=pow(max(dot(R,sun),0.),70.)*(1.-night*.85);' +
+  'vec3 col=mix(vc.rgb*(.55+.45*(1.-night)),sky,.25+.55*fr)+sunC*sp;float f=1.-exp(-pow(length(vw-cam)/fogD,1.7));gl_FragColor=vec4(mix(col,fogC,clamp(f,0.,1.)),.72+.25*fr);}';
+var M3SVS = 'attribute vec2 p;varying vec2 q;void main(){q=p;gl_Position=vec4(p,.9999,1.);}';
+var M3SFS = 'precision highp float;varying vec2 q;uniform mat4 ivp;uniform vec3 cam;uniform vec3 sun;uniform vec3 hor;uniform vec3 zen;uniform float night;uniform float aur;uniform float t;' +
+  'float h(vec3 p){return fract(sin(dot(p,vec3(12.9898,78.233,37.719)))*43758.5453);}' +
+  'void main(){vec4 w=ivp*vec4(q,1.,1.);vec3 d=normalize(w.xyz/w.w-cam);float y=max(d.y,0.);vec3 col=mix(hor,zen,pow(y,.55));float s=dot(d,sun);' +
+  'col+=vec3(1.,.9,.7)*smoothstep(.9986,.9994,s)*(1.-night*.6)+vec3(1.,.8,.55)*pow(max(s,0.),60.)*.35*(1.-night);' +
+  'vec3 c=floor(d*260.);float st=step(.9975,h(c))*smoothstep(.0,.25,y)*night;col+=vec3(st);' +
+  'float a=exp(-pow((d.y-.2-.06*sin(d.x*7.+t*.25)-.03*sin(d.x*19.-t*.4))/.055,2.))*max(-d.z,0.)*aur;col+=vec3(.15,.95,.55)*a*.55+vec3(.5,.2,.8)*a*.15*max(sin(d.x*5.+t*.2),0.);' +
+  'gl_FragColor=vec4(col,1.);}';
+var M3PVS = 'attribute vec3 p;uniform mat4 vp;uniform vec3 cam;uniform float sz;varying float k;void main(){vec4 c=vp*vec4(p,1.);k=clamp(1.-length(p-cam)/80.,0.,1.);gl_Position=c;gl_PointSize=sz*60./max(c.w,1.);}';
+var M3PFS = 'precision mediump float;uniform vec3 pc;varying float k;void main(){vec2 d=gl_PointCoord-.5;if(dot(d,d)>.25)discard;gl_FragColor=vec4(pc,k*.9);}';
+function m3Up(gl, B, fl){ if (!B.p.length) return null; var o = {n: B.p.length / 3, p: gl.createBuffer(), q: gl.createBuffer(), c: gl.createBuffer()};
+  gl.bindBuffer(gl.ARRAY_BUFFER, o.p); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(B.p), gl.STATIC_DRAW); gl.bindBuffer(gl.ARRAY_BUFFER, o.q); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(B.n), gl.STATIC_DRAW); gl.bindBuffer(gl.ARRAY_BUFFER, o.c); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(B.c), gl.STATIC_DRAW); return o; }
+function m3Attr(gl, pr, o){ var a = gl.getAttribLocation(pr, 'p'), b = gl.getAttribLocation(pr, 'n'), c = gl.getAttribLocation(pr, 'c');
+  gl.bindBuffer(gl.ARRAY_BUFFER, o.p); gl.enableVertexAttribArray(a); gl.vertexAttribPointer(a, 3, gl.FLOAT, false, 0, 0);
+  if (b >= 0){ gl.bindBuffer(gl.ARRAY_BUFFER, o.q); gl.enableVertexAttribArray(b); gl.vertexAttribPointer(b, 3, gl.FLOAT, false, 0, 0); }
+  if (c >= 0){ gl.bindBuffer(gl.ARRAY_BUFFER, o.c); gl.enableVertexAttribArray(c); gl.vertexAttribPointer(c, 4, gl.FLOAT, false, 0, 0); } }
+function m3Html(){ return '<div class="m3" id="m3" tabindex="0" aria-label="3D pasaulis. W A S D arba rodyklės eina, pelė ar pirštas dairosi, Shift bėga, tarpas šoka, F skrenda, E aplanko, Esc grąžina į žemėlapį."><canvas id="m3c"></canvas>' +
+  '<div class="m3-lb" id="m3-lb" aria-hidden="true"></div><div class="m3-cmp" id="m3-cmp" aria-hidden="true"></div><div class="m3-rg" id="m3-rg" aria-live="polite"></div><button type="button" class="m3-pr" id="m3-pr" hidden></button>' +
+  '<div class="m3-joy" id="m3-joy" aria-hidden="true"><span></span></div><div class="m3-help" id="m3-help"></div></div>' +
+  '<p class="m3-st" id="m3-st"></p><div class="m3-bar"><button type="button" class="tog" data-m3="fly" aria-pressed="false">Skristi</button><button type="button" class="tog" data-m3="home">Į mano sostinę</button><button type="button" class="tog" data-m3="view">Vaizdas iš viršaus</button><button type="button" class="tog" data-m3="shot">Nuotrauka</button>' +
+  '<button type="button" class="tog' + (mapPref().m3line !== 0 ? ' on' : '') + '" data-m3="line" aria-pressed="' + (mapPref().m3line !== 0) + '">Kelio linija</button><button type="button" class="tog' + (mapPref().m3bob !== 0 && !mapPref().still ? ' on' : '') + '" data-m3="bob" aria-pressed="' + (mapPref().m3bob !== 0 && !mapPref().still) + '">Siūbavimas</button></div>'; }
+function m3Size(){ var cv = document.getElementById('m3c'); if (!cv) return; var W = cv.parentNode.clientWidth || 600, H = Math.round(Math.min(W < 560 ? W * 1.1 : W * 0.6, (window.innerHeight || 800) * 0.74)), dp = Math.min(2, window.devicePixelRatio || 1);
+  if (M3 && M3.W === W && M3.H === H) return; cv.style.height = H + 'px'; cv.width = Math.round(W * dp); cv.height = Math.round(H * dp); if (M3){ M3.W = W; M3.H = H; M3.gl.viewport(0, 0, cv.width, cv.height); } }
+function m3Init(){ var cv = document.getElementById('m3c'); if (!cv || !MAPS.cur) return;
+  var gl = null; try { gl = cv.getContext('webgl', {antialias: true, preserveDrawingBuffer: false}) || cv.getContext('experimental-webgl'); } catch (e){}
+  if (!gl){ document.getElementById('m3').innerHTML = '<p class="m3-no">Ši naršyklė nepalaiko 3D (WebGL). Žemėlapis veikia Paviršiaus rodinyje.</p>'; return; }
+  if (M3 && M3.raf) cancelAnimationFrame(M3.raf); if (M3 && M3.gl && M3.cv !== cv){ var lx0 = M3.gl.getExtension('WEBGL_lose_context'); if (lx0) lx0.loseContext(); } var old = M3, G = MAPS.cur.G, pref = mapPref(), me = myTeam(), sv = pref.p3 && pref.p3.o === (G.port ? 'p' : 'l') ? pref.p3 : null;
+  M3 = {gl: gl, cv: cv, keys: {}, yaw: 0, pitch: -0.08, fly: false, vy: 0, t0: performance.now(), last: performance.now(), step: 0, walk: pref.walk3 || 0, reg: null, regT: 0, trailAcc: 0, saveT: 0, look: null, joy: null, fov: 1.05, touch: false};
+  try { M3.pr = m3Prog(gl, M3VS, M3FS); M3.pw = m3Prog(gl, M3VS, M3WFS); M3.ps = m3Prog(gl, M3SVS, M3SFS); M3.pp = m3Prog(gl, M3PVS, M3PFS); }
+  catch (e){ document.getElementById('m3').innerHTML = '<p class="m3-no">3D vaizdo paleisti nepavyko. Žemėlapis veikia Paviršiaus rodinyje.</p>'; M3 = null; return; }
+  M3.sky = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, M3.sky); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+  var start = me && MAPS.cur.graph.nodes[me] ? MAPS.cur.graph.nodes[me] : G.harbor, toS = [G.cx - start[0], G.cy - start[1]];
+  if (old && old.x != null && old.o === (G.port ? 'p' : 'l')){ M3.x = old.x; M3.z = old.z; M3.yaw = old.yaw; M3.pitch = old.pitch; M3.fly = old.fly; M3.y = old.y; M3.t0 = 0; }
+  else if (sv){ M3.x = sv.x; M3.z = sv.z; M3.yaw = sv.yaw; }
+  else { var l = Math.hypot(toS[0], toS[1]) || 1; M3.x = start[0] + toS[0] / l * 20; M3.z = start[1] + toS[1] / l * 20; M3.yaw = Math.atan2(toS[0], -toS[1]); }
+  M3.o = G.port ? 'p' : 'l'; m3Size(); m3Load(); if (!M3.y) M3.y = m3Ground(M3.x, M3.z) + 1.7;
+  if (pref.still) M3.t0 = 0; M3.raf = requestAnimationFrame(m3Frame);
+  var help = document.getElementById('m3-help'); if (help && !pref.m3help){ help.innerHTML = '<b>Kaip vaikščioti</b><span>' + (matchMedia('(pointer: coarse)').matches ? 'Kairiu pirštu eik, dešiniu dairykis. Paspausk ženklą, kad aplankytum.' : 'W A S D arba rodyklės eina, tempk pele dairytis, Shift bėga, tarpas šoka, F skrenda, E aplanko vietą, Esc grįžta.') + '</span><button type="button" class="tog" id="m3-hok">Supratau</button>'; help.hidden = false; } else if (help) help.hidden = true; m3Bind(); }
+function m3Load(){ var gl = M3.gl, W = m3Build(), o = {};
+  ['tp', 'tn', 'tc'].forEach(function(k){ o[k] = gl.createBuffer(); }); gl.bindBuffer(gl.ARRAY_BUFFER, o.tp); gl.bufferData(gl.ARRAY_BUFFER, W.pos, gl.STATIC_DRAW); gl.bindBuffer(gl.ARRAY_BUFFER, o.tn); gl.bufferData(gl.ARRAY_BUFFER, W.nrm, gl.STATIC_DRAW); gl.bindBuffer(gl.ARRAY_BUFFER, o.tc); gl.bufferData(gl.ARRAY_BUFFER, W.col, gl.STATIC_DRAW);
+  o.ti = gl.createBuffer(); gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, o.ti); gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, W.idx, gl.STATIC_DRAW); o.tn2 = W.idx.length;
+  o.obj = m3Up(gl, W.obj); o.add = m3Up(gl, W.add); o.glow = m3Up(gl, W.glow); o.water = m3Up(gl, W.water);
+  var R = mapRng(7), pts = new Float32Array(420 * 3); for (var i = 0; i < pts.length; i++) pts[i] = R(); o.pt = gl.createBuffer(); o.ptv = pts; o.ptn = 420;
+  if (M3.w) ['tp', 'tn', 'tc', 'ti'].forEach(function(k){ gl.deleteBuffer(M3.w[k]); });
+  M3.w = o; M3.season = W.season; M3.night = W.night; m3Labels(); }
+function m3Labels(){ var box = document.getElementById('m3-lb'); if (!box) return; var L = MAPS.cur.m3labels || [];
+  box.innerHTML = L.map(function(l, k){ return '<span class="m3-l m3-' + l.cls + (l.me ? ' me' : '') + '" data-k="' + k + '"' + (l.c ? ' style="--c:' + l.c + '"' : '') + '>' + esc(l.t) + '</span>'; }).join(''); M3.lbl = Array.prototype.slice.call(box.children); }
+/* ---------- controls ---------- */
+function m3Bind(){ var cv = M3.cv, root = document.getElementById('m3'), joy = document.getElementById('m3-joy');
+  M3.touch = matchMedia('(pointer: coarse)').matches; joy.hidden = !M3.touch; root.classList.toggle('tc', M3.touch);
+  root.addEventListener('keydown', function(e){ if (!M3) return; var k = e.key.length === 1 ? e.key.toLowerCase() : e.key; e.stopPropagation();
+    if (k === 'Escape'){ var b = document.querySelector('[data-floor="surface"]'); if (b) b.click(); return; }
+    if (k === 'f'){ m3Act('fly'); return; } if (k === 'e' || k === 'Enter'){ var pr = document.getElementById('m3-pr'); if (!pr.hidden) pr.click(); return; }
+    if (k === ' '){ e.preventDefault(); if (!M3.fly && M3.ground) M3.vy = 13; }
+    if (/^(w|a|s|d|q|x|c|Shift|ArrowUp|ArrowDown|ArrowLeft|ArrowRight| )$/.test(k)){ M3.keys[k] = 1; e.preventDefault(); } });
+  root.addEventListener('keyup', function(e){ if (!M3) return; var k = e.key.length === 1 ? e.key.toLowerCase() : e.key; delete M3.keys[k]; e.stopPropagation(); });
+  root.addEventListener('blur', function(){ if (M3) M3.keys = {}; }, true);
+  cv.addEventListener('pointerdown', function(e){ if (!M3) return; root.focus({preventScroll: true}); try { cv.setPointerCapture(e.pointerId); } catch (x){} var r = cv.getBoundingClientRect(), lx = e.clientX - r.left;
+    if (M3.touch && e.pointerType !== 'mouse' && lx < r.width * 0.42 && !M3.joy){ M3.joy = {id: e.pointerId, x: e.clientX, y: e.clientY, dx: 0, dy: 0}; joy.style.left = (lx - 50) + 'px'; joy.style.top = (e.clientY - r.top - 50) + 'px'; joy.style.bottom = 'auto'; joy.classList.add('on'); return; }
+    M3.look = {id: e.pointerId, x: e.clientX, y: e.clientY, m: 0}; });
+  cv.addEventListener('pointermove', function(e){ if (!M3) return;
+    if (M3.joy && e.pointerId === M3.joy.id){ var dx = e.clientX - M3.joy.x, dy = e.clientY - M3.joy.y, l = Math.hypot(dx, dy), m = Math.min(l, 44) / (l || 1); M3.joy.dx = dx * m / 44; M3.joy.dy = dy * m / 44; joy.firstChild.style.transform = 'translate(' + (dx * m) + 'px,' + (dy * m) + 'px)'; return; }
+    if (M3.look && e.pointerId === M3.look.id){ var ex = e.clientX - M3.look.x, ey = e.clientY - M3.look.y; M3.look.x = e.clientX; M3.look.y = e.clientY; M3.look.m += Math.abs(ex) + Math.abs(ey); var sens = M3.touch ? 0.006 : 0.0045;
+      M3.yaw += ex * sens; M3.pitch = Math.max(-1.35, Math.min(1.25, M3.pitch - ey * sens)); M3.t0 = 0; } });
+  function up(e){ if (!M3) return; if (M3.joy && e.pointerId === M3.joy.id){ M3.joy = null; joy.classList.remove('on'); joy.firstChild.style.transform = ''; } if (M3.look && e.pointerId === M3.look.id) M3.look = null; }
+  cv.addEventListener('pointerup', up); cv.addEventListener('pointercancel', up);
+  cv.addEventListener('wheel', function(e){ if (!M3) return; e.preventDefault(); M3.fov = Math.max(0.55, Math.min(1.35, M3.fov + (e.deltaY > 0 ? 0.06 : -0.06))); }, {passive: false});
+  cv.addEventListener('contextmenu', function(e){ e.preventDefault(); });
+  document.getElementById('m3-pr').addEventListener('click', function(){ var q = M3 && M3.near; if (!q) return; mapTone(q.p + 3);
+    if (q.t === 'capital'){ MAPS.sel = q.id; MAPS.poi = null; mapAmbient(MAPS.cur.E.ids.indexOf(q.id)); } else { MAPS.poi = q; }
+    mapInfo(); var inf = document.getElementById('mp-info'); if (inf && inf.getBoundingClientRect().top > window.innerHeight - 60) inf.scrollIntoView({block: 'nearest', behavior: 'smooth'}); });
+  var hk = document.getElementById('m3-hok'); if (hk) hk.addEventListener('click', function(){ mapPref().m3help = 1; mapSave(); document.getElementById('m3-help').hidden = true; root.focus({preventScroll: true}); });
+  document.querySelector('.m3-bar').addEventListener('click', function(e){ var b = e.target.closest('[data-m3]'); if (b) m3Act(b.getAttribute('data-m3')); });
+  root.focus({preventScroll: true}); }
+function m3Act(a){ if (!M3) return; var p = mapPref(), G = MAPS.cur.G, tog = function(sel, on){ var b = document.querySelector('[data-m3="' + sel + '"]'); if (b){ b.classList.toggle('on', on); b.setAttribute('aria-pressed', String(on)); } };
+  if (a === 'fly'){ M3.fly = !M3.fly; M3.vy = 0; if (M3.fly) M3.y += 18; tog('fly', M3.fly); m3Say(M3.fly ? 'Skrendi. Tarpas kyla, X leidžiasi.' : 'Nusileidai.'); }
+  else if (a === 'home'){ var me = myTeam(), a2 = me && MAPS.cur.graph.nodes[me] ? MAPS.cur.graph.nodes[me] : G.harbor; m3Go(a2[0], a2[1]); }
+  else if (a === 'view'){ M3.fly = true; tog('fly', true); M3.x = G.cx; M3.z = G.cy + G.VH * 0.62; M3.y = 230; M3.yaw = 0; M3.pitch = -0.62; }
+  else if (a === 'shot'){ m3Draw(performance.now()); try { var u = M3.cv.toDataURL('image/png'), l = document.createElement('a'); l.href = u; l.download = 'lygos-pasaulis-3d.png'; document.body.appendChild(l); l.click(); l.remove(); m3Say('Nuotrauka išsaugota.'); } catch (e){ m3Say('Nuotraukos padaryti nepavyko.'); } }
+  else if (a === 'line'){ p.m3line = p.m3line === 0 ? 1 : 0; mapSave(); tog('line', p.m3line !== 0); m3Load(); }
+  else if (a === 'bob'){ p.m3bob = p.m3bob === 0 ? 1 : 0; mapSave(); tog('bob', p.m3bob !== 0); }
+  var r = document.getElementById('m3'); if (r) r.focus({preventScroll: true}); }
+function m3Go(x, z){ if (!M3) return; var G = MAPS.cur.G, dx = G.cx - x, dz = G.cy - z, l = Math.hypot(dx, dz) || 1; M3.x = x + dx / l * 18; M3.z = z + dz / l * 18; M3.yaw = Math.atan2(-dx, dz); M3.pitch = -0.05; M3.y = m3Ground(M3.x, M3.z) + (M3.fly ? 20 : 1.7); M3.t0 = 0; mapTone(4); }
+function m3Say(t){ var b = document.getElementById('m3-rg'); if (!b) return; b.innerHTML = '<span class="sm">' + esc(t) + '</span>'; b.classList.add('on'); clearTimeout(M3.sayT); M3.sayT = setTimeout(function(){ b.classList.remove('on'); }, 2200); }
+/* footsteps follow the surface (87) */
+function m3Step(kind){ if (!mapPref().sound) return; var A = mapAudio(); if (!A) return; if (!M3.nb){ var n = A.createBuffer(1, A.sampleRate * 0.09, A.sampleRate), d = n.getChannelData(0); for (var i = 0; i < d.length; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / d.length, 2); M3.nb = n; }
+  var s = A.createBufferSource(), f = A.createBiquadFilter(), g = A.createGain(); s.buffer = M3.nb; f.type = 'bandpass'; f.frequency.value = {snow: 700, sand: 1300, stone: 3200, wood: 520, grass: 2200}[kind] || 1800; f.Q.value = 0.9; g.gain.value = kind === 'snow' ? 0.18 : 0.12; s.connect(f); f.connect(g); g.connect(A.destination); s.start(); }
+/* ---------- the frame ---------- */
+function m3Frame(now){ if (!M3 || !document.getElementById('m3c') || M3.cv !== document.getElementById('m3c')){ if (M3 && M3.x != null){ var sp = mapPref(); sp.p3 = {x: Math.round(M3.x), z: Math.round(M3.z), yaw: Math.round(M3.yaw * 100) / 100, o: M3.o}; sp.walk3 = Math.round(M3.walk); mapSave(); } if (M3 && M3.gl){ var ext = M3.gl.getExtension('WEBGL_lose_context'); if (ext) ext.loseContext(); } M3 = null; return; }
+  M3.raf = requestAnimationFrame(m3Frame); if (document.hidden) return;
+  var dt = Math.min(0.05, (now - M3.last) / 1000); M3.last = now; m3Size(); m3Move(dt, now); m3Draw(now); m3Hud(now); }
+function m3Move(dt, now){ var k = M3.keys, f = 0, r = 0, turn = 0, G = MAPS.cur.G;
+  if (k.w || k.ArrowUp) f += 1; if (k.s || k.ArrowDown) f -= 1; if (k.d) r += 1; if (k.a) r -= 1; if (k.ArrowLeft || k.q) turn -= 1; if (k.ArrowRight) turn += 1;
+  if (M3.joy){ f -= M3.joy.dy; r += M3.joy.dx; }
+  var gp = navigator.getGamepads ? Array.prototype.filter.call(navigator.getGamepads(), Boolean)[0] : null;
+  if (gp){ var ax = gp.axes; if (Math.abs(ax[1]) > 0.18) f -= ax[1]; if (Math.abs(ax[0]) > 0.18) r += ax[0]; if (ax.length > 3){ if (Math.abs(ax[2]) > 0.18) M3.yaw += ax[2] * dt * 2.4; if (Math.abs(ax[3]) > 0.18) M3.pitch = Math.max(-1.35, Math.min(1.25, M3.pitch - ax[3] * dt * 2)); }
+    var A = gp.buttons[0] && gp.buttons[0].pressed, Bb = gp.buttons[1] && gp.buttons[1].pressed, Xb = gp.buttons[2] && gp.buttons[2].pressed; if (A && !M3.pa && !M3.fly && M3.ground) M3.vy = 13; if (Bb && !M3.pb) m3Act('fly'); if (Xb && !M3.px){ var pr = document.getElementById('m3-pr'); if (!pr.hidden) pr.click(); } M3.pa = A; M3.pb = Bb; M3.px = Xb; }
+  M3.yaw += turn * dt * 1.9; if (f || r) M3.t0 = 0;
+  var run = k.Shift || (gp && gp.buttons[10] && gp.buttons[10].pressed), sp = M3.fly ? (run ? 120 : 55) : (run ? 30 : 13), l = Math.hypot(f, r); if (l > 1){ f /= l; r /= l; }
+  var sy = Math.sin(M3.yaw), cy = Math.cos(M3.yaw), vx = (sy * f + cy * r) * sp * dt, vz = (-cy * f + sy * r) * sp * dt, nx = M3.x + vx, nz = M3.z + vz, lim = 260;
+  nx = Math.max(-lim, Math.min(G.VW + lim, nx)); nz = Math.max(-lim, Math.min(G.VH + lim, nz));
+  if (!M3.fly){ var deep = function(x, z){ return m3Ground(x, z) < -0.6; }; if (deep(nx, nz)){ if (!deep(nx, M3.z)) nz = M3.z; else if (!deep(M3.x, nz)) nx = M3.x; else { nx = M3.x; nz = M3.z; } if (now - (M3.seaT || 0) > 4000){ M3.seaT = now; m3Say('Toliau jūra. Paspausk Skristi, kad pasiektum salas.'); } } }
+  if (!M3.fly && MAPS.cur.m3col) MAPS.cur.m3col.forEach(function(o){ var dx = nx - o[0], dz = nz - o[1], d = Math.hypot(dx, dz); if (d < o[2] && d > 0.001){ nx = o[0] + dx / d * o[2]; nz = o[1] + dz / d * o[2]; } });
+  var moved = Math.hypot(nx - M3.x, nz - M3.z); M3.x = nx; M3.z = nz;
+  var gy = Math.max(m3Ground(M3.x, M3.z), M3.fly ? 0 : -0.4);
+  if (M3.fly){ if (k[' ']) M3.y += sp * 0.6 * dt; if (k.x || k.c) M3.y -= sp * 0.6 * dt; M3.y = Math.max(gy + 2, Math.min(320, M3.y)); M3.ground = false; }
+  else { M3.vy -= 34 * dt; M3.y += M3.vy * dt; var eye = gy + 1.7; if (M3.y <= eye){ M3.y = eye; M3.vy = 0; M3.ground = true; } else M3.ground = M3.y - eye < 0.05; }
+  if (!M3.fly && moved > 0.001 && M3.ground){ M3.step += moved; M3.walk += moved; M3.trailAcc += moved;
+    if (M3.step > 3.2){ M3.step = 0; var rg = M3.reg || {}, yy = gy; m3Step(yy < 1.6 ? 'sand' : rg.k === 'summit' ? 'stone' : rg.k === 'harbor' ? 'wood' : (rg.b && rg.b.snow) || yy > 50 || M3.season === 'žiema' ? 'snow' : rg.b && (rg.b.id === 'dykuma' || rg.b.id === 'savana') ? 'sand' : yy > 40 ? 'stone' : 'grass'); } }
+  if (M3.trailAcc > 8){ M3.trailAcc = 0; var p = mapPref(), tr = p.trail3 && p.trail3.o === M3.o ? p.trail3 : {o: M3.o, pts: []}; tr.pts.push([Math.round(M3.x), Math.round(M3.z)]); if (tr.pts.length > 400) tr.pts.shift(); p.trail3 = tr; }
+  if (now - M3.saveT > 2500){ M3.saveT = now; var pp = mapPref(); pp.p3 = {x: Math.round(M3.x), z: Math.round(M3.z), yaw: Math.round(M3.yaw * 100) / 100, o: M3.o}; pp.walk3 = Math.round(M3.walk); mapSave(); } }
+function m3Cam(now){ var bob = !mapPref().still && mapPref().m3bob !== 0 && !M3.fly && M3.ground ? Math.sin(M3.walk * 0.9) * 0.09 : 0, e = [M3.x, M3.y + bob, M3.z], yaw = M3.yaw, pit = M3.pitch, G = MAPS.cur.G;
+  /* entrance: the camera comes down from above the map (249) */
+  if (M3.t0){ var u = Math.min(1, (now - M3.t0) / 2200), s = u < .5 ? 4 * u * u * u : 1 - Math.pow(-2 * u + 2, 3) / 2, top = [G.cx, 340, G.cy + G.VH * 0.55]; e = [top[0] + (e[0] - top[0]) * s, top[1] + (e[1] - top[1]) * s, top[2] + (e[2] - top[2]) * s];
+    pit = -0.95 + (pit + 0.95) * s; if (u >= 1) M3.t0 = 0; }
+  var cp = Math.cos(pit), d = [Math.sin(yaw) * cp, Math.sin(pit), -Math.cos(yaw) * cp]; return {e: e, d: d}; }
+function m3Draw(now){ var gl = M3.gl, w = M3.w, C = m3Cam(now), t = now / 1000, night = M3.night ? 1 : 0, reg = M3.reg && M3.reg.b ? M3.reg.b.id : null;
+  var asp = M3.cv.width / M3.cv.height, P = m3Persp(M3.fov, asp, 0.3, 2600), V = m3Look(C.e, C.d), VP = m3Mul(P, V); M3.vp = VP; M3.ce = C.e;
+  var sk = reg && M3SKY[reg] ? M3SKY[reg] : [0.78, 0.86, 0.92]; M3.skyC = M3.skyC ? m3Mix(M3.skyC, sk, 0.02) : sk;
+  var hor = night ? [0.07, 0.09, 0.16] : M3.skyC, zen = night ? [0.01, 0.02, 0.06] : [0.32, 0.52, 0.78], hr = new Date().getHours() + new Date().getMinutes() / 60;
+  var az = night ? 2.6 : Math.max(-1.3, Math.min(1.3, (hr - 13) / 6 * 1.4)), el = night ? 0.55 : 0.32 + 0.45 * Math.cos((hr - 13) / 7 * 1.3), sun = [Math.sin(az) * Math.cos(el), Math.sin(el), Math.cos(az) * Math.cos(el)]; /* the sun stands in the south (101) */
+  var sunC = night ? [0.32, 0.36, 0.5] : [0.78, 0.73, 0.62], amb = night ? [0.16, 0.18, 0.26] : [0.36, 0.38, 0.44], fogD = (reg === 'pelkes' ? 220 : reg === 'vulkanai' ? 280 : 620) * (night ? 0.7 : 1) * (M3.fly ? 1.8 : 1);
+  gl.clearColor(hor[0], hor[1], hor[2], 1); gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+  /* sky with sun, stars and northern lights (65, 102, 429) */
+  gl.disable(gl.DEPTH_TEST); gl.useProgram(M3.ps); var sa = gl.getAttribLocation(M3.ps, 'p'); gl.bindBuffer(gl.ARRAY_BUFFER, M3.sky); gl.enableVertexAttribArray(sa); gl.vertexAttribPointer(sa, 2, gl.FLOAT, false, 0, 0);
+  var U = M3.ps.u; gl.uniformMatrix4fv(U.ivp, false, m3Inv(VP)); gl.uniform3fv(U.cam, C.e); gl.uniform3fv(U.sun, sun); gl.uniform3fv(U.hor, hor); gl.uniform3fv(U.zen, zen); gl.uniform1f(U.night, night); gl.uniform1f(U.aur, night && (M3.season === 'žiema' || reg === 'ledynai' || reg === 'taiga') ? 1 : night ? 0.35 : 0); gl.uniform1f(U.t, t);
+  gl.drawArrays(gl.TRIANGLES, 0, 3); gl.disableVertexAttribArray(sa); gl.enable(gl.DEPTH_TEST);
+  gl.useProgram(M3.pr); U = M3.pr.u; gl.uniformMatrix4fv(U.vp, false, VP); gl.uniform3fv(U.sun, sun); gl.uniform3fv(U.sunC, sunC); gl.uniform3fv(U.amb, amb); gl.uniform3fv(U.fogC, hor); gl.uniform3fv(U.cam, C.e); gl.uniform1f(U.fogD, fogD); gl.uniform1f(U.night, night); gl.uniform1f(U.alpha, 1); gl.uniform1f(U.grain, 1);
+  m3Attr(gl, M3.pr, {p: w.tp, q: w.tn, c: w.tc}); gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, w.ti); gl.drawElements(gl.TRIANGLES, w.tn2, gl.UNSIGNED_SHORT, 0);
+  gl.uniform1f(U.two, 1); gl.uniform1f(U.grain, 0); if (w.obj){ m3Attr(gl, M3.pr, w.obj); gl.drawArrays(gl.TRIANGLES, 0, w.obj.n); } if (w.glow){ m3Attr(gl, M3.pr, w.glow); gl.drawArrays(gl.TRIANGLES, 0, w.glow.n); } gl.uniform1f(U.two, 0);
+  gl.enable(gl.BLEND); gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA); gl.depthMask(false);
+  gl.useProgram(M3.pw); U = M3.pw.u; gl.uniformMatrix4fv(U.vp, false, VP); gl.uniform3fv(U.sun, sun); gl.uniform3fv(U.sunC, sunC); gl.uniform3fv(U.fogC, hor); gl.uniform3fv(U.sky, m3Mix(hor, zen, 0.4)); gl.uniform3fv(U.cam, C.e); gl.uniform1f(U.fogD, fogD * 1.4); gl.uniform1f(U.night, night); gl.uniform1f(U.t, t);
+  m3Attr(gl, M3.pw, w.water); gl.drawArrays(gl.TRIANGLES, 0, w.water.n);
+  if (w.add){ gl.useProgram(M3.pr); U = M3.pr.u; gl.uniform1f(U.alpha, 0.22 + 0.08 * Math.sin(t * 2)); gl.blendFunc(gl.SRC_ALPHA, gl.ONE); m3Attr(gl, M3.pr, w.add); gl.drawArrays(gl.TRIANGLES, 0, w.add.n); gl.uniform1f(U.alpha, 1); }
+  /* season particles in the air (88): snow, petals, pollen, leaves; fireflies in forests at night (55) */
+  var pc = night && (reg === 'giria' || reg === 'pelkes') ? [0.75, 1, 0.45] : {'žiema': [1, 1, 1], pavasaris: [1, 0.78, 0.85], vasara: [1, 0.95, 0.6], ruduo: [0.9, 0.55, 0.2]}[M3.season] || [1, 1, 1], fall = M3.season === 'žiema' ? 6 : M3.season === 'ruduo' ? 3 : 0.6;
+  if (!mapPref().still){ var v = w.ptv, a3 = new Float32Array(w.ptn * 3); for (var i = 0; i < w.ptn; i++){ var bx = v[i * 3], by = v[i * 3 + 1], bz = v[i * 3 + 2];
+      a3[i * 3] = C.e[0] + (((bx * 120 + Math.sin(t * 0.7 + i) * 2 - C.e[0]) % 120) + 120) % 120 - 60; a3[i * 3 + 1] = C.e[1] - 8 + ((((by * 40 - t * fall) % 40) + 40) % 40); a3[i * 3 + 2] = C.e[2] + (((bz * 120 + Math.cos(t * 0.5 + i) * 2 - C.e[2]) % 120) + 120) % 120 - 60; }
+    for (var a0 = 0; a0 < 3; a0++) gl.disableVertexAttribArray(a0); gl.useProgram(M3.pp); U = M3.pp.u; gl.uniformMatrix4fv(U.vp, false, VP); gl.uniform3fv(U.cam, C.e); gl.uniform1f(U.sz, M3.season === 'žiema' ? 2.6 : 1.7); gl.uniform3fv(U.pc, pc); gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+    var pa = gl.getAttribLocation(M3.pp, 'p'); gl.bindBuffer(gl.ARRAY_BUFFER, w.pt); gl.bufferData(gl.ARRAY_BUFFER, a3, gl.DYNAMIC_DRAW); gl.enableVertexAttribArray(pa); gl.vertexAttribPointer(pa, 3, gl.FLOAT, false, 0, 0); gl.drawArrays(gl.POINTS, 0, w.ptn); }
+  gl.depthMask(true); gl.disable(gl.BLEND);
+  for (var a = 0; a < 3; a++) gl.disableVertexAttribArray(a); }
+function m3Proj(x, y, z){ var m = M3.vp, cx = m[0] * x + m[4] * y + m[8] * z + m[12], cy = m[1] * x + m[5] * y + m[9] * z + m[13], cw = m[3] * x + m[7] * y + m[11] * z + m[15]; if (cw < 0.5) return null; return [(cx / cw * 0.5 + 0.5) * M3.W, (0.5 - cy / cw * 0.5) * M3.H, cw]; }
+function m3Hud(now){ var c = MAPS.cur, G = c.G, E = c.E, L = c.m3labels || [], keep = [], e = M3.ce || [M3.x, M3.y, M3.z];
+  /* labels: nearer and more important first, nothing overlaps (459) */
+  var order = L.map(function(l, k){ return [k, Math.hypot(l.x - e[0], l.z - e[2])]; }).sort(function(a, b){ return L[a[0]].pr - L[b[0]].pr || a[1] - b[1]; });
+  order.forEach(function(o){ var l = L[o[0]], el = M3.lbl && M3.lbl[o[0]]; if (!el) return; var d = o[1], p = d < l.d ? m3Proj(l.x, l.y, l.z) : null;
+    if (!p || p[0] < 4 || p[0] > M3.W - 4 || p[1] < 30 || p[1] > M3.H - 8){ el.style.display = 'none'; return; }
+    var fs = l.cls === 'cap' ? Math.max(11, Math.min(17, 1400 / d + 10)) : Math.max(10, Math.min(14, 600 / d + 8)), wpx = (l.t.length * fs * 0.56) + 10, r = {l: p[0] - wpx / 2, r: p[0] + wpx / 2, t: p[1] - fs - 6, b: p[1] + 2};
+    var hidn = false; for (var s2 = 1; s2 < 14; s2++){ var u = s2 / 14, qx = e[0] + (l.x - e[0]) * u, qy = e[1] + (l.y - 3 - e[1]) * u, qz = e[2] + (l.z - e[2]) * u; if (m3Ground(qx, qz) > qy){ hidn = true; break; } }
+    if (hidn && l.cls !== 'cap'){ el.style.display = 'none'; return; }
+    if (keep.some(function(k){ return r.l < k.r && k.l < r.r && r.t < k.b && k.t < r.b; })){ el.style.display = 'none'; return; } keep.push(r);
+    el.style.display = 'block'; el.style.fontSize = fs.toFixed(1) + 'px'; el.style.transform = 'translate(' + (p[0] - wpx / 2).toFixed(1) + 'px,' + (p[1] - fs - 6).toFixed(1) + 'px)'; el.style.width = wpx.toFixed(0) + 'px'; el.style.opacity = l.cls === 'cap' ? (hidn ? 0.5 : 1) : Math.max(0.35, 1 - d / l.d).toFixed(2); });
+  if (now - (M3.hudT || 0) < 200) return; M3.hudT = now;
+  /* region banner when you cross a border (209), and walking explores it */
+  var rg = m3Region(M3.x, M3.z);
+  if (!M3.reg || M3.reg.k !== rg.k){ var first = !M3.reg; M3.reg = rg; var b = document.getElementById('m3-rg');
+    if (b && !first){ b.innerHTML = rg.b ? '<span class="kick">' + esc(rg.b.nm) + '</span><b>' + esc(rg.nm) + '</b><span class="sm">valdovas ' + esc(who(rg.k)) + ' · ' + E.pos[rg.k] + ' vieta</span>' : '<b>' + esc(rg.nm) + '</b>'; b.style.setProperty('--c', rg.b ? tcol(rg.k) : '#9a2b1c'); b.classList.add('on'); clearTimeout(M3.sayT); M3.sayT = setTimeout(function(){ b.classList.remove('on'); }, 3000); }
+    if (rg.b){ mapAmbient(rg.i); var pf = mapPref(); if (pf.fog && !(pf.seen || {})[rg.k]){ pf.seen = pf.seen || {}; pf.seen[rg.k] = 1; mapSave(); c.open[rg.k] = 1; m3Load(); mapNewSince(); m3Say('Atradai naują regioną: ' + rg.nm); } } else mapAmbient(null); }
+  /* what is near: press E to visit (8548) */
+  var near = null, nd = 1e9; c.pois.forEach(function(q){ var d = Math.hypot(q.x - M3.x, q.y - M3.z), r = q.t === 'capital' ? 22 : q.t === 'summit' || q.t === 'harbor' ? 26 : 11; if (d < r && d < nd){ nd = d; near = q; } });
+  var pr = document.getElementById('m3-pr'); M3.near = near;
+  if (near){ var hid = near.hidden && mapPref().fog && !(mapPref().found || {})[near.t + '-' + near.id]; pr.hidden = false; pr.textContent = (M3.touch ? '' : 'E · ') + (near.t === 'capital' ? 'Aplankyti ' + near.name : hid ? 'Ištirti neatrastą vietą' : near.t === 'town' ? 'Miestas: ' + near.name : near.t === 'watch' ? 'Užlipti į bokštą' : 'Apžiūrėti: ' + (near.name || '')); } else pr.hidden = true;
+  /* compass strip (83) with the target, distance and height difference (227, 228) */
+  var hd = ((M3.yaw * 180 / Math.PI) % 360 + 360) % 360, cmp = document.getElementById('m3-cmp'), Wc = cmp.clientWidth || M3.W, tgK = mapTarget(), tg = c.graph.nodes[tgK], items = [['Š', 0, 'cd'], ['R', 90, 'cd'], ['P', 180, 'cd'], ['V', 270, 'cd']];
+  var me = myTeam(); E.ids.forEach(function(id){ var a = c.graph.nodes[id]; if (!a || id === tgK) return; if (Wc < 560 && id !== me) return; items.push([M[id].first, (Math.atan2(a[0] - M3.x, -(a[1] - M3.z)) * 180 / Math.PI + 360) % 360, id === me ? 'me' : '']); });
+  if (tg) items.push(['★ ' + (tgK === 'summit' ? 'Taurė' : tgK === 'harbor' ? 'Uostas' : M[tgK].first), (Math.atan2(tg[0] - M3.x, -(tg[1] - M3.z)) * 180 / Math.PI + 360) % 360, 'tg']);
+  var span = Wc < 560 ? 120 : 160, rows = [[], []], h = '';
+  items.map(function(it){ var rel = ((it[1] - hd + 540) % 360) - 180; return [it, rel]; }).filter(function(z){ return Math.abs(z[1]) < span / 2; }).sort(function(a, b){ return (a[0][2] === 'cd' ? 0 : a[0][2] === 'tg' ? 1 : 2) - (b[0][2] === 'cd' ? 0 : b[0][2] === 'tg' ? 1 : 2); }).forEach(function(z){
+    var x = Wc / 2 + z[1] / span * Wc, w = z[0][0].length * 7.2 + 6, hit = function(r){ return rows[r].some(function(q){ return Math.abs(q[0] - x) < (w + q[1]) / 2 + 6; }); }, row = z[0][2] === 'cd' ? 0 : hit(0) ? 1 : 0; if (row && hit(1)) return; rows[row].push([x, w]);
+    h += '<span class="m3-ci ' + z[0][2] + (row ? ' r2' : '') + '" style="left:' + x.toFixed(0) + 'px">' + esc(z[0][0]) + '</span>'; });
+  cmp.innerHTML = '<i class="m3-tick"></i>' + h;
+  var st = document.getElementById('m3-st'), alt = Math.round(m3Ground(M3.x, M3.z) * M3U), tx = '';
+  if (tg){ var dd = Math.hypot(tg[0] - M3.x, tg[1] - M3.z) * M3U, dh = Math.round((m3Ground(tg[0], tg[1]) - m3Ground(M3.x, M3.z)) * M3U); tx = ' · tikslas ' + esc(tgK === 'summit' ? 'Taurės kalnas' : tgK === 'harbor' ? 'Drafto uostas' : M[tgK].team) + ' ' + (dd >= 1000 ? NF.format(Math.round(dd / 100) / 10) + ' km' : Math.round(dd / 10) * 10 + ' m') + (Math.abs(dh) >= 10 ? (dh > 0 ? ', ' + dh + ' m aukščiau' : ', ' + (-dh) + ' m žemiau') : '') + ' (~' + Math.max(1, Math.round(dd / 80)) + ' min pėsčiomis)'; }
+  st.innerHTML = '<b>' + esc(rg.nm) + '</b> · aukštis ' + Math.max(0, alt) + ' m' + tx + ' · nueita ' + (M3.walk * M3U >= 1000 ? NF.format(Math.round(M3.walk * M3U / 100) / 10) + ' km' : Math.round(M3.walk * M3U) + ' m');
+  if (now - (M3.miniT || 0) > 500){ M3.miniT = now; mapMini(); } }
 var SR_PAGES = [
   ["lentele", "Lentelė", "Pagrindinis puslapis", pageHome], ["turai", "Turai", "Taškai kiekviename ture", pageRounds], ["istorija", "Istorija", "Rekordai, formos lentelė, dvikovos", pageHistory], ["zemelapis", "Lygos žemėlapis", "Karalystės pagal taškus, keliai pagal mainus", pageMap],
   ["sprendimai", "Sprendimai", "Kapitonai ir sudėčių efektyvumas", pageDecisions], ["koeficientai", "Koeficientai", "Lažybų linijos ir tikimybės", pageOdds],
