@@ -1504,27 +1504,59 @@ html.landing footer,html.landing .foot{display:none!important}
 .st-c .btn{font-size:15px;line-height:1.2;background:var(--red);color:var(--on-red,#fff);border:0;padding:12px 20px;border-radius:12px;font-weight:700;letter-spacing:.02em;text-transform:none;cursor:pointer}
 .st-c .btn:hover{filter:brightness(1.08)}
 .st-c input{font-size:16px}
-.mp-ctl{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;margin:14px 0 12px;font-family:var(--f-data);font-size:14px}
-.mp-era{display:flex;align-items:center;gap:8px;flex:1 1 220px}.mp-era input{flex:1;min-width:120px;accent-color:#9a2b1c}
-.mp-lay{display:flex;gap:12px;flex-wrap:wrap}.mp-lay label{display:inline-flex;align-items:center;gap:4px;cursor:pointer}
-.mp-wrap{border:1px solid var(--rule,#ccc);background:#b9cdc6;line-height:0}
+.mp-ctl{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin:12px 0 10px;font-family:var(--f-data);font-size:14px}
+.mp-era{display:flex;align-items:center;gap:8px;flex:1 1 200px}.mp-era input{flex:1;min-width:110px;accent-color:#9a2b1c}
+.mp-seg{display:inline-flex;gap:0}.mp-seg .tog{border-radius:0}.mp-seg .tog:first-child{border-radius:6px 0 0 6px}.mp-seg .tog:last-child{border-radius:0 6px 6px 0}
+.mp-seg .tog.on,.mp-tool .tog.on{background:#3b2412;color:#f3e3bd}
+.mp-find{display:flex;gap:6px;flex:1 1 220px}.mp-find input{flex:1;min-width:0;font:inherit;padding:5px 8px;border:1px solid var(--rule,#bbb);border-radius:6px;background:var(--paper,#fff);color:inherit}
+.mp-sel{display:inline-flex;align-items:center;gap:6px}.mp-sel select,.mp-pinf select,.mp-chip select{font:inherit;padding:3px 4px;max-width:150px}
+.mp-stage{position:relative}
+.mp-wrap{border:1px solid var(--rule,#ccc);background:#a9c9c4;line-height:0;touch-action:none;overflow:hidden;cursor:grab;outline-offset:2px}
+.mp-wrap:active{cursor:grabbing}.mp-wrap.mp-aim{cursor:crosshair}
 .lmap{width:100%;height:auto;display:block;user-select:none;-webkit-user-select:none}
-.lmap .mp-realm,.lmap .mp-lab,.lmap .mp-town{cursor:pointer}
-.lmap .mp-realm:hover{fill-opacity:.34}
-.lmap text{fill:#3b2412;font-family:var(--f-body)}
-.lmap .mp-k{font-weight:700;letter-spacing:.13em;paint-order:stroke;stroke:#efdcb2;stroke-width:3.5px;stroke-linejoin:round}
-.lmap .mp-r{font-size:12.5px;font-style:italic;paint-order:stroke;stroke:#efdcb2;stroke-width:3px;stroke-linejoin:round}
-.lmap .mp-t{font-size:11px;font-style:italic;paint-order:stroke;stroke:#efdcb2;stroke-width:2.6px;stroke-linejoin:round}
-.lmap .mp-s{font-size:15px;font-style:italic;font-weight:600;letter-spacing:.18em;fill:#35585b}
-.lmap .mp-isle .mp-t{stroke:#b9cdc6}
-.lmap .mp-c{font-family:var(--f-display);font-weight:900;font-size:15px}
-.lmap .mp-ct{font-family:var(--f-display);font-weight:900;font-size:17px;letter-spacing:.06em}
-.lmap .mp-cs{font-size:11.5px;font-style:italic}
-.lmap.pt .mp-r{font-size:14px}.lmap.pt .mp-t{font-size:13px}.lmap.pt .mp-s{font-size:17px}.lmap.pt .mp-ct{font-size:18px}.lmap.pt .mp-cs{font-size:13px}.lmap.pt .mp-c{font-size:17px}
-.mp-info{margin:14px 0 6px}
+.lmap .mp-p{transform:translate(var(--x),var(--y)) scale(var(--ik,1))}
+.lmap .mp-off{display:none}.lmap .mp-dim{opacity:.45}.lmap .mp-fogcap use{opacity:.55}
+.lmap [data-poi],.lmap [data-pin]{cursor:pointer}
+.lmap text{fill:#2e1c0e;font-family:var(--f-body)}
+.lmap .mp-k{font-size:14px;font-weight:700;letter-spacing:.12em;paint-order:stroke;stroke:#f3e6c4;stroke-width:3.5px;stroke-linejoin:round}
+.lmap .mp-k.mp-big{font-size:15px;letter-spacing:.16em}.lmap .mp-k.mp-mid{font-size:12px}
+.lmap .mp-r{font-size:12px;font-style:italic;paint-order:stroke;stroke:#f3e6c4;stroke-width:3px;stroke-linejoin:round}
+.lmap .mp-b{font-size:10.5px;font-family:var(--f-data);letter-spacing:.04em;fill:#5b4632;paint-order:stroke;stroke:#f3e6c4;stroke-width:3px;stroke-linejoin:round}
+.lmap .mp-l{font-size:11px;font-style:italic;paint-order:stroke;stroke:#f3e6c4;stroke-width:2.8px;stroke-linejoin:round}
+.lmap .mp-w{font-size:10.5px;font-style:italic;letter-spacing:.14em;fill:#2f5f72;paint-order:stroke;stroke:#e9eee8;stroke-width:2.6px}
+.lmap .mp-s{font-size:14px;font-style:italic;font-weight:600;letter-spacing:.18em;fill:#2f5254}
+.lmap .mp-isle .mp-l{stroke:#b6d0cb}
+.lmap .mp-c{font-family:var(--f-display);font-weight:900;font-size:14px}
+.lmap .mp-ct{font-family:var(--f-display);font-weight:900;letter-spacing:.06em}
+.lmap .mp-cs{font-size:11px;font-style:italic}
+.lmap.night .mp-k,.lmap.night .mp-r,.lmap.night .mp-l,.lmap.night .mp-b{stroke:#e8dcbc}
+.lmap.under text.mp-lu{fill:#f0dfb8;stroke:#1d1712;paint-order:stroke;stroke-width:3px}
+.lmap .mp-orbit{animation:mpOrbit 6s linear infinite;transform-origin:0 0}
+@keyframes mpOrbit{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.lmap .mp-orbit{animation:none}}
+.mp-bar{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px;margin:6px 0 0}.mp-zoom{display:flex;gap:4px}.mp-zoom .tog{min-width:36px;height:34px;padding:0 8px;font-size:17px;line-height:1;background:#f3e3bd;color:#3b2412;border:1px solid #3b2412}
+.mp-mini{position:absolute;left:8px;top:8px;border:2px solid #3b2412;background:#f3e3bd;line-height:0;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,.25)}
+.mp-tool{display:flex;gap:4px}.mp-tool .tog{background:#f3e3bd;color:#3b2412;border:1px solid #3b2412;font-size:13px}.mp-tool .tog.on{background:#3b2412;color:#f3e3bd}
+.mp-pinf[hidden],.mp-comp[hidden],.mp-mini[hidden]{display:none}
+.mp-comp{position:relative;height:46px;margin:0 0 6px;border:1px solid var(--rule,#ccc);background:linear-gradient(#f6ecd4,#efdcb2);overflow:hidden;font-family:var(--f-data)}
+.mp-cb-in{position:absolute;inset:0 0 12px 0}.mp-cd{position:absolute;top:10px;opacity:.55;transform:translateX(-50%);font-weight:700;font-size:12px;color:#9a2b1c}
+.mp-ci{position:absolute;top:4px;transform:translateX(-50%);font-size:10px;padding:1px 3px;border:1px solid #3b2412;border-radius:3px;background:#fff8e6;color:#3b2412;cursor:pointer;line-height:1.2}.mp-ci.on{background:#c0262d;color:#fff}
+.mp-cb-l{position:absolute;left:6px;bottom:1px;font-size:10px;color:#6b4a2a}
+.mp-pinf{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;margin:8px 0;font-family:var(--f-data);font-size:14px}.mp-pinf input{font:inherit;padding:3px 6px}
+.mp-info{margin:12px 0 6px}
 .mp-card{border:1px solid var(--rule,#ccc);border-top:4px solid var(--c);padding:12px 14px}
 .mp-hd{display:flex;align-items:center;gap:12px}.mp-hd>div{flex:1;min-width:0}.mp-nm{margin:0;font-family:var(--f-display);font-weight:900;font-size:26px;line-height:1}.mp-hd .sub{margin:2px 0 0}
-.mp-leg{list-style:none;padding:0;margin:0;display:grid;gap:8px;font-size:16px}.mp-leg li{display:flex;align-items:center;gap:10px}.mp-leg svg{flex:none}
+.mp-acts{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.mp-stars{letter-spacing:.05em;color:#b48a2a}.mp-st{opacity:.5}.mp-st.on{opacity:1;color:#c08a10}
+.mp-banner{background:#fff3cf;border-left:4px solid #c08a10;padding:8px 12px;margin:8px 0;font-size:16px}
+.mp-prog{display:flex;flex-wrap:wrap;gap:6px 18px;font-family:var(--f-data);font-size:14px;margin:6px 0}
+.mp-rt{font-family:var(--f-data);font-size:14px;margin:6px 0}
+.mp-more{margin:12px 0;font-family:var(--f-data);font-size:14px}.mp-more summary{cursor:pointer;font-weight:600}
+.mp-chips{display:flex;flex-wrap:wrap;gap:6px 14px;margin:8px 0}.mp-chip{display:inline-flex;align-items:center;gap:5px;cursor:pointer}
+.mp-pl{list-style:none;padding:0;margin:0;display:grid;gap:6px;font-family:var(--f-data)}.mp-sw{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+.mp-legs{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:4px 22px}.mp-legs h4{margin:10px 0 6px;font-family:var(--f-data);font-size:13px;text-transform:uppercase;letter-spacing:.06em}
+.mp-li{display:flex;align-items:center;gap:10px;font-size:15px;line-height:1.3;margin:0 0 6px}.mp-li svg{flex:none}
+@media (max-width:560px){.mp-nm{font-size:22px}}
 </style>
 </head>
 <body>
@@ -1979,7 +2011,8 @@ function render(keepScroll){
   else if (r === "mainai-skaiciuokle") html = pageTradeCalc();
   else if (r === "sprendimai") html = pageDecisions();
   else if (r === "istorija") html = pageHistory();
-  else if (r === "zemelapis") html = pageMap();
+  else if (r === "zemelapis" && !(LG && LG.cur)) html = pageMap();
+  else if (r === "zemelapis"){ location.replace("#lentele"); return; }
   else if (r === "analitika" || r.indexOf("analitika-") === 0) html = pageLab(r.slice(10));
   else if (r === "izvalgos") html = pageInsights();
   else if (r === "kalendorius") html = pageCalendar();
@@ -2006,7 +2039,8 @@ function render(keepScroll){
   if (mm){ drawTrade(); }
   if (r.indexOf("palyginimas") === 0){ drawCompare(); }
   if (r.indexOf("komanda-") === 0){ drawTeamRounds(); }
-  if (r === "zemelapis"){ mapBind(); drawMap(); } else mapStop();
+  if (r === "zemelapis"){ mapOpen(); } else { mapStop(); mapAmbient(null); }
+  var zl = document.querySelector('a[href="#zemelapis"]'); if (zl) zl.hidden = !!(LG && LG.cur);
   toolsInit(); applyMe(); try { tabBar(); tabSync(); } catch (e){} tickCountdown(); try { postRender(r); } catch (e){ if (window.console) console.error(e); }
   var tl = document.querySelector('.tools'); if (tl) tl.hidden = r !== 'lentele';
   if (!keepScroll) window.scrollTo(0, 0);
@@ -5858,281 +5892,732 @@ function labAwards(){
 /* ---------- site search (button, "/" or Ctrl+K) ---------- */
 var SRCH = {idx: null, sect: null, sel: 0, list: []};
 function srNorm(s){ return String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/\s+/g, ' ').trim(); }
-/* ===== Lygos žemėlapis: procedural fantasy map, territory = points earned (power diagram) ===== */
-var MAPS = {era: null, sel: null, layers: {roads: true, towns: true, terrain: true}, play: null, key: null};
+/* ===== Lygos žemėlapis v2: the league as a game world (main league only) =====
+   One island inside a reef (clear boundary), realms follow points (power diagram) in a fair ring around Taurės kalnas.
+   Camera: pan and zoom move two groups; every icon and label sits in a .mp-p group counter-scaled by --ik so it keeps its screen size. */
+var MAPS = {era: null, sel: null, floor: 'surface', cam: {x: 0, y: 0, k: 1}, tool: null, route: null, poi: null, play: null, geo: null};
+var MAP_BIOMES = [ /* clockwise from north: cold north, hot south, wet west */
+  {id: 'ledynai', nm: 'Ledynai', fill: '#e2eaee', ink: '#5d7380', glyph: 'peak', snow: 1},
+  {id: 'taiga', nm: 'Taiga', fill: '#d3ddc4', ink: '#3f5a3a', glyph: 'pine'},
+  {id: 'kalnynas', nm: 'Kalnynas', fill: '#ddd0b8', ink: '#5b4632', glyph: 'peak'},
+  {id: 'giria', nm: 'Giria', fill: '#cddab0', ink: '#2f5328', glyph: 'tree'},
+  {id: 'vynuogynai', nm: 'Vynuogynai', fill: '#e9d4ad', ink: '#7a3f2a', glyph: 'vine'},
+  {id: 'dykuma', nm: 'Dykuma', fill: '#efd9a2', ink: '#9a6a2a', glyph: 'dune'},
+  {id: 'savana', nm: 'Savana', fill: '#e6d99a', ink: '#6f6a24', glyph: 'acacia'},
+  {id: 'pelkes', nm: 'Pelkės', fill: '#cbd4b2', ink: '#4a5a34', glyph: 'reed'},
+  {id: 'pievos', nm: 'Pievos', fill: '#dbe5b4', ink: '#4d6a2c', glyph: 'grass'},
+  {id: 'vulkanai', nm: 'Vulkanai', fill: '#d6beab', ink: '#6a2a1c', glyph: 'volcano'}
+];
+var MAP_CAP = {ledynai: 'tower', taiga: 'hall', kalnynas: 'castle', giria: 'hall', vynuogynai: 'dome', dykuma: 'tent', savana: 'tent', pelkes: 'tower', pievos: 'castle', vulkanai: 'dome'};
+var MAP_CB = ['#E69F00', '#56B4E9', '#009E73', '#F0E442', '#0072B2', '#D55E00', '#CC79A7', '#999999', '#882255', '#44AA99', '#332288', '#117733'];
+var MAP_RIVERS = ['Taškupė', 'Kapitonė', 'Suolupė', 'Mainupė', 'Draftupė', 'Raištupė'];
+var MAP_L0 = {roads: 1, towns: 1, terrain: 1, quests: 1, dangers: 1, treasures: 1, events: 1, merchants: 1, weather: 1, wildlife: 1, contours: 1, zone: 1, pins: 1};
+function mapPref(){ if (!MAPS.pref){ var p = {}; try { p = JSON.parse(lsGet('ef-map') || '{}') || {}; } catch (e){}
+    MAPS.pref = Object.assign({fog: 1, cb: 0, fair: 0, still: 0, night: 'auto', sound: 0, compass: 1, found: {}, seen: {}, pins: [], tour: 0, snap: null}, p);
+    MAPS.pref.L = Object.assign({}, MAP_L0, p.L || {}); MAPS.pref.mini = Object.assign({on: 1, size: 1, op: 0.92, rot: 0}, p.mini || {}); }
+  return MAPS.pref; }
+function mapSave(){ try { lsSet('ef-map', JSON.stringify(MAPS.pref)); } catch (e){} }
 function mapRng(seed){ var a = seed >>> 0; return function(){ a = (a + 0x6D2B79F5) >>> 0; var t = a; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
 function mapHash(s){ var h = 2166136261; for (var i = 0; i < s.length; i++){ h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; }
 function mapInPoly(x, y, P){ var c = false; for (var i = 0, j = P.length - 1; i < P.length; j = i++){ var a = P[i], b = P[j]; if ((a[1] > y) !== (b[1] > y) && x < (b[0] - a[0]) * (y - a[1]) / (b[1] - a[1]) + a[0]) c = !c; } return c; }
-function mapSmooth(P){ var n = P.length, s = ''; for (var i = 0; i < n; i++){ var a = P[i], b = P[(i + 1) % n], m = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2]; s += (i ? ' Q' : 'M' + r1(((P[n - 1][0] + a[0]) / 2)) + ' ' + r1(((P[n - 1][1] + a[1]) / 2)) + ' Q') + r1(a[0]) + ' ' + r1(a[1]) + ' ' + r1(m[0]) + ' ' + r1(m[1]); } return s + 'Z'; function r1(v){ return Math.round(v * 10) / 10; } }
-function mapClip(poly, a, b, c){ /* keep a*x + b*y <= c */
-  var out = [], n = poly.length; if (!n) return out;
+function mR(v){ return Math.round(v * 10) / 10; }
+function mapSmooth(P, open){ var n = P.length, s = '', i;
+  if (open){ s = 'M' + mR(P[0][0]) + ' ' + mR(P[0][1]); for (i = 1; i < n - 1; i++) s += 'Q' + mR(P[i][0]) + ' ' + mR(P[i][1]) + ' ' + mR((P[i][0] + P[i + 1][0]) / 2) + ' ' + mR((P[i][1] + P[i + 1][1]) / 2); return s + 'L' + mR(P[n - 1][0]) + ' ' + mR(P[n - 1][1]); }
+  for (i = 0; i < n; i++){ var a = P[i], b = P[(i + 1) % n]; s += (i ? ' Q' : 'M' + mR((P[n - 1][0] + a[0]) / 2) + ' ' + mR((P[n - 1][1] + a[1]) / 2) + ' Q') + mR(a[0]) + ' ' + mR(a[1]) + ' ' + mR((a[0] + b[0]) / 2) + ' ' + mR((a[1] + b[1]) / 2); }
+  return s + 'Z'; }
+function mapWarpD(P, G){ var out = []; for (var i = 0; i < P.length; i++){ var a = P[i], b = P[(i + 1) % P.length], l = Math.hypot(b[0] - a[0], b[1] - a[1]), n = Math.max(1, Math.ceil(l / 5)); for (var k = 0; k < n; k++){ var t = k / n; out.push(G.warp(a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t)); } } return mapPolyD(out); }
+function mapPolyD(P){ return 'M' + P.map(function(p){ return mR(p[0]) + ' ' + mR(p[1]); }).join('L') + 'Z'; }
+function mapClip(poly, a, b, c){ var out = [], n = poly.length; if (!n) return out;
   for (var i = 0; i < n; i++){ var p = poly[i], q = poly[(i + 1) % n], fp = a * p[0] + b * p[1] - c, fq = a * q[0] + b * q[1] - c;
-    if (fp <= 0) out.push(p);
-    if ((fp < 0 && fq > 0) || (fp > 0 && fq < 0)){ var t = fp / (fp - fq); out.push([p[0] + t * (q[0] - p[0]), p[1] + t * (q[1] - p[1])]); } }
-  return out;
-}
-function MAP_FIX(port){ /* x, y, w, h of cartouche, compass, sea name */
-  return port ? [[18, 786, 212, 58], [508, 780, 64, 64], [40, 52, 170, 26]] : [[792, 540, 188, 62], [846, 322, 76, 76], [810, 236, 150, 30]]; }
-/* static geometry for one league and one orientation: coast, islands, sample grid, seeds, terrain noise */
-function mapGeo(key, ids, port){
-  var ck = key + '|' + ids.join(',') + '|' + (port ? 'p' : 'l');
+    if (fp <= 0) out.push(p); if ((fp < 0 && fq > 0) || (fp > 0 && fq < 0)){ var t = fp / (fp - fq); out.push([p[0] + t * (q[0] - p[0]), p[1] + t * (q[1] - p[1])]); } }
+  return out; }
+function MAP_FIX(port){ /* furniture in the sea: cartouche, compass rose, sea name (x, y, w, h) */
+  return port ? [[16, 852, 236, 40], [536, 846, 48, 48], [292, 856, 200, 26]] : [[842, 576, 146, 66], [878, 330, 80, 80], [846, 240, 140, 30]]; }
+
+/* ---------- static world (per orientation): coast, elevation, rivers, contours, fair seats ---------- */
+function mapGeo(ids, port){
+  var ck = ids.join(',') + '|' + (port ? 'p' : 'l');
   if (MAPS.geo && MAPS.geo.ck === ck) return MAPS.geo;
-  var R = mapRng(mapHash(key)), VW = port ? 600 : 1000, VH = port ? 860 : 640, ph = [], k;
-  var FB = port ? [24, 128, 576, 772] : [26, 26, 772, 614], cx = 0, cy = 0, rx = 1, ry = 1;
-  for (k = 0; k < 6; k++) ph.push(R() * 6.283);
-  var land = [];
-  for (var i = 0; i < 200; i++){ var th = i / 200 * 6.2832;
-    var f = 1 + 0.10 * Math.sin(2 * th + ph[0]) + 0.07 * Math.sin(3 * th + ph[1]) + 0.05 * Math.sin(5 * th + ph[2]) + 0.035 * Math.sin(8 * th + ph[3]) + 0.02 * Math.sin(13 * th + ph[4]) + 0.012 * Math.sin(21 * th + ph[5]);
-    land.push([Math.cos(th) * f, Math.sin(th) * f]); }
-  (function(){ var x0 = 1e9, x1 = -1e9, y0 = 1e9, y1 = -1e9; land.forEach(function(p){ x0 = Math.min(x0, p[0]); x1 = Math.max(x1, p[0]); y0 = Math.min(y0, p[1]); y1 = Math.max(y1, p[1]); });
-    land = land.map(function(p){ return [FB[0] + (p[0] - x0) / (x1 - x0) * (FB[2] - FB[0]), FB[1] + (p[1] - y0) / (y1 - y0) * (FB[3] - FB[1])]; });
-    cx = (FB[0] + FB[2]) / 2; cy = (FB[1] + FB[3]) / 2; rx = (FB[2] - FB[0]) / 2 * 0.8; ry = (FB[3] - FB[1]) / 2 * 0.8; })();
-  /* free agent isles in the emptiest sea corner */
-  var ic = port ? [470, 76] : [884, 112], isles = [];
-  [[0, 0, 22], [-40, 22, 13], [36, 20, 10], [-6, 44, 8]].forEach(function(o, n){
-    var P = [], q = R() * 6.28, cxi = ic[0] + o[0] * (port ? 0.8 : 1), cyi = ic[1] + o[1] * (port ? 0.7 : 1);
-    for (var j = 0; j < 40; j++){ var t = j / 40 * 6.2832, g = 1 + 0.25 * Math.sin(3 * t + q) + 0.12 * Math.sin(5 * t + n); P.push([cxi + Math.cos(t) * o[2] * g * 1.3, cyi + Math.sin(t) * o[2] * g * 0.8]); }
+  var R = mapRng(mapHash('w2main')), VW = port ? 600 : 1000, VH = port ? 900 : 660, ph = [], k, i, x, y;
+  for (k = 0; k < 7; k++) ph.push(R() * 6.283);
+  var FB = port ? [30, 66, 570, 836] : [40, 38, 818, 622], land = [];
+  for (i = 0; i < 220; i++){ var th = i / 220 * 6.2832;
+    var f = 1 + 0.085 * Math.sin(2 * th + ph[0]) + 0.06 * Math.sin(3 * th + ph[1]) + 0.045 * Math.sin(5 * th + ph[2]) + 0.03 * Math.sin(8 * th + ph[3]) + 0.018 * Math.sin(13 * th + ph[4]) + 0.01 * Math.sin(23 * th + ph[5]);
+    var dd = Math.abs(Math.atan2(Math.sin(th - 1.5708), Math.cos(th - 1.5708))), bay = dd < 0.3 ? 1 - 0.15 * Math.cos(dd / 0.3 * 1.5708) : 1; /* southern bay for the harbour */
+    land.push([Math.cos(th) * f * bay, Math.sin(th) * f * bay]); }
+  var bx = [1e9, -1e9, 1e9, -1e9]; land.forEach(function(p){ bx[0] = Math.min(bx[0], p[0]); bx[1] = Math.max(bx[1], p[0]); bx[2] = Math.min(bx[2], p[1]); bx[3] = Math.max(bx[3], p[1]); });
+  land = land.map(function(p){ return [FB[0] + (p[0] - bx[0]) / (bx[1] - bx[0]) * (FB[2] - FB[0]), FB[1] + (p[1] - bx[2]) / (bx[3] - bx[2]) * (FB[3] - FB[1])]; });
+  var cx = (FB[0] + FB[2]) / 2, cy = (FB[1] + FB[3]) / 2, rx = (FB[2] - FB[0]) / 2, ry = (FB[3] - FB[1]) / 2;
+  var bayP = land[55], harbor = [bayP[0], bayP[1] - (port ? 30 : 26)];
+  var cliffs = [], cur = [];
+  land.forEach(function(p){ var a = Math.atan2(p[1] - cy, p[0] - cx); if (Math.sin(a * 3 + ph[6]) > 0.55) cur.push(p); else { if (cur.length > 4) cliffs.push(cur); cur = []; } }); if (cur.length > 4) cliffs.push(cur);
+  var ic = port ? [500, 30] : [912, 84], isles = [];
+  [[0, 0, 20], [-34, 26, 12], [30, 24, 9], [-4, 46, 7]].forEach(function(o, n){ var P = [], q = R() * 6.28, sc = port ? 0.72 : 1;
+    for (var j = 0; j < 40; j++){ var t = j / 40 * 6.2832, g = 1 + 0.25 * Math.sin(3 * t + q) + 0.12 * Math.sin(5 * t + n); P.push([ic[0] + o[0] * sc + Math.cos(t) * o[2] * g * 1.3 * sc, ic[1] + 22 + o[1] * sc + Math.sin(t) * o[2] * g * 0.8 * sc]); }
     isles.push(P); });
-  /* sample grid */
-  var st = VW / (port ? 46 : 74), S = [];
-  for (var y = st / 2; y < VH; y += st) for (var x = st / 2; x < VW; x += st) if (mapInPoly(x, y, land)) S.push([x, y]);
-  /* seeds: golden spiral, then Lloyd relaxation on the land samples */
-  var n = ids.length, seeds = [];
-  for (k = 0; k < n; k++){ var a = k * 2.39996 + ph[0], rr = Math.sqrt((k + 0.5) / n) * 0.72; seeds.push([cx + Math.cos(a) * rx * rr, cy + Math.sin(a) * ry * rr]); }
-  for (var it = 0; it < 25; it++){
-    var acc = seeds.map(function(){ return [0, 0, 0]; });
-    S.forEach(function(p){ var b = 0, bd = 1e18; for (var s = 0; s < n; s++){ var d = (p[0] - seeds[s][0]) * (p[0] - seeds[s][0]) + (p[1] - seeds[s][1]) * (p[1] - seeds[s][1]); if (d < bd){ bd = d; b = s; } } acc[b][0] += p[0]; acc[b][1] += p[1]; acc[b][2]++; });
-    seeds = seeds.map(function(s, j){ return acc[j][2] ? [acc[j][0] / acc[j][2], acc[j][1] / acc[j][2]] : s; }); }
-  /* distance of samples to the coast (for terrain spacing) */
-  function coastDist(x, y){ var m = 1e9; for (var j = 0; j < land.length; j += 2){ var dx = land[j][0] - x, dy = land[j][1] - y, d = dx * dx + dy * dy; if (d < m) m = d; } return Math.sqrt(m); }
-  var nz = [R() * 9, R() * 9, R() * 9, R() * 9];
-  function noise(x, y){ return Math.sin(x / 61 + nz[0]) * Math.cos(y / 53 + nz[1]) + 0.6 * Math.sin((x + y) / 37 + nz[2]) * Math.cos((x - y) / 43 + nz[3]); }
-  /* terrain candidates: jittered grid */
-  var T = [], ts = port ? 19 : 21;
-  for (y = ts; y < VH; y += ts) for (x = ts; x < VW; x += ts){
-    var jx = x + (R() - 0.5) * ts * 0.8, jy = y + (R() - 0.5) * ts * 0.8;
-    if (!mapInPoly(jx, jy, land) || coastDist(jx, jy) < 16) continue;
-    var v = noise(jx, jy), ty = v > 0.62 ? 'm' : v < -0.55 ? 'f' : (R() < 0.10 ? 'h' : null);
-    if (ty) T.push([jx, jy, ty, R()]); }
-  /* rivers: start at the highest mountains, walk away from the centre toward the sea */
-  var rivers = [], ms = T.filter(function(t){ return t[2] === 'm'; }).sort(function(a, b){ return noise(b[0], b[1]) - noise(a[0], a[1]); });
-  for (k = 0; k < ms.length && rivers.length < 3; k++){
-    var p0 = ms[k]; if (rivers.some(function(r){ return Math.hypot(r[0][0] - p0[0], r[0][1] - p0[1]) < VW * 0.2; })) continue;
-    var pts = [[p0[0], p0[1]]], dir = Math.atan2(p0[1] - cy, p0[0] - cx), px = p0[0], py = p0[1];
-    for (var stp = 0; stp < 80; stp++){ dir += (R() - 0.5) * 0.7; dir += Math.atan2(Math.sin(Math.atan2(py - cy, px - cx) - dir), Math.cos(Math.atan2(py - cy, px - cx) - dir)) * 0.18;
-      px += Math.cos(dir) * 11; py += Math.sin(dir) * 11; pts.push([px, py]); if (!mapInPoly(px, py, land)) break; }
-    if (pts.length > 6) rivers.push(pts); }
-  var waves = [];
-  for (k = 0; k < 90 && waves.length < (port ? 22 : 34); k++){ var wx = R() * VW, wy = R() * VH; if (wx < 30 || wy < 30 || wx > VW - 40 || wy > VH - 30) continue;
-    if (mapInPoly(wx, wy, land) || coastDist(wx, wy) < 26 || Math.hypot(ic[0] - wx, ic[1] - wy) < 95 || MAP_FIX(port).some(function(b){ return wx > b[0] - 20 && wx < b[0] + b[2] + 10 && wy > b[1] - 12 && wy < b[1] + b[3] + 12; })) continue; waves.push([wx, wy]); }
-  MAPS.geo = {ck: ck, VW: VW, VH: VH, cx: cx, cy: cy, land: land, isles: isles, S: S, st: st, seeds: seeds, T: T, rivers: rivers, waves: waves, ic: ic, port: port};
+  function coastDist(px, py){ var m = 1e9; for (var j = 0; j < land.length; j += 2){ var dx = land[j][0] - px, dy = land[j][1] - py, d = dx * dx + dy * dy; if (d < m) m = d; } return Math.sqrt(m); }
+  var nz = []; for (k = 0; k < 6; k++) nz.push(R() * 9);
+  function noise(px, py){ return Math.sin(px / 47 + nz[0]) * Math.cos(py / 41 + nz[1]) + 0.55 * Math.sin((px + py) / 29 + nz[2]) * Math.cos((px - py) / 33 + nz[3]) + 0.3 * Math.sin(px / 17 + nz[4]) * Math.sin(py / 19 + nz[5]); }
+  var st = port ? 12 : 13, GX = Math.ceil(VW / st) + 1, GY = Math.ceil(VH / st) + 1, E = new Float32Array(GX * GY), IN = new Uint8Array(GX * GY), CD = new Float32Array(GX * GY), maxCD = 1;
+  for (y = 0; y < GY; y++) for (x = 0; x < GX; x++){ var idx = y * GX + x; if (mapInPoly(x * st, y * st, land)){ IN[idx] = 1; CD[idx] = coastDist(x * st, y * st); if (CD[idx] > maxCD) maxCD = CD[idx]; } }
+  var plateau = Math.min(rx, ry) * 0.17;
+  for (y = 0; y < GY; y++) for (x = 0; x < GX; x++){ var id2 = y * GX + x;
+    if (!IN[id2]){ E[id2] = -0.2; continue; }
+    var c = Math.min(1, CD[id2] / (maxCD * 0.7)), dc = Math.hypot((x * st - cx) / rx, (y * st - cy) / ry);
+    E[id2] = 0.5 * Math.pow(c, 0.8) + 0.24 * (noise(x * st, y * st) * 0.5 + 0.5) + 0.38 * Math.exp(-dc * dc / 0.05); }
+  function elev(px, py){ var gx = Math.max(0, Math.min(GX - 1.001, px / st)), gy = Math.max(0, Math.min(GY - 1.001, py / st)), x0 = gx | 0, y0 = gy | 0, fx = gx - x0, fy = gy - y0;
+    return (E[y0 * GX + x0] * (1 - fx) + E[y0 * GX + x0 + 1] * fx) * (1 - fy) + (E[(y0 + 1) * GX + x0] * (1 - fx) + E[(y0 + 1) * GX + x0 + 1] * fx) * fy; }
+  /* rivers: born on the high ground around the summit, always flow downhill to the sea (5) */
+  var rivers = [];
+  for (k = 0; k < 6; k++){ var a0 = ph[0] + k * 6.2832 / 6 + 0.4, px = cx + Math.cos(a0) * rx * 0.25, py = cy + Math.sin(a0) * ry * 0.25, pts = [[px, py]], dir = a0;
+    for (var stp = 0; stp < 160; stp++){ var best = null, be = 1e9;
+      for (var a = -1.1; a <= 1.11; a += 0.275){ var qx = px + Math.cos(dir + a) * 9, qy = py + Math.sin(dir + a) * 9, e = elev(qx, qy) + Math.abs(a) * 0.012 + (R() - 0.5) * 0.01; if (e < be){ be = e; best = [qx, qy, dir + a]; } }
+      px = best[0]; py = best[1]; dir = dir * 0.6 + best[2] * 0.4; pts.push([px, py]);
+      if (!mapInPoly(px, py, land)) break;
+      if (rivers.some(function(r){ return r.pts.some(function(q){ return Math.hypot(q[0] - px, q[1] - py) < 7; }); })) break; }
+    if (pts.length > 10) rivers.push({pts: pts, name: MAP_RIVERS[k % MAP_RIVERS.length]}); }
+  var riverPts = []; rivers.forEach(function(r){ r.pts.forEach(function(p, j){ if (j % 2 === 0) riverPts.push(p); }); });
+  function waterDist(px, py){ var m = coastDist(px, py); for (var j = 0; j < riverPts.length; j++){ var d = Math.hypot(riverPts[j][0] - px, riverPts[j][1] - py); if (d < m) m = d; } return m; }
+  var lake = []; for (k = 0; k < 30; k++){ var tt = k / 30 * 6.2832; lake.push([cx + plateau * 0.55 + Math.cos(tt) * plateau * 0.3 * (1 + 0.15 * Math.sin(3 * tt)), cy + plateau * 0.5 + Math.sin(tt) * plateau * 0.18]); }
+  /* contour lines (8) by marching squares */
+  var contours = [0.4, 0.54, 0.68, 0.82].map(function(lv){ var seg = [];
+    for (var yy = 0; yy < GY - 1; yy++) for (var xx = 0; xx < GX - 1; xx++){
+      var a = E[yy * GX + xx], b = E[yy * GX + xx + 1], c2 = E[(yy + 1) * GX + xx + 1], d = E[(yy + 1) * GX + xx];
+      var cs = (a > lv ? 8 : 0) | (b > lv ? 4 : 0) | (c2 > lv ? 2 : 0) | (d > lv ? 1 : 0); if (cs === 0 || cs === 15) continue;
+      var X = xx * st, Y = yy * st, t = function(p, q){ return (lv - p) / (q - p); };
+      var top = [X + st * t(a, b), Y], rgt = [X + st, Y + st * t(b, c2)], bot = [X + st * t(d, c2), Y + st], lft = [X, Y + st * t(a, d)];
+      var M2 = {1: [lft, bot], 2: [bot, rgt], 3: [lft, rgt], 4: [top, rgt], 5: [lft, top, bot, rgt], 6: [top, bot], 7: [lft, top], 8: [lft, top], 9: [top, bot], 10: [lft, bot, top, rgt], 11: [top, rgt], 12: [lft, rgt], 13: [bot, rgt], 14: [lft, bot]}[cs];
+      for (var m = 0; m < M2.length; m += 2) seg.push('M' + mR(M2[m][0]) + ' ' + mR(M2[m][1]) + 'L' + mR(M2[m + 1][0]) + ' ' + mR(M2[m + 1][1])); }
+    return seg.join(''); });
+  /* fair seats (84, 85): equal distance to the summit, every realm has two neighbours (16) */
+  var n = ids.length, seeds = [], a1 = -1.5708 + Math.PI / n;
+  for (k = 0; k < n; k++){ var ang = a1 + k * 6.2832 / n; seeds.push([cx + Math.cos(ang) * rx * 0.58, cy + Math.sin(ang) * ry * 0.58, ang]); }
+  var biome = seeds.map(function(s){ var b = (((s[2] + 1.5708) / 6.2832) % 1 + 1) % 1; return MAP_BIOMES[Math.floor(b * MAP_BIOMES.length) % MAP_BIOMES.length]; });
+  var S2 = [], ss = port ? 9 : 10, hr = port ? 34 : 40;
+  for (y = ss / 2; y < VH; y += ss) for (x = ss / 2; x < VW; x += ss){ if (!mapInPoly(x, y, land)) continue; S2.push([x, y, Math.hypot(x - cx, y - cy) < plateau || Math.hypot(x - harbor[0], y - harbor[1]) < hr ? 1 : 0]); }
+  var sidx = {}; S2.forEach(function(p, j){ sidx[Math.round(p[0]) + ',' + Math.round(p[1])] = j; });
+  var T = [], ts = port ? 15 : 16;
+  for (y = ts; y < VH; y += ts) for (x = ts; x < VW; x += ts){ var jx = x + (R() - 0.5) * ts * 0.8, jy = y + (R() - 0.5) * ts * 0.8;
+    if (!mapInPoly(jx, jy, land) || coastDist(jx, jy) < 12 || Math.hypot(jx - cx, jy - cy) < plateau * 1.25 || Math.hypot(jx - harbor[0], jy - harbor[1]) < hr + 6) continue;
+    T.push([jx, jy, elev(jx, jy), R(), noise(jx * 1.7, jy * 1.7)]); }
+  var waves = [], fixb = MAP_FIX(port);
+  for (k = 0; k < 200 && waves.length < (port ? 26 : 40); k++){ var wx = 20 + R() * (VW - 40), wy = 20 + R() * (VH - 40);
+    if (mapInPoly(wx, wy, land) || coastDist(wx, wy) < 34 || Math.hypot(ic[0] - wx, ic[1] + 30 - wy) < 80 || fixb.some(function(b){ return wx > b[0] - 24 && wx < b[0] + b[2] + 14 && wy > b[1] - 14 && wy < b[1] + b[3] + 14; })) continue; waves.push([wx, wy]); }
+  function warp(px, py){ var a = port ? 6 : 8; return [px + a * Math.sin(px / 23 + nz[2]) * Math.cos(py / 31 + nz[4]) + a * 0.5 * Math.sin(py / 11 + nz[1]), py + a * Math.cos(px / 29 + nz[3]) * Math.sin(py / 21 + nz[5]) + a * 0.5 * Math.cos(px / 13 + nz[0])]; }
+  MAPS.geo = {warp: warp, ck: ck, VW: VW, VH: VH, cx: cx, cy: cy, rx: rx, ry: ry, land: land, isles: isles, ic: ic, harbor: harbor, hr: hr, cliffs: cliffs, rivers: rivers, lake: lake, contours: contours, seeds: seeds, biome: biome, S: S2, sidx: sidx, ss: ss, T: T, waves: waves, plateau: plateau, port: port, elev: elev, waterDist: waterDist, coastDist: coastDist};
   return MAPS.geo;
 }
-/* power diagram: weights tuned so each territory's land share follows the points share */
+/* ---------- power diagram: each realm's land share follows its points ---------- */
 function mapPower(G, share){
-  var n = share.length, w = share.map(function(){ return 0; }), own = new Array(G.S.length), D2 = Math.pow(G.VW * 0.22, 2);
+  var n = share.length, w = share.map(function(){ return 0; }), own = new Int16Array(G.S.length), D2 = Math.pow(G.VW * 0.2, 2), nl = G.S.filter(function(p){ return !p[2]; }).length;
   function assign(){ var c = share.map(function(){ return 0; });
-    for (var i = 0; i < G.S.length; i++){ var p = G.S[i], b = 0, bd = 1e18;
+    for (var i = 0; i < G.S.length; i++){ var p = G.S[i]; if (p[2]){ own[i] = -1; continue; } var b = 0, bd = 1e18;
       for (var s = 0; s < n; s++){ var d = (p[0] - G.seeds[s][0]) * (p[0] - G.seeds[s][0]) + (p[1] - G.seeds[s][1]) * (p[1] - G.seeds[s][1]) - w[s]; if (d < bd){ bd = d; b = s; } }
       own[i] = b; c[b]++; }
-    return c.map(function(v){ return v / G.S.length; }); }
-  for (var it = 0; it < 70; it++){ var a = assign(); for (var s = 0; s < n; s++) w[s] += (share[s] - a[s]) * D2 * 1.4; }
+    return c.map(function(v){ return v / nl; }); }
+  for (var it = 0; it < 60; it++){ var a = assign(); for (var s = 0; s < n; s++) w[s] += (share[s] - a[s]) * D2 * 1.4; }
   var area = assign();
-  var polys = G.seeds.map(function(pi, i){
-    var poly = [[-5, -5], [G.VW + 5, -5], [G.VW + 5, G.VH + 5], [-5, G.VH + 5]];
-    for (var j = 0; j < n && poly.length; j++){ if (j === i) continue; var pj = G.seeds[j];
-      poly = mapClip(poly, 2 * (pj[0] - pi[0]), 2 * (pj[1] - pi[1]), pj[0] * pj[0] + pj[1] * pj[1] - pi[0] * pi[0] - pi[1] * pi[1] - w[j] + w[i]); }
+  var polys = G.seeds.map(function(pi, i){ var poly = [[-5, -5], [G.VW + 5, -5], [G.VW + 5, G.VH + 5], [-5, G.VH + 5]];
+    for (var j = 0; j < n && poly.length; j++){ if (j === i) continue; var pj = G.seeds[j]; poly = mapClip(poly, 2 * (pj[0] - pi[0]), 2 * (pj[1] - pi[1]), pj[0] * pj[0] + pj[1] * pj[1] - pi[0] * pi[0] - pi[1] * pi[1] - w[j] + w[i]); }
     return poly; });
   var cen = share.map(function(){ return [0, 0, 0]; });
-  G.S.forEach(function(p, i){ var c = cen[own[i]]; c[0] += p[0]; c[1] += p[1]; c[2]++; });
-  /* anchor = owned sample closest to the centroid (always inside the territory) */
+  G.S.forEach(function(p, i){ if (own[i] < 0) return; var c = cen[own[i]]; c[0] += p[0]; c[1] += p[1]; c[2]++; });
   var anc = cen.map(function(c, s){ if (!c[2]) return null; var mx = c[0] / c[2], my = c[1] / c[2], b = null, bd = 1e18;
-    G.S.forEach(function(p, i){ if (own[i] !== s) return; var d = (p[0] - mx) * (p[0] - mx) + (p[1] - my) * (p[1] - my); if (d < bd){ bd = d; b = p; } }); return b; });
-  return {own: own, area: area, polys: polys, anc: anc};
+    G.S.forEach(function(p, i){ if (own[i] !== s) return; var d = (p[0] - mx) * (p[0] - mx) + (p[1] - my) * (p[1] - my) + (G.coastDist(p[0], p[1]) < 40 ? 4000 : 0); if (d < bd){ bd = d; b = p; } }); return b; });
+  var border = [];
+  G.S.forEach(function(p, i){ if (own[i] < 0) return; [[G.ss, 0], [0, G.ss]].forEach(function(o){ var j = G.sidx[Math.round(p[0] + o[0]) + ',' + Math.round(p[1] + o[1])]; if (j != null && own[j] >= 0 && own[j] !== own[i]) border.push([p[0] + o[0] / 2, p[1] + o[1] / 2]); }); });
+  return {own: own, area: area, polys: polys, anc: anc, border: border};
 }
+function mapOwnAt(P, G, x, y){ var st = G.ss, bi = -1, bd = 1e9, gx = Math.round((x - st / 2) / st) * st + st / 2, gy = Math.round((y - st / 2) / st) * st + st / 2;
+  for (var dx = -st; dx <= st; dx += st) for (var dy = -st; dy <= st; dy += st){ var k = G.sidx[Math.round(gx + dx) + ',' + Math.round(gy + dy)]; if (k == null || P.own[k] < 0) continue; var p = G.S[k], d = Math.hypot(p[0] - x, p[1] - y); if (d < bd){ bd = d; bi = P.own[k]; } }
+  return bi; }
+
+/* ---------- what happened up to a round ---------- */
+function mapOdds(era){ var d = S.data, H = (d.odds && d.odds.history) || [], e = H.filter(function(x){ return x.before === era + 1; })[0];
+  if (!e && d.livetips && d.livetips.odds && d.livetips.odds.round === era + 1) e = d.livetips.odds; return e || H[H.length - 1] || null; }
 function mapEraData(era){
-  var d = S.data, ids = d.managers.map(function(m){ return m.id; }), tot = {}, wins = {}, last = {};
-  ids.forEach(function(id){ tot[id] = 0; wins[id] = 0; last[id] = null; });
-  d.rounds.slice(0, era).forEach(function(r){ ids.forEach(function(id){ var v = r.scores[id] || 0; tot[id] += v; last[id] = v; }); if (r.winner && wins[r.winner] != null) wins[r.winner]++; });
-  var order = ids.slice().sort(function(a, b){ return tot[b] - tot[a]; }), pos = {};
-  order.forEach(function(id, i){ pos[id] = i + 1; });
-  var roads = {};
-  (d.transfers || []).forEach(function(w){ (w.deals || []).forEach(function(x){ if (x.kind !== 'trade' || x.undo || !x.a || !x.b || x.round > era) return; var k = [x.a, x.b].sort().join('|'); roads[k] = (roads[k] || 0) + 1; }); });
-  /* players: owner in that round, best total so far */
-  var towns = {}; ids.forEach(function(id){ towns[id] = []; });
-  var pls = []; Object.keys(d.rosters || {}).forEach(function(t){ (d.rosters[t] || []).forEach(function(p){ pls.push(p); }); }); (d.free_agents || []).forEach(function(p){ pls.push(p); });
-  var seen = {};
-  pls.forEach(function(p){ if (!p || !p.own || seen[p.id || p.full]) return; seen[p.id || p.full] = 1; var o = p.own[era - 1]; if (!o || !towns[o]) return;
-    var s = 0; (p.cnt || p.pts || []).slice(0, era).forEach(function(v){ s += v || 0; }); towns[o].push({p: p, s: s}); });
-  ids.forEach(function(id){ towns[id].sort(function(a, b){ return b.s - a.s; }); towns[id] = towns[id].slice(0, 3); });
+  var d = S.data, ids = d.managers.map(function(m){ return m.id; }), tot = {}, wins = {}, last = {}, best = {}, rounds = d.rounds.slice(0, era);
+  ids.forEach(function(id){ tot[id] = 0; wins[id] = 0; last[id] = null; best[id] = [0, 0]; });
+  rounds.forEach(function(r, k){ ids.forEach(function(id){ var v = r.scores[id] || 0; tot[id] += v; last[id] = v; if (v > best[id][0]) best[id] = [v, k + 1]; }); if (r.winner && wins[r.winner] != null) wins[r.winner]++; });
+  var order = ids.slice().sort(function(a, b){ return tot[b] - tot[a]; }), pos = {}; order.forEach(function(id, i){ pos[id] = i + 1; });
+  var lastPlace = {}, lr = rounds[rounds.length - 1]; if (lr) ids.slice().sort(function(a, b){ return (lr.scores[b] || 0) - (lr.scores[a] || 0); }).forEach(function(id, i){ lastPlace[id] = i + 1; });
+  var roads = {}, secret = {}, trades = {};
+  (d.transfers || []).forEach(function(w){ (w.deals || []).forEach(function(x){ if (x.kind !== 'trade' || !x.a || !x.b || x.round > era) return; var k = [x.a, x.b].sort().join('|');
+    if (x.undo) secret[k] = (secret[k] || 0) + 1; else { roads[k] = (roads[k] || 0) + 1; trades[x.a] = (trades[x.a] || 0) + 1; trades[x.b] = (trades[x.b] || 0) + 1; } }); });
+  var pls = [], seen = {}; Object.keys(d.rosters || {}).forEach(function(t){ (d.rosters[t] || []).forEach(function(p){ pls.push(p); }); }); (d.free_agents || []).forEach(function(p){ pls.push(p); });
+  pls = pls.filter(function(p){ var k = p && (p.id || p.full); if (!k || seen[k]) return false; seen[k] = 1; return true; });
+  var towns = {}, ruins = {}, bench = {}, deep = {}, danger = {}, capt = {}, treas = {}, watch = {}, wl = {}; try { (wlGet() || []).forEach(function(id){ wl[id] = 1; }); } catch (e){}
+  ids.forEach(function(id){ towns[id] = []; ruins[id] = []; bench[id] = []; deep[id] = []; danger[id] = []; capt[id] = null; treas[id] = null; watch[id] = []; });
+  var nowR = era === d.rounds_played;
+  pls.forEach(function(p){ var own = p.own || [], o = own[era - 1], cnt = p.cnt || p.pts || [], s = 0;
+    own.slice(0, era).forEach(function(t, k){ if (!t || !towns[t]) return; var v = cnt[k] || 0; if (!treas[t] || v > treas[t].v) treas[t] = {p: p, v: v, r: k + 1}; if (p.slot && p.slot[k] === 'C' && (!capt[t] || v > capt[t].v)) capt[t] = {p: p, v: v};
+      if (t !== o && (k === era - 1 || own[k + 1] !== t) && ruins[t].indexOf(p) < 0) ruins[t].push(p); });
+    if (!o || !towns[o]) return;
+    cnt.slice(0, era).forEach(function(v, k){ if (own[k] === o) s += v || 0; }); towns[o].push({p: p, s: s});
+    var sl = p.slot ? p.slot[era - 1] : null; if (sl === 'B' || sl === 'B6') bench[o].push({p: p, v: cnt[era - 1] || 0, sl: sl}); if (sl === 'I') deep[o].push({p: p});
+    if (nowR && p.inj && /out|doubtful|uncertain/.test(p.status || '')) danger[o].push(p);
+    if (nowR && p.id && wl[p.id]) watch[o].push(p); });
+  ids.forEach(function(id){ towns[id].sort(function(a, b){ return b.s - a.s; }); ruins[id] = ruins[id].slice(-2); });
   var fa = (d.free_agents || []).slice().sort(function(a, b){ return (b.avg || 0) - (a.avg || 0); }).slice(0, 3);
-  return {ids: ids, tot: tot, wins: wins, last: last, pos: pos, roads: roads, towns: towns, fa: fa};
+  var used = {}; (d.specials || []).forEach(function(s){ if (s.round <= era){ used[s.team] = used[s.team] || {}; used[s.team][s.card] = s.round; } });
+  var od = mapOdds(era), winp = {}; ids.forEach(function(id){ winp[id] = od && od.teams && od.teams[id] ? od.teams[id].win[0] : null; });
+  var signings = []; (d.transfers || []).forEach(function(w){ if (w.round !== era + 1 && w.round !== era) return; (w.deals || []).forEach(function(x){ if (x.kind === 'fa' && !x.undo && x.team) signings.push(x); }); });
+  var news = (nowR ? d.news || [] : []).slice(0, 10).map(function(nw){ var t = null; (nw.players || []).forEach(function(pid){ var p = PIDX[pid]; if (p && p.own && p.own[era - 1]) t = t || p.own[era - 1]; }); return t ? {t: t, nw: nw} : null; }).filter(Boolean);
+  var live = d.live && d.live.round === era + 1 ? d.live : null;
+  return {ids: ids, tot: tot, wins: wins, last: last, best: best, pos: pos, order: order, lastPlace: lastPlace, roads: roads, secret: secret, trades: trades, towns: towns, ruins: ruins, bench: bench, deep: deep, danger: danger, capt: capt, treas: treas, watch: watch, fa: fa, used: used, winp: winp, signings: signings, news: news, live: live, avg: function(id){ return era ? tot[id] / era : 0; }};
 }
-function mapIcons(){
+
+/* ---------- symbols ---------- */
+function mapDefs(){
+  var ink = '#3b2412';
   return '<defs>' +
-    '<filter id="mp-rough" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency=".035" numOctaves="2" seed="7" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="3"/></filter>' +
-    '<filter id="mp-paper"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="3"/><feColorMatrix values="0 0 0 0 .45  0 0 0 0 .3  0 0 0 0 .12  0 0 0 .09 0"/></filter>' +
-    '<radialGradient id="mp-vig" cx="50%" cy="50%" r="70%"><stop offset="60%" stop-color="#7a4a1c" stop-opacity="0"/><stop offset="100%" stop-color="#7a4a1c" stop-opacity=".28"/></radialGradient>' +
-    '<g id="mp-castle"><path d="M-9 6V-3h3v-3h3v3h2v-6h3v6h2v-3h3v3h3V6z" fill="#f3e3bd" stroke="#3b2412" stroke-width="1.2" stroke-linejoin="round"/><path d="M-1 6V2a1 1 0 0 1 2 0v4" fill="#3b2412"/><path d="M0.5 -9V-15l5 2-5 2" fill="#9a2b1c" stroke="#3b2412" stroke-width=".7"/></g>' +
-    '<g id="mp-town"><rect x="-3.2" y="-2.2" width="6.4" height="5" fill="#f3e3bd" stroke="#3b2412" stroke-width="1"/><path d="M-4 -2L0 -5.6 4 -2" fill="#9a2b1c" stroke="#3b2412" stroke-width="1" stroke-linejoin="round"/></g>' +
+    '<filter id="mp-rough" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency=".03" numOctaves="2" seed="7" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="3"/></filter>' +
+    '<filter id="mp-paper"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" seed="3"/><feColorMatrix values="0 0 0 0 .45  0 0 0 0 .3  0 0 0 0 .12  0 0 0 .08 0"/></filter>' +
+    '<filter id="mp-cloud" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".014" numOctaves="3" seed="11"/><feColorMatrix values="0 0 0 0 .95  0 0 0 0 .92  0 0 0 0 .85  0 0 0 1.4 -.35"/></filter>' +
+    '<filter id="mp-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5"/></filter>' +
+    '<radialGradient id="mp-vig" cx="50%" cy="50%" r="72%"><stop offset="62%" stop-color="#5a3412" stop-opacity="0"/><stop offset="100%" stop-color="#5a3412" stop-opacity=".3"/></radialGradient>' +
+    '<radialGradient id="mp-light"><stop offset="0" stop-color="#fff6cf" stop-opacity=".95"/><stop offset="1" stop-color="#fff6cf" stop-opacity="0"/></radialGradient>' +
+    '<linearGradient id="mp-sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a9c9c4"/><stop offset="1" stop-color="#8fb3b4"/></linearGradient>' +
+    [0, 45, 90, 135, 30, 60, 120, 150, 15, 75].map(function(a, i){ return '<pattern id="mp-pat' + i + '" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(' + a + ')"><path d="M0 0V7" stroke="#000" stroke-width="' + [1.4, .8, 2.2][i % 3] + '" stroke-opacity=".3"' + (i > 4 ? ' stroke-dasharray="2 2"' : '') + '/></pattern>'; }).join('') +
+    '<g id="mp-c-castle"><path d="M-10 7V-3h3v-3h3v3h2v-7h4v7h2v-3h3v3h3V7z" fill="#f3e3bd" stroke="' + ink + '" stroke-width="1.3" stroke-linejoin="round"/><path d="M-1.5 7V3a1.5 1.5 0 0 1 3 0v4" fill="' + ink + '"/></g>' +
+    '<g id="mp-c-tent"><path d="M-11 7L0 -9 11 7z" fill="#f3e3bd" stroke="' + ink + '" stroke-width="1.3" stroke-linejoin="round"/><path d="M0 -9V7M-3 7L0 1 3 7" fill="none" stroke="' + ink + '"/></g>' +
+    '<g id="mp-c-tower"><path d="M-5 7L-4 -8h8l1 15z" fill="#f3e3bd" stroke="' + ink + '" stroke-width="1.3"/><path d="M-6 -8L0 -14 6 -8z" fill="#9a2b1c" stroke="' + ink + '"/><rect x="-1.5" y="-3" width="3" height="4" fill="' + ink + '"/></g>' +
+    '<g id="mp-c-hall"><path d="M-11 7V-1L0 -9 11 -1V7z" fill="#f3e3bd" stroke="' + ink + '" stroke-width="1.3" stroke-linejoin="round"/><path d="M-13 0L0 -11 13 0" fill="none" stroke="' + ink + '" stroke-width="1.6"/><rect x="-2" y="2" width="4" height="5" fill="' + ink + '"/></g>' +
+    '<g id="mp-c-dome"><path d="M-10 7V0a10 9 0 0 1 20 0v7z" fill="#f3e3bd" stroke="' + ink + '" stroke-width="1.3"/><path d="M0 -9V-14" stroke="' + ink + '"/><circle cy="-15" r="1.6" fill="#9a2b1c"/><path d="M-2 7V3h4v4" fill="' + ink + '"/></g>' +
+    '<g id="mp-town"><rect x="-3.2" y="-2.2" width="6.4" height="5" fill="#f3e3bd" stroke="' + ink + '" stroke-width="1"/><path d="M-4.2 -2L0 -5.8 4.2 -2" fill="#9a2b1c" stroke="' + ink + '" stroke-width="1" stroke-linejoin="round"/></g>' +
+    '<g id="mp-ruin"><path d="M-5 4V-2l2 -2v8M0 4V-4l2 1v7M4 4V0" fill="none" stroke="' + ink + '" stroke-width="1.2"/><path d="M-6 4H6" stroke="' + ink + '"/></g>' +
+    '<g id="mp-watch"><path d="M-3 7L-2 -6h4l1 13z" fill="#e6cf9f" stroke="' + ink + '"/><path d="M-4.5 -6h9v-3h-9z" fill="#f3e3bd" stroke="' + ink + '"/><path d="M-4 -9L0 -13 4 -9" fill="#9a2b1c" stroke="' + ink + '"/></g>' +
+    '<g id="mp-statue"><rect x="-4" y="3" width="8" height="4" fill="#d9c8a4" stroke="' + ink + '"/><circle cy="-6" r="2.2" fill="#c9b27a" stroke="' + ink + '"/><path d="M-2.5 3L-1.5 -3.5h3L2.5 3M-1.5 -2.5L-5 -6M1.5 -2.5L4 -7" fill="#c9b27a" stroke="' + ink + '" stroke-linejoin="round"/></g>' +
+    '<g id="mp-quest"><circle r="7.5" fill="#f2c230" stroke="' + ink + '" stroke-width="1.3"/><path d="M0 -4.5V1.2" stroke="' + ink + '" stroke-width="2.2" stroke-linecap="round"/><circle cy="4" r="1.3" fill="' + ink + '"/></g>' +
+    '<g id="mp-side"><circle r="6.5" fill="#f6e7b5" stroke="' + ink + '" stroke-width="1.2"/><path d="M-2.3 -2a2.4 2.4 0 1 1 3.4 2.2c-.9.5-1.1 1-1.1 1.8" fill="none" stroke="' + ink + '" stroke-width="1.6" stroke-linecap="round"/><circle cy="4" r="1.1" fill="' + ink + '"/></g>' +
+    '<g id="mp-camp"><path d="M-8 6L-2 -4 4 6zM0 6L5 -2 10 6z" fill="#b84a2e" stroke="' + ink + '" stroke-linejoin="round"/><path d="M-9 6H11" stroke="' + ink + '"/></g>' +
+    '<g id="mp-chest"><rect x="-6" y="-3" width="12" height="8" rx="1" fill="#c9852f" stroke="' + ink + '" stroke-width="1.2"/><path d="M-6 0H6M0 -3v3" stroke="' + ink + '"/><path d="M-6 -3a6 3 0 0 1 12 0" fill="#d99a3d" stroke="' + ink + '"/></g>' +
+    '<g id="mp-cave"><path d="M-8 6Q-8 -6 0 -6T8 6z" fill="#5c4630" stroke="' + ink + '"/><path d="M-4 6Q-4 -1 0 -1T4 6z" fill="#1e140b"/></g>' +
+    '<g id="mp-skull"><circle cy="-1" r="5" fill="#fff4e0" stroke="#7a1f12" stroke-width="1.3"/><circle cx="-1.8" cy="-1.5" r="1.1" fill="#7a1f12"/><circle cx="1.8" cy="-1.5" r="1.1" fill="#7a1f12"/><path d="M-2 4v2M0 4v2M2 4v2" stroke="#7a1f12"/></g>' +
+    '<g id="mp-scroll"><rect x="-5" y="-5" width="10" height="11" rx="1" fill="#f6e7c4" stroke="' + ink + '"/><path d="M-3 -2h6M-3 1h6M-3 4h4" stroke="' + ink + '" stroke-width=".8"/></g>' +
+    '<g id="mp-fire"><path d="M-5 5L5 2M-5 2L5 5" stroke="' + ink + '" stroke-width="1.4"/><path d="M0 2C-4 -1 -1 -4 0 -8C1 -4 4 -2 0 2z" fill="#e8742a" stroke="#8a2a10" stroke-width=".8"/></g>' +
+    '<g id="mp-market"><path d="M-8 -2h16l-2 -5h-12z" fill="#2f6f8f" stroke="' + ink + '"/><path d="M-7 -2V6h14V-2" fill="#f3e3bd" stroke="' + ink + '"/><path d="M-3 6V1h6v5" fill="' + ink + '"/></g>' +
+    '<g id="mp-gate"><path d="M-7 7V-4a7 7 0 0 1 14 0V7" fill="#e6d6b4" stroke="' + ink + '" stroke-width="2"/><path d="M-4 7V-2M0 7V-4M4 7V-2" stroke="' + ink + '"/></g>' +
+    '<g id="mp-gate-o"><path d="M-7 7V-4a7 7 0 0 1 14 0V7" fill="none" stroke="#2f7a3a" stroke-width="2.2"/></g>' +
+    '<g id="mp-sign"><path d="M0 7V-6" stroke="' + ink + '" stroke-width="1.4"/><path d="M-1 -6h9l2 2.5-2 2.5h-9z" fill="#e6cf9f" stroke="' + ink + '"/></g>' +
+    '<g id="mp-eye"><path d="M-6 0Q0 -6 6 0Q0 6 -6 0z" fill="#f6e7c4" stroke="' + ink + '"/><circle r="2" fill="#2f5f9a"/></g>' +
+    '<g id="mp-ship"><path d="M-9 2h18l-4 5h-10z" fill="#7a4a24" stroke="' + ink + '"/><path d="M0 2V-10" stroke="' + ink + '"/><path d="M1 -9l7 8H1z" fill="#f6e7c4" stroke="' + ink + '" stroke-width=".8"/></g>' +
+    '<g id="mp-sun"><circle r="4.5" fill="#f2c230" stroke="#a5781a"/>' + [0, 45, 90, 135, 180, 225, 270, 315].map(function(a){ return '<path transform="rotate(' + a + ')" d="M0 -6.5V-9" stroke="#a5781a" stroke-width="1.3"/>'; }).join('') + '</g>' +
+    '<g id="mp-rain"><path d="M-8 1a4 4 0 0 1 2-7 5 5 0 0 1 9-1 3.5 3.5 0 0 1 5 4 3 3 0 0 1-1 4z" fill="#d6dde3" stroke="#56606b"/><path d="M-4 4l-1 4M0 4l-1 4M4 4l-1 4" stroke="#2f6f8f" stroke-width="1.2"/></g>' +
+    '<g id="mp-storm"><path d="M-8 1a4 4 0 0 1 2-7 5 5 0 0 1 9-1 3.5 3.5 0 0 1 5 4 3 3 0 0 1-1 4z" fill="#8e97a1" stroke="#3b434c"/><path d="M0 2l-3 5h3l-2 5 5-7h-3l2-3z" fill="#f2c230" stroke="#7a5a10" stroke-width=".6"/></g>' +
+    '<g id="mp-bird"><path d="M-5 0q2.5 -3 5 0q2.5 -3 5 0" fill="none" stroke="#2b2b2b" stroke-width="1.1"/></g>' +
+    '<g id="mp-whale"><path d="M-9 1q4 -6 12 -2l4 -3 -1 4 2 2q-4 1 -6 0q-6 3 -11 -1z" fill="#5f7f80" stroke="#36504f" stroke-width=".7"/></g>' +
+    '<g id="mp-me"><circle r="12" fill="none" stroke="#c0262d" stroke-width="2.4"><animate attributeName="r" values="10;16;10" dur="2.2s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;.3;1" dur="2.2s" repeatCount="indefinite"/></circle></g>' +
+    '<g id="mp-smoke"><path d="M0 0c-4 -5 4 -7 0 -12c-4 -5 4 -8 0 -14" fill="none" stroke="#7d756a" stroke-width="2.4" stroke-linecap="round" opacity=".55"/></g>' +
+    '<g id="mp-arena"><ellipse rx="15" ry="9" fill="#e9d6a8" stroke="' + ink + '" stroke-width="1.4"/><ellipse rx="9" ry="5" fill="#d8bf86" stroke="' + ink + '"/></g>' +
+    '<g id="mp-summit"><path d="M-30 14L-10 -18 -2 -8 8 -30 30 14z" fill="#e9dcc0" stroke="' + ink + '" stroke-width="1.6" stroke-linejoin="round"/><path d="M8 -30L2 -16 8 -14 14 -18zM-10 -18L-14 -10 -8 -10z" fill="#fff"/><path d="M8 -30V-52" stroke="' + ink + '" stroke-width="1.6"/><path d="M8 -52l16 5-16 5z" fill="var(--lead,#9a2b1c)" stroke="' + ink + '"/><path d="M-4 0h12l-2 8h-8z" fill="#d9b04a" stroke="' + ink + '"/><path d="M-2 8h8v3h-8z" fill="#b48a2a" stroke="' + ink + '"/></g>' +
     '</defs>';
 }
+function mapSeason(era){ var R = S.data.rounds_played, m = new Date().getMonth(); if (era < R) m = (8 + Math.floor((era - 1) / 4.3)) % 12; return m >= 11 || m <= 1 ? 'žiema' : m <= 4 ? 'pavasaris' : m <= 7 ? 'vasara' : 'ruduo'; }
+function mapNight(){ var p = mapPref(); if (p.night === 'day') return false; if (p.night === 'night') return true; var h = new Date().getHours(); return h >= 18 || h < 7; }
+function mapGlyph(t, b, season){ var x = t[0], y = t[1], s = 0.8 + t[3] * 0.45, k = b.ink, o = '', autumn = season === 'ruduo', winter = season === 'žiema';
+  var crown = b.id === 'taiga' ? '#5e7b52' : autumn && /tree|vine|acacia/.test(b.glyph) ? ['#c9762f', '#b8552a', '#d6a13a'][Math.floor(t[3] * 3)] : '#8ea46a';
+  if (t[2] > 0.74 || b.glyph === 'peak' && t[2] > 0.5 || b.glyph === 'volcano' && t[2] > 0.6){ var vol = b.glyph === 'volcano' && t[4] > 0.4;
+    o += '<path d="M' + mR(x - 9 * s) + ' ' + mR(y + 5) + 'L' + mR(x - 1) + ' ' + mR(y - 10 * s) + 'L' + mR(x + 8 * s) + ' ' + mR(y + 5) + '" fill="' + (vol ? '#b58f78' : '#e6d6b4') + '" stroke="' + k + '" stroke-width="1.2"/><path d="M' + mR(x - 1) + ' ' + mR(y - 10 * s) + 'L' + mR(x + 1.6) + ' ' + mR(y - 1) + 'L' + mR(x - 1) + ' ' + mR(y + 5) + '" fill="none" stroke="' + k + '" stroke-width=".7"/>';
+    if (vol) o += '<path d="M' + mR(x - 1) + ' ' + mR(y - 10 * s) + 'l-2 -4m2 4l1 -5" stroke="#c4441c" stroke-width="1.4"/>';
+    else if (b.snow || winter || t[2] > 0.84) o += '<path d="M' + mR(x - 4.2 * s) + ' ' + mR(y - 3.4 * s) + 'L' + mR(x - 1) + ' ' + mR(y - 10 * s) + 'L' + mR(x + 2.9 * s) + ' ' + mR(y - 3.6 * s) + 'L' + mR(x - 1) + ' ' + mR(y - 5 * s) + 'z" fill="#fff"/>';
+    return o; }
+  if (t[4] < -0.25 && t[3] > 0.4) return ''; /* quiet open spaces between the busy ones (9) */
+  switch (b.glyph){
+    case 'pine': [[-4, 2], [1, -1], [5, 3]].forEach(function(q){ var tx = x + q[0] * s, ty = y + q[1] * s; o += '<path d="M' + mR(tx) + ' ' + mR(ty - 7 * s) + 'l-3.5 7h7z" fill="' + (winter ? '#e9eef0' : crown) + '" stroke="' + k + '" stroke-width=".9" stroke-linejoin="round"/>'; }); break;
+    case 'tree': [[-5, 2], [1, -2], [6, 3]].forEach(function(q){ var tx = x + q[0] * s, ty = y + q[1] * s; o += '<path d="M' + mR(tx) + ' ' + mR(ty + 3.5) + 'v3" stroke="' + k + '"/><circle cx="' + mR(tx) + '" cy="' + mR(ty) + '" r="' + mR(3.4 * s) + '" fill="' + crown + '" stroke="' + k + '" stroke-width=".9"/>'; }); break;
+    case 'vine': for (var r = -1; r <= 1; r++) o += '<path d="M' + mR(x - 7) + ' ' + mR(y + r * 4) + 'h14" stroke="' + (autumn ? '#9b4a2a' : '#6f7d3a') + '" stroke-width="1.4" stroke-dasharray="1.6 1.4"/>'; break;
+    case 'dune': o += '<path d="M' + mR(x - 9) + ' ' + mR(y + 2) + 'q5 -6 10 0q4 -4 8 0" fill="none" stroke="' + k + '" stroke-width="1" opacity=".75"/>'; break;
+    case 'acacia': o += '<path d="M' + mR(x) + ' ' + mR(y + 6) + 'V' + mR(y - 1) + '" stroke="' + k + '"/><path d="M' + mR(x - 6 * s) + ' ' + mR(y - 1) + 'q6 -6 12 0z" fill="' + crown + '" stroke="' + k + '" stroke-width=".8"/>'; break;
+    case 'reed': o += '<path d="M' + mR(x - 6) + ' ' + mR(y + 3) + 'h12" stroke="#4c7a8c" stroke-width="1"/><path d="M' + mR(x - 2) + ' ' + mR(y + 3) + 'v-7M' + mR(x + 1) + ' ' + mR(y + 3) + 'v-9M' + mR(x + 4) + ' ' + mR(y + 3) + 'v-6" stroke="' + k + '" stroke-width=".9"/>'; break;
+    case 'grass': o += '<path d="M' + mR(x - 4) + ' ' + mR(y + 3) + 'l1 -4l1 4M' + mR(x + 1) + ' ' + mR(y + 3) + 'l1 -5l1 5" fill="none" stroke="' + k + '" stroke-width=".9" opacity=".8"/>'; break;
+    case 'volcano': o += '<path d="M' + mR(x - 6) + ' ' + mR(y + 3) + 'q6 -5 12 0" fill="none" stroke="' + k + '" stroke-width="1"/><circle cx="' + mR(x + 2) + '" cy="' + mR(y + 1) + '" r="1" fill="#c4441c"/>'; break;
+    default: o += '<path d="M' + mR(x - 6) + ' ' + mR(y + 2) + 'q6 -7 12 0" fill="none" stroke="' + k + '" stroke-width="1" opacity=".7"/>'; }
+  return o; }
+
+/* ---------- points of interest: one list drives drawing, search, completion and the cards ---------- */
+function mapPois(E, P, G){
+  var pois = [], ids = E.ids, port = G.port;
+  function add(o){ pois.push(o); return o; }
+  function nearIn(i, a, dmin, dmax, ang, pref){ var best = null, bs = -1e9;
+    G.S.forEach(function(p, k){ if (P.own[k] !== i) return; var d = Math.hypot(p[0] - a[0], p[1] - a[1]); if (d < dmin || d > dmax) return;
+      for (var j = 0; j < pois.length; j++) if (Math.abs(pois[j].x - p[0]) < (port ? 30 : 36) && Math.abs(pois[j].y - p[1]) < (port ? 26 : 26)) return;
+      var q = Math.atan2(p[1] - a[1], p[0] - a[0]), da = ang == null ? 0 : Math.abs(Math.atan2(Math.sin(q - ang), Math.cos(q - ang))), sc = -da * 40 - d * 0.05 + (pref ? pref(p) : 0); if (sc > bs){ bs = sc; best = p; } });
+    return best; }
+  add({t: 'summit', x: G.cx, y: G.cy, name: 'Taurės kalnas', p: 0});
+  add({t: 'arena', x: G.cx - G.plateau * 0.62, y: G.cy + G.plateau * 0.62, name: 'Turo arena', lod: 1.5, p: 3});
+  add({t: 'harbor', x: G.harbor[0], y: G.harbor[1], name: 'Drafto uostas', p: 1});
+  ids.forEach(function(id, i){ var a = P.anc[i]; if (a) add({t: 'capital', id: id, x: a[0], y: a[1], name: M[id].team, p: 0, style: MAP_CAP[G.biome[i].id] || 'castle'}); });
+  ids.forEach(function(id, i){ var a = P.anc[i]; if (!a) return;
+    var pos = E.pos[id], above = E.order[pos - 2], below = E.order[pos], q;
+    var qtxt = pos === 1 ? 'Apgink pirmą vietą: pranašumas ' + NF.format(Math.round((E.tot[id] - E.tot[below]) * 100) / 100) + ' FPTS prieš ' + M[below].team : 'Pasivyk ' + M[above].team + ': trūksta ' + NF.format(Math.round((E.tot[above] - E.tot[id]) * 100) / 100) + ' FPTS';
+    if ((q = nearIn(i, a, 30, 80, -0.7))) add({t: 'quest', id: id, x: q[0], y: q[1], name: 'Pagrindinė užduotis', lod: 0.75, p: 2, info: qtxt});
+    E.towns[id].slice(0, 3).forEach(function(tw, k){ var w = nearIn(i, a, 44, 150, k * 2.1 + i, function(p){ return -Math.min(G.waterDist(p[0], p[1]), 70) * 1.3; }); /* by the water (5) */
+      if (w) add({t: 'town', id: id, x: w[0], y: w[1], name: tw.p.name || tw.p.full, pid: tw.p.id, lod: k ? 1.7 : 0.95, p: 4 + k, info: NF.format(Math.round(tw.s * 100) / 100) + ' FPTS šiai karalystei'}); });
+    if ((q = nearIn(i, a, 46, 999, null, function(p){ return G.elev(p[0], p[1]) * 400; }))) add({t: 'watch', id: id, x: q[0], y: q[1], name: 'Apžvalgos bokštas', lod: 1.4, p: 6});
+    if (E.capt[id] && (q = nearIn(i, a, 36, 120, i * 1.3 + 2.4))) add({t: 'statue', id: id, x: q[0], y: q[1], name: 'Kapitono statula', short: E.capt[id].p.name, pid: E.capt[id].p.id, lod: 2, p: 7, info: 'Geriausias kapitono turas šiame regione: ' + (E.capt[id].p.name || '') + ', ' + NF.format(E.capt[id].v) + ' FPTS'});
+    if (E.treas[id] && (q = nearIn(i, a, 50, 999, null, function(p){ return G.elev(p[0], p[1]) * 300 + Math.hypot(p[0] - a[0], p[1] - a[1]) * 0.8; }))) add({t: 'treasure', id: id, x: q[0], y: q[1], name: 'Lobis', lod: 1.6, p: 8, hidden: 1, info: (E.treas[id].p.name || '') + ' ' + E.treas[id].r + ' ture atnešė ' + NF.format(E.treas[id].v) + ' FPTS: daugiausia šiam regionui per vieną turą'});
+    if ((q = nearIn(i, a, 40, 999, i * 2.2 + 1, function(p){ return G.elev(p[0], p[1]) * 120; }))) add({t: 'cave', id: id, x: q[0], y: q[1], name: 'Urvas', lod: 1.6, p: 8, hidden: 1});
+    var u = E.used[id] || {}, side = !E.wins[id] ? 'Laimėk bent vieną turą: tai raktas į Taurės kalno vartus' : !u['Triple Captain'] ? 'Trigubas kapitonas dar nepanaudotas' : !u['Bench Boost'] ? 'Bench Boost dar nepanaudotas' : 'Pagerink rekordą: ' + NF.format(E.best[id][0]) + ' FPTS per turą';
+    if ((q = nearIn(i, a, 50, 160, 2 + i * 0.7))) add({t: 'side', id: id, x: q[0], y: q[1], name: 'Šalutinė užduotis', lod: 1.9, p: 8, info: side});
+    if (above){ var ab = P.anc[ids.indexOf(above)]; if (ab && (q = nearIn(i, a, 50, 170, Math.atan2(ab[1] - a[1], ab[0] - a[0])))) add({t: 'camp', id: id, foe: above, x: q[0], y: q[1], name: 'Varžovo stovykla', lod: 2, p: 8, info: M[above].team + ' stovykla pasienyje: ' + NF.format(Math.round((E.tot[above] - E.tot[id]) * 100) / 100) + ' FPTS aukščiau'}); }
+    E.danger[id].slice(0, 2).forEach(function(dp, k){ var w = nearIn(i, a, 30, 130, k * 2 + 4 + i); if (w) add({t: 'danger', id: id, x: w[0], y: w[1], name: dp.name, pid: dp.id, lod: 1.5, p: 6, info: (dp.inj && dp.inj.lt) || 'Traumuotas'}); });
+    E.watch[id].slice(0, 2).forEach(function(wp, k){ var w = nearIn(i, a, 30, 130, k * 2 + 5 + i); if (w) add({t: 'eye', id: id, x: w[0], y: w[1], name: wp.name, pid: wp.id, lod: 1.5, p: 6, info: 'Tavo stebimas žaidėjas'}); });
+    E.news.filter(function(z){ return z.t === id; }).slice(0, 1).forEach(function(z){ var w = nearIn(i, a, 30, 130, 3 + i); if (w) add({t: 'event', id: id, x: w[0], y: w[1], name: 'Įvykis', lod: 1.6, p: 7, info: z.nw.text}); });
+    if (E.bench[id].length && (q = nearIn(i, a, 30, 110, 4 + i))) add({t: 'fire', id: id, x: q[0], y: q[1], name: 'Stovyklavietė', lod: 2.3, p: 9, info: 'Suolas paskutiniame ture: ' + E.bench[id].map(function(z){ return (z.p.name || z.p.full) + ' ' + NF.format(z.v); }).join(', ')});
+    var mx = Math.max.apply(null, ids.map(function(t){ return E.trades[t] || 0; }));
+    if (mx && E.trades[id] === mx && (q = nearIn(i, a, 30, 100, 1 + i))) add({t: 'market', id: id, x: q[0], y: q[1], name: 'Turgus', lod: 1.8, p: 7, info: 'Daugiausia mainų lygoje: ' + E.trades[id]});
+    E.ruins[id].forEach(function(rp, k){ var w = nearIn(i, a, 40, 150, k * 2.6 + 1 + i); if (w) add({t: 'ruin', id: id, x: w[0], y: w[1], name: 'Griuvėsiai', short: rp.name, pid: rp.id, lod: 2.5, p: 10, info: 'Čia gyveno ' + (rp.name || rp.full) + ', bet paliko regioną (45)'.replace(' (45)', '')}); });
+  });
+  return pois;
+}
+/* road graph: ring road (loop), spokes to the summit gates, harbour road, trade shortcuts, secret passages */
+function mapGraph(E, P, G){
+  var nodes = {summit: [G.cx, G.cy], harbor: G.harbor}, edges = [], ids = E.ids, n = ids.length;
+  ids.forEach(function(id, i){ if (P.anc[i]) nodes[id] = P.anc[i]; });
+  function curve(A, B, bend){ var mx = (A[0] + B[0]) / 2, my = (A[1] + B[1]) / 2, dx = B[0] - A[0], dy = B[1] - A[1], l = Math.hypot(dx, dy) || 1;
+    return {d: 'M' + mR(A[0]) + ' ' + mR(A[1]) + 'Q' + mR(mx - dy * bend) + ' ' + mR(my + dx * bend) + ' ' + mR(B[0]) + ' ' + mR(B[1]), len: l * (1 + Math.abs(bend) * 0.6)}; }
+  for (var i = 0; i < n; i++){ var a = ids[i], b = ids[(i + 1) % n]; if (!nodes[a] || !nodes[b]) continue; var c = curve(nodes[a], nodes[b], 0.12); edges.push({a: a, b: b, kind: 'ring', d: c.d, len: c.len}); }
+  ids.forEach(function(id){ if (!nodes[id]) return; var A = nodes[id], dx = G.cx - A[0], dy = G.cy - A[1], l = Math.hypot(dx, dy) || 1, g = [G.cx - dx / l * G.plateau, G.cy - dy / l * G.plateau], c = curve(A, g, 0.05);
+    edges.push({a: id, b: 'summit', kind: 'spoke', d: c.d + 'L' + mR(G.cx) + ' ' + mR(G.cy), len: c.len + G.plateau, gate: g, open: E.wins[id] > 0}); });
+  ids.filter(function(id){ return nodes[id]; }).sort(function(x, y){ return Math.hypot(nodes[x][0] - G.harbor[0], nodes[x][1] - G.harbor[1]) - Math.hypot(nodes[y][0] - G.harbor[0], nodes[y][1] - G.harbor[1]); }).slice(0, 2)
+    .forEach(function(id){ var c = curve(G.harbor, nodes[id], 0.08); edges.push({a: 'harbor', b: id, kind: 'harbor', d: c.d, len: c.len}); });
+  Object.keys(E.roads).forEach(function(k){ var ab = k.split('|'); if (!nodes[ab[0]] || !nodes[ab[1]]) return; var c = curve(nodes[ab[0]], nodes[ab[1]], mapHash(k) % 2 ? 0.1 : -0.1); edges.push({a: ab[0], b: ab[1], kind: 'trade', n: E.roads[k], d: c.d, len: c.len * 0.8}); });
+  Object.keys(E.secret).forEach(function(k){ var ab = k.split('|'); if (!nodes[ab[0]] || !nodes[ab[1]]) return; var c = curve(nodes[ab[0]], nodes[ab[1]], 0.2); edges.push({a: ab[0], b: ab[1], kind: 'secret', n: E.secret[k], d: c.d, len: c.len * 0.7}); });
+  return {nodes: nodes, edges: edges};
+}
+function mapRoute(from, to, ban){
+  var g = MAPS.cur && MAPS.cur.graph; if (!g || !g.nodes[from] || !g.nodes[to] || from === to) return null;
+  var dist = {}, prev = {}, Q = Object.keys(g.nodes), found = mapPref().found || {};
+  Q.forEach(function(k){ dist[k] = Infinity; }); dist[from] = 0;
+  while (Q.length){ Q.sort(function(a, b){ return dist[a] - dist[b]; }); var u = Q.shift(); if (u === to || dist[u] === Infinity) break;
+    g.edges.forEach(function(e, k){ if (ban === k || (e.kind === 'spoke' && !e.open) || (e.kind === 'secret' && !found['secret-' + e.a + '-' + e.b])) return;
+      var v = e.a === u ? e.b : e.b === u ? e.a : null; if (v == null || Q.indexOf(v) < 0) return; var nd = dist[u] + e.len; if (nd < dist[v]){ dist[v] = nd; prev[v] = [u, k]; } }); }
+  if (dist[to] === Infinity) return null;
+  var path = [], used = [], cur = to; while (cur !== from){ path.unshift(cur); used.unshift(prev[cur][1]); cur = prev[cur][0]; } path.unshift(from);
+  var out = {d: used.map(function(k){ return g.edges[k].d; }).join(''), path: path, used: used, len: dist[to]};
+  if (ban == null){ var alts = used.map(function(k){ return mapRoute(from, to, k); }).filter(Boolean).sort(function(a, b){ return a.len - b.len; }); if (alts[0] && alts[0].d !== out.d) out.alt = alts[0]; }
+  return out;
+}
+
+/* ---------- the world ---------- */
 function mapSvg(era, W){
-  var d = S.data, E = mapEraData(era), port = W < 560, key = (LG && LG.cur) || 'main', G = mapGeo(key, E.ids, port);
-  var VW = G.VW, VH = G.VH, ink = '#3b2412', n = E.ids.length, mn = Infinity;
-  E.ids.forEach(function(id){ mn = Math.min(mn, E.tot[id]); });
-  var raw = E.ids.map(function(id){ var mean = 0; E.ids.forEach(function(j){ mean += E.tot[j]; }); mean = mean / n || 1; return Math.pow(Math.max(0.05, E.tot[id] / mean), 3); }), sum = raw.reduce(function(a, b){ return a + b; }, 0);
-  var share = raw.map(function(v){ return v / sum; }), P = mapPower(G, share);
-  MAPS.cur = {E: E, P: P, G: G};
-  var h = '<svg class="lmap' + (port ? ' pt' : '') + '" viewBox="0 0 ' + VW + ' ' + VH + '" role="img" aria-label="Lygos žemėlapis po ' + era + ' turo: kiekvienos komandos valdos atitinka surinktus taškus">' + mapIcons();
-  /* sea and paper */
-  h += '<rect width="' + VW + '" height="' + VH + '" fill="#b9cdc6"/><rect width="' + VW + '" height="' + VH + '" filter="url(#mp-paper)"/>';
-  G.waves.forEach(function(p){ h += '<path d="M' + p[0].toFixed(1) + ' ' + p[1].toFixed(1) + 'q4 -4 8 0t8 0" fill="none" stroke="#5f7f80" stroke-width="1.1" opacity=".75"/>'; });
-  var landD = mapSmooth(G.land), isleD = G.isles.map(mapSmooth);
+  var pref = mapPref(), L = pref.L, E = mapEraData(era), port = W < 560, G = mapGeo(E.ids, port), VW = G.VW, VH = G.VH, ink = '#3b2412', n = E.ids.length, me = myTeam();
+  var mean = 0; E.ids.forEach(function(j){ mean += E.tot[j]; }); mean = mean / n || 1;
+  var raw = E.ids.map(function(id){ return pref.fair ? 1 : Math.pow(Math.max(0.05, E.tot[id] / mean), 3); }), sum = raw.reduce(function(a, b){ return a + b; }, 0);
+  var P = mapPower(G, raw.map(function(v){ return v / sum; })), season = mapSeason(era), night = mapNight(), cb = pref.cb;
+  MAPS.cur = {E: E, P: P, G: G, era: era}; MAPS.cur.graph = mapGraph(E, P, G); MAPS.cur.pois = mapPois(E, P, G);
+  var col = function(i, id){ return cb ? MAP_CB[i % MAP_CB.length] : tcol(id); }, leader = E.order[0];
+  var open = {}; if (pref.fog){ E.ids.forEach(function(id){ if ((pref.seen || {})[id] || id === me) open[id] = 1; }); } else E.ids.forEach(function(id){ open[id] = 1; });
+  MAPS.cur.open = open;
+  var h = '<svg class="lmap' + (port ? ' pt' : '') + (night ? ' night' : '') + '" viewBox="0 0 ' + VW + ' ' + VH + '" style="--lead:' + col(E.ids.indexOf(leader), leader) + '" role="img" aria-label="Lygos žemėlapis po ' + era + ' turo">' + mapDefs();
+  h += '<rect width="' + VW + '" height="' + VH + '" fill="url(#mp-sea)"/><rect width="' + VW + '" height="' + VH + '" filter="url(#mp-paper)"/><g id="mp-cam">';
+  var landD = mapSmooth(G.land), isleD = G.isles.map(function(p){ return mapSmooth(p); });
   h += '<clipPath id="mp-land"><path d="' + landD + '"/></clipPath>';
-  /* coastline ripples (old-map hatching) */
-  [[26, .10], [17, .16], [9, .26]].forEach(function(x){ h += '<path d="' + landD + '" fill="none" stroke="#4f6f72" stroke-width="' + x[0] + '" stroke-opacity="' + x[1] + '" stroke-linejoin="round"/>'; isleD.forEach(function(s){ h += '<path d="' + s + '" fill="none" stroke="#4f6f72" stroke-width="' + (x[0] * 0.6) + '" stroke-opacity="' + x[1] + '"/>'; }); });
+  /* clear world boundary (1): reef ring and a fog wall beyond it */
+  var reef = G.land.map(function(p){ var dx = p[0] - G.cx, dy = p[1] - G.cy, l = Math.hypot(dx, dy); return [p[0] + dx / l * (port ? 22 : 30), p[1] + dy / l * (port ? 22 : 30)]; });
+  h += '<path d="' + mapSmooth(reef) + '" fill="none" stroke="#eef5f2" stroke-width="2.2" stroke-dasharray="2 5" stroke-linecap="round"/>';
+  G.waves.forEach(function(p, k){ h += L.wildlife && k % 11 === 5 ? '<use href="#mp-whale" x="' + mR(p[0]) + '" y="' + mR(p[1]) + '"/>' : '<path d="M' + mR(p[0]) + ' ' + mR(p[1]) + 'q4 -4 8 0t8 0" fill="none" stroke="#557677" stroke-width="1.1" opacity=".7"/>'; });
+  [[24, .10], [15, .16], [8, .26]].forEach(function(x){ h += '<path d="' + landD + '" fill="none" stroke="#3f6466" stroke-width="' + x[0] + '" stroke-opacity="' + x[1] + '" stroke-linejoin="round"/>' + isleD.map(function(s){ return '<path d="' + s + '" fill="none" stroke="#3f6466" stroke-width="' + (x[0] * 0.6) + '" stroke-opacity="' + x[1] + '"/>'; }).join(''); });
   h += '<g filter="url(#mp-rough)"><path d="' + landD + '" fill="#efdcb2"/>' + isleD.map(function(s){ return '<path d="' + s + '" fill="#efdcb2" stroke="' + ink + '" stroke-width="1.3"/>'; }).join('') + '</g>';
-  /* realms */
+  /* regions (3, 4): biome ground, realm tint, patterns for colour-blind mode (77) */
   h += '<g clip-path="url(#mp-land)">';
-  E.ids.forEach(function(id, i){ var poly = P.polys[i]; if (poly.length < 3) return;
-    var sel = MAPS.sel === id, dim = MAPS.sel && !sel;
-    h += '<path class="mp-realm" data-mp="' + id + '" d="M' + poly.map(function(p){ return p[0].toFixed(1) + ' ' + p[1].toFixed(1); }).join('L') + 'Z" fill="' + tcol(id) + '" fill-opacity="' + (sel ? .42 : dim ? .08 : .2) + '" stroke="none"><title>' + esc(M[id].team) + '</title></path>'; });
-  h += '</g>';
-  /* terrain */
-  var reserve = [], fsMax = port ? 22 : 20, fsMin = port ? 13 : 11, FS = {}, TW = {}; /* areas kept clear: castles, labels, towns */
-  E.ids.forEach(function(id, i){ var a = P.anc[i]; if (!a) return;
-    var fs = FS[id] = Math.max(fsMin, Math.min(fsMax, Math.sqrt(P.area[i]) * (port ? 52 : 52))), w = Math.max(M[id].team.length * fs * 0.8, port ? 90 : 110) + 14;
-    reserve.push([a[0], a[1] + fs * 0.5, w, fs + (port ? 58 : 62)]); });
-  if (MAPS.layers.towns) E.ids.forEach(function(id, i){ var a = P.anc[i]; TW[id] = []; if (!a) return;
-    var spots = []; G.S.forEach(function(p, k){ if (P.own[k] !== i) return; var dd = Math.hypot(p[0] - a[0], p[1] - a[1]); if (dd > (port ? 46 : 60) && dd < (port ? 95 : 125)) spots.push(p); });
-    E.towns[id].forEach(function(t, k){
-      var nm0 = t.p.name || t.p.full, tw = nm0.length * (port ? 7.4 : 6.2) + 12;
-      var ok = spots.filter(function(p){ return !reserve.some(function(r){ return p[0] - 6 < r[0] + r[2] / 2 && p[0] + tw > r[0] - r[2] / 2 && p[1] - 10 < r[1] + r[3] / 2 && p[1] + 6 > r[1] - r[3] / 2; }) && p[0] + tw < G.VW - 16; });
-      if (!ok.length) return;
-      var ang = k * 2.1 + i, best = null, bd = 1e9; ok.forEach(function(p){ var q = Math.atan2(p[1] - a[1], p[0] - a[0]), dd = Math.abs(Math.atan2(Math.sin(q - ang), Math.cos(q - ang))); if (dd < bd){ bd = dd; best = p; } });
-      spots = spots.filter(function(p){ return Math.hypot(p[0] - best[0], p[1] - best[1]) > 34; });
-      var nm = t.p.name || t.p.full; TW[id].push([best, nm]);
-      reserve.push([best[0] - 6 + tw / 2, best[1] - 2, tw + 6, 18]); }); });
-  if (MAPS.layers.terrain){
-    h += '<g class="mp-terr" fill="none" stroke="' + ink + '" stroke-linecap="round" stroke-linejoin="round" pointer-events="none" clip-path="url(#mp-land)">';
-    G.rivers.forEach(function(rv){ h += '<path d="' + rv.map(function(p, k){ return (k ? 'L' : 'M') + p[0].toFixed(1) + ' ' + p[1].toFixed(1); }).join('') + '" stroke="#4c7a8c" stroke-width="1.7" opacity=".85"/>'; });
-    G.T.forEach(function(t){
-      if (reserve.some(function(r){ return Math.abs(t[0] - r[0]) < r[2] / 2 && Math.abs(t[1] - r[1]) < r[3] / 2; })) return;
-      var x = t[0], y = t[1], s = 0.8 + t[3] * 0.5;
-      if (t[2] === 'm') h += '<path d="M' + (x - 9 * s).toFixed(1) + ' ' + (y + 5).toFixed(1) + 'L' + (x - 1).toFixed(1) + ' ' + (y - 9 * s).toFixed(1) + 'L' + (x + 8 * s).toFixed(1) + ' ' + (y + 5).toFixed(1) + '" fill="#e6cf9f" stroke-width="1.3"/><path d="M' + (x - 1).toFixed(1) + ' ' + (y - 9 * s).toFixed(1) + 'L' + (x + 1.5).toFixed(1) + ' ' + (y - 1).toFixed(1) + 'L' + (x - 1).toFixed(1) + ' ' + (y + 5).toFixed(1) + '" stroke-width=".8"/>';
-      else if (t[2] === 'f') [[-5, 2], [1, -2], [6, 3]].forEach(function(o){ var tx = x + o[0] * s, ty = y + o[1] * s; h += '<path d="M' + tx.toFixed(1) + ' ' + (ty + 4).toFixed(1) + 'v3" stroke-width="1"/><circle cx="' + tx.toFixed(1) + '" cy="' + ty.toFixed(1) + '" r="' + (3.4 * s).toFixed(1) + '" fill="#9fae78" stroke-width="1"/>'; });
-      else h += '<path d="M' + (x - 6).toFixed(1) + ' ' + (y + 2).toFixed(1) + 'q6 -7 12 0" stroke-width="1" opacity=".7"/>'; });
-    h += '</g>';
-  }
-  /* borders and coast */
-  h += '<g clip-path="url(#mp-land)" pointer-events="none">' + E.ids.map(function(id, i){ var poly = P.polys[i]; if (poly.length < 3) return '';
-    return '<path d="M' + poly.map(function(p){ return p[0].toFixed(1) + ' ' + p[1].toFixed(1); }).join('L') + 'Z" fill="none" stroke="#7a2e1a" stroke-width="' + (MAPS.sel === id ? 2.6 : 1.4) + '" stroke-dasharray="7 3 1.5 3" opacity=".8"/>'; }).join('') + '</g>';
-  h += '<path d="' + landD + '" fill="none" stroke="' + ink + '" stroke-width="1.8" filter="url(#mp-rough)" pointer-events="none"/>';
-  /* roads = trades */
-  if (MAPS.layers.roads) Object.keys(E.roads).forEach(function(k){ var ab = k.split('|'), ia = E.ids.indexOf(ab[0]), ib = E.ids.indexOf(ab[1]), A = P.anc[ia], B = P.anc[ib]; if (!A || !B) return;
-    var mx = (A[0] + B[0]) / 2, my = (A[1] + B[1]) / 2, dx = B[0] - A[0], dy = B[1] - A[1], L = Math.hypot(dx, dy) || 1, off = L * 0.12 * (mapHash(k) % 2 ? 1 : -1);
-    var c = [mx - dy / L * off, my + dx / L * off], cnt = E.roads[k], hot = MAPS.sel && (ab[0] === MAPS.sel || ab[1] === MAPS.sel);
-    h += '<path d="M' + A[0].toFixed(1) + ' ' + A[1].toFixed(1) + 'Q' + c[0].toFixed(1) + ' ' + c[1].toFixed(1) + ' ' + B[0].toFixed(1) + ' ' + B[1].toFixed(1) + '" fill="none" stroke="' + (hot ? '#9a2b1c' : '#6b4421') + '" stroke-width="' + (1 + Math.min(cnt, 5) * 0.55).toFixed(2) + '" stroke-dasharray="1 4.5" stroke-linecap="round" opacity="' + (MAPS.sel && !hot ? .25 : .9) + '"><title>' + esc(M[ab[0]].team) + ' ir ' + esc(M[ab[1]].team) + ': ' + cnt + ' ' + plural(cnt, 'mainai', 'mainai', 'mainų') + '</title></path>'; });
-  /* labels: realm name, ruler line, castle, towns (overlaps are resolved after drawing) */
-  E.ids.forEach(function(id, i){ var a = P.anc[i]; if (!a) return;
-    var fs = FS[id], dim = MAPS.sel && MAPS.sel !== id;
-    h += '<g class="mp-lab" data-mp="' + id + '" opacity="' + (dim ? .45 : 1) + '"><use href="#mp-castle" x="' + a[0].toFixed(1) + '" y="' + (a[1] - 14).toFixed(1) + '"/>' +
-      '<text class="mp-k" x="' + a[0].toFixed(1) + '" y="' + (a[1] + 4 + fs * 0.75).toFixed(1) + '" text-anchor="middle" font-size="' + fs.toFixed(1) + '" data-fs="' + fs.toFixed(1) + '">' + esc(M[id].team.toUpperCase()) + '</text>' +
-      '<text class="mp-r" x="' + a[0].toFixed(1) + '" y="' + (a[1] + 4 + fs * 1.1 + (port ? 17 : 15)).toFixed(1) + '" text-anchor="middle">' + esc(M[id].first) + ' · ' + NF.format(Math.round(E.tot[id])) + (E.wins[id] ? ' · ' + E.wins[id] + '★' : '') + '</text></g>'; });
-  if (MAPS.layers.towns) E.ids.forEach(function(id){ (TW[id] || []).forEach(function(tw){ var best = tw[0], nm = tw[1];
-      h += '<g class="mp-town" data-mp="' + id + '" opacity="' + (MAPS.sel && MAPS.sel !== id ? .4 : 1) + '"><use href="#mp-town" x="' + best[0].toFixed(1) + '" y="' + best[1].toFixed(1) + '"/><text class="mp-t" x="' + (best[0] + 6).toFixed(1) + '" y="' + (best[1] + 3).toFixed(1) + '">' + esc(nm) + '</text></g>'; }); });
-  /* free agent isles */
-  var iy = G.ic[1] + (port ? 52 : 66), F = MAP_FIX(port);
-  h += '<g class="mp-isle"><text class="mp-s" x="' + G.ic[0].toFixed(1) + '" y="' + (G.ic[1] - (port ? 30 : 36)).toFixed(1) + '" text-anchor="middle">Laisvųjų salos</text>' +
-    E.fa.slice(0, port ? 2 : 3).map(function(p, k){ return '<text class="mp-t" x="' + G.ic[0].toFixed(1) + '" y="' + (iy + k * (port ? 19 : 17)).toFixed(1) + '" text-anchor="middle">' + esc(p.name || p.full) + '</text>'; }).join('') + '</g>';
-  /* sea names */
-  h += '<text class="mp-s mp-sea" x="' + (F[2][0] + F[2][2] / 2) + '" y="' + (F[2][1] + F[2][3] * 0.7) + '" text-anchor="middle">Mainų jūra</text>';
-  /* compass rose */
-  var cx = F[1][0] + F[1][2] / 2, cy = F[1][1] + F[1][3] / 2 + 4, cr = F[1][2] * 0.4;
-  h += '<g class="mp-rose" transform="translate(' + cx + ' ' + cy + ')" pointer-events="none"><circle r="' + (cr * 0.82) + '" fill="none" stroke="' + ink + '" stroke-width=".8"/><circle r="' + (cr * 0.7) + '" fill="none" stroke="' + ink + '" stroke-width=".5"/>';
-  [0, 90, 180, 270].forEach(function(r, k){ h += '<path transform="rotate(' + r + ')" d="M0 ' + (-cr) + 'L' + (cr * 0.16) + ' 0 0 0z" fill="' + (k % 2 ? '#f3e3bd' : '#9a2b1c') + '" stroke="' + ink + '" stroke-width=".8"/><path transform="rotate(' + r + ')" d="M0 ' + (-cr) + 'L' + (-cr * 0.16) + ' 0 0 0z" fill="' + ink + '"/>'; });
-  [45, 135, 225, 315].forEach(function(r){ h += '<path transform="rotate(' + r + ')" d="M0 ' + (-cr * 0.62) + 'L' + (cr * 0.1) + ' 0 ' + (-cr * 0.1) + ' 0z" fill="#e6cf9f" stroke="' + ink + '" stroke-width=".6"/>'; });
-  h += '<text class="mp-c" y="' + (-cr - 5) + '" text-anchor="middle">Š</text></g>';
-  /* cartouche */
-  var ttl = lgName(), cxx = F[0][0], cyy = F[0][1], cw = F[0][2], chh = F[0][3];
-  h += '<g class="mp-cart" pointer-events="none"><rect x="' + cxx + '" y="' + cyy + '" width="' + cw + '" height="' + chh + '" fill="#f3e3bd" stroke="' + ink + '" stroke-width="1.6"/><rect x="' + (cxx + 4) + '" y="' + (cyy + 4) + '" width="' + (cw - 8) + '" height="' + (chh - 8) + '" fill="none" stroke="' + ink + '" stroke-width=".6"/>' +
-    '<text class="mp-ct" x="' + (cxx + cw / 2) + '" y="' + (cyy + chh * 0.46) + '" text-anchor="middle" style="font-size:' + Math.min(port ? 18 : 17, (cw - 28) / (ttl.length * 0.66)).toFixed(1) + 'px">' + esc(ttl.toUpperCase()) + '</text>' +
-    '<text class="mp-cs" x="' + (cxx + cw / 2) + '" y="' + (cyy + chh * 0.84) + '" text-anchor="middle">valdos po ' + era + ' turo</text></g>';
-  /* frame and vignette */
-  h += '<rect width="' + VW + '" height="' + VH + '" fill="url(#mp-vig)" pointer-events="none"/><rect x="5" y="5" width="' + (VW - 10) + '" height="' + (VH - 10) + '" fill="none" stroke="' + ink + '" stroke-width="2.4" pointer-events="none"/><rect x="11" y="11" width="' + (VW - 22) + '" height="' + (VH - 22) + '" fill="none" stroke="' + ink + '" stroke-width=".8" pointer-events="none"/>';
-  [[11, 11], [VW - 11, 11], [11, VH - 11], [VW - 11, VH - 11]].forEach(function(p){ h += '<path d="M' + p[0] + ' ' + (p[1] - 7) + 'l7 7-7 7-7-7z" fill="#9a2b1c" stroke="' + ink + '" stroke-width="1" pointer-events="none"/>'; });
+  var WD = P.polys.map(function(poly){ return poly.length < 3 ? '' : mapWarpD(poly, G); }); MAPS.cur.WD = WD;
+  E.ids.forEach(function(id, i){ var poly = P.polys[i]; if (poly.length < 3) return; var b = G.biome[i], sel = MAPS.sel === id, dim = MAPS.sel && !sel, d = WD[i];
+    h += '<path d="' + d + '" fill="' + b.fill + '"/><path d="' + d + '" fill="' + col(i, id) + '" fill-opacity="' + (sel ? .32 : dim ? .05 : .14) + '"/>' + (cb ? '<path d="' + d + '" fill="url(#mp-pat' + (i % 10) + ')"/>' : ''); });
+  h += '<circle cx="' + mR(G.cx) + '" cy="' + mR(G.cy) + '" r="' + mR(G.plateau) + '" fill="#efe3c6" stroke="#7a2e1a" stroke-width="1.2" stroke-dasharray="3 3"/>';
+  h += '<circle cx="' + mR(G.harbor[0]) + '" cy="' + mR(G.harbor[1]) + '" r="' + G.hr + '" fill="#f4ead0" stroke="#2f7a3a" stroke-width="1.6" stroke-dasharray="4 3"/></g>';
+  if (L.contours) h += '<g clip-path="url(#mp-land)" fill="none" stroke="#8a6a44">' + G.contours.map(function(c, k){ return '<path d="' + c + '" stroke-width="' + (0.5 + k * 0.15) + '" opacity="' + (0.25 + k * 0.08) + '"/>'; }).join('') + '</g>';
+  h += '<path d="' + mapSmooth(G.lake) + '" fill="#9cc0c6" stroke="#3f6466" stroke-width="1"/>';
+  h += '<g clip-path="url(#mp-land)" fill="none" stroke-linecap="round">' + G.rivers.map(function(r){ var dd = mapSmooth(r.pts, 1); return '<path d="' + dd + '" stroke="#7aa9b6" stroke-width="3.4" opacity=".6"/><path d="' + dd + '" stroke="#3f6f84" stroke-width="1.3" vector-effect="non-scaling-stroke"/>'; }).join('') + '</g>';
+  /* storm wall (92): shrinks to the realms that can still win the league */
+  var cont = E.ids.filter(function(id){ return E.winp[id] == null || E.winp[id] >= 0.01; }), zoneR = G.plateau * 1.6;
+  cont.forEach(function(id){ var a = P.anc[E.ids.indexOf(id)]; if (a) zoneR = Math.max(zoneR, Math.hypot(a[0] - G.cx, a[1] - G.cy) + 40); });
+  var outside = E.ids.filter(function(id){ return cont.indexOf(id) < 0; }); MAPS.cur.zone = {r: zoneR, out: outside};
+  if (L.zone && outside.length) h += '<mask id="mp-zm"><rect width="' + VW + '" height="' + VH + '" fill="#fff"/><circle cx="' + mR(G.cx) + '" cy="' + mR(G.cy) + '" r="' + mR(zoneR) + '" fill="#000"/></mask><g clip-path="url(#mp-land)"><rect width="' + VW + '" height="' + VH + '" fill="#5b2b6b" opacity=".15" mask="url(#mp-zm)"/></g><circle cx="' + mR(G.cx) + '" cy="' + mR(G.cy) + '" r="' + mR(zoneR) + '" fill="none" stroke="#6b2b7b" stroke-width="2" stroke-dasharray="10 5" opacity=".75"/>';
+  /* terrain (9, 10): busy and quiet areas, nothing empty without a reason */
+  if (L.terrain){ var res = MAPS.cur.pois.map(function(q){ return [q.x, q.y, q.t === 'capital' ? 32 : q.t === 'summit' ? 0 : q.t === 'harbor' ? 0 : 15]; });
+    h += '<g clip-path="url(#mp-land)" fill="none" stroke-linecap="round" stroke-linejoin="round">';
+    G.T.forEach(function(t){ for (var j = 0; j < res.length; j++) if (Math.abs(t[0] - res[j][0]) < res[j][2] && Math.abs(t[1] - res[j][1]) < res[j][2]) return; var o = mapOwnAt(P, G, t[0], t[1]); h += mapGlyph(t, G.biome[o] || MAP_BIOMES[8], season); });
+    h += '</g>'; }
+  /* natural borders (2): ridge ticks on high borders + dashed line */
+  h += '<g clip-path="url(#mp-land)">' + E.ids.map(function(id, i){ return !WD[i] ? '' : '<path d="' + WD[i] + '" fill="none" stroke="#6b2a18" stroke-width="' + (MAPS.sel === id ? 3 : 1.5) + '" stroke-dasharray="8 3 2 3" opacity=".75" vector-effect="non-scaling-stroke"/>'; }).join('') +
+    P.border.filter(function(b, k){ return k % 3 === 0 && G.elev(b[0], b[1]) > 0.5; }).map(function(b){ return '<path d="M' + mR(b[0] - 4) + ' ' + mR(b[1] + 2.5) + 'L' + mR(b[0]) + ' ' + mR(b[1] - 4) + 'L' + mR(b[0] + 4) + ' ' + mR(b[1] + 2.5) + '" fill="#d9c7a3" stroke="#5b4632" stroke-width=".9"/>'; }).join('') + '</g>';
+  h += '<path d="' + landD + '" fill="none" stroke="' + ink + '" stroke-width="1.9" filter="url(#mp-rough)"/>';
+  G.cliffs.forEach(function(c){ var s2 = ''; c.forEach(function(p){ var dx = p[0] - G.cx, dy = p[1] - G.cy, l = Math.hypot(dx, dy); s2 += 'M' + mR(p[0]) + ' ' + mR(p[1]) + 'l' + mR(-dx / l * 6) + ' ' + mR(-dy / l * 6); }); h += '<path d="' + s2 + '" stroke="' + ink + '" stroke-width="1" opacity=".8"/>'; });
+  /* roads (15, 16, 17, 21) */
+  if (L.roads){ h += '<g fill="none" stroke-linecap="round">';
+    MAPS.cur.graph.edges.forEach(function(e){ if (e.kind === 'secret') return; var st = {ring: 'stroke="#7a5230" stroke-width="2.2" stroke-dasharray="6 4"', spoke: 'stroke="#7a5230" stroke-width="1.6" stroke-dasharray="3 4"', harbor: 'stroke="#2f7a3a" stroke-width="1.8" stroke-dasharray="5 3"', trade: 'stroke="#9a2b1c" stroke-width="' + (1 + Math.min(e.n, 5) * 0.5).toFixed(1) + '" stroke-dasharray="1 4.5"'}[e.kind];
+      h += '<path d="' + e.d + '" ' + st + ' opacity="' + (e.kind === 'trade' ? (MAPS.sel ? (e.a === MAPS.sel || e.b === MAPS.sel ? .95 : .15) : .5) : .9) + '" vector-effect="non-scaling-stroke"/>'; });
+    if (!pref.still) MAPS.cur.graph.edges.filter(function(e){ return e.kind === 'trade'; }).slice(0, 6).forEach(function(e, k){ h += '<circle r="2.6" fill="#9a2b1c" stroke="#fff6e0" stroke-width="1"><animateMotion dur="' + (9 + k * 2) + 's" repeatCount="indefinite" path="' + e.d + '"/></circle>'; });
+    h += '</g>'; }
+  if (MAPS.route){ var rt = mapRoute(MAPS.route.from, MAPS.route.to); MAPS.cur.rt = rt;
+    if (rt){ if (rt.alt) h += '<path d="' + rt.alt.d + '" fill="none" stroke="#2f5f9a" stroke-width="3" stroke-dasharray="2 6" stroke-linecap="round" opacity=".85" vector-effect="non-scaling-stroke"/>';
+      h += '<path d="' + rt.d + '" fill="none" stroke="#fff6cf" stroke-width="7" stroke-linecap="round" opacity=".85" vector-effect="non-scaling-stroke"/><path d="' + rt.d + '" fill="none" stroke="#c0262d" stroke-width="3" stroke-dasharray="9 5" stroke-linecap="round" vector-effect="non-scaling-stroke">' + (pref.still ? '' : '<animate attributeName="stroke-dashoffset" values="28;0" dur="1.2s" repeatCount="indefinite"/>') + '</path>'; } }
+  /* light (22) */
+  h += '<circle cx="' + mR(G.cx) + '" cy="' + mR(G.cy - 12) + '" r="' + mR(G.plateau * 1.6) + '" fill="url(#mp-light)" opacity="' + (night ? .9 : .55) + '"/>';
+  if (MAPS.sel && P.anc[E.ids.indexOf(MAPS.sel)]){ var sa = P.anc[E.ids.indexOf(MAPS.sel)]; h += '<circle cx="' + mR(sa[0]) + '" cy="' + mR(sa[1]) + '" r="' + (port ? 70 : 90) + '" fill="url(#mp-light)" opacity=".45"/>'; }
+  /* ships from the free agent isles (44) */
+  E.signings.slice(0, 4).forEach(function(x, k){ var a = P.anc[E.ids.indexOf(x.team)]; if (!a) return; var dx = a[0] - G.cx, dy = a[1] - G.cy, l = Math.hypot(dx, dy) || 1, c0 = [G.ic[0], G.ic[1] + 30], c1 = [G.cx + dx / l * G.rx * 1.12, G.cy + dy / l * G.ry * 1.12];
+    var pd = 'M' + mR(c0[0]) + ' ' + mR(c0[1]) + 'Q' + mR((c0[0] + c1[0]) / 2 + 40) + ' ' + mR((c0[1] + c1[1]) / 2 - 30) + ' ' + mR(c1[0]) + ' ' + mR(c1[1]);
+    h += '<path d="' + pd + '" fill="none" stroke="#2f5f9a" stroke-width="1" stroke-dasharray="3 5" opacity=".55"/>' + (pref.still ? '' : '<use href="#mp-ship"><animateMotion dur="' + (14 + k * 3) + 's" repeatCount="indefinite" path="' + pd + '"/></use>'); });
+  /* fog of war (56-58) */
+  var closed = E.ids.filter(function(id){ return !open[id]; });
+  if (closed.length) h += '<mask id="mp-fm"><rect width="' + VW + '" height="' + VH + '" fill="#000"/>' + closed.map(function(id){ return '<path d="' + WD[E.ids.indexOf(id)] + '" fill="#fff"/>'; }).join('') + '<circle cx="' + mR(G.cx) + '" cy="' + mR(G.cy) + '" r="' + mR(G.plateau * 1.25) + '" fill="#000"/><circle cx="' + mR(G.harbor[0]) + '" cy="' + mR(G.harbor[1]) + '" r="' + (G.hr + 12) + '" fill="#000"/></mask>' +
+    '<g clip-path="url(#mp-land)" mask="url(#mp-fm)"><rect width="' + VW + '" height="' + VH + '" fill="#e9dfc8" opacity=".86"/><rect width="' + VW + '" height="' + VH + '" filter="url(#mp-cloud)" opacity=".9"/></g>';
+  if (night) h += '<rect width="' + VW + '" height="' + VH + '" fill="#13213f" opacity=".4"/>';
+  h += '</g><g id="mp-poi">' + mapPoiSvg(E, P, G, col, night) + '</g>';
+  h += mapFurniture(G, era, season);
   return h + '</svg>';
 }
-/* resolve label collisions with real measurements: realm names shrink, then ruler lines, towns and sea names give way */
-function mapFixLabels(svg){
-  var sm = svg.getScreenCTM().inverse();
-  function box(e){ var b = e.getBBox(), m = sm.multiply(e.getScreenCTM()); return {x: m.a * b.x + m.e - 1, y: m.d * b.y + m.f - 1, w: b.width * m.a + 2, h: b.height * m.d + 2, t: e.textContent}; }
-  function hit(a, b){ return a.x < b.x + b.w && b.x < a.x + a.w && a.y < b.y + b.h && b.y < a.y + a.h; }
-  var keep = [];
-  var ks = Array.prototype.slice.call(svg.querySelectorAll('text.mp-k')).sort(function(a, b){ return +b.getAttribute('data-fs') - +a.getAttribute('data-fs'); });
-  ks.forEach(function(t){ var fs = +t.getAttribute('data-fs'), b = box(t);
-    while (keep.some(function(k){ return hit(k, b); }) && fs > 7){ fs -= 1; t.setAttribute('font-size', fs); b = box(t); }
-    if (keep.some(function(k){ return hit(k, b); })) t.style.display = 'none'; else keep.push(b); });
-  ['text.mp-r', 'text.mp-c', 'text.mp-ct', 'text.mp-cs', 'text.mp-s', '.mp-isle text.mp-t', '.mp-town'].forEach(function(sel){
-    Array.prototype.slice.call(svg.querySelectorAll(sel)).forEach(function(e){ var b = box(e);
-      var vb = svg.viewBox.baseVal, hk = keep.filter(function(k){ return hit(k, b); });
-      if (b.x < 12 || b.y < 12 || b.x + b.w > vb.width - 12 || b.y + b.h > vb.height - 12 || hk.length){ e.style.display = 'none'; } else keep.push(b); }); });
+function mapFurniture(G, era, season){
+  var VW = G.VW, VH = G.VH, ink = '#3b2412', F = MAP_FIX(G.port), h = '<g class="mp-fur" pointer-events="none">', rcx = F[1][0] + F[1][2] / 2, rcy = F[1][1] + F[1][3] / 2 + 4, cr = F[1][2] * 0.42;
+  h += '<g class="mp-rose" transform="translate(' + rcx + ' ' + rcy + ')"><circle r="' + mR(cr * 0.82) + '" fill="#f3e3bd" fill-opacity=".6" stroke="' + ink + '" stroke-width=".8"/>';
+  [0, 90, 180, 270].forEach(function(r, k){ h += '<path transform="rotate(' + r + ')" d="M0 ' + (-cr) + 'L' + mR(cr * 0.16) + ' 0 0 0z" fill="' + (k % 2 ? '#f3e3bd' : '#9a2b1c') + '" stroke="' + ink + '" stroke-width=".8"/><path transform="rotate(' + r + ')" d="M0 ' + (-cr) + 'L' + mR(-cr * 0.16) + ' 0 0 0z" fill="' + ink + '"/>'; });
+  h += '<text class="mp-c" y="' + mR(-cr - 4) + '" text-anchor="middle">Š</text></g>';
+  var ttl = lgName(), x = F[0][0], y = F[0][1], w = F[0][2], hh = F[0][3];
+  h += '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + hh + '" fill="#f3e3bd" stroke="' + ink + '" stroke-width="1.6"/><rect x="' + (x + 4) + '" y="' + (y + 4) + '" width="' + (w - 8) + '" height="' + (hh - 8) + '" fill="none" stroke="' + ink + '" stroke-width=".6"/>' +
+    (G.port ? '<text class="mp-ct" x="' + (x + w / 2) + '" y="' + (y + hh * 0.66) + '" text-anchor="middle" style="font-size:14px">' + esc(ttl.toUpperCase()) + ' · ' + era + ' T.</text>' :
+    '<text class="mp-ct" x="' + (x + w / 2) + '" y="' + (y + hh * 0.44) + '" text-anchor="middle" style="font-size:' + Math.min(15, (w - 28) / (ttl.length * 0.7)).toFixed(1) + 'px">' + esc(ttl.toUpperCase()) + '</text><text class="mp-cs" x="' + (x + w / 2) + '" y="' + (y + hh * 0.78) + '" text-anchor="middle">po ' + era + ' turo · ' + season + '</text>');
+  h += '<text class="mp-s" x="' + (F[2][0] + F[2][2] / 2) + '" y="' + (F[2][1] + F[2][3] * 0.7) + '" text-anchor="middle">Mainų jūra</text>';
+  h += '<rect width="' + VW + '" height="' + VH + '" fill="url(#mp-vig)"/><rect x="4" y="4" width="' + (VW - 8) + '" height="' + (VH - 8) + '" fill="none" stroke="' + ink + '" stroke-width="2.4"/><rect x="10" y="10" width="' + (VW - 20) + '" height="' + (VH - 20) + '" fill="none" stroke="' + ink + '" stroke-width=".8"/>';
+  [[10, 10], [VW - 10, 10], [10, VH - 10], [VW - 10, VH - 10]].forEach(function(p){ h += '<path d="M' + p[0] + ' ' + (p[1] - 7) + 'l7 7-7 7-7-7z" fill="#9a2b1c" stroke="' + ink + '" stroke-width="1"/>'; });
+  return h + '</g><g id="mp-fx" pointer-events="none"></g>';
 }
+/* POI layer: counter-scaled groups with level of detail (data-lod) and label priority (data-pr) */
+function mapPoiSvg(E, P, G, col, night){
+  var pref = mapPref(), L = pref.L, me = myTeam(), found = pref.found || {}, h = '', port = G.port, pois = MAPS.cur.pois, open = MAPS.cur.open;
+  var show = {watch: L.terrain, statue: 1, town: L.towns, ruin: L.towns, danger: L.dangers, eye: L.towns, quest: L.quests, side: L.quests, camp: L.quests, treasure: L.treasures, cave: L.treasures, fire: L.merchants, market: L.merchants, event: L.events};
+  function grp(k, q, cls, inner, extra){ return '<g class="mp-p mp-' + q.t + (cls || '') + '" data-poi="' + k + '"' + (q.id && q.t === 'capital' ? ' data-mp="' + q.id + '"' : '') + ' data-lod="' + (q.lod || 0) + '" data-pr="' + q.p + '" style="--x:' + mR(q.x) + 'px;--y:' + mR(q.y) + 'px">' + inner + (extra || '') + '</g>'; }
+  function tx(cls, y, txt, pr, x, anchor, lod){ return '<text class="' + cls + '" x="' + (x || 0) + '" y="' + y + '" text-anchor="' + (anchor || 'middle') + '" data-pr="' + pr + '"' + (lod ? ' data-lod="' + lod + '"' : '') + '>' + esc(txt) + '</text>'; }
+  pois.forEach(function(q, k){
+    var dim = MAPS.sel && q.id && q.id !== MAPS.sel ? ' mp-dim' : '';
+    if (q.t !== 'capital' && q.id && !open[q.id]) return; /* nothing leaks through the fog except capitals (89) */
+    if (q.t === 'summit'){ h += grp(k, q, '', '<use href="#mp-summit"/>', tx('mp-k mp-big', 30, 'TAURĖS KALNAS', 0) + tx('mp-r', 44, 'Lyderis: ' + M[E.order[0]].team, 2)); return; }
+    if (q.t === 'harbor'){ h += grp(k, q, '', '<use href="#mp-market"/><use href="#mp-ship" x="20" y="10"/>', tx('mp-k mp-mid', 22, 'DRAFTO UOSTAS', 1) + tx('mp-b', 35, 'Saugi zona · prekeivis', 5, 0, 'middle', 1.2)); return; }
+    if (q.t === 'arena'){ var rw = S.data.rounds[MAPS.cur.era - 1]; h += grp(k, q, '', '<use href="#mp-arena"/>', tx('mp-l', 22, 'Turo arena', 4) + (rw && rw.winner ? tx('mp-b', 35, 'Bosas: ' + M[rw.winner].team, 7, 0, 'middle', 1.4) : '')); return; }
+    if (q.t === 'capital'){ var id = q.id, i = E.ids.indexOf(id), ld = E.pos[id] === 1, gap = E.pos[id] < E.ids.length ? E.tot[id] - E.tot[E.order[E.pos[id]]] : 0, wall = Math.min(5, 1 + gap / 40);
+      var inner = (night ? '<circle r="16" fill="#ffd66b" opacity=".5" filter="url(#mp-glow)"/>' : '') + '<circle r="16" fill="none" stroke="#6b4a2a" stroke-width="' + wall.toFixed(1) + '" stroke-dasharray="2 1.6" opacity=".7"/><use href="#mp-c-' + q.style + '" transform="scale(' + (ld ? 1.35 : 1.1) + ')"/>' +
+        '<path d="M9 -12V-25" stroke="#3b2412" stroke-width="1.2"/><path d="M9 -25h10l-3 3 3 3H9z" fill="' + col(i, id) + '" stroke="#3b2412" stroke-width=".8"/>' + (id === me ? '<use href="#mp-me"/>' : '');
+      h += grp(k, q, dim + (open[id] ? '' : ' mp-fogcap'), inner, tx('mp-k', 29, M[id].team.toUpperCase(), 0) + tx('mp-r', 43, M[id].first + ' · ' + NF.format(Math.round(E.tot[id])) + (E.wins[id] ? ' · ' + E.wins[id] + '★' : ''), 1) + (open[id] ? tx('mp-b', 56, G.biome[i].nm + ' · rek. lygis ' + Math.round(E.avg(id)), 9, 0, 'middle', 1.3) : tx('mp-b', 56, 'Neištirta', 9, 0, 'middle', 1.3)));
+      if (L.weather && E.lastPlace[id] && open[id]){ var lp = E.lastPlace[id], wi = lp <= 3 ? 'mp-sun' : lp === E.ids.length ? 'mp-storm' : lp >= E.ids.length - 2 ? 'mp-rain' : null;
+        if (wi) h += '<g class="mp-p' + dim + '" data-lod="0.8" data-pr="12" style="--x:' + mR(q.x - 27) + 'px;--y:' + mR(q.y - 20) + 'px"><use href="#' + wi + '"/><title>' + esc(M[id].team) + ': ' + lp + ' vieta paskutiniame ture</title></g>'; }
+      if (L.weather && E.live && E.live.teams && E.live.teams[id]){ var lv = E.live.teams[id].pts, mx = Math.max.apply(null, E.ids.map(function(t){ return E.live.teams[t] ? E.live.teams[t].pts : 0; }));
+        if (lv === mx && mx > 0) h += '<g class="mp-p" data-lod="0" data-pr="12" style="--x:' + mR(q.x) + 'px;--y:' + mR(q.y - 44) + 'px"><g class="mp-orbit"><use href="#mp-bird" x="-14"/><use href="#mp-bird" x="10" y="-6"/><use href="#mp-bird" x="2" y="8"/></g><title>Gyvo turo lyderis: ' + NF.format(lv) + ' FPTS</title></g>';
+        if (mx > 0 && lv >= mx * 0.8) h += '<g class="mp-p" data-lod="0" data-pr="12" style="--x:' + mR(q.x - 7) + 'px;--y:' + mR(q.y - 12) + 'px"><use href="#mp-smoke"/></g>'; }
+      return; }
+    if (!show[q.t]) return;
+    var key = q.t + '-' + q.id, hid = q.hidden && pref.fog && !found[key], icon = {watch: 'mp-watch', statue: 'mp-statue', town: 'mp-town', ruin: 'mp-ruin', danger: 'mp-skull', eye: 'mp-eye', quest: 'mp-quest', side: 'mp-side', camp: 'mp-camp', treasure: 'mp-chest', cave: 'mp-cave', fire: 'mp-fire', market: 'mp-market', event: 'mp-scroll'}[q.t];
+    var inner2 = hid ? '<circle r="7.5" fill="#efe6d2" stroke="#8a6a44" stroke-dasharray="2 2"/><path d="M-2 -2.6a2.2 2.2 0 1 1 3 2c-.8.4-1 .9-1 1.6M0 3.6v.4" fill="none" stroke="#5b4632" stroke-width="1.5" stroke-linecap="round"/>' : '<use href="#' + icon + '"/>';
+    if (!hid && found[key] && (q.t === 'treasure' || q.t === 'cave')) inner2 += '<circle r="10.5" fill="none" stroke="#2f7a3a" stroke-width="1.4"/>';
+    if (q.t === 'watch') inner2 += '<path d="M6 6l3 -3M8 9l3 -3" stroke="#e8c531" stroke-width="1.6" stroke-linecap="round"/>' + (found[key] ? '<path d="M-3 -16l3 -4 3 4" fill="#f2c230" stroke="#3b2412" stroke-width=".7"/>' : ''); /* climbing hint (23) */
+    var lbl = {town: [q.name, 'right'], ruin: [q.short ? q.short + ' griuvėsiai' : '', 'right'], statue: [q.short ? 'Statula: ' + q.short : '', 'below'], danger: [q.name, 'right'], eye: [q.name, 'right'], camp: [q.foe ? 'Stovykla: ' + M[q.foe].team : '', 'below'], market: ['Turgus', 'below'], treasure: [hid ? '' : 'Lobis', 'below']}[q.t];
+    var extra = lbl && lbl[0] ? (lbl[1] === 'right' ? tx('mp-l', 3.5, lbl[0], q.p, 8, 'start') : tx('mp-l', 19, lbl[0], q.p)) : '';
+    h += grp(k, q, dim + (hid ? ' mp-hid' : ''), inner2, extra); });
+  /* summit gates (14, 20): a round win is the key */
+  MAPS.cur.graph.edges.forEach(function(e){ if (e.kind !== 'spoke') return; h += '<g class="mp-p mp-gatep" data-lod="1.5" data-pr="12" style="--x:' + mR(e.gate[0]) + 'px;--y:' + mR(e.gate[1]) + 'px"><use href="#mp-gate' + (e.open ? '-o' : '') + '"/><title>' + esc(M[e.a].team) + ': vartai į Taurės kalną ' + (e.open ? 'atidaryti' : 'užrakinti, raktas yra turo pergalė') + '</title></g>'; });
+  /* signposts (26) on the ring road: points gap to the neighbour */
+  if (L.roads) MAPS.cur.graph.edges.forEach(function(e){ if (e.kind !== 'ring') return; var A = MAPS.cur.graph.nodes[e.a], B = MAPS.cur.graph.nodes[e.b], gp = Math.round(E.tot[e.b] - E.tot[e.a]);
+    h += '<g class="mp-p" data-lod="2.3" data-pr="13" style="--x:' + mR((A[0] + B[0]) / 2) + 'px;--y:' + mR((A[1] + B[1]) / 2) + 'px"><use href="#mp-sign"/>' + tx('mp-l', -1, M[e.b].first + ' ' + (gp >= 0 ? '+' : '−') + NF.format(Math.abs(gp)), 13, 13, 'start') + '</g>'; });
+  G.rivers.forEach(function(r){ var m = r.pts[Math.floor(r.pts.length * 0.55)]; if (m && mapInPoly(m[0], m[1], G.land)) h += '<g class="mp-p" data-lod="2.1" data-pr="14" style="--x:' + mR(m[0]) + 'px;--y:' + mR(m[1]) + 'px">' + tx('mp-w', -5, r.name, 14) + '</g>'; });
+  h += '<g class="mp-p mp-isle" data-lod="0" data-pr="3" style="--x:' + mR(G.ic[0]) + 'px;--y:' + mR(G.ic[1]) + 'px">' + tx('mp-s', -2, 'Laisvųjų salos', 3) + E.fa.slice(0, port ? 2 : 3).map(function(p, k){ return tx('mp-l', (port ? 64 : 76) + k * 14, p.name || p.full, 4 + k); }).join('') + '</g>';
+  if (L.pins) (pref.pins || []).forEach(function(p, k){ if (p.o !== (port ? 'p' : 'l')) return;
+    var shp = {pin: '<path d="M0 0c-6 -8 -6 -14 0 -16c6 2 6 8 0 16z" fill="' + p.c + '" stroke="#3b2412"/><circle cy="-10" r="2" fill="#fff"/>', star: '<path d="M0 -9l2.6 5.4 5.9.8-4.3 4.1 1 5.8L0 4.3-5.2 7.1l1-5.8-4.3-4.1 5.9-.8z" fill="' + p.c + '" stroke="#3b2412"/>', warn: '<path d="M0 -9l9 15h-18z" fill="' + p.c + '" stroke="#3b2412"/><path d="M0 -4v5" stroke="#3b2412" stroke-width="1.6"/>', flag: '<path d="M-3 7V-10M-3 -10h10l-3 4 3 4h-10" fill="' + p.c + '" stroke="#3b2412"/>'}[p.s] || '';
+    h += '<g class="mp-p mp-pin" data-pin="' + k + '" data-lod="0" data-pr="2" style="--x:' + mR(p.x) + 'px;--y:' + mR(p.y) + 'px">' + shp + (p.n ? tx('mp-l', -4, p.n, 2, 9, 'start') : '') + '</g>'; });
+  return h;
+}
+/* ---------- underground floor (59, 60) ---------- */
+function mapUnderSvg(era, W){
+  var E = mapEraData(era), port = W < 560, G = mapGeo(E.ids, port), VW = G.VW, VH = G.VH, P = mapPower(G, E.ids.map(function(){ return 1 / E.ids.length; })), pref = mapPref(), found = pref.found || {};
+  MAPS.cur = {E: E, P: P, G: G, era: era, under: 1, open: {}}; MAPS.cur.graph = mapGraph(E, P, G); var pois = MAPS.cur.pois = [];
+  var h = '<svg class="lmap under' + (port ? ' pt' : '') + '" viewBox="0 0 ' + VW + ' ' + VH + '" role="img" aria-label="Požemiai po ' + era + ' turo">' + mapDefs() + '<rect width="' + VW + '" height="' + VH + '" fill="#1d1712"/><g id="mp-cam">';
+  h += '<path d="' + mapSmooth(G.land) + '" fill="#2b2119" stroke="#5c4630" stroke-width="2" stroke-dasharray="6 4"/>';
+  MAPS.cur.graph.edges.forEach(function(e){ if (e.kind !== 'trade' && e.kind !== 'secret' && e.kind !== 'ring') return; var sec = e.kind === 'secret', op = !sec || found['secret-' + e.a + '-' + e.b] || !pref.fog;
+    h += '<path d="' + e.d + '" fill="none" stroke="' + (sec ? '#c9852f' : e.kind === 'trade' ? '#8a6a44' : '#4a3a2a') + '" stroke-width="' + (e.kind === 'ring' ? 5 : 3) + '"' + (sec ? ' stroke-dasharray="2 4"' : '') + ' opacity="' + (op ? .9 : .2) + '" stroke-linecap="round"/>'; });
+  h += '</g><g id="mp-poi">';
+  E.ids.forEach(function(id, i){ var a = P.anc[i]; if (!a) return; pois.push({t: 'chamber', id: id, x: a[0], y: a[1], name: M[id].team + ' požemiai', p: 0});
+    var rows = E.bench[id].map(function(z){ return (z.sl === 'B6' ? '6-as: ' : 'Suolas: ') + (z.p.name || z.p.full) + ' ' + NF.format(z.v); }).concat(E.deep[id].map(function(z){ return 'Neaktyvus: ' + (z.p.name || z.p.full); }));
+    h += '<g class="mp-p mp-chamber" data-poi="' + (pois.length - 1) + '" data-mp="' + id + '" data-lod="0" data-pr="0" style="--x:' + mR(a[0]) + 'px;--y:' + mR(a[1]) + 'px"><ellipse rx="' + (port ? 30 : 36) + '" ry="' + (port ? 18 : 22) + '" fill="#3a2c20" stroke="' + tcol(id) + '" stroke-width="2"/><use href="#mp-cave" y="2"/>' +
+      '<text class="mp-k mp-lu" y="' + (i % 2 ? (port ? -26 : -30) : (port ? 34 : 38)) + '" text-anchor="middle" data-pr="0">' + esc(M[id].team.toUpperCase()) + '</text>' + rows.slice(0, 3).map(function(r, k){ return '<text class="mp-l mp-lu" y="' + ((i % 2 ? (port ? 32 : 36) : (port ? 52 : 57)) + k * 14) + '" text-anchor="middle" data-pr="' + (2 + k) + '" data-lod="' + (k ? 1.2 : 0) + '">' + esc(r) + '</text>'; }).join('') + '</g>'; });
+  Object.keys(E.secret).forEach(function(k){ var ab = k.split('|'), A = MAPS.cur.graph.nodes[ab[0]], B = MAPS.cur.graph.nodes[ab[1]]; if (!A || !B) return; var key = 'secret-' + ab[0] + '-' + ab[1], ok = found[key] || !pref.fog;
+    pois.push({t: 'secret', a: ab[0], b: ab[1], key: key, x: (A[0] + B[0]) / 2, y: (A[1] + B[1]) / 2, name: 'Slapta praėja', p: 4, info: M[ab[0]].team + ' ir ' + M[ab[1]].team + ' kartą susitarė, bet mainus atšaukė (' + E.secret[k] + ' k.)'});
+    h += '<g class="mp-p mp-secret" data-poi="' + (pois.length - 1) + '" data-lod="0" data-pr="4" style="--x:' + mR(pois[pois.length - 1].x) + 'px;--y:' + mR(pois[pois.length - 1].y) + 'px">' + (ok ? '<circle r="7" fill="#c9852f" stroke="#f3e3bd"/><path d="M-3 0h6" stroke="#1d1712" stroke-width="2"/>' : '<circle r="7" fill="#2b2119" stroke="#c9852f" stroke-dasharray="2 2"/>') + '</g>'; });
+  h += '</g><g class="mp-fur" pointer-events="none"><text class="mp-s mp-lu" x="' + (VW / 2) + '" y="' + (port ? 40 : 34) + '" text-anchor="middle">POŽEMIAI</text><rect x="4" y="4" width="' + (VW - 8) + '" height="' + (VH - 8) + '" fill="none" stroke="#8a6a44" stroke-width="2.4"/></g><g id="mp-fx" pointer-events="none"></g></svg>';
+  return h;
+}
+
+/* ---------- camera (53, 94, 96), level of detail (75) and label collisions (74) ---------- */
+function mapApplyCam(){
+  var svg = document.querySelector('#mp-wrap svg'); if (!svg || !MAPS.cur) return; var c = MAPS.cam, G = MAPS.cur.G, W = svg.getBoundingClientRect().width || G.VW, s = W / G.VW;
+  c.k = Math.max(1, Math.min(6, c.k)); c.x = Math.min(0, Math.max(G.VW * (1 - c.k), c.x)); c.y = Math.min(0, Math.max(G.VH * (1 - c.k), c.y));
+  var tr = 'translate(' + mR(c.x) + ' ' + mR(c.y) + ') scale(' + c.k.toFixed(4) + ')';
+  svg.querySelector('#mp-cam').setAttribute('transform', tr); svg.querySelector('#mp-poi').setAttribute('transform', tr);
+  svg.style.setProperty('--ik', (1 / (c.k * s)).toFixed(4));
+  var eff = c.k * Math.min(1.3, s / (G.port ? 0.6 : 0.85));
+  Array.prototype.forEach.call(svg.querySelectorAll('#mp-poi [data-lod]'), function(e){ e.classList.toggle('mp-off', +e.getAttribute('data-lod') > eff + 0.001); });
+  mapMini(); mapCompass();
+}
+function mapFixLabels(){
+  var svg = document.querySelector('#mp-wrap svg'); if (!svg) return;
+  var wr = svg.getBoundingClientRect(), keep = [], icons = [], major = [];
+  Array.prototype.forEach.call(svg.querySelectorAll('#mp-poi .mp-p'), function(g){ g.style.visibility = ''; });
+  Array.prototype.forEach.call(svg.querySelectorAll('#mp-poi .mp-p'), function(g){ if (g.closest('.mp-off')) return; var u = g.querySelector('use'); if (u){ var r = u.getBoundingClientRect(); icons.push({left: r.left + 2, right: r.right - 2, top: r.top + 2, bottom: r.bottom - 2, g: g}); } });
+  function hit(a, b){ return a.left < b.right && b.left < a.right && a.top < b.bottom && b.top < a.bottom; }
+  function pr(e){ if (e.closest('.mp-fur')) return -1; var a = e.getAttribute('data-pr'); if (a == null){ var g = e.closest('[data-pr]'); a = g ? g.getAttribute('data-pr') : 9; } return +a; }
+  var els = Array.prototype.slice.call(svg.querySelectorAll('text'));
+  els.forEach(function(e){ e.style.visibility = ''; });
+  els = els.filter(function(e){ return !e.closest('.mp-off') && e.textContent.trim(); }).sort(function(a, b){ return pr(a) - pr(b); });
+  els.forEach(function(e){ var b = e.getBoundingClientRect(), r = {left: b.left - 1, right: b.right + 1, top: b.top - 1, bottom: b.bottom + 1}, own = e.closest('.mp-p');
+    var bad = r.left < wr.left + 8 || r.right > wr.right - 8 || r.top < wr.top + 8 || r.bottom > wr.bottom - 8 || keep.some(function(k){ return hit(k, r); }) || (pr(e) > 1 && icons.some(function(ic){ return ic.g !== own && hit(ic, r); }));
+    if (bad) e.style.visibility = 'hidden'; else { keep.push(r); if (pr(e) <= 1) major.push({r: r, g: own}); } });
+  icons.forEach(function(ic){ var g = ic.g; if (g.classList.contains('mp-capital') || g.classList.contains('mp-summit') || g.classList.contains('mp-harbor') || g.classList.contains('mp-pin')) return;
+    if (major.some(function(m){ return m.g !== g && hit(m.r, ic); })) g.style.visibility = 'hidden'; });
+}
+var MAP_FIXT = 0;
+function mapLater(){ clearTimeout(MAP_FIXT); MAP_FIXT = setTimeout(mapFixLabels, 90); }
+function mapFly(x, y, k, ms){ var c = MAPS.cam, G = MAPS.cur.G, k1 = Math.max(1, Math.min(6, k || c.k)), x1 = G.VW / 2 - x * k1, y1 = G.VH / 2 - y * k1, x0 = c.x, y0 = c.y, k0 = c.k, t0 = performance.now(), dur = ms == null ? 450 : ms;
+  if (mapPref().still || !dur){ c.x = x1; c.y = y1; c.k = k1; mapApplyCam(); mapLater(); return; }
+  (function step(t){ var u = Math.min(1, (t - t0) / dur), e = u < .5 ? 2 * u * u : 1 - Math.pow(-2 * u + 2, 2) / 2; c.k = k0 + (k1 - k0) * e; c.x = x0 + (x1 - x0) * e; c.y = y0 + (y1 - y0) * e; mapApplyCam(); if (u < 1) requestAnimationFrame(step); else mapLater(); })(t0); }
+function mapZoomAt(fx, fy, f){ var c = MAPS.cam, k1 = Math.max(1, Math.min(6, c.k * f)); c.x = fx - (fx - c.x) * k1 / c.k; c.y = fy - (fy - c.y) * k1 / c.k; c.k = k1; mapApplyCam(); mapLater(); }
+function mapPt(ev){ var svg = document.querySelector('#mp-wrap svg'), r = svg.getBoundingClientRect(), G = MAPS.cur.G; return [(ev.clientX - r.left) / r.width * G.VW, (ev.clientY - r.top) / r.height * G.VH]; }
+function mapWorld(p){ var c = MAPS.cam; return [(p[0] - c.x) / c.k, (p[1] - c.y) / c.k]; }
+function mapCenter(){ var c = MAPS.cam, G = MAPS.cur.G; return [(G.VW / 2 - c.x) / c.k, (G.VH / 2 - c.y) / c.k]; }
+
+/* ---------- minimap (78-82) and compass bar (83) ---------- */
+function mapTarget(){ var E = MAPS.cur && MAPS.cur.E, me = myTeam(); if (MAPS.route) return MAPS.route.to; if (!E || !me) return 'summit'; return E.order[E.pos[me] - 2] || 'summit'; }
+function mapMini(){
+  var box = document.getElementById('mp-mini'), m = mapPref().mini; if (!box || !MAPS.cur) return; box.hidden = !m.on; if (!m.on) return;
+  var G = MAPS.cur.G, P = MAPS.cur.P, E = MAPS.cur.E, c = MAPS.cam, me = myTeam(), w = (G.port ? [64, 80, 104] : [96, 132, 176])[m.size] || 80, g = MAPS.cur.graph, rot = 0, tgt = mapTarget();
+  box.style.width = w + 'px'; box.style.opacity = m.op;
+  if (m.rot && me && g.nodes[me] && g.nodes[tgt]){ var A = g.nodes[me], B = g.nodes[tgt]; rot = -Math.atan2(B[1] - A[1], B[0] - A[0]) * 180 / Math.PI - 90; }
+  var s = '<svg viewBox="0 0 ' + G.VW + ' ' + G.VH + '" width="' + w + '" height="' + mR(w * G.VH / G.VW) + '" aria-hidden="true"><rect width="' + G.VW + '" height="' + G.VH + '" fill="' + (MAPS.cur.under ? '#1d1712' : '#9fc0bd') + '"/><g transform="rotate(' + mR(rot) + ' ' + G.VW / 2 + ' ' + G.VH / 2 + ')"><clipPath id="mp-mc"><path d="' + mapSmooth(G.land) + '"/></clipPath><path d="' + mapSmooth(G.land) + '" fill="' + (MAPS.cur.under ? '#2b2119' : '#efdcb2') + '"/><g clip-path="url(#mp-mc)">' +
+    E.ids.map(function(id, i){ return P.polys[i].length > 2 ? '<path d="' + mapPolyD(P.polys[i]) + '" fill="' + (mapPref().cb ? MAP_CB[i % 12] : tcol(id)) + '" fill-opacity=".45" stroke="#3b2412" stroke-width="2"/>' : ''; }).join('') + '</g>';
+  if (me && E.pos[me]){ [[me, '#c0262d', 24], [E.order[E.pos[me] - 2], '#f2c230', 18], [E.order[E.pos[me]], '#6b2b7b', 18]].forEach(function(z){ var a = z[0] && g.nodes[z[0]]; if (a) s += '<circle cx="' + mR(a[0]) + '" cy="' + mR(a[1]) + '" r="' + z[2] + '" fill="' + z[1] + '" stroke="#fff" stroke-width="6"/>'; }); }
+  s += '<rect x="' + mR(-c.x / c.k) + '" y="' + mR(-c.y / c.k) + '" width="' + mR(G.VW / c.k) + '" height="' + mR(G.VH / c.k) + '" fill="none" stroke="#c0262d" stroke-width="8"/></g></svg>';
+  box.innerHTML = s;
+}
+function mapCompass(){
+  var bar = document.getElementById('mp-comp'); if (!bar || !MAPS.cur) return; bar.hidden = !mapPref().compass || !!MAPS.cur.under; if (bar.hidden) return;
+  var E = MAPS.cur.E, g = MAPS.cur.graph, me = myTeam(), from = me && g.nodes[me] ? g.nodes[me] : mapCenter(), tgt = mapTarget();
+  var items = E.ids.filter(function(id){ return id !== me && g.nodes[id]; }).map(function(id){ return [id, M[id].first, g.nodes[id]]; }).concat([['summit', 'Taurė', g.nodes.summit], ['harbor', 'Uostas', g.nodes.harbor]]);
+  if (bar.clientWidth < 560){ var keepIds = ['summit', 'harbor', tgt, MAPS.sel]; if (me && E.pos[me]){ keepIds.push(E.order[E.pos[me] - 2], E.order[E.pos[me]]); } items = items.filter(function(z){ return keepIds.indexOf(z[0]) >= 0; }); }
+  bar.innerHTML = '<div class="mp-cb-in">' + ['Š', 'R', 'P', 'V'].map(function(t, k){ return '<span class="mp-cd" style="left:' + (k * 25 + 12.5) + '%">' + t + '</span>'; }).join('') +
+    items.map(function(z){ z.b = (Math.atan2(z[2][0] - from[0], -(z[2][1] - from[1])) * 180 / Math.PI + 405) % 360; return z; }).sort(function(a, b){ return a.b - b.b; }).map(function(z, k, arr){ var px = bar.clientWidth || 600, gap = 34 / px * 360; z.row = 0; for (var j = k - 1; j >= 0 && z.b - arr[j].b < gap; j--) if (arr[j].row === z.row) z.row = 1 - z.row; return z; }).map(function(z){ var b = z.b; return '<button type="button" class="mp-ci' + (z[0] === tgt ? ' on' : '') + '" data-fly="' + z[0] + '" style="left:' + (b / 360 * 100).toFixed(1) + '%;top:' + (z.row ? 18 : 3) + 'px" title="' + esc(z[0] === 'summit' ? 'Taurės kalnas' : z[0] === 'harbor' ? 'Drafto uostas' : M[z[0]].team) + '">' + esc(z[1].slice(0, 3)) + '</button>'; }).join('') + '</div>' +
+    '<span class="mp-cb-l">Kryptys nuo ' + (me && g.nodes[me] ? esc(M[me].team) : 'žemėlapio centro') + '</span>';
+}
+
+/* ---------- sound (97, 98): optional, generated in the browser ---------- */
+var MAPA = null, MAPAMB = null;
+function mapAudio(){ try { MAPA = MAPA || new (window.AudioContext || window.webkitAudioContext)(); return MAPA; } catch (e){ return null; } }
+function mapTone(i){ if (!mapPref().sound) return; var A = mapAudio(); if (!A) return; var o = A.createOscillator(), g = A.createGain();
+  o.type = 'triangle'; o.frequency.value = [262, 294, 330, 392, 440, 494, 523, 587, 659, 698][Math.abs(i) % 10]; g.gain.setValueAtTime(0.0001, A.currentTime); g.gain.exponentialRampToValueAtTime(0.1, A.currentTime + 0.02); g.gain.exponentialRampToValueAtTime(0.0001, A.currentTime + 0.5);
+  o.connect(g); g.connect(A.destination); o.start(); o.stop(A.currentTime + 0.55); }
+function mapAmbient(i){ if (MAPAMB){ try { MAPAMB.g.gain.exponentialRampToValueAtTime(0.0001, MAPA.currentTime + 0.4); MAPAMB.o.forEach(function(o){ o.stop(MAPA.currentTime + 0.45); }); } catch (e){} MAPAMB = null; }
+  if (!mapPref().sound || i == null || i < 0 || !document.getElementById('mp-wrap')) return; var A = mapAudio(); if (!A) return;
+  var base = [110, 98, 82, 123, 147, 131, 117, 92, 139, 73][i % 10], o = A.createOscillator(), o2 = A.createOscillator(), g = A.createGain(), fl = A.createBiquadFilter();
+  o.type = 'sawtooth'; o2.type = 'sine'; o.frequency.value = base; o2.frequency.value = base * 1.5; fl.type = 'lowpass'; fl.frequency.value = 380; g.gain.value = 0.0001;
+  o.connect(fl); o2.connect(fl); fl.connect(g); g.connect(A.destination); o.start(); o2.start(); g.gain.exponentialRampToValueAtTime(0.025, A.currentTime + 1.2); MAPAMB = {o: [o, o2], g: g}; }
+
+/* ---------- page ---------- */
 function pageMap(){
-  var d = S.data, R = d.rounds_played;
+  var d = S.data, R = d.rounds_played, pref = mapPref();
   if (!R) return '<h2 class="page">Lygos žemėlapis</h2><p class="data">Žemėlapis atsiras po pirmojo turo.</p>';
-  if (MAPS.key !== ((LG && LG.cur) || 'main')){ MAPS.key = (LG && LG.cur) || 'main'; MAPS.era = null; MAPS.sel = null; MAPS.geo = null; }
   if (!MAPS.era || MAPS.era > R) MAPS.era = R;
-  var L = MAPS.layers;
+  var L = pref.L, opts = d.managers.map(function(m){ return '<option value="' + m.id + '">' + esc(m.team) + '</option>'; }).join('');
+  var places = d.managers.map(function(m){ return m.team; }).concat(['Taurės kalnas', 'Drafto uostas', 'Turo arena', 'Laisvųjų salos']).concat(Object.keys(d.rosters || {}).reduce(function(a, t){ return a.concat((d.rosters[t] || []).slice(0, 4).map(function(p){ return p.name; })); }, []));
+  var chips = [['roads', 'Keliai'], ['towns', 'Miestai'], ['quests', 'Užduotys'], ['dangers', 'Pavojai'], ['treasures', 'Paslaptys'], ['events', 'Įvykiai'], ['merchants', 'Prekeiviai ir stovyklos'], ['weather', 'Orai'], ['zone', 'Audros siena'], ['terrain', 'Reljefas ir bokštai'], ['contours', 'Aukščio linijos'], ['wildlife', 'Gyvūnai'], ['pins', 'Mano žymekliai']];
+  function chk(attr, k, on, txt){ return '<label class="mp-chip"><input type="checkbox" ' + attr + '="' + k + '"' + (on ? ' checked' : '') + '> ' + txt + '</label>'; }
   return '<p class="kicker">Po ' + R + ' turo</p><h2 class="page">Lygos žemėlapis</h2>' +
-    '<p class="deck">Kiekviena komanda yra karalystė, o jos valdos auga ir traukiasi kartu su surinktais taškais. Keliai jungia komandas, kurios mainėsi žaidėjais, miestai yra naudingiausi komandos žaidėjai. Paspausk karalystę, o slankikliu pažiūrėk, kaip žemėlapis keitėsi per sezoną.</p>' +
-    '<div class="mp-ctl"><button type="button" class="btn mp-play" id="mp-play" aria-label="Rodyti visą sezoną nuo pradžios">▶ Sezonas</button>' +
-    '<label class="mp-era">Po <b id="mp-era-v">' + MAPS.era + '</b> turo<input type="range" id="mp-era" min="1" max="' + R + '" value="' + MAPS.era + '" step="1"></label>' +
-    '<span class="mp-lay">' + [['roads', 'Keliai'], ['towns', 'Miestai'], ['terrain', 'Reljefas']].map(function(x){ return '<label><input type="checkbox" data-mpl="' + x[0] + '"' + (L[x[0]] ? ' checked' : '') + '> ' + x[1] + '</label>'; }).join('') + '</span></div>' +
-    '<div class="mp-wrap" id="mp-wrap"></div><div id="mp-info" class="mp-info" aria-live="polite"></div>' +
-    '<section><h3 class="sect">Žemėlapio legenda</h3><ul class="mp-leg">' +
-    '<li><svg viewBox="-10 -16 20 24" width="20" height="24" aria-hidden="true"><use href="#mp-castle"/></svg>Sostinė ir karalystės vardas, po juo valdovas, taškai ir turų pergalės ★</li>' +
-    '<li><svg viewBox="-6 -7 12 12" width="14" height="14" aria-hidden="true"><use href="#mp-town"/></svg>Miestas: vienas iš trijų naudingiausių komandos žaidėjų tą turą</li>' +
-    '<li><svg viewBox="0 0 30 10" width="30" height="10" aria-hidden="true"><path d="M2 5H28" stroke="#6b4421" stroke-width="2.4" stroke-dasharray="1 4.5" stroke-linecap="round"/></svg>Kelias: mainai tarp dviejų komandų, kuo storesnis, tuo daugiau mainų</li>' +
-    '<li><svg viewBox="0 0 30 10" width="30" height="10" aria-hidden="true"><path d="M2 5H28" stroke="#7a2e1a" stroke-width="1.6" stroke-dasharray="7 3 1.5 3"/></svg>Siena: valdų plotas atitinka taškus (lyderis gauna daugiau žemės nei proporcingai)</li>' +
-    '<li><svg viewBox="0 0 30 12" width="30" height="12" aria-hidden="true"><path d="M3 10L11 2 19 10" fill="#e6cf9f" stroke="#3b2412" stroke-width="1.3"/><circle cx="24" cy="6" r="3.4" fill="#9fae78" stroke="#3b2412"/></svg>Kalnai, miškai ir upės yra tik dekoracija</li>' +
-    '<li><svg viewBox="0 0 30 12" width="30" height="12" aria-hidden="true"><ellipse cx="15" cy="6" rx="12" ry="5" fill="#efdcb2" stroke="#3b2412"/></svg>Laisvųjų salos: geriausi laisvieji agentai pagal vidurkį</li></ul></section>';
+    '<p class="deck">Lyga kaip žaidimo pasaulis. Kiekviena komanda valdo savo regioną, valdos auga ir traukiasi kartu su taškais. Viduryje stūkso Taurės kalnas, sezonas prasidėjo Drafto uoste. Žemėlapį gali tempti ir artinti, ieškoti vietų, brėžti kelią iki varžovo, dėti savo žymeklius ir atrasti paslaptis.</p>' +
+    '<div id="mp-new"></div>' +
+    '<div class="mp-ctl"><button type="button" class="btn mp-play" id="mp-play">▶ Sezonas</button>' +
+    '<label class="mp-era">Po <b id="mp-era-v">' + MAPS.era + '</b> turo<input type="range" id="mp-era" min="1" max="' + R + '" value="' + MAPS.era + '" step="1" aria-label="Turas"></label>' +
+    '<span class="mp-seg" role="group" aria-label="Aukštas">' + [['surface', 'Paviršius'], ['under', 'Požemiai']].map(function(f){ return '<button type="button" class="tog' + (MAPS.floor === f[0] ? ' on' : '') + '" data-floor="' + f[0] + '" aria-pressed="' + (MAPS.floor === f[0]) + '">' + f[1] + '</button>'; }).join('') + '</span></div>' +
+    '<div class="mp-ctl mp-ctl2"><form class="mp-find" id="mp-find" role="search"><input type="search" id="mp-q" list="mp-ql" placeholder="Ieškoti vietos ar žaidėjo" aria-label="Ieškoti žemėlapyje"><datalist id="mp-ql">' + places.map(function(p){ return '<option value="' + esc(p) + '">'; }).join('') + '</datalist><button type="submit" class="tog">Rasti</button></form>' +
+    '<label class="mp-sel">Kelias iki <select id="mp-route"><option value="">tikslo</option><option value="summit">Taurės kalnas</option><option value="harbor">Drafto uostas</option>' + opts + '</select></label>' +
+    '<label class="mp-sel">Keliauti į <select id="mp-ft"><option value="">vietą</option><option value="summit">Taurės kalnas</option><option value="harbor">Drafto uostas</option>' + opts + '</select></label></div>' +
+    '<div id="mp-comp" class="mp-comp" hidden></div>' +
+    '<div class="mp-stage"><div class="mp-wrap" id="mp-wrap" tabindex="0" aria-label="Žemėlapis. Tempk, artink ratuku ar dviem pirštais. Klaviatūra: rodyklės, plius, minus, nulis."></div>' +
+    '<div id="mp-mini" class="mp-mini" hidden></div></div>' +
+    '<div class="mp-bar"><div class="mp-zoom"><button type="button" class="tog" data-z="in" aria-label="Priartinti">+</button><button type="button" class="tog" data-z="out" aria-label="Atitolinti">−</button><button type="button" class="tog" data-z="home" aria-label="Visas žemėlapis">⌂</button><button type="button" class="tog" data-z="me" aria-label="Mano regionas">◎ Mano</button></div><div class="mp-tool"><button type="button" class="tog" data-tool="pin" aria-pressed="false">Žymeklis</button><button type="button" class="tog" data-tool="ping" aria-pressed="false">Signalas</button></div></div>' +
+    '<div id="mp-pinf" class="mp-pinf" hidden><label>Forma <select id="mp-ps"><option value="pin">smeigtukas</option><option value="star">žvaigždė</option><option value="warn">pavojus</option><option value="flag">vėliava</option></select></label><label>Spalva <select id="mp-pc"><option value="#c0262d">raudona</option><option value="#2f5f9a">mėlyna</option><option value="#2f7a3a">žalia</option><option value="#f2c230">geltona</option><option value="#6b2b7b">violetinė</option></select></label><label class="mp-pn">Užrašas <input id="mp-pn" maxlength="40" placeholder="pvz. čia ieškosiu centro"></label><span class="muted">Paspausk žemėlapyje, kur padėti.</span></div>' +
+    '<div id="mp-info" class="mp-info" aria-live="polite"></div>' +
+    '<details class="mp-more"><summary>Sluoksniai, rodinys ir garsas</summary><div class="mp-chips">' + chips.map(function(x){ return chk('data-mpl', x[0], L[x[0]], x[1]); }).join('') + '</div>' +
+    '<div class="mp-chips">' + [['fog', 'Karo rūkas'], ['cb', 'Daltonikams'], ['fair', 'Lygūs plotai'], ['still', 'Be animacijų'], ['sound', 'Garsai ir muzika'], ['compass', 'Kompaso juosta']].map(function(x){ return chk('data-mpo', x[0], pref[x[0]], x[1]); }).join('') +
+    '<label class="mp-chip">Paros metas <select data-mpo="night">' + [['auto', 'pagal laiką'], ['day', 'diena'], ['night', 'naktis']].map(function(o){ return '<option value="' + o[0] + '"' + (pref.night === o[0] ? ' selected' : '') + '>' + o[1] + '</option>'; }).join('') + '</select></label></div>' +
+    '<div class="mp-chips">' + chk('data-mpm', 'on', pref.mini.on, 'Minižemėlapis') + '<label class="mp-chip">Dydis <select data-mpm="size">' + ['mažas', 'vidutinis', 'didelis'].map(function(o, k){ return '<option value="' + k + '"' + (pref.mini.size === k ? ' selected' : '') + '>' + o + '</option>'; }).join('') + '</select></label>' +
+    '<label class="mp-chip">Permatomumas <input type="range" min="0.4" max="1" step="0.05" value="' + pref.mini.op + '" data-mpm="op"></label>' + chk('data-mpm', 'rot', pref.mini.rot, 'Sukti pagal tikslą') + '</div>' +
+    '<p class="data"><button type="button" class="tog" id="mp-reveal">Atverti visą žemėlapį</button> <button type="button" class="tog" id="mp-reset">Pamiršti atradimus</button> <button type="button" class="tog" id="mp-tour-b">Kaip naudotis</button></p></details>' +
+    '<div id="mp-pins"></div>' +
+    '<section><h3 class="sect">Legenda</h3><div class="mp-legs">' + mapLegend() + '</div><p class="note">Valdų plotas atitinka surinktus taškus (lyderiui žemės duodama daugiau nei proporcingai, kad skirtumai matytųsi), o „Lygūs plotai“ parodo sąžiningą padalijimą: visos sostinės vienodai nutolusios nuo Taurės kalno. Sostinės matomos ir per rūką. Klavišai: M atidaro žemėlapį, rodyklės tempia, + ir − artina, 0 grąžina visą vaizdą. Veikia ir žaidimų pultas.</p></section>';
+}
+function mapLegend(){
+  function it(svg, t){ return '<div class="mp-li"><svg viewBox="-12 -14 24 24" width="26" height="26" aria-hidden="true">' + svg + '</svg><span>' + t + '</span></div>'; }
+  return '<div><h4>Pasaulis</h4>' + it('<use href="#mp-c-castle"/>', 'Sostinė: statybos stilius pagal regiono frakciją, tvora storėja kartu su pranašumu prieš persekiotoją') + it('<use href="#mp-summit" transform="scale(.3) translate(0 18)"/>', 'Taurės kalnas: centrinis orientyras, vėliava lyderio spalvos') + it('<use href="#mp-market"/>', 'Drafto uostas: saugi pradžios zona ir laisvųjų agentų prekeivis') +
+    it('<use href="#mp-gate"/>', 'Vartai į Taurės kalną: atsidaro, kai regionas laimi turą') + it('<path d="M-10 0H10" stroke="#7a5230" stroke-width="2.2" stroke-dasharray="6 4"/>', 'Žiedinis kelias tarp kaimynų ir takai į kalną') + it('<path d="M-10 0H10" stroke="#9a2b1c" stroke-width="2" stroke-dasharray="1 4.5" stroke-linecap="round"/>', 'Trumpasis kelias: mainai, atsiranda po to turo') +
+    it('<circle r="9" fill="none" stroke="#6b2b7b" stroke-width="2" stroke-dasharray="6 3"/>', 'Audros siena: už jos regionai, kurie lygos laimėti nebegali') + it('<path d="M-9 5L-1 -8 7 5" fill="#e6d6b4" stroke="#5b4632" stroke-width="1.2"/>', 'Kalnai, aukščio linijos, upės teka nuo kalno į jūrą') + '</div>' +
+    '<div><h4>Vietos</h4>' + it('<use href="#mp-town"/>', 'Miestas: naudingiausi komandos žaidėjai, kuriasi prie vandens') + it('<use href="#mp-statue"/>', 'Kapitono statula: geriausias kapitono turas') + it('<use href="#mp-watch"/><path d="M6 6l3 -3M8 9l3 -3" stroke="#e8c531" stroke-width="1.6"/>', 'Apžvalgos bokštas: užlipus atidengia kaimynus, geltoni ženklai rodo, kur lipti') + it('<use href="#mp-ruin"/>', 'Griuvėsiai: žaidėjas, kuris paliko regioną') + it('<use href="#mp-fire"/>', 'Stovyklavietė: suolas paskutiniame ture') + it('<use href="#mp-market"/>', 'Turgus: daugiausia mainų') + it('<use href="#mp-arena"/>', 'Turo arena: turo nugalėtojas yra bosas') + '</div>' +
+    '<div><h4>Užduotys ir pavojai</h4>' + it('<use href="#mp-quest"/>', 'Pagrindinė užduotis: ką pasivyti arba apginti') + it('<use href="#mp-side"/>', 'Šalutinė užduotis: kortos, pergalės, rekordai') + it('<use href="#mp-camp"/>', 'Varžovo stovykla: komanda viena vieta aukščiau') + it('<use href="#mp-skull"/>', 'Pavojus: traumuotas žaidėjas') + it('<use href="#mp-scroll"/>', 'Įvykis: naujiena apie regiono žaidėją') + it('<use href="#mp-eye"/>', 'Tavo stebimas žaidėjas') + '</div>' +
+    '<div><h4>Paslaptys ir orai</h4>' + it('<circle r="7.5" fill="#efe6d2" stroke="#8a6a44" stroke-dasharray="2 2"/>', 'Neatrasta vieta: lobis arba urvas su mįsle') + it('<use href="#mp-chest"/>', 'Lobis: geriausias regiono žaidėjo turas') + it('<use href="#mp-cave"/>', 'Urvas su mįsle') + it('<use href="#mp-sun"/>', 'Saulė: 1 iki 3 vieta paskutiniame ture') + it('<use href="#mp-rain"/>', 'Lietus: viena iš paskutinių vietų') + it('<use href="#mp-storm"/>', 'Audra: paskutinė vieta') + it('<use href="#mp-bird"/>', 'Paukščiai ir dūmai: gyvo turo lyderiai') + '</div>';
 }
 function drawMap(){
-  var wrap = document.getElementById('mp-wrap'); if (!wrap) return;
-  var W = wrap.clientWidth || 720;
-  wrap.innerHTML = mapSvg(MAPS.era, W);
-  var svg = wrap.querySelector('svg'); try { mapFixLabels(svg); } catch (e){}
-  mapInfo();
+  var wrap = document.getElementById('mp-wrap'); if (!wrap) return; var t0 = performance.now();
+  wrap.innerHTML = MAPS.floor === 'under' ? mapUnderSvg(MAPS.era, wrap.clientWidth || 720) : mapSvg(MAPS.era, wrap.clientWidth || 720);
+  mapApplyCam(); mapFixLabels(); mapInfo(); mapPinsList(); MAPS.drawMs = Math.round(performance.now() - t0);
+}
+function mapNewSince(){
+  var box = document.getElementById('mp-new'), pref = mapPref(), d = S.data, R = d.rounds_played; if (!box || !MAPS.cur) return;
+  var E = R === MAPS.era && MAPS.cur.E ? MAPS.cur.E : mapEraData(R), snap = pref.snap, msg = '';
+  if (snap && snap.r != null){ var ch = E.ids.map(function(id){ return [id, snap.pos && snap.pos[id] ? snap.pos[id] - E.pos[id] : 0]; }).filter(function(x){ return x[1]; }).sort(function(a, b){ return Math.abs(b[1]) - Math.abs(a[1]); });
+    if (snap.r !== R || ch.length) msg = 'Nuo tavo paskutinio apsilankymo' + (snap.r !== R ? ' sužaista ' + (R - snap.r) + ' ' + plural(R - snap.r, 'turas', 'turai', 'turų') : '') + (ch.length ? (snap.r !== R ? ', ' : ': ') + ch.slice(0, 3).map(function(x){ return esc(M[x[0]].team) + ' ' + (x[1] > 0 ? 'pakilo' : 'nukrito') + ' per ' + Math.abs(x[1]) + ' ' + plural(Math.abs(x[1]), 'vietą', 'vietas', 'vietų'); }).join(', ') : '') + '.'; }
+  var tot = 0, fnd = 0; (MAPS.cur.pois || []).forEach(function(q){ if (q.hidden){ tot++; if ((pref.found || {})[q.t + '-' + q.id]) fnd++; } });
+  var seen = E.ids.filter(function(id){ return (pref.seen || {})[id] || id === myTeam(); }).length;
+  box.innerHTML = (msg && !MAPS.newShown ? '<p class="mp-banner">' + msg + '</p>' : MAPS.newMsg || '') + '<p class="mp-prog"><span>Ištyrinėta regionų <b>' + seen + '/' + E.ids.length + '</b></span><span>Rasta paslapčių <b>' + fnd + '/' + tot + '</b></span><span>Sezonas <b>' + Math.round(R / d.rounds_total * 100) + ' %</b></span></p>';
+  if (msg && !MAPS.newShown){ MAPS.newShown = 1; MAPS.newMsg = '<p class="mp-banner">' + msg + '</p>'; }
+  pref.snap = {r: R, pos: E.pos}; mapSave();
 }
 function mapInfo(){
   var box = document.getElementById('mp-info'); if (!box || !MAPS.cur) return;
-  var E = MAPS.cur.E, P = MAPS.cur.P, id = MAPS.sel;
-  if (!id){ box.innerHTML = '<p class="data muted">Paspausk karalystę žemėlapyje, kad pamatytum jos valdovą, taškus ir miestus.</p>'; return; }
+  var E = MAPS.cur.E, P = MAPS.cur.P, pref = mapPref(), q = MAPS.poi, id = MAPS.sel, rtx = '';
+  if (MAPS.route && !MAPS.cur.under){ var rt = MAPS.cur.rt, nm = function(k){ return k === 'summit' ? 'Taurės kalnas' : k === 'harbor' ? 'Drafto uostas' : M[k].team; }, to = MAPS.route.to, fr = MAPS.route.from;
+    rtx = '<p class="mp-rt">' + (rt ? '<b>Kelias:</b> ' + rt.path.map(nm).map(esc).join(' → ') + (rt.alt ? ' <span class="muted">· alternatyva (mėlyna): ' + rt.alt.path.map(nm).map(esc).join(' → ') + '</span>' : '') + (M[to] && M[fr] ? ' · taškų skirtumas ' + NF.format(Math.round((E.tot[to] - E.tot[fr]) * 100) / 100) : '') : 'Kelio nėra: į Taurės kalną veda tik vartai, atrakinti turo pergale.') + ' <button type="button" class="tog" id="mp-rtx">Išvalyti kelią</button></p>'; }
+  if (q && q.t !== 'capital' && q.t !== 'chamber'){ box.innerHTML = rtx + mapPoiCard(q); return; }
+  if (!id){ box.innerHTML = rtx + '<p class="data muted">Paspausk regioną, sostinę ar ženklą. Klaustukai žymi neatrastas vietas, rūkas dengia dar neištyrinėtus regionus.</p>'; return; }
   var i = E.ids.indexOf(id), part = [];
-  Object.keys(E.roads).forEach(function(k){ var ab = k.split('|'); if (ab[0] === id || ab[1] === id) part.push([ab[0] === id ? ab[1] : ab[0], E.roads[k]]); });
-  part.sort(function(a, b){ return b[1] - a[1]; });
-  box.innerHTML = '<div class="mp-card" style="--c:' + tcol(id) + '"><div class="mp-hd">' + teamLogo(id, 40) + '<div><p class="mp-nm">' + teamLink(id) + '</p><p class="sub">Valdovas ' + esc(who(id)) + ' · ' + E.pos[id] + ' vieta po ' + MAPS.era + ' turo</p></div><button type="button" class="tog" id="mp-x" aria-label="Uždaryti">✕</button></div>' +
-    '<dl class="strip"><div><dt>Taškai</dt><dd>' + NF.format(Math.round(E.tot[id] * 100) / 100) + '</dd></div><div><dt>' + MAPS.era + ' ture</dt><dd>' + (E.last[id] == null ? '–' : NF.format(E.last[id])) + '</dd></div><div><dt>Žemės</dt><dd>' + Math.round(P.area[i] * 100) + ' %</dd></div><div><dt>Turų pergalės</dt><dd>' + E.wins[id] + '</dd></div></dl>' +
-    '<p class="data"><b>Miestai:</b> ' + (E.towns[id].length ? E.towns[id].map(function(t){ var p = t.p; return (p.id ? '<a href="#zaidejas-' + p.id + '">' + esc(p.name || p.full) + '</a>' : esc(p.name || p.full)) + ' <span class="muted">(' + NF.format(Math.round(t.s * 100) / 100) + ')</span>'; }).join(', ') : '<span class="muted">nėra</span>') + '</p>' +
-    '<p class="data"><b>Keliai:</b> ' + (part.length ? part.map(function(x){ return esc(M[x[0]].team) + ' <span class="muted">(' + x[1] + ')</span>'; }).join(', ') : '<span class="muted">su niekuo nesimainė</span>') + '</p></div>';
+  Object.keys(E.roads).forEach(function(k){ var ab = k.split('|'); if (ab[0] === id || ab[1] === id) part.push([ab[0] === id ? ab[1] : ab[0], E.roads[k]]); }); part.sort(function(a, b){ return b[1] - a[1]; });
+  var hid = (MAPS.cur.pois || []).filter(function(z){ return z.id === id && z.hidden; }), fnd = hid.filter(function(z){ return (pref.found || {})[z.t + '-' + id]; }).length;
+  var comp = MAPS.cur.under ? null : Math.round((MAPS.cur.open[id] ? 40 : 0) + (hid.length ? fnd / hid.length * 60 : 60));
+  var stars = ''; for (var r = 1; r <= MAPS.era; r++){ var rr = S.data.rounds[r - 1], w = rr && rr.winner === id; stars += '<span class="mp-st' + (w ? ' on' : '') + '" title="' + r + ' turas">' + (w ? '★' : '☆') + '</span>'; }
+  var me = myTeam(), b = MAPS.cur.G.biome[i];
+  var under = MAPS.cur.under ? '<p class="data"><b>Požemiuose:</b> ' + (E.bench[id].concat(E.deep[id]).map(function(z){ return esc(z.p.name || z.p.full) + (z.v != null ? ' ' + NF.format(z.v) : '') + ' <span class="muted">(' + (z.sl === 'B6' ? '6-as' : z.sl === 'B' ? 'suolas' : 'neaktyvus') + ')</span>'; }).join(', ') || '<span class="muted">tuščia</span>') + '</p>' : '';
+  box.innerHTML = rtx + '<div class="mp-card" style="--c:' + tcol(id) + '"><div class="mp-hd">' + teamLogo(id, 40) + '<div><p class="mp-nm">' + esc(M[id].team) + '</p><p class="sub">' + esc(b.nm) + ' · valdovas ' + esc(who(id)) + ' · ' + E.pos[id] + ' vieta po ' + MAPS.era + ' turo</p></div><button type="button" class="tog" id="mp-x" aria-label="Uždaryti">✕</button></div>' +
+    '<dl class="strip"><div><dt>Taškai</dt><dd>' + NF.format(Math.round(E.tot[id] * 100) / 100) + '</dd></div><div><dt>' + MAPS.era + ' ture</dt><dd>' + (E.last[id] == null ? '–' : NF.format(E.last[id])) + '</dd></div><div><dt>Rek. lygis</dt><dd title="Vidutiniškai surenka per turą">' + Math.round(E.avg(id)) + '</dd></div><div><dt>Žemės</dt><dd>' + Math.round(P.area[i] * 100) + ' %</dd></div>' + (comp != null ? '<div><dt>Ištyrinėta</dt><dd>' + comp + ' %</dd></div>' : '') + '</dl>' + under +
+    '<p class="data"><b>Turų pergalės:</b> <span class="mp-stars">' + stars + '</span> ' + E.wins[id] + ' iš ' + MAPS.era + '</p>' +
+    '<p class="data"><b>Miestai:</b> ' + (E.towns[id].length ? E.towns[id].slice(0, 3).map(function(t){ var p = t.p; return (p.id ? '<a href="#zaidejas-' + p.id + '">' + esc(p.name || p.full) + '</a>' : esc(p.name || p.full)) + ' <span class="muted">(' + NF.format(Math.round(t.s * 100) / 100) + ')</span>'; }).join(', ') : '<span class="muted">nėra</span>') + '</p>' +
+    '<p class="data"><b>Trumpieji keliai:</b> ' + (part.length ? part.map(function(x){ return esc(M[x[0]].team) + ' <span class="muted">(' + x[1] + ')</span>'; }).join(', ') : '<span class="muted">su niekuo nesimainė</span>') + '</p>' +
+    (MAPS.cur.zone && MAPS.cur.zone.out.indexOf(id) >= 0 ? '<p class="data"><b>Už audros sienos:</b> lygos laimėti šansų beveik nebėra, bet turų pergalės dar laukia.</p>' : '') +
+    '<p class="mp-acts"><a class="btn" href="#komanda-' + id + '">Keliauti į komandos puslapį</a> ' + (me !== id ? '<button type="button" class="tog" data-route="' + id + '">Kelias iki čia</button> ' : '') + '<button type="button" class="tog" data-fly="' + id + '">Priartinti</button></p></div>';
 }
+function mapPoiCard(q){
+  var E = MAPS.cur.E, pref = mapPref(), key = q.key || q.t + '-' + q.id, found = (pref.found || {})[key], body = '';
+  var head = {treasure: 'Lobis', cave: 'Urvas', watch: 'Apžvalgos bokštas', town: 'Miestas: ' + q.name, ruin: 'Griuvėsiai: ' + (q.short || ''), statue: 'Kapitono statula', quest: 'Pagrindinė užduotis', side: 'Šalutinė užduotis', camp: 'Varžovo stovykla', danger: 'Pavojus: ' + q.name, eye: 'Stebimas: ' + q.name, fire: 'Stovyklavietė', market: 'Turgus', event: 'Įvykis', summit: 'Taurės kalnas', harbor: 'Drafto uostas', arena: 'Turo arena', secret: 'Slapta praėja'}[q.t] || q.name;
+  if ((q.t === 'treasure' || q.t === 'cave') && pref.fog && !found){ body = q.t === 'treasure' ? '<p class="mp-acts"><button type="button" class="tog" data-dig="' + key + '">Atkasti lobį</button></p>' : ''; }
+  if (q.t === 'cave'){ var z = mapRiddle(q.id); body = found || !pref.fog ? '<p class="data">Mįslė: ' + esc(z.q) + ' Atsakymas: ' + esc(z.a) + '.</p>' : '<p class="data">' + esc(z.q) + '</p><p class="mp-acts">' + z.o.map(function(o){ return '<button type="button" class="tog" data-ans="' + esc(o) + '" data-ok="' + (o === z.a ? 1 : 0) + '">' + esc(o) + '</button>'; }).join(' ') + '</p>'; }
+  else if (q.t === 'treasure' && (found || !pref.fog)) body = '<p class="data">' + esc(q.info) + '</p>';
+  else if (q.t === 'summit'){ var fav = E.ids.slice().sort(function(a, b){ return (E.winp[b] || 0) - (E.winp[a] || 0); })[0];
+    body = '<p class="data">Lyderis ' + esc(M[E.order[0]].team) + ', ' + NF.format(Math.round(E.tot[E.order[0]])) + ' FPTS. Didžiausi šansai laimėti lygą: ' + esc(M[fav].team) + (E.winp[fav] != null ? ' (' + Math.round(E.winp[fav] * 100) + ' %)' : '') + '. Vartai atidaryti ' + E.ids.filter(function(i){ return E.wins[i]; }).length + ' regionams iš ' + E.ids.length + '. <a href="#koeficientai">Koeficientai</a></p>'; }
+  else if (q.t === 'harbor') body = '<p class="data">Saugi zona, kurioje prasidėjo sezonas. Prekeivis siūlo laisvuosius agentus: ' + E.fa.map(function(p){ return '<a href="#zaidejas-' + p.id + '">' + esc(p.name) + '</a> <span class="muted">(vid. ' + nf1(p.avg) + ')</span>'; }).join(', ') + '. <a href="#agentai">Visi laisvieji agentai</a></p>';
+  else if (q.t === 'arena'){ var rw = S.data.rounds[MAPS.era - 1]; body = '<p class="data">' + MAPS.era + ' turo bosas: ' + (rw && rw.winner ? '<b>' + esc(M[rw.winner].team) + '</b>, ' + NF.format(rw.winner_score) + ' FPTS. <a href="#turas-' + MAPS.era + '-' + rw.winner + '">Bosų sudėtis</a>' : 'nėra') + '</p>'; }
+  else if (q.t === 'watch') body = found ? '<p class="data">Nuo bokšto matyti kaimyniniai regionai, jie atidengti.</p>' : '<p class="mp-acts"><button type="button" class="tog" data-climb="' + q.id + '">Užlipti į bokštą</button> <span class="muted">atidengs kaimyninius regionus</span></p>';
+  else if (q.t === 'secret') body = found || !pref.fog ? '<p class="data">' + esc(q.info) + '</p>' : '<p class="mp-acts"><button type="button" class="tog" data-dig="' + key + '">Ištirti praėją</button></p>';
+  else if (q.t !== 'treasure') body = '<p class="data">' + esc(q.info || '') + (q.pid ? ' <a href="#zaidejas-' + q.pid + '">Žaidėjo kortelė</a>' : '') + '</p>';
+  var sub = q.id ? esc(M[q.id].team) + ' · ' + esc(MAPS.cur.G.biome[E.ids.indexOf(q.id)].nm) : '';
+  return '<div class="mp-card" style="--c:' + (q.id ? tcol(q.id) : '#9a2b1c') + '"><div class="mp-hd"><div><p class="mp-nm">' + esc(head) + '</p>' + (sub ? '<p class="sub">' + sub + '</p>' : '') + '</div><button type="button" class="tog" id="mp-x" aria-label="Uždaryti">✕</button></div>' + body + '</div>';
+}
+function mapRiddle(id){ var d = S.data, ids = d.managers.map(function(m){ return m.id; }), r1 = d.rounds[0], pos1 = ids.slice().sort(function(a, b){ return (r1.scores[b] || 0) - (r1.scores[a] || 0); }).indexOf(id) + 1, n = ids.length;
+  var o = [pos1, pos1 % n + 1, (pos1 + 3) % n + 1].map(String).filter(function(v, k, a){ return a.indexOf(v) === k; }); if (o.length < 3) o.push(String((pos1 + 5) % n + 1));
+  o.sort(function(a, b){ return mapHash(id + a) - mapHash(id + b); });
+  return {q: 'Kelintoje vietoje ' + M[id].team + ' buvo pirmajame ture?', a: String(pos1), o: o}; }
+function mapPinsList(){ var box = document.getElementById('mp-pins'), port = MAPS.cur && MAPS.cur.G.port, pins = (mapPref().pins || []).map(function(p, k){ return [p, k]; }).filter(function(z){ return z[0].o === (port ? 'p' : 'l'); }); if (!box) return;
+  box.innerHTML = pins.length ? '<section><h3 class="sect">Mano žymekliai</h3><ul class="mp-pl">' + pins.map(function(z){ var p = z[0]; return '<li><span class="mp-sw" style="background:' + p.c + '"></span>' + esc(p.n || {pin: 'Smeigtukas', star: 'Žvaigždė', warn: 'Pavojus', flag: 'Vėliava'}[p.s]) + ' <button type="button" class="tog" data-pinfly="' + z[1] + '">Rodyti</button> <button type="button" class="tog" data-pindel="' + z[1] + '">Ištrinti</button></li>'; }).join('') + '</ul></section>' : ''; }
+function mapRedraw(){ drawMap(); mapNewSince(); }
+function mapSelect(id, poi){
+  MAPS.sel = id; MAPS.poi = poi || null;
+  if (id && mapPref().fog){ var p = mapPref(); p.seen = p.seen || {}; if (!p.seen[id]){ p.seen[id] = 1; mapSave(); } }
+  if (id) mapTone(MAPS.cur.E.ids.indexOf(id)); mapAmbient(id ? MAPS.cur.E.ids.indexOf(id) : null);
+  mapRedraw();
+}
+function mapPing(x, y, share){
+  var fx = document.querySelector('#mp-wrap #mp-fx'); if (!fx) return; var c = MAPS.cam;
+  fx.innerHTML = '<g transform="translate(' + mR(x * c.k + c.x) + ' ' + mR(y * c.k + c.y) + ')"><circle r="6" fill="#c0262d"/><circle r="6" fill="none" stroke="#c0262d" stroke-width="3"><animate attributeName="r" values="6;34" dur="1.4s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;0" dur="1.4s" repeatCount="indefinite"/></circle></g>';
+  if (share){ var url = location.href.split('#')[0] + '#zemelapis~ping~' + Math.round(x) + '~' + Math.round(y) + '~' + (MAPS.cur.G.port ? 'p' : 'l');
+    var say = function(ok){ var inf = document.getElementById('mp-info'); if (inf) inf.insertAdjacentHTML('afterbegin', '<p class="mp-banner">Signalas padėtas. ' + (ok ? 'Nuoroda nukopijuota, nusiųsk ją lygos grupėje.' : 'Nusiųsk šią nuorodą lygos grupėje: ' + esc(url)) + '</p>'); };
+    try { navigator.clipboard.writeText(url).then(function(){ say(true); }, function(){ say(false); }); } catch (e){ say(false); } }
+}
+function mapTour(){ var box = document.getElementById('mp-info'); if (!box) return;
+  var steps = ['Tempk žemėlapį pele ar pirštu, artink ratuku, dviem pirštais arba + ir − mygtukais. Kuo arčiau, tuo daugiau vietų ir pavadinimų matyti.', 'Paspausk regioną: pamatysi valdovą, taškus, užduotis ir kiek jau ištyrinėjai. Kol nepaspaudi, regioną dengia rūkas.', 'Klaustukai yra paslaptys: lobiai ir urvai su mįslėmis. Apžvalgos bokštai atidengia kaimynus, o Požemiuose slepiasi suolas ir slaptos praėjos.', 'Viršuje gali ieškoti vietos, nusibrėžti kelią iki varžovo, dėti savo žymeklius ir siųsti signalą. Slankiklis rodo, kaip pasaulis keitėsi per sezoną.'];
+  var k = 0; (function show(){ box.innerHTML = '<div class="mp-card" style="--c:#9a2b1c"><p class="mp-nm">Kaip naudotis · ' + (k + 1) + '/' + steps.length + '</p><p class="data">' + steps[k] + '</p><p class="mp-acts"><button type="button" class="btn" id="mp-tn">' + (k < steps.length - 1 ? 'Toliau' : 'Pradėti') + '</button> <button type="button" class="tog" id="mp-ts">Praleisti</button></p></div>';
+    document.getElementById('mp-tn').onclick = function(){ k++; if (k < steps.length) show(); else { mapPref().tour = 1; mapSave(); mapInfo(); } };
+    document.getElementById('mp-ts').onclick = function(){ mapPref().tour = 1; mapSave(); mapInfo(); }; })(); }
 function mapBind(){
   var wrap = document.getElementById('mp-wrap'); if (!wrap || wrap.mpBound) return; wrap.mpBound = 1;
-  wrap.addEventListener('click', function(e){ var t = e.target.closest('[data-mp]'); var id = t ? t.getAttribute('data-mp') : null; MAPS.sel = id && id !== MAPS.sel ? id : null; drawMap(); });
+  var view = document.getElementById('view'), ptrs = {}, drag = null, moved = false, downT = null;
+  wrap.addEventListener('pointerdown', function(e){ downT = e.target; try { wrap.setPointerCapture(e.pointerId); } catch (x){} ptrs[e.pointerId] = mapPt(e); moved = false; drag = {p: mapPt(e), c: {x: MAPS.cam.x, y: MAPS.cam.y}, d0: null}; });
+  wrap.addEventListener('pointermove', function(e){ if (!ptrs[e.pointerId] || !drag) return; ptrs[e.pointerId] = mapPt(e); var ks = Object.keys(ptrs);
+    if (ks.length === 2){ var a = ptrs[ks[0]], b = ptrs[ks[1]], dd = Math.hypot(a[0] - b[0], a[1] - b[1]); if (!drag.d0){ drag.d0 = dd; drag.k0 = MAPS.cam.k; } mapZoomAt((a[0] + b[0]) / 2, (a[1] + b[1]) / 2, drag.k0 * dd / drag.d0 / MAPS.cam.k); moved = true; return; }
+    var p = mapPt(e), dx = p[0] - drag.p[0], dy = p[1] - drag.p[1]; if (Math.abs(dx) + Math.abs(dy) > 5) moved = true; if (!moved) return; MAPS.cam.x = drag.c.x + dx; MAPS.cam.y = drag.c.y + dy; mapApplyCam(); });
+  function up(e){ delete ptrs[e.pointerId]; if (!Object.keys(ptrs).length){ if (moved) mapLater(); drag = null; } else if (drag) { drag.d0 = null; var k = Object.keys(ptrs)[0]; drag.p = ptrs[k]; drag.c = {x: MAPS.cam.x, y: MAPS.cam.y}; } }
+  wrap.addEventListener('pointerup', up); wrap.addEventListener('pointercancel', up);
+  wrap.addEventListener('click', function(e){ if (moved){ moved = false; return; } if (!MAPS.cur) return; var w = mapWorld(mapPt(e)), t = downT || e.target;
+    if (MAPS.tool === 'pin'){ var pp = mapPref(); pp.pins = pp.pins || []; pp.pins.push({x: Math.round(w[0]), y: Math.round(w[1]), s: document.getElementById('mp-ps').value, c: document.getElementById('mp-pc').value, n: document.getElementById('mp-pn').value.trim(), o: MAPS.cur.G.port ? 'p' : 'l'}); mapSave(); mapRedraw(); return; }
+    if (MAPS.tool === 'ping'){ mapPing(w[0], w[1], true); return; }
+    if (t.closest && t.closest('[data-pin]')) return;
+    var g = t.closest && t.closest('[data-poi]'), q = g ? MAPS.cur.pois[+g.getAttribute('data-poi')] : null;
+    if (q && (q.t === 'capital' || q.t === 'chamber')){ mapSelect(q.id === MAPS.sel && !MAPS.poi ? null : q.id); return; }
+    if (q){ MAPS.poi = q; mapTone(q.p + 3); mapInfo(); document.getElementById('mp-info').scrollIntoView({block: 'nearest', behavior: 'smooth'}); return; }
+    var own = MAPS.cur.under ? -1 : mapOwnAt(MAPS.cur.P, MAPS.cur.G, w[0], w[1]);
+    if (own >= 0 && mapInPoly(w[0], w[1], MAPS.cur.G.land)){ var id = MAPS.cur.E.ids[own]; mapSelect(id === MAPS.sel && !MAPS.poi ? null : id); } else if (MAPS.sel || MAPS.poi) mapSelect(null); });
+  wrap.addEventListener('wheel', function(e){ e.preventDefault(); var p = mapPt(e); mapZoomAt(p[0], p[1], e.deltaY < 0 ? 1.2 : 1 / 1.2); }, {passive: false});
+  wrap.addEventListener('dblclick', function(e){ var p = mapPt(e); mapZoomAt(p[0], p[1], 1.8); });
+  wrap.addEventListener('keydown', function(e){ var c = MAPS.cam, G = MAPS.cur.G;
+    if (e.key === 'ArrowLeft') c.x += 40; else if (e.key === 'ArrowRight') c.x -= 40; else if (e.key === 'ArrowUp') c.y += 40; else if (e.key === 'ArrowDown') c.y -= 40;
+    else if (e.key === '+' || e.key === '='){ e.preventDefault(); mapZoomAt(G.VW / 2, G.VH / 2, 1.3); return; } else if (e.key === '-'){ e.preventDefault(); mapZoomAt(G.VW / 2, G.VH / 2, 1 / 1.3); return; }
+    else if (e.key === '0'){ c.x = 0; c.y = 0; c.k = 1; } else if (e.key === 'Enter'){ var w = mapCenter(), o = mapOwnAt(MAPS.cur.P, G, w[0], w[1]); if (o >= 0) mapSelect(MAPS.cur.E.ids[o]); return; } else return;
+    e.preventDefault(); mapApplyCam(); mapLater(); });
+  view.querySelector('.mp-zoom').addEventListener('click', function(e){ var b = e.target.closest('[data-z]'); if (!b || !MAPS.cur) return; var z = b.getAttribute('data-z'), G = MAPS.cur.G, c = mapCenter();
+    if (z === 'in') mapFly(c[0], c[1], MAPS.cam.k * 1.5); if (z === 'out') mapFly(c[0], c[1], MAPS.cam.k / 1.5); if (z === 'home') mapFly(G.VW / 2, G.VH / 2, 1);
+    if (z === 'me'){ var me = myTeam(), a = me && MAPS.cur.graph.nodes[me]; a = a || G.harbor; mapFly(a[0], a[1], 2.4); } });
+  document.getElementById('mp-mini').addEventListener('click', function(e){ if (mapPref().mini.rot || !MAPS.cur) return; var r = this.getBoundingClientRect(), G = MAPS.cur.G; mapFly((e.clientX - r.left) / r.width * G.VW, (e.clientY - r.top) / r.height * G.VH, Math.max(2, MAPS.cam.k)); });
   var rg = document.getElementById('mp-era');
-  rg.addEventListener('input', function(){ mapStop(); MAPS.era = +rg.value; document.getElementById('mp-era-v').textContent = MAPS.era; drawMap(); });
-  document.getElementById('mp-info').addEventListener('click', function(e){ if (e.target.id === 'mp-x'){ MAPS.sel = null; drawMap(); } });
-  Array.prototype.forEach.call(document.querySelectorAll('[data-mpl]'), function(c){ c.addEventListener('change', function(){ MAPS.layers[c.getAttribute('data-mpl')] = c.checked; drawMap(); }); });
-  document.getElementById('mp-play').addEventListener('click', function(){
-    if (MAPS.play){ mapStop(); return; }
-    var R = S.data.rounds_played; MAPS.era = 1; this.textContent = '■ Stop';
-    var step = function(){ if (!document.getElementById('mp-wrap')){ mapStop(); return; } rg.value = MAPS.era; document.getElementById('mp-era-v').textContent = MAPS.era; drawMap(); if (MAPS.era >= R){ mapStop(); return; } MAPS.era++; MAPS.play = setTimeout(step, 750); };
+  rg.addEventListener('input', function(){ mapStop(); MAPS.era = +rg.value; document.getElementById('mp-era-v').textContent = MAPS.era; MAPS.poi = null; drawMap(); });
+  document.getElementById('mp-find').addEventListener('submit', function(e){ e.preventDefault(); if (!MAPS.cur) return; var v = document.getElementById('mp-q').value.trim().toLowerCase(), inf = document.getElementById('mp-info'); if (!v) return;
+    var hit = MAPS.cur.pois.filter(function(q){ return (q.name || '').toLowerCase().indexOf(v) >= 0 || (q.short || '').toLowerCase().indexOf(v) >= 0; })[0];
+    if (!hit) MAPS.cur.E.ids.forEach(function(id){ if (!hit && (M[id].first.toLowerCase().indexOf(v) >= 0 || M[id].team.toLowerCase().indexOf(v) >= 0)) hit = MAPS.cur.pois.filter(function(q){ return q.t === 'capital' && q.id === id; })[0]; });
+    if (!hit && v.indexOf('sal') >= 0) hit = {x: MAPS.cur.G.ic[0], y: MAPS.cur.G.ic[1] + 30};
+    if (!hit){ inf.innerHTML = '<p class="data">Nieko neradau pagal „' + esc(v) + '“. Pabandyk regiono, sostinės, valdovo ar žaidėjo vardą.</p>'; return; }
+    mapFly(hit.x, hit.y, 2.8); if (hit.t === 'capital') setTimeout(function(){ mapSelect(hit.id); }, 480); else if (hit.t){ MAPS.poi = hit; mapInfo(); } });
+  var ro = 0; if (!MAPS.resizeBound) window.addEventListener('resize', function(){ clearTimeout(ro); ro = setTimeout(function(){ var w = document.getElementById('mp-wrap'); if (!w || !MAPS.cur) return; if ((w.clientWidth < 560) !== !!MAPS.cur.G.port){ MAPS.cam = {x: 0, y: 0, k: 1}; drawMap(); } else { mapApplyCam(); mapFixLabels(); } }, 200); }); MAPS.resizeBound = 1;
+  (function pad(){ if (!document.getElementById('mp-wrap')) return; var gp = navigator.getGamepads ? Array.prototype.filter.call(navigator.getGamepads(), Boolean)[0] : null; /* gamepad (76) */
+    if (gp && MAPS.cur){ var ax = gp.axes, c = MAPS.cam, mv = false, G = MAPS.cur.G; if (Math.abs(ax[0]) > 0.2){ c.x -= ax[0] * 12; mv = true; } if (Math.abs(ax[1]) > 0.2){ c.y -= ax[1] * 12; mv = true; }
+      if (gp.buttons[7] && gp.buttons[7].pressed) mapZoomAt(G.VW / 2, G.VH / 2, 1.03); if (gp.buttons[6] && gp.buttons[6].pressed) mapZoomAt(G.VW / 2, G.VH / 2, 1 / 1.03);
+      var A = gp.buttons[0] && gp.buttons[0].pressed; if (A && !MAPS.padA){ var w = mapCenter(), o = mapOwnAt(MAPS.cur.P, G, w[0], w[1]); if (o >= 0) mapSelect(MAPS.cur.E.ids[o]); } MAPS.padA = A;
+      if (mv){ mapApplyCam(); mapLater(); } }
+    requestAnimationFrame(pad); })();
+  document.getElementById('mp-play').addEventListener('click', function(){ if (MAPS.play){ mapStop(); return; } var R = S.data.rounds_played; MAPS.era = 1; this.textContent = '■ Stop';
+    var step = function(){ if (!document.getElementById('mp-wrap')){ mapStop(); return; } rg.value = MAPS.era; document.getElementById('mp-era-v').textContent = MAPS.era; drawMap(); if (MAPS.era >= R){ mapStop(); return; } MAPS.era++; MAPS.play = setTimeout(step, 800); };
     step(); });
-  var ro = 0; window.addEventListener('resize', function(){ clearTimeout(ro); ro = setTimeout(function(){ if (document.getElementById('mp-wrap')) drawMap(); }, 200); });
+  if (MAPS.viewBound) return; MAPS.viewBound = 1;
+  view.addEventListener('click', function(e){ var t = e.target, b, wrap = document.getElementById('mp-wrap'); if (!wrap || !MAPS.cur) return;
+    if ((b = t.closest('[data-floor]'))){ MAPS.floor = b.getAttribute('data-floor'); MAPS.poi = null; document.querySelectorAll('[data-floor]').forEach(function(x){ var on = x === b; x.classList.toggle('on', on); x.setAttribute('aria-pressed', String(on)); }); drawMap(); return; }
+    if ((b = t.closest('[data-tool]'))){ var tl = b.getAttribute('data-tool'); MAPS.tool = MAPS.tool === tl ? null : tl; document.querySelectorAll('[data-tool]').forEach(function(x){ var on = x.getAttribute('data-tool') === MAPS.tool; x.classList.toggle('on', on); x.setAttribute('aria-pressed', String(on)); }); document.getElementById('mp-pinf').hidden = MAPS.tool !== 'pin'; wrap.classList.toggle('mp-aim', !!MAPS.tool); return; }
+    if ((b = t.closest('[data-fly]'))){ var k = b.getAttribute('data-fly'), a = MAPS.cur.graph.nodes[k]; if (a){ mapFly(a[0], a[1], 2.4); if (M[k]) setTimeout(function(){ mapSelect(k); }, 480); } return; }
+    if ((b = t.closest('[data-route]'))){ MAPS.route = {from: myTeam() || 'harbor', to: b.getAttribute('data-route')}; document.getElementById('mp-route').value = MAPS.route.to; drawMap(); return; }
+    if (t.id === 'mp-rtx'){ MAPS.route = null; document.getElementById('mp-route').value = ''; drawMap(); return; }
+    if (t.id === 'mp-x'){ MAPS.sel = null; MAPS.poi = null; mapAmbient(null); drawMap(); return; }
+    var p = mapPref(); p.found = p.found || {}; p.seen = p.seen || {};
+    if ((b = t.closest('[data-ans]'))){ if (b.getAttribute('data-ok') === '1'){ p.found['cave-' + MAPS.poi.id] = 1; mapSave(); mapTone(9); mapRedraw(); } else { b.disabled = true; b.textContent += ' ✕'; } return; }
+    if ((b = t.closest('[data-dig]'))){ p.found[b.getAttribute('data-dig')] = 1; mapSave(); mapTone(7); mapRedraw(); return; }
+    if ((b = t.closest('[data-climb]'))){ var id = b.getAttribute('data-climb'), E = MAPS.cur.E, P = MAPS.cur.P, a2 = P.anc[E.ids.indexOf(id)]; p.found['watch-' + id] = 1; p.seen[id] = 1;
+      E.ids.forEach(function(o, j){ var c2 = P.anc[j]; if (c2 && a2 && Math.hypot(c2[0] - a2[0], c2[1] - a2[1]) < MAPS.cur.G.VW * 0.36) p.seen[o] = 1; }); mapSave(); mapRedraw(); return; }
+    if ((b = t.closest('[data-pinfly]'))){ var pn = p.pins[+b.getAttribute('data-pinfly')]; if (pn) mapFly(pn.x, pn.y, 2.6); return; }
+    if ((b = t.closest('[data-pindel]'))){ p.pins.splice(+b.getAttribute('data-pindel'), 1); mapSave(); mapRedraw(); return; }
+    if (t.id === 'mp-reveal'){ S.data.managers.forEach(function(m){ p.seen[m.id] = 1; }); (MAPS.cur.pois || []).forEach(function(q){ if (q.hidden) p.found[q.t + '-' + q.id] = 1; }); mapSave(); mapRedraw(); return; }
+    if (t.id === 'mp-reset'){ p.seen = {}; p.found = {}; mapSave(); mapRedraw(); return; }
+    if (t.id === 'mp-tour-b'){ mapTour(); return; } });
+  view.addEventListener('change', function(e){ var t = e.target, p = mapPref(); if (!document.getElementById('mp-wrap')) return;
+    if (t.hasAttribute('data-mpl')){ p.L[t.getAttribute('data-mpl')] = t.checked ? 1 : 0; mapSave(); drawMap(); return; }
+    if (t.hasAttribute('data-mpo')){ var o = t.getAttribute('data-mpo'); p[o] = t.type === 'checkbox' ? (t.checked ? 1 : 0) : t.value; mapSave(); if (o === 'sound' && !p.sound) mapAmbient(null); mapRedraw(); return; }
+    if (t.hasAttribute('data-mpm')){ var m = t.getAttribute('data-mpm'); p.mini[m] = t.type === 'checkbox' ? (t.checked ? 1 : 0) : +t.value; mapSave(); mapMini(); return; }
+    if (t.id === 'mp-route'){ MAPS.route = t.value ? {from: myTeam() || 'harbor', to: t.value} : null; drawMap(); return; }
+    if (t.id === 'mp-ft' && t.value){ var a = MAPS.cur.graph.nodes[t.value], k = t.value; if (a) mapFly(a[0], a[1], 2.4); if (M[k]) setTimeout(function(){ mapSelect(k); }, 480); t.value = ''; } });
+  view.addEventListener('input', function(e){ if (e.target.getAttribute && e.target.getAttribute('data-mpm') === 'op'){ mapPref().mini.op = +e.target.value; mapSave(); mapMini(); } });
 }
 function mapStop(){ if (MAPS.play){ clearTimeout(MAPS.play); MAPS.play = null; } var b = document.getElementById('mp-play'); if (b) b.textContent = '▶ Sezonas'; }
+function mapOpen(){
+  mapPref(); MAPS.tool = null; mapBind(); drawMap(); mapNewSince();
+  var hs = (location.hash || '').split('~'); if (hs[1] === 'ping' && hs.length >= 4 && MAPS.cur){ var x = +hs[2], y = +hs[3]; if ((hs[4] === 'p') === !!MAPS.cur.G.port){ mapFly(x, y, 2.2, 0); setTimeout(function(){ mapPing(x, y, false); }, 80); } }
+  if (!mapPref().tour) mapTour();
+}
 
 var SR_PAGES = [
   ["lentele", "Lentelė", "Pagrindinis puslapis", pageHome], ["turai", "Turai", "Taškai kiekviename ture", pageRounds], ["istorija", "Istorija", "Rekordai, formos lentelė, dvikovos", pageHistory], ["zemelapis", "Lygos žemėlapis", "Karalystės pagal taškus, keliai pagal mainus", pageMap],
@@ -6160,7 +6645,7 @@ var SR_PAGES = [
 function srIndex(){
   if (SRCH.idx && SRCH.data === S.data && SRCH.hj === !!S.hj) return SRCH.idx;
   var d = S.data, el = EL(), out = [];
-  SR_PAGES.forEach(function(p){ out.push({k: 'Puslapis', ic: '📄', t: p[1], s: p[2], r: p[0]}); });
+  SR_PAGES.forEach(function(p){ if (p[0] === 'zemelapis' && LG && LG.cur) return; out.push({k: 'Puslapis', ic: '📄', t: p[1], s: p[2], r: p[0]}); });
   if (liveTips()) out.push({k: 'Puslapis', ic: '📄', t: 'Turo patarėjas', s: 'Ką dar keisti ture: kapitonas, sudėtis, rizikos, tikimybės', r: 'turo-patarejas'});
   d.standings.forEach(function(s, i){ out.push({k: 'Komanda', ic: teamLogo(s.id, 22), t: team(s.id), s: M[s.id].name + ' · ' + (i + 1) + ' vieta', r: 'komanda-' + s.id, x: M[s.id].first}); });
   allPlayers().forEach(function(p){ out.push({k: 'Žaidėjas', ic: pFace(p, 26) || '🏀', t: p.full || p.name, s: (p.club) + ' · ' + POS[p.pos] + ' · ' + (p.cur ? team(p.cur) : 'laisvas') + (p.avg != null ? ' · vid. ' + nf1(p.avg) : ''), r: 'zaidejas-' + p.id, x: p.name, w: (p.avg || 0) / 100}); });
@@ -6177,7 +6662,7 @@ function srIndex(){
 function srSections(){
   if (SRCH.sect && SRCH.sdata === S.data) return SRCH.sect;
   var out = [];
-  S.srScan = true; SR_PAGES.forEach(function(p){ if (!p[3]) return; var html; try { html = p[3](); } catch (e){ return; } if (!html) return;
+  S.srScan = true; SR_PAGES.forEach(function(p){ if (!p[3] || p[0] === 'zemelapis') return; var html; try { html = p[3](); } catch (e){ return; } if (!html) return;
     var re = /<h3 class="sect">([\s\S]*?)<\/h3>/g, m; while ((m = re.exec(html))){ var raw = m[1].replace(/<button[\s\S]*?<\/button>/g, '').replace(/<small>[\s\S]*?<\/small>/g, ''), t = raw.replace(/<[^>]+>/g, '').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').trim(); if (t) out.push({k: 'Skiltis', ic: '§', t: t, s: p[1], r: p[0], sec: t, n: srNorm(t + ' ' + p[1]), nt: srNorm(t), w: 0.2}); } });
   S.srScan = false; SRCH.sect = out; SRCH.sdata = S.data;
   return out;
@@ -6194,7 +6679,7 @@ function srFind(q){
 function srHi(t, q){ var nq = srNorm(q).split(' ').filter(Boolean), s = esc(t); nq.forEach(function(w){ var nt = srNorm(t), i = nt.indexOf(w); if (i >= 0 && nt.length === t.length) s = s.replace(esc(t.substr(i, w.length)), '<mark>' + esc(t.substr(i, w.length)) + '</mark>'); }); return s; }
 function srRender(){
   var box = document.getElementById('srch-res'), q = document.getElementById('srch-in').value;
-  var list = q.trim() ? srFind(q) : SR_PAGES.slice(0, 12).map(function(p){ return {k: 'Puslapis', ic: '📄', t: p[1], s: p[2], r: p[0]}; });
+  var list = q.trim() ? srFind(q) : SR_PAGES.filter(function(p){ return !(p[0] === 'zemelapis' && LG && LG.cur); }).slice(0, 12).map(function(p){ return {k: 'Puslapis', ic: '📄', t: p[1], s: p[2], r: p[0]}; });
   SRCH.list = list; if (SRCH.sel >= list.length) SRCH.sel = 0;
   if (!list.length){ box.innerHTML = '<p class="srch-empty">Nieko nerasta. Pabandyk kitą žodį: žaidėjo pavardę, komandą, klubą, turą ar skiltį.</p>'; return; }
   var prev = null;
@@ -7069,6 +7554,7 @@ document.addEventListener('keydown', function(e){
   if (e.key === 'g'){ GKEY = setTimeout(function(){ GKEY = null; }, 1200); return; }
   if (e.key === '?'){ location.hash = 'pagalba'; e.preventDefault(); }
   if (e.key === 't'){ window.scrollTo(0, 0); }
+  if (e.key === 'm' && !(LG && LG.cur)){ location.hash = 'zemelapis'; }
 });
 window.addEventListener('scroll', function(){
   var tt = document.getElementById('totop'); if (tt) tt.hidden = window.scrollY < 900;
