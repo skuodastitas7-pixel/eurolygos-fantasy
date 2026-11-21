@@ -1532,6 +1532,7 @@ html.landing footer,html.landing .foot{display:none!important}
       <a href="#turai" data-sec="turai">Turai</a>
       <a href="#komandos" data-sec="komandos">Komandos</a>
       <a href="#mainai" data-sec="mainai">Mainai</a>
+      <a href="#mainu-skaiciuokle" data-sec="mainu-skaiciuokle">Mainų skaičiuoklė</a>
       <a href="#agentai" data-sec="agentai">Laisvieji agentai</a>
       <a href="#draftas" data-sec="draftas">Draftas</a>
       <a href="#apzvalgos" data-sec="apzvalgos">Apžvalgos</a>
@@ -1916,6 +1917,7 @@ function render(keepScroll){
   if (r.indexOf("turas-") === 0) sec = "turai";
   if (r.indexOf("zaidejas-") === 0) sec = "zaidejai";
   if (r.indexOf("mainai-") === 0) sec = "mainai";
+  if (r === "mainai-skaiciuokle") sec = "mainu-skaiciuokle";
   if (r.indexOf("analitika") === 0) sec = "analitika";
   if (r.indexOf("palyginimas") === 0 || r === "izvalgos") sec = "zaidejai";
   if (r.indexOf("eurolyga") === 0 || r.indexOf("klubas-") === 0) sec = "eurolyga";
@@ -1955,7 +1957,8 @@ function render(keepScroll){
   else if (r === "eurolyga-traumos") html = pageELInjuries() + injX5();
   else if (er && +er[1] >= 1 && +er[1] <= 38) html = pageELRound(+er[1]);
   else if (r.indexOf("klubas-") === 0 && elIndex().slug[r.slice(7)]) html = pageClub(elIndex().slug[r.slice(7)]) + clubX5(elIndex().slug[r.slice(7)]);
-  else if (r === "mainai-skaiciuokle") html = pageTradeCalc();
+  else if (r === "mainu-skaiciuokle") html = pageTradeCalc();
+  else if (r === "mainai-skaiciuokle"){ location.replace("#mainu-skaiciuokle"); return; }
   else if (r === "sprendimai") html = pageDecisions();
   else if (r === "istorija") html = pageHistory();
   else if (r === "zemelapis"){ location.replace("#lentele"); return; }
@@ -3554,7 +3557,7 @@ function pageTransfers(){
   var most = d.standings.map(function(x){ return x.id; }).sort(function(a, b){ return st[b].trades - st[a].trades; })[0];
   var tb = tradeBalances();
   var h = '<p class="kicker">Nuo sezono pradžios</p><h2 class="page">Mainai</h2><p class="deck">Mainai tarp komandų pagal BasketNews, naujausi viršuje. Komandos keičiasi žaidėjais ir gali pridėti kreditų. Paspaudus Mainų apžvalga atsidaro tų mainų statistika: kiek taškų mainai atnešė abiem komandoms, įskaitant žaidėjus, į kuriuos gauti žaidėjai vėliau buvo iškeisti ar pakeisti laisvaisiais agentais. Laisvųjų agentų įsigijimai yra skyriuje <a href="#agentai">Laisvieji agentai</a>.' + (miss.length ? ' ' + missNote() : '') + '</p>';
-  h += '<p class="data an-cap"><a href="#mainai-skaiciuokle">Mainų skaičiuoklė</a>: pažymėkite žaidėjus ir pamatysite, kiek mainai pagal prognozes sustiprintų ar susilpnintų abi komandas.</p>';
+  h += '<p class="data an-cap"><a href="#mainu-skaiciuokle">Mainų skaičiuoklė</a>: pažymėkite žaidėjus ir pamatysite, kiek mainai pagal prognozes sustiprintų ar susilpnintų abi komandas.</p>';
   h += '<div class="cols" style="margin-top:26px"><section><h3 class="sect">Mainai pagal komandą</h3>';
   h += '<div class="tbl"><table class="ag"><thead><tr><th>Komanda</th><th class="num">Mainai</th><th>Laimėti – pralaimėti</th><th class="num">Kreditai</th></tr></thead><tbody>';
   d.standings.forEach(function(s){
@@ -4564,7 +4567,7 @@ function adviceHtml(id){
   }
   else h += '<p class="data muted">Laisvųjų agentų, kurie sustiprintų sudėtį, nėra.</p>';
   h += '</div></div>';
-  h += '<p class="note">Optimali sudėtis: pagal prognozes geriausias startinis penketas (bent vienas gynėjas, puolėjas ir centras), kapitonas, 6th man, suolas ir neaktyvūs. Įskaitoma: prognozė su vietos daugikliu (kapitonas ×2, suolas ×0,5). Laisvųjų agentų nauda: kiek padidėtų optimalios sudėties prognozė per turą likusį sezoną (su žinomais traumų terminais) ir ' + R + ' ture; laisvųjų agentų kaina neįskaityta. Mainus su kita komanda galima įvertinti <a href="#mainai-skaiciuokle">mainų skaičiuoklėje</a>. <a href="#eurolyga-analize">Kaip skaičiuojamos prognozės</a>.</p></section>';
+  h += '<p class="note">Optimali sudėtis: pagal prognozes geriausias startinis penketas (bent vienas gynėjas, puolėjas ir centras), kapitonas, 6th man, suolas ir neaktyvūs. Įskaitoma: prognozė su vietos daugikliu (kapitonas ×2, suolas ×0,5). Laisvųjų agentų nauda: kiek padidėtų optimalios sudėties prognozė per turą likusį sezoną (su žinomais traumų terminais) ir ' + R + ' ture; laisvųjų agentų kaina neįskaityta. Mainus su kita komanda galima įvertinti <a href="#mainu-skaiciuokle">mainų skaičiuoklėje</a>. <a href="#eurolyga-analize">Kaip skaičiuojamos prognozės</a>.</p></section>';
   return h;
 }
 function teamsForecastHtml(){
@@ -4659,7 +4662,7 @@ function tcSelect(side){
 }
 function pageTradeCalc(){
   var R = EL().next_round;
-  var h = '<p class="kicker"><a href="#mainai">Mainai</a></p><h2 class="page">Mainų skaičiuoklė</h2><p class="deck">Pasirinkite dvi komandas ir pažymėkite, kuriuos žaidėjus kiekviena atiduoda. Pozicijos turi sutapti: gynėjas keičiamas tik į gynėją, puolėjas į puolėją, centras į centrą. Skaičiuoklė palygina abiejų komandų geriausias sudėtis prieš ir po mainų: kiek jos surinktų per turą likusį sezoną ir ' + R + ' ture.</p>';
+  var h = '<p class="kicker">Lyga · <a href="#mainai">Visi mainai</a></p><h2 class="page">Mainų skaičiuoklė</h2><p class="deck">Pasirinkite dvi komandas ir pažymėkite, kuriuos žaidėjus kiekviena atiduoda. Pozicijos turi sutapti: gynėjas keičiamas tik į gynėją, puolėjas į puolėją, centras į centrą. Skaičiuoklė palygina abiejų komandų geriausias sudėtis prieš ir po mainų: kiek jos surinktų per turą likusį sezoną ir ' + R + ' ture.</p>';
   h += '<section id="tc-res-s"><h3 class="sect">Rezultatas</h3><div id="tc-res">' + tcResult() + '</div><p class="note">Per turą likusį sezoną: geriausios sudėties prognozė vienam turui iki sezono pabaigos, įskaitant žinomus traumų terminus. ' + R + ' turas: geriausios sudėties prognozė kitam turui. Geriausia sudėtis: kapitonas ×2, keturi startiniai ir 6th man po 1, keturi suolo žaidėjai po 0,5, startiniame penkete bent vienas gynėjas, puolėjas ir centras. <a href="#eurolyga-analize">Kaip skaičiuojamos prognozės</a>.</p></section>';
   h += '<div class="cols-even tcw"><section><h3 class="sect">Pirma komanda</h3><p>' + tcSelect("a") + '</p><div id="tc-a">' + tcRoster("a") + '</div></section>' +
     '<section><h3 class="sect">Antra komanda</h3><p>' + tcSelect("b") + '</p><div id="tc-b">' + tcRoster("b") + '</div></section></div>';
@@ -5698,7 +5701,7 @@ function labTrades(){
   var sl = S.labSug.list, seen = {}, pick = [];
   sl.forEach(function(x){ var k = x.a + x.b; if ((seen[k] || 0) < 1 && pick.length < 10){ seen[k] = 1; pick.push(x); } });
   h += sect('Abiem pusėms naudingi mainai', 'pagal likusio sezono prognozes', (pick.length ? '<div class="sgx">' + pick.map(function(x){
-    return '<div class="sgc"><div class="txs" style="--c:' + tcol(x.a) + '"><h4>' + teamLogo(x.a, 20) + '<b>' + esc(team(x.a)) + '</b> atiduoda</h4><div class="chs"><a class="txp" href="#zaidejas-' + x.pa.id + '">' + pFace(x.pa, 26) + esc(x.pa.name) + '</a></div><span class="sgg' + (x.ga < 0 ? ' n' : '') + '">' + 'nauda ' + sgn1(x.ga) + ' per turą</span></div><div class="txa">⇄</div><div class="txs" style="--c:' + tcol(x.b) + '"><h4>' + teamLogo(x.b, 20) + '<b>' + esc(team(x.b)) + '</b> atiduoda</h4><div class="chs"><a class="txp" href="#zaidejas-' + x.pb.id + '">' + pFace(x.pb, 26) + esc(x.pb.name) + '</a></div><span class="sgg' + (x.gb < 0 ? ' n' : '') + '">' + 'nauda ' + sgn1(x.gb) + ' per turą</span></div></div>'; }).join('') + '</div>' : '<p class="data muted">Šiuo metu nerasta mainų, kurie sustiprintų abi komandas.</p>') + '<p class="note">Variklis tikrina visų komandų porų mainus vienas už vieną tarp devynių vertingiausių kiekvienos komandos žaidėjų. Rodomi mainai, po kurių bendra abiejų komandų nauda didžiausia, o nė viena pusė beveik nepraranda; skaičius: kiek FPTS per turą likusį sezoną. Tai tik skaičiai: susitarti reikia patiems. Patikrinti galima <a href="#mainai-skaiciuokle">mainų skaičiuoklėje</a>.</p>');
+    return '<div class="sgc"><div class="txs" style="--c:' + tcol(x.a) + '"><h4>' + teamLogo(x.a, 20) + '<b>' + esc(team(x.a)) + '</b> atiduoda</h4><div class="chs"><a class="txp" href="#zaidejas-' + x.pa.id + '">' + pFace(x.pa, 26) + esc(x.pa.name) + '</a></div><span class="sgg' + (x.ga < 0 ? ' n' : '') + '">' + 'nauda ' + sgn1(x.ga) + ' per turą</span></div><div class="txa">⇄</div><div class="txs" style="--c:' + tcol(x.b) + '"><h4>' + teamLogo(x.b, 20) + '<b>' + esc(team(x.b)) + '</b> atiduoda</h4><div class="chs"><a class="txp" href="#zaidejas-' + x.pb.id + '">' + pFace(x.pb, 26) + esc(x.pb.name) + '</a></div><span class="sgg' + (x.gb < 0 ? ' n' : '') + '">' + 'nauda ' + sgn1(x.gb) + ' per turą</span></div></div>'; }).join('') + '</div>' : '<p class="data muted">Šiuo metu nerasta mainų, kurie sustiprintų abi komandas.</p>') + '<p class="note">Variklis tikrina visų komandų porų mainus vienas už vieną tarp devynių vertingiausių kiekvienos komandos žaidėjų. Rodomi mainai, po kurių bendra abiejų komandų nauda didžiausia, o nė viena pusė beveik nepraranda; skaičius: kiek FPTS per turą likusį sezoną. Tai tik skaičiai: susitarti reikia patiems. Patikrinti galima <a href="#mainu-skaiciuokle">mainų skaičiuoklėje</a>.</p>');
   /* needs radar: weakest position */
   var needs = ids.map(function(t){ var s = {G: [], F: [], C: []}; d.rosters[t].forEach(function(p){ s[p.pos].push(p.proj.season); }); var sc = {}; ["G", "F", "C"].forEach(function(k){ s[k].sort(function(a, b){ return b - a; }); sc[k] = (s[k][0] || 0) + (s[k][1] || 0) * 0.6 + (s[k][2] || 0) * 0.3; }); return {id: t, sc: sc}; });
   var lg = {G: mean(needs.map(function(x){ return x.sc.G; })), F: mean(needs.map(function(x){ return x.sc.F; })), C: mean(needs.map(function(x){ return x.sc.C; }))};
@@ -5841,7 +5844,7 @@ var SR_PAGES = [
   ["sprendimai", "Sprendimai", "Kapitonai ir sudėčių efektyvumas", pageDecisions], ["koeficientai", "Koeficientai", "Lažybų linijos ir tikimybės", pageOdds],
   ["komandos", "Komandos", "Visos lygos komandos ir draftas", pageTeams], ["zaidejai", "Žaidėjai", "Komandų sudėtys", function(){ return pagePlayers(''); }],
   ["zaidejai-reitingas", "Žaidėjų reitingas", "Visi žaidėjai pagal FPTS", pageRanking], ["izvalgos", "Įžvalgos", "Serijos, deimantai, debiutai", pageInsights],
-  ["palyginimas", "Žaidėjų palyginimas", "Palygink kelis žaidėjus", null], ["mainai", "Mainai", "Visi mainai tarp komandų", pageTransfers], ["mainai-skaiciuokle", "Mainų skaičiuoklė", "Įvertink mainus", null],
+  ["palyginimas", "Žaidėjų palyginimas", "Palygink kelis žaidėjus", null], ["mainai", "Mainai", "Visi mainai tarp komandų", pageTransfers], ["mainu-skaiciuokle", "Mainų skaičiuoklė", "Įvertink mainus", null],
   ["agentai", "Laisvieji agentai", "Laisvi žaidėjai ir įsigijimai", pageFreeAgents], ["draftas", "Draftas", "Drafto lenta ir pervertinimas", pageDraft],
   ["eurolyga", "Eurolygos lentelė", "Eurolyga", pageEL], ["eurolyga-kitas", "Kitas turas", "Eurolyga: rungtynės ir mūsų žaidėjai", pageELNext], ["eurolyga-tvarkarastis", "Tvarkaraščio sunkumas", "Eurolyga: artimiausi 5 turai", pageELSchedule],
   ["eurolyga-analize", "Fantasy analizė", "Eurolyga: kapitonai, laisvieji agentai, forma", pageELAnalysis], ["eurolyga-traumos", "Traumos ir naujienos", "Eurolyga: traumų sąrašas", pageELInjuries],
@@ -7821,7 +7824,7 @@ function wlGet(){ return (lsGet('ef-watch') || '').split(',').filter(function(x)
 function wlToggle(id){ var w = wlGet(), i = w.indexOf(id); if (i >= 0) w.splice(i, 1); else w.unshift(id); lsSet('ef-watch', w.slice(0, 30).join(',')); }
 function playerActions(p){
   var on = wlGet().indexOf(p.id) >= 0;
-  return '<div class="pact"><button type="button" class="tog" data-watch="' + p.id + '" aria-pressed="' + on + '">' + (on ? '★ Stebimas' : '☆ Stebėti') + '</button><a class="tog" href="#palyginimas-' + p.id + '">Palyginti</a><a class="tog" href="#mainai-skaiciuokle">Mainų skaičiuoklė</a>' + (p.sofa && S.hj !== undefined ? '' : '') + '</div>';
+  return '<div class="pact"><button type="button" class="tog" data-watch="' + p.id + '" aria-pressed="' + on + '">' + (on ? '★ Stebimas' : '☆ Stebėti') + '</button><a class="tog" href="#palyginimas-' + p.id + '">Palyginti</a><a class="tog" href="#mainu-skaiciuokle">Mainų skaičiuoklė</a>' + (p.sofa && S.hj !== undefined ? '' : '') + '</div>';
 }
 document.addEventListener('click', function(e){ var b = e.target.closest && e.target.closest('[data-watch]'); if (!b) return; wlToggle(b.getAttribute('data-watch')); var on = wlGet().indexOf(b.getAttribute('data-watch')) >= 0; b.setAttribute('aria-pressed', on); b.textContent = on ? '★ Stebimas' : '☆ Stebėti'; });
 function watchBox(){
