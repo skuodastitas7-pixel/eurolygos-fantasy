@@ -483,7 +483,22 @@ tr.me td{background:var(--soft)}
   .tbl{overflow:visible}a{text-decoration:none}body{font-size:11pt}
 }
 .tools[hidden]{display:none}
-.tlogo{flex:none;display:inline-block;vertical-align:middle;filter:drop-shadow(0 1px 0 rgba(16,26,51,.08))}
+.tlogo{flex:none;display:inline-block;vertical-align:middle;filter:drop-shadow(0 1px 0 rgba(16,26,51,.08));cursor:pointer}
+.lgfx{position:fixed;z-index:9999;pointer-events:none;perspective:600px}
+.lgfx .lf-c{position:absolute;inset:0;animation:lfFlip 1.15s cubic-bezier(.2,.9,.25,1) forwards;transform-style:preserve-3d}
+.lgfx .lf-c svg{width:100%;height:100%;display:block;filter:drop-shadow(0 0 0 transparent);animation:lfGlow 1.15s ease forwards}
+.lgfx .lf-sh{position:absolute;inset:0;border-radius:50%;overflow:hidden;animation:lfFlip 1.15s cubic-bezier(.2,.9,.25,1) forwards;mix-blend-mode:screen}
+.lgfx .lf-sh::after{content:'';position:absolute;top:-20%;bottom:-20%;width:40%;left:-60%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.85),transparent);transform:skewX(-18deg);animation:lfShine 1.15s ease .25s forwards}
+.lgfx .lf-r{position:absolute;left:27.3%;top:27.3%;width:45.4%;height:45.4%;border-radius:50%;border:3px solid var(--r);opacity:0;animation:lfRing .9s ease-out .28s forwards}
+.lgfx .lf-r.b{border-color:var(--b);animation-delay:.42s}
+.lgfx .lf-p{position:absolute;left:50%;top:50%;width:var(--s);height:var(--s);margin:calc(var(--s) / -2) 0 0 calc(var(--s) / -2);border-radius:50%;background:var(--pc);opacity:0;animation:lfBurst .95s cubic-bezier(.15,.8,.3,1) .3s forwards}
+.lgfx .lf-p.st{border-radius:1px;transform-origin:center}
+@keyframes lfFlip{0%{transform:scale(.4545) rotateY(0)}28%{transform:scale(.864) rotateY(200deg)}48%{transform:scale(.977) rotateY(360deg)}62%{transform:scale(.84) rotateY(360deg)}78%{transform:scale(.886) rotateY(360deg)}100%{transform:scale(.4545) rotateY(360deg)}}
+@keyframes lfGlow{0%,100%{filter:drop-shadow(0 0 0 transparent)}45%{filter:drop-shadow(0 0 10px var(--r)) drop-shadow(0 0 22px var(--b))}}
+@keyframes lfShine{to{left:130%}}
+@keyframes lfRing{0%{opacity:.9;transform:scale(.8)}100%{opacity:0;transform:scale(3.4)}}
+@keyframes lfBurst{0%{opacity:1;transform:translate(0,0) rotate(0) scale(1)}100%{opacity:0;transform:translate(var(--x),var(--y)) rotate(var(--rt)) scale(.3)}}
+@media (prefers-reduced-motion:reduce){.lgfx .lf-c{animation:lfPulse .5s ease forwards}.lgfx .lf-c svg,.lgfx .lf-sh,.lgfx .lf-r,.lgfx .lf-p{animation:none;display:none}.lgfx .lf-c svg{display:block}@keyframes lfPulse{50%{transform:scale(1.25)}}}
 .pphoto{display:inline-block;flex:none;border-radius:50%;background-color:#dfe6f5;background-repeat:no-repeat;background-size:88% auto;background-position:50% 6%;vertical-align:middle;border:2px solid var(--card,#fff);outline:1px solid rgba(16,26,51,.14)}
 .pphoto.ini{display:inline-flex;align-items:center;justify-content:center;font-weight:800;color:var(--red,#2459e6);background:var(--soft,#e8edf8)}
 .mtc{--w:236px;position:relative;display:block;width:var(--w);aspect-ratio:5/7;border-radius:calc(var(--w) * .07);overflow:hidden;color:#fff;text-decoration:none;isolation:isolate;flex:none;box-shadow:inset 0 0 0 2px rgba(255,255,255,.35)}
@@ -1696,12 +1711,29 @@ function embIcon(ic, c){
 function mEmb(id){ if (!LG.cur) return EMB[id]; var m = (S.data && S.data.managers || []).filter(function(x){ return x.id === id; })[0]; return m && m.emb; }
 function teamLogo(id, px){
   var c = mEmb(id) || {bg: LOGO_C[tidx(id) % LOGO_C.length], ring: "#fff", shape: ["circle", "shield", "hex", "square", "diamond"][tidx(id) % 5], ic: id}, s = px || 28;
-  return '<svg class="tlogo" width="' + s + '" height="' + s + '" viewBox="0 0 48 48" role="img" aria-label="' + esc(team(id)) + ' emblema">' +
+  return '<svg class="tlogo" data-bg="' + c.bg + '" data-ring="' + c.ring + '" width="' + s + '" height="' + s + '" viewBox="0 0 48 48" role="img" aria-label="' + esc(team(id)) + ' emblema">' +
     '<g fill="' + c.bg + '">' + EMB_SHAPE[c.shape] + '</g>' +
     '<g fill="none" stroke="' + c.ring + '" stroke-width="1.8">' + EMB_INNER[c.shape] + '</g>' +
     embIcon(c.ic, c) + '</svg>';
 }
 
+
+/* ---------- emblem click animation: 3D flip, glow, shine, shockwave and a burst in the team's colours ---------- */
+document.addEventListener('click', function(e){
+  var t = e.target && e.target.closest ? e.target.closest('svg.tlogo, svg[data-bg][data-ring]') : null; if (!t) return;
+  var r = t.getBoundingClientRect(); if (!r.width) return;
+  var bg = t.getAttribute('data-bg') || '#5b21b6', ring = t.getAttribute('data-ring') || '#fbbf24';
+  var fx = document.createElement('div'); fx.className = 'lgfx'; fx.setAttribute('aria-hidden', 'true');
+  var K = 2.2, W = r.width * K, H = r.height * K; fx.style.cssText = 'left:' + (r.left - (W - r.width) / 2) + 'px;top:' + (r.top - (H - r.height) / 2) + 'px;width:' + W + 'px;height:' + H + 'px;--r:' + ring + ';--b:' + bg;
+  var cl = t.cloneNode(true); cl.removeAttribute('x'); cl.removeAttribute('y'); cl.setAttribute('width', '100%'); cl.setAttribute('height', '100%');
+  var h = '<div class="lf-r"></div><div class="lf-r b"></div>', n = 22, R = Math.max(50, r.width * 1.9);
+  for (var i = 0; i < n; i++){ var a = i / n * 6.2832 + Math.random() * 0.3, d = R * (0.7 + Math.random() * 0.6), sz = Math.max(5, Math.min(18, r.width * (0.12 + Math.random() * 0.12)));
+    h += '<i class="lf-p' + (i % 3 === 0 ? ' st' : '') + '" style="--x:' + (Math.cos(a) * d).toFixed(1) + 'px;--y:' + (Math.sin(a) * d).toFixed(1) + 'px;--s:' + sz.toFixed(1) + 'px;--rt:' + Math.round(Math.random() * 540) + 'deg;--pc:' + (i % 2 ? ring : bg) + '"></i>'; }
+  fx.innerHTML = h + '<div class="lf-c"></div><div class="lf-sh"></div>'; fx.querySelector('.lf-c').appendChild(cl);
+  document.body.appendChild(fx); t.style.visibility = 'hidden';
+  setTimeout(function(){ t.style.visibility = ''; }, 1150); setTimeout(function(){ if (fx.parentNode) fx.parentNode.removeChild(fx); }, 1400);
+  if (navigator.vibrate) try { navigator.vibrate(12); } catch (x){}
+}, true);
 /* ---------- player cards (MyTeam style) ---------- */
 var TIERS = [
   [97, "dm", "Tamsioji materija"], [93, "go", "Galaktikos opalas"], [89, "pd", "Rožinis deimantas"], [84, "di", "Deimantas"],
