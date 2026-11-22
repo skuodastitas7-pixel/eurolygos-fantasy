@@ -1709,14 +1709,14 @@ function teamLogo(id, px){
 
 /* ---------- emblem click animation: each emblem has its own themed show ---------- */
 function lgfxPlay(t){
-  var r = t.getBoundingClientRect(); if (!r.width) return;
+  lgfxStop(); var r = t.getBoundingClientRect(); if (!r.width) return;
   var bg = t.getAttribute('data-bg') || '#5b21b6', ring = t.getAttribute('data-ring') || '#fbbf24', ic = t.getAttribute('data-ic') || '';
   var K = 2.2, W = r.width * K, u = r.width, fx = document.createElement('div');
   fx.className = 'lgfx'; fx.setAttribute('aria-hidden', 'true');
-  fx.style.cssText = 'left:' + (r.left - (W - u) / 2) + 'px;top:' + (r.top - (W - r.height) / 2) + 'px;width:' + W + 'px;height:' + W + 'px';
+  var top0 = r.top - (W - r.height) / 2, left0 = r.left - (W - u) / 2; fx.style.cssText = 'left:' + left0 + 'px;top:' + top0 + 'px;width:' + W + 'px;height:' + W + 'px';
   var box = document.createElement('div'); box.className = 'lf-c'; var cl = t.cloneNode(true);
   ['x', 'y', 'style', 'class'].forEach(function(a){ cl.removeAttribute(a); }); cl.setAttribute('width', '100%'); cl.setAttribute('height', '100%');
-  box.appendChild(cl); fx.appendChild(box); document.body.appendChild(fx); t.style.visibility = 'hidden';
+  box.appendChild(cl); fx.appendChild(box); document.body.appendChild(fx); t.style.opacity = '0';
   var S0 = 1 / K, still = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches, end = 0;
   function sc(k){ return k * S0; }
   function logo(frames, ms, ease){ end = Math.max(end, ms); return box.animate(frames.map(function(f){ return {transform: f[0], offset: f[1], filter: f[2] || 'none'}; }), {duration: ms, easing: ease || 'ease-in-out', fill: 'forwards'}); }
@@ -1806,13 +1806,16 @@ function lgfxPlay(t){
     logo([['scale(' + sc(1) + ') rotateY(0)', 0], ['scale(' + sc(1.9) + ') rotateY(200deg)', .3], ['scale(' + sc(2.1) + ') rotateY(360deg)', .5, 'drop-shadow(0 0 14px ' + ring + ')'], ['scale(' + sc(1) + ') rotateY(360deg)', 1]], 1150);
     for (var k = 0; k < 18; k++){ var a = k / 18 * 6.2832, dd = u * R(0.9, 1.4), d = dot(R(5, 11), k % 2 ? ring : bg); anim(d, [{transform: 'translate(0,0)', opacity: 1}, {transform: 'translate(' + Math.cos(a) * dd + 'px,' + Math.sin(a) * dd + 'px) scale(.3)', opacity: 0}], 900, 300, 'cubic-bezier(.15,.8,.3,1)'); }
     ringWave(ring, 300); }
-  setTimeout(function(){ t.style.visibility = ''; if (fx.parentNode) fx.parentNode.removeChild(fx); }, end + 80);
+  /* follow the emblem if the page scrolls during the show */
+  var onScroll = function(){ var q = t.getBoundingClientRect(); if (!q.width){ return; } fx.style.top = (q.top - (W - q.height) / 2) + 'px'; fx.style.left = (q.left - (W - q.width) / 2) + 'px'; };
+  window.addEventListener('scroll', onScroll, true);
+  LGFX = {fx: fx, t: t, off: function(){ window.removeEventListener('scroll', onScroll, true); }, tm: setTimeout(lgfxStop, end + 80)};
   if (navigator.vibrate) try { navigator.vibrate(ic === 'bomb' ? [10, 60, 40] : 12); } catch (x){}
 }
-document.addEventListener('click', function(e){
-  var t = e.target && e.target.closest ? e.target.closest('svg.tlogo, svg[data-bg][data-ring]') : null;
-  if (t && !document.querySelector('.lgfx')) lgfxPlay(t);
-}, true);
+var LGFX = null;
+function lgfxStop(){ if (!LGFX) return; clearTimeout(LGFX.tm); try { LGFX.off(); } catch (e){} try { LGFX.t.style.opacity = ''; } catch (e){} if (LGFX.fx.parentNode) LGFX.fx.parentNode.removeChild(LGFX.fx); LGFX = null; }
+function lgfxHit(e){ var n = e.target; while (n && n !== document){ if (n.nodeName && n.nodeName.toLowerCase() === 'svg' && n.getAttribute && n.getAttribute('data-ring')) return n; n = n.parentNode; } return null; }
+document.addEventListener('click', function(e){ var t = lgfxHit(e); if (t){ try { lgfxPlay(t); } catch (x){ lgfxStop(); } } }, true);
 /* ---------- player cards (MyTeam style) ---------- */
 var TIERS = [
   [97, "dm", "Tamsioji materija"], [93, "go", "Galaktikos opalas"], [89, "pd", "Rožinis deimantas"], [84, "di", "Deimantas"],
