@@ -1646,7 +1646,7 @@ function indexPlayers(){
 /* ---------- team emblems ---------- */
 var EMB = {
   vakaris:    {bg: "#14532d", ring: "#86efac", shape: "hex", ic: "wolf"},
-  titas:      {bg: "#5b21b6", ring: "#fbbf24", shape: "shield", ic: "crown"},
+  titas:      {bg: "#5b21b6", ring: "#fbbf24", shape: "shield", ic: "pharaoh"},
   dovydas:    {bg: "#b91c1c", ring: "#fecaca", shape: "circle", ic: "jet"},
   lukas:      {bg: "#0e7490", ring: "#facc15", shape: "diamond", ic: "bolt"},
   martynas:   {bg: "#3f6212", ring: "#d9f99d", shape: "square", ic: "plots"},
@@ -1680,6 +1680,14 @@ function embIcon(ic, c){
   var w = "#fff";
   switch (ic){
     case "wolf": return '<path fill="' + w + '" d="M14 15 L18 8.5 L21.5 16 L26.5 16 L30 8.5 L34 15 L33.2 26.5 L24 37 L14.8 26.5 Z"/><path fill="' + c.bg + '" d="M18.5 22 L22.3 23.6 L19 25 Z M29.5 22 L25.7 23.6 L29 25 Z M21.5 30.5 L26.5 30.5 L24 33.4 Z"/>';
+    case "pharaoh": return '<path fill="' + c.ring + '" d="M24 8.2 C16.4 8.2 13.4 12.8 13.1 19 L10.6 34 L17 34 L17.5 21.5 L30.5 21.5 L31 34 L37.4 34 L34.9 19 C34.6 12.8 31.6 8.2 24 8.2 Z"/>' +
+      '<path d="M15.6 14.8 Q24 10.8 32.4 14.8 M14.2 18.2 Q24 14.4 33.8 18.2 M11.6 26.5 H16.8 M11.2 30 H16.9 M31.2 26.5 H36.4 M31.1 30 H36.8" stroke="#1e3a8a" stroke-width="1.5" fill="none" stroke-linecap="round"/>' +
+      '<path fill="#e7b98a" d="M18.2 19.6 H29.8 V27.2 C29.8 31.2 27.3 33.6 24 33.6 C20.7 33.6 18.2 31.2 18.2 27.2 Z"/>' +
+      '<rect x="17.6" y="18.6" width="12.8" height="1.8" rx=".6" fill="#1e3a8a"/>' +
+      '<path d="M19.7 23.4 H22.5 L23 24.4 M25.5 23.4 H28.3 L28.9 24.4" stroke="#111827" stroke-width="1.2" fill="none" stroke-linecap="round"/>' +
+      '<path d="M23.4 26.4 L24 28.4 L24.6 26.4" stroke="#b07a4f" stroke-width=".9" fill="none"/><path d="M22.2 30.4 Q24 31.4 25.8 30.4" stroke="#8b4a2b" stroke-width="1" fill="none" stroke-linecap="round"/>' +
+      '<rect x="22.6" y="33.4" width="2.8" height="5.2" rx="1" fill="' + c.ring + '"/><path d="M22.6 35.2 H25.4 M22.6 37 H25.4" stroke="#1e3a8a" stroke-width=".8"/>' +
+      '<path fill="#dc2626" stroke="' + c.ring + '" stroke-width=".5" d="M24 9.6 C22.7 10.6 22.8 12.7 24 13.9 C25.2 12.7 25.3 10.6 24 9.6 Z"/>';
     case "crown": return '<path fill="' + c.ring + '" d="M12.5 31 L10.5 16 L18 22.5 L24 12 L30 22.5 L37.5 16 L35.5 31 Z"/><rect x="12.5" y="33" width="23" height="4" rx="1.5" fill="' + c.ring + '"/><circle cx="24" cy="26" r="2.3" fill="' + c.bg + '"/>';
     case "jet": return '<path fill="' + w + '" d="M24 7.5 L26.6 18.5 L37.5 26.5 V30 L26.6 26.6 L25.8 34 L30 37 V39.5 L24 37.8 L18 39.5 V37 L22.2 34 L21.4 26.6 L10.5 30 V26.5 L21.4 18.5 Z"/>';
     case "bolt": return '<path fill="' + c.ring + '" d="M27.5 8 L14.5 27 H22.5 L19.5 40 L33.5 20 H25.5 Z"/>';
@@ -1729,6 +1737,15 @@ function lgfxPlay(t){
   function tr(x, y, rot, s){ return 'translate(-50%,-50%) translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px) rotate(' + (rot || 0).toFixed(0) + 'deg) scale(' + (s == null ? 1 : s) + ')'; }
   function ringWave(col, delay, to){ var d = el('', 'width:' + u + 'px;height:' + u + 'px;margin:' + (-u / 2) + 'px 0 0 ' + (-u / 2) + 'px;border-radius:50%;border:3px solid ' + col); anim(d, [{transform: 'scale(.6)', opacity: .9}, {transform: 'scale(' + (to || 2.6) + ')', opacity: 0}], 800, delay || 0); }
   var A = {
+    pharaoh: function(){ /* the pharaoh rises in front of a golden pyramid, sun disk, sandstorm and ankhs */
+      logo([['scale(' + sc(1) + ')', 0], ['translateY(-6%) scale(' + sc(1.8) + ')', .3, 'drop-shadow(0 0 14px ' + ring + ')'], ['translateY(-10%) scale(' + sc(1.95) + ') rotate(-3deg)', .55, 'drop-shadow(0 0 22px ' + ring + ')'], ['translateY(-10%) scale(' + sc(1.95) + ') rotate(3deg)', .72, 'drop-shadow(0 0 18px ' + ring + ')'], ['scale(' + sc(1) + ')', 1]], 1800);
+      var pw = u * 2.1, py = el('', 'width:' + pw + 'px;height:' + (pw * 0.62) + 'px;margin:' + (-pw * 0.2) + 'px 0 0 ' + (-pw / 2) + 'px;clip-path:polygon(50% 0,100% 100%,0 100%);background:linear-gradient(115deg,#fde68a,#f59e0b 48%,#b45309 52%,#92400e)');
+      anim(py, [{transform: 'translateY(' + (pw * 0.5) + 'px) scaleY(.2)', opacity: 0}, {transform: 'translateY(0) scaleY(1)', opacity: .95, offset: .35}, {transform: 'translateY(0) scaleY(1)', opacity: .95, offset: .75}, {transform: 'translateY(' + (pw * 0.4) + 'px) scaleY(.3)', opacity: 0}], 1700, 50, 'cubic-bezier(.2,.8,.3,1)');
+      var sd = dot(u * 0.75, 'radial-gradient(circle,#fff7c2,#fbbf24 55%,rgba(251,191,36,0) 72%)', 'box-shadow:0 0 30px #fbbf24'); anim(sd, [{transform: 'translateY(' + (-u * 0.2) + 'px) scale(.3)', opacity: 0}, {transform: 'translateY(' + (-u * 1.05) + 'px) scale(1)', opacity: 1, offset: .45}, {transform: 'translateY(' + (-u * 1.1) + 'px) scale(1.1)', opacity: 0}], 1500, 250);
+      for (var k = 0; k < 28; k++){ var a0 = R(0, 6.2832), rr = u * R(0.75, 1.25), d = dot(R(3, 6), k % 3 ? '#e7c991' : '#c8a165');
+        anim(d, [{transform: 'translate(' + Math.cos(a0) * rr + 'px,' + Math.sin(a0) * rr * 0.45 + 'px)', opacity: 0}, {transform: 'translate(' + Math.cos(a0 + 2) * rr + 'px,' + Math.sin(a0 + 2) * rr * 0.45 + 'px)', opacity: .9, offset: .5}, {transform: 'translate(' + Math.cos(a0 + 4) * rr * 1.3 + 'px,' + Math.sin(a0 + 4) * rr * 0.5 + 'px)', opacity: 0}], R(900, 1300), R(100, 500), 'linear'); }
+      for (var k2 = 0; k2 < 7; k2++){ var x = (k2 - 3) * u * 0.33, d2 = txt('☥', R(14, 20), ring, 'text-shadow:0 0 6px #b45309;font-family:serif');
+        anim(d2, [{transform: tr(x, u * 0.5, 0, .5), opacity: 0}, {transform: tr(x, -u * 0.2, 0, 1), opacity: 1, offset: .4}, {transform: tr(x, -u * 1, 0, .8), opacity: 0}], 1100, 450 + Math.abs(k2 - 3) * 90); } },
     crown: function(){ /* the crown is raised and gold rains down */
       logo([['scale(' + sc(1) + ')', 0], ['translateY(-12%) scale(' + sc(1.9) + ') rotate(-6deg)', .3, 'drop-shadow(0 0 12px ' + ring + ')'], ['translateY(-14%) scale(' + sc(2) + ') rotate(5deg)', .6, 'drop-shadow(0 0 18px ' + ring + ')'], ['scale(' + sc(1) + ')', 1]], 1500);
       for (var k = 0; k < 22; k++){ var x = R(-u * 1.1, u * 1.1), d = k % 3 ? dot(R(5, 9), 'radial-gradient(circle at 35% 35%,#fff7c2,' + ring + ' 55%,#b7791f)', 'box-shadow:0 0 4px ' + ring) : txt('✦', R(10, 16), ring);
