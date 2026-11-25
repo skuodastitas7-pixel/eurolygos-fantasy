@@ -1533,7 +1533,7 @@ html.landing footer,html.landing .foot{display:none!important}
 .pfx-podium b{display:block;font:800 34px/1 var(--f-data,system-ui)}
 .pfx-podium span{display:block;margin-top:6px;font:700 12px/1.2 var(--f-data,system-ui)}
 .pfx-flash{position:absolute;width:26px;height:26px;border-radius:50%;background:radial-gradient(#fff,rgba(255,255,255,0) 70%)}
-.pfx-chip{position:absolute;left:6%;right:6%;height:auto;display:flex;justify-content:center}
+.pfx-o.pfx-chip{position:absolute;left:6%;right:6%;bottom:auto;height:auto;display:flex;justify-content:center}
 .pfx-chip span{max-width:100%;padding:5px 10px;border:2px solid;border-radius:999px;background:rgba(0,0,0,.7);font:700 12px/1.2 var(--f-data,system-ui);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pfx-chip.gold span{background:linear-gradient(90deg,#b45309,#fbbf24);border-color:#fde68a;color:#1c1917}
 .pfx-cup{position:absolute;left:30%;top:12%;width:40%}
@@ -1899,7 +1899,7 @@ function pfxBeats(p, f){
   if (f.col) mid.push({k: 'college', t: 'Universitetas', x: 'NCAA krepšinis: ' + f.col + '.'});
   if (f.dy || f.drt || f.und) mid.push({k: 'draft', t: f.und ? 'Nedraftuotas' : 'NBA draftas' + (f.dy ? ' ' + f.dy : ''), x: f.und ? 'NBA drafte jo niekas nepašaukė, kelią prasimušė pats.' : (f.dp ? f.dp + ' šaukimas' : 'Pašauktas') + (f.drt ? ', ' + f.drt : '') + '.'});
   if (f.nba) mid.push({k: 'nba', t: 'NBA klubai: ' + f.nba.length, x: f.nba.join(' · '), L: f.nba});
-  if (f.cl) mid.push({k: 'clubs', t: 'Karjeros stotelės', x: f.cl.length + (f.cl.length === 1 ? ' klubas' : f.cl.length < 10 ? ' klubai' : ' klubų') + ' Vikipedijos sąraše.', L: f.cl.slice(-6)});
+  if (f.cl && f.cl.length > 1) mid.push({k: 'clubs', t: 'Karjeros stotelės', x: f.cl.length + (f.cl.length === 1 ? ' klubas' : f.cl.length < 10 ? ' klubai' : ' klubų') + ' Vikipedijos sąraše.', L: f.cl.slice(-6)});
   if (f.nk) mid.push({k: 'nick', t: 'Pravardė', x: '„' + f.nk + '“', n: f.nk});
   if (f.fam) mid.push({k: 'fam', t: 'Krepšinio šeima', x: f.fam.join('. ') + '.'});
   for (var i = mid.length - 1; i > 0; i--){ var j = Math.floor(R() * (i + 1)), z = mid[i]; mid[i] = mid[j]; mid[j] = z; }
