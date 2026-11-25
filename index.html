@@ -1509,6 +1509,52 @@ html.landing footer,html.landing .foot{display:none!important}
 .st-c .btn:hover{filter:brightness(1.08)}
 .st-c input{font-size:16px}
 @keyframes mpOrbit{to{transform:rotate(360deg)}}
+.mtc[data-pid]{cursor:pointer}
+.pfx{position:fixed;inset:0;z-index:10000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:16px;color:#fff}
+.pfx-bd{position:absolute;inset:0;background:rgba(6,10,20,.82);backdrop-filter:blur(4px)}
+.pfx-st{position:relative;width:min(64vw,260px);aspect-ratio:5/7;perspective:900px;cursor:pointer;flex:none}
+.pfx-cw{position:absolute;inset:0;transform-style:preserve-3d}
+.pfx-cw .mtc{width:100%!important;--w:min(64vw,260px)!important;box-shadow:0 18px 50px rgba(0,0,0,.6),inset 0 0 0 2px rgba(255,255,255,.35)}
+.pfx-sc{position:absolute;inset:0;border-radius:18px;overflow:hidden;pointer-events:none}
+.pfx-o{position:absolute;inset:0}
+.pfx-flag{mix-blend-mode:hard-light}
+.pfx-wave{position:absolute;left:-10%;width:120%;height:7%;opacity:.8}
+.pfx-big{position:absolute;left:0;right:0;top:30%;text-align:center;font:800 clamp(44px,15vw,64px)/1 var(--f-data,system-ui);letter-spacing:-.03em;text-shadow:0 4px 18px rgba(0,0,0,.7)}
+.pfx-pin{position:absolute;left:50%;top:58%;width:26px;height:26px;border-radius:50% 50% 50% 0;box-shadow:0 0 0 4px rgba(255,255,255,.85)}
+.pfx-rule{position:absolute;left:12%;top:0;bottom:0;width:2px;background:rgba(255,255,255,.6)}
+.pfx-rule i{position:absolute;left:0;width:10px;height:2px;background:#fff}
+.pfx-rule em{position:absolute;left:14px;top:-7px;font:600 11px/1 var(--f-data,system-ui);font-style:normal;text-shadow:0 1px 3px #000}
+.pfx-bar{position:absolute;left:5%;width:6%;bottom:0;top:100%;border-radius:6px 6px 0 0;box-shadow:0 0 18px rgba(255,255,255,.6)}
+.pfx-avg{position:absolute;right:6%;left:24%;border-top:2px dashed rgba(255,255,255,.75);font:600 11px/1 var(--f-data,system-ui);text-align:right;padding-top:3px;text-shadow:0 1px 3px #000}
+.pfx-avg::after{content:" vid. lietuvis"}
+.pfx-pen{position:absolute;left:10%;top:16%;width:80%;height:30%;clip-path:polygon(0 0,100% 50%,0 100%);transform-origin:0 50%;display:flex;align-items:center;padding-left:8%;box-shadow:0 6px 20px rgba(0,0,0,.4)}
+.pfx-pen span{font:800 13px/1.1 var(--f-data,system-ui);max-width:62%;color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.6)}
+.pfx-podium{position:absolute;left:14%;right:14%;top:28%;padding:12px 8px;border:3px solid;border-radius:12px;background:rgba(0,0,0,.65);text-align:center}
+.pfx-podium b{display:block;font:800 34px/1 var(--f-data,system-ui)}
+.pfx-podium span{display:block;margin-top:6px;font:700 12px/1.2 var(--f-data,system-ui)}
+.pfx-flash{position:absolute;width:26px;height:26px;border-radius:50%;background:radial-gradient(#fff,rgba(255,255,255,0) 70%)}
+.pfx-chip{position:absolute;left:6%;right:6%;height:auto;display:flex;justify-content:center}
+.pfx-chip span{max-width:100%;padding:5px 10px;border:2px solid;border-radius:999px;background:rgba(0,0,0,.7);font:700 12px/1.2 var(--f-data,system-ui);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pfx-chip.gold span{background:linear-gradient(90deg,#b45309,#fbbf24);border-color:#fde68a;color:#1c1917}
+.pfx-cup{position:absolute;left:30%;top:12%;width:40%}
+.pfx-pt{position:absolute;width:9px;height:9px}
+.pfx-bub{position:absolute;left:10%;right:10%;top:22%;padding:14px 10px;border-radius:20px;text-align:center;font:800 22px/1.1 var(--f-data,system-ui);box-shadow:0 8px 24px rgba(0,0,0,.45);word-break:break-word}
+.pfx-tree{position:absolute;left:20%;top:14%;width:60%}
+.pfx-q{position:absolute;left:0;right:0;top:20%;text-align:center;font:800 110px/1 var(--f-data,system-ui);text-shadow:0 6px 24px rgba(0,0,0,.7)}
+.pfx-cap{position:relative;width:min(92vw,420px);min-height:64px;text-align:center}
+.pfx-cap b{display:block;font:800 18px/1.2 var(--f-data,system-ui);margin-bottom:4px}
+.pfx-cap span{display:block;font:500 14px/1.4 var(--f-body,system-ui);color:#e2e8f0;overflow-wrap:anywhere}
+.pfx.still .pfx-cap{max-height:40vh;overflow:auto}
+.pfx.still .pfx-cap b{margin-top:10px}
+.pfx-dots{position:relative;display:flex;flex-wrap:wrap;justify-content:center;gap:6px;max-width:90vw}
+.pfx-dots i{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.3)}
+.pfx-dots i.on{background:#fff}
+.pfx-act{position:relative;display:flex;gap:10px;align-items:center}
+.pfx-x{width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.4);background:rgba(255,255,255,.08);color:#fff;font-size:16px;cursor:pointer}
+.pfx-go{padding:10px 16px;border-radius:999px;background:#fff;color:#0f172a;font:700 14px/1 var(--f-data,system-ui);text-decoration:none}
+.pfx-src{position:relative;margin:0;font:500 11px/1 var(--f-body,system-ui);color:rgba(255,255,255,.55)}
+.pfx.end .pfx-st::after{content:"Paspausk, kad kartotum";position:absolute;left:0;right:0;bottom:-2px;text-align:center;font:600 11px/1 var(--f-body,system-ui);color:rgba(255,255,255,.7)}
+@media (max-height:640px){.pfx-st{width:min(50vw,200px)}.pfx-cw .mtc{--w:min(50vw,200px)!important}.pfx{gap:8px}}
 </style>
 </head>
 <body>
@@ -1833,6 +1879,149 @@ var LGFX = null;
 function lgfxStop(){ if (!LGFX) return; clearTimeout(LGFX.tm); try { LGFX.off(); } catch (e){} try { LGFX.t.style.opacity = ''; } catch (e){} if (LGFX.fx.parentNode) LGFX.fx.parentNode.removeChild(LGFX.fx); LGFX = null; }
 function lgfxHit(e){ var n = e.target; while (n && n !== document){ if (n.nodeName && n.nodeName.toLowerCase() === 'svg' && n.getAttribute && n.getAttribute('data-ring')) return n; n = n.parentNode; } return null; }
 document.addEventListener('click', function(e){ var t = lgfxHit(e); if (t){ try { lgfxPlay(t); } catch (x){ lgfxStop(); } } }, true);
+/* ---------- player card click show: every player's own Wikipedia facts ---------- */
+var PFX_FLAG = {US:['#b22234','#ffffff','#3c3b6e'],FR:['#0055a4','#ffffff','#ef4135','v'],RS:['#c6363c','#0c4076','#ffffff'],IT:['#009246','#ffffff','#ce2b37','v'],GR:['#0d5eaf','#ffffff','#0d5eaf'],ES:['#aa151b','#f1bf00','#aa151b'],IL:['#ffffff','#0038b8','#ffffff'],TR:['#e30a17','#ffffff','#e30a17'],DE:['#111111','#dd0000','#ffce00'],LT:['#fdb913','#006a44','#c1272d'],CA:['#d52b1e','#ffffff','#d52b1e','v'],NG:['#008751','#ffffff','#008751','v'],AR:['#74acdf','#ffffff','#74acdf'],BR:['#009c3b','#ffdf00','#002776'],SN:['#00853f','#fdef42','#e31b23','v'],DO:['#002d62','#ffffff','#ce1126'],SS:['#111111','#da121a','#078930'],HR:['#ff0000','#ffffff','#171796'],BA:['#002395','#fecb00','#002395','v'],LV:['#9e3039','#ffffff','#9e3039'],SI:['#ffffff','#0000ff','#ff0000'],AO:['#cc092f','#111111'],CD:['#007fff','#f7d618','#ce1021'],BG:['#ffffff','#00966e','#d62612'],UA:['#0057b7','#ffd700'],AM:['#d90012','#0033a0','#f2a800'],PL:['#ffffff','#dc143c'],AZ:['#0092bc','#e4002b','#00af66'],MK:['#d20000','#ffe600'],GE:['#ffffff','#ff0000','#ffffff'],FI:['#ffffff','#002f6c','#ffffff'],PR:['#ed0000','#ffffff','#0050f0'],ML:['#14b53a','#fcd116','#ce1126','v'],DK:['#c8102e','#ffffff','#c8102e'],ME:['#c40308','#d4af3a','#c40308'],AT:['#ed2939','#ffffff','#ed2939'],AU:['#012169','#ffffff','#e4002b'],RU:['#ffffff','#0039a6','#d52b1e'],DZ:['#006233','#ffffff','#d21034','v'],CF:['#003082','#ffffff','#289728','#ffce00'],CZ:['#ffffff','#d7141a','#11457e'],CV:['#003893','#ffffff','#cf2027'],CU:['#002a8f','#ffffff','#cb1515'],HU:['#ce2939','#ffffff','#477050'],CL:['#ffffff','#0039a6','#d52b1e'],IE:['#169b62','#ffffff','#ff883e','v'],BS:['#00abc9','#fae042','#00abc9'],SE:['#006aa7','#fecc00','#006aa7'],GB:['#012169','#ffffff','#c8102e'],UG:['#111111','#fcdc04','#d90000'],UY:['#ffffff','#0038a8','#ffffff'],RO:['#002b7f','#fcd116','#ce1126','v'],CY:['#ffffff','#d57800'],BY:['#c8313e','#4aa657'],CM:['#007a5e','#ce1126','#fcd116','v'],QA:['#8a1538','#ffffff','v'],GW:['#ce1126','#fcd116','#009e49'],RW:['#00a1de','#fad201','#20603d'],BJ:['#008751','#fcd116','#e8112d'],GN:['#ce1126','#fcd116','#009460','v'],AL:['#e41e20','#111111'],TT:['#ce1126','#111111','#ffffff'],GH:['#ce1126','#fcd116','#006b3f'],GM:['#ce1126','#0c1c8c','#3a7728'],CG:['#009543','#fbde4a','#dc241f'],GA:['#009e60','#fcd116','#3a75c4']};
+var PFX = null, PFX_DATA = null, PFX_LOAD = null;
+function pfxData(){ if (PFX_DATA) return Promise.resolve(PFX_DATA); if (!PFX_LOAD) PFX_LOAD = fetch('fx.json').then(function(r){ return r.json(); }).then(function(j){ PFX_DATA = j; return j; }).catch(function(){ PFX_DATA = {}; return PFX_DATA; }); return PFX_LOAD; }
+function pfxRng(s){ var h = 2166136261; for (var i = 0; i < s.length; i++){ h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return function(){ h ^= h << 13; h ^= h >>> 17; h ^= h << 5; return ((h >>> 0) % 100000) / 100000; }; }
+function pfxPlayer(id){ var a = allPlayers(); for (var i = 0; i < a.length; i++) if (a[i].id === id) return a[i]; return null; }
+function pfxCm(h){ return (h / 100).toFixed(2).replace('.', ',') + ' m'; }
+function pfxBeats(p, f){
+  var R = pfxRng(p.id), fl = f.c && PFX_FLAG[f.c[0]] || ['#334155', '#94a3b8', '#e2e8f0'], B = [];
+  var acc = fl.filter(function(c){ return c !== 'v' && c !== '#ffffff' && c !== '#111111'; })[0] || '#f59e0b';
+  if (!f.w){
+    B.push({k: 'nowiki', t: 'Vikipedija tyli', x: 'Apie ' + (p.full || p.name) + ' Vikipedijoje straipsnio dar nėra. Legenda kuriama dabar.'});
+  }
+  if (f.c) B.push({k: 'flag', t: f.c.length > 1 ? 'Dvi vėliavos' : 'Šalis', x: f.cn.join(' · ') + (f.nt ? '. Žaidė nacionalinėje rinktinėje.' : '')});
+  var mid = [];
+  if (f.by) mid.push({k: 'born', t: 'Gimė ' + f.bd, x: f.bp ? 'Gimimo vieta: ' + f.bp + '.' : 'Į krepšinį atėjo ' + (f.by + 18) + ' m. kartos bangoje.', y: f.by});
+  if (f.h) mid.push({k: 'height', t: 'Ūgis ' + pfxCm(f.h), x: f.h >= 181 ? (f.h - 181) + ' cm aukštesnis už vidutinį lietuvį.' : (181 - f.h) + ' cm žemesnis už vidutinį lietuvį, bet aikštėje to nesimato.', h: f.h});
+  if (f.col) mid.push({k: 'college', t: 'Universitetas', x: 'NCAA krepšinis: ' + f.col + '.'});
+  if (f.dy || f.drt || f.und) mid.push({k: 'draft', t: f.und ? 'Nedraftuotas' : 'NBA draftas' + (f.dy ? ' ' + f.dy : ''), x: f.und ? 'NBA drafte jo niekas nepašaukė, kelią prasimušė pats.' : (f.dp ? f.dp + ' šaukimas' : 'Pašauktas') + (f.drt ? ', ' + f.drt : '') + '.'});
+  if (f.nba) mid.push({k: 'nba', t: 'NBA klubai: ' + f.nba.length, x: f.nba.join(' · '), L: f.nba});
+  if (f.cl) mid.push({k: 'clubs', t: 'Karjeros stotelės', x: f.cl.length + (f.cl.length === 1 ? ' klubas' : f.cl.length < 10 ? ' klubai' : ' klubų') + ' Vikipedijos sąraše.', L: f.cl.slice(-6)});
+  if (f.nk) mid.push({k: 'nick', t: 'Pravardė', x: '„' + f.nk + '“', n: f.nk});
+  if (f.fam) mid.push({k: 'fam', t: 'Krepšinio šeima', x: f.fam.join('. ') + '.'});
+  for (var i = mid.length - 1; i > 0; i--){ var j = Math.floor(R() * (i + 1)), z = mid[i]; mid[i] = mid[j]; mid[j] = z; }
+  B = B.concat(mid);
+  if (f.tt) B.push({k: 'titles', t: 'Pasiekimai', x: f.tt.join(' · '), L: f.tt});
+  var avg = p.avg == null ? null : nf1(p.avg);
+  B.push({k: 'now', t: 'Dabar: ' + (TEAMS_LONG[p.club] || p.club), x: avg ? 'Šį sezoną vidutiniškai ' + avg + ' FPTS per rungtynes.' : 'Šį sezoną Eurolygoje taškų dar nerinko.'});
+  return {B: B, fl: fl, acc: acc, shape: ['50%', '2px', '50% 0', '30%'][Math.floor(R() * 4)], dir: Math.floor(R() * 4), ang: Math.round(R() * 180), R: R};
+}
+var TEAMS_LONG = {EFS: 'Anadolu Efes', EA7: 'Milano Olimpia', BJK: 'Besiktas', CZV: 'Crvena zvezda', DUB: 'Dubai Basketball', BAY: 'Bayern', BAR: 'Barcelona', FEN: 'Fenerbahce', HTA: 'Hapoel Tel Aviv', BKN: 'Baskonia', ASV: 'ASVEL', MTA: 'Maccabi Tel Aviv', OLY: 'Olympiacos', PAO: 'Panathinaikos', PAR: 'Paris Basketball', PBB: 'Partizan', RMB: 'Real Madrid', VAL: 'Valencia', VIRT: 'Virtus Bologna', 'ŽAL': 'Žalgiris'};
+function pfxFlagBg(fl, ang){
+  var c = fl.filter(function(x){ return x !== 'v'; }), v = fl.indexOf('v') >= 0, n = c.length, st = [];
+  c.forEach(function(x, i){ st.push(x + ' ' + (i * 100 / n) + '%', x + ' ' + ((i + 1) * 100 / n) + '%'); });
+  return 'linear-gradient(' + (v ? 90 : 180) + 'deg,' + st.join(',') + ')';
+}
+function pfxBurst(sc, S, n, cols){
+  var w = sc.clientWidth, h = sc.clientHeight;
+  for (var i = 0; i < n; i++){
+    var d = document.createElement('i'); d.className = 'pfx-pt';
+    var a = S.R() * Math.PI * 2, r = (0.35 + S.R() * 0.6) * w;
+    d.style.cssText = 'background:' + cols[i % cols.length] + ';border-radius:' + S.shape + ';left:' + (w / 2) + 'px;top:' + (h * 0.45) + 'px';
+    sc.appendChild(d);
+    d.animate([{transform: 'translate(-50%,-50%) scale(.2)', opacity: 1}, {transform: 'translate(' + (Math.cos(a) * r - 4) + 'px,' + (Math.sin(a) * r - 4) + 'px) rotate(' + Math.round(S.R() * 540) + 'deg) scale(1)', opacity: 0}], {duration: 900 + S.R() * 700, easing: 'cubic-bezier(.15,.7,.3,1)', fill: 'forwards'});
+  }
+}
+function pfxBeat(b, S){
+  var sc = PFX.sc, card = PFX.card, fl = S.fl.filter(function(x){ return x !== 'v'; }), acc = S.acc;
+  sc.innerHTML = ''; PFX.cap.innerHTML = '<b>' + esc(b.t) + '</b><span>' + esc(b.x) + '</span>';
+  PFX.cap.animate([{opacity: 0, transform: 'translateY(8px)'}, {opacity: 1, transform: 'none'}], {duration: 380, fill: 'both'});
+  var D = [[-1, 0], [1, 0], [0, -1], [0, 1]][S.dir], E = 'cubic-bezier(.2,.8,.2,1)';
+  function add(html, cls){ var e = document.createElement('div'); e.className = 'pfx-o ' + (cls || ''); e.innerHTML = html; sc.appendChild(e); return e; }
+  if (b.k === 'flag'){
+    var e = add('', 'pfx-flag'); e.style.background = pfxFlagBg(S.fl);
+    card.animate([{transform: 'rotateY(0)'}, {transform: 'rotateY(180deg)'}, {transform: 'rotateY(360deg)'}], {duration: 1100, easing: E});
+    e.animate([{clipPath: 'circle(0% at 50% 50%)', opacity: .95}, {clipPath: 'circle(75% at 50% 50%)', opacity: .9}, {clipPath: 'circle(75% at 50% 50%)', opacity: .35}], {duration: 1500, easing: E, fill: 'forwards'});
+    for (var k = 0; k < 7; k++){ var w = add('', 'pfx-wave'); w.style.cssText = 'top:' + (8 + k * 13) + '%;background:' + fl[k % fl.length]; w.animate([{transform: 'translateX(' + (k % 2 ? 120 : -120) + '%) skewX(-20deg)'}, {transform: 'translateX(0) skewX(-20deg)', opacity: .8}, {transform: 'translateX(' + (k % 2 ? -120 : 120) + '%) skewX(-20deg)', opacity: 0}], {duration: 1500, delay: k * 60, easing: E, fill: 'both'}); }
+  } else if (b.k === 'born'){
+    var e2 = add('<span class="pfx-big">' + (b.y - 30) + '</span><span class="pfx-pin"></span>'), num = e2.firstChild, pin = e2.lastChild;
+    pin.style.background = acc;
+    var t0 = performance.now(), from = b.y - 30;
+    (function tick(t){ if (!PFX || PFX.beat !== b) return; var q = Math.min(1, (t - t0) / 1100), v = Math.round(from + (b.y - from) * (1 - Math.pow(1 - q, 3))); num.textContent = v; if (q < 1) requestAnimationFrame(tick); })(t0);
+    pin.animate([{transform: 'translate(-50%,-260%) rotate(-45deg)', opacity: 0}, {transform: 'translate(-50%,0) rotate(-45deg)', opacity: 1}], {duration: 700, delay: 900, easing: 'cubic-bezier(.3,1.6,.5,1)', fill: 'both'});
+    card.animate([{filter: 'sepia(0)'}, {filter: 'sepia(.8) brightness(.8)'}, {filter: 'sepia(0)'}], {duration: 1600});
+  } else if (b.k === 'height'){
+    var top = Math.max(8, 100 - (b.h - 150) * 1.35), ticks = '';
+    for (var c = 160; c <= 230; c += 10) ticks += '<i style="top:' + (100 - (c - 150) * 1.35) + '%"><em>' + c + '</em></i>';
+    var e3 = add('<div class="pfx-rule">' + ticks + '</div><div class="pfx-bar"></div><div class="pfx-avg" style="top:' + (100 - 31 * 1.35) + '%">181</div>');
+    var bar = e3.children[1]; bar.style.background = 'linear-gradient(0deg,' + acc + ',#fff)';
+    bar.animate([{top: '100%'}, {top: top + '%'}], {duration: 1200, easing: 'cubic-bezier(.2,1.2,.4,1)', fill: 'forwards'});
+    card.animate([{transform: 'scaleY(1)'}, {transform: 'scaleY(1.08) translateY(-3%)'}, {transform: 'scaleY(1)'}], {duration: 1200, easing: E});
+  } else if (b.k === 'college'){
+    var e4 = add('<div class="pfx-pen"><span></span></div>'); var pen = e4.firstChild; pen.style.background = acc; pen.firstChild.textContent = String(b.x).replace(/^NCAA krepšinis: /, '').replace(/\.$/, '').toUpperCase();
+    pen.animate([{transform: 'rotate(-80deg)'}, {transform: 'rotate(12deg)'}, {transform: 'rotate(-6deg)'}, {transform: 'rotate(3deg)'}, {transform: 'rotate(0)'}], {duration: 1500, easing: 'ease-out', fill: 'both'});
+  } else if (b.k === 'draft'){
+    var e5 = add('<div class="pfx-podium"><b>' + (b.t.match(/\d{4}/) || ['NBA'])[0] + '</b><span>' + esc(b.x.split(',')[0].replace(/\.$/, '')) + '</span></div>');
+    e5.firstChild.style.borderColor = acc;
+    e5.firstChild.animate([{transform: 'translateY(120%) scale(.6)', opacity: 0}, {transform: 'translateY(-6%) scale(1.05)', opacity: 1}, {transform: 'none', opacity: 1}], {duration: 900, easing: E, fill: 'both'});
+    for (var s = 0; s < 6; s++){ var fsh = add('', 'pfx-flash'); fsh.style.left = (10 + S.R() * 80) + '%'; fsh.style.top = (10 + S.R() * 60) + '%'; fsh.animate([{opacity: 0, transform: 'scale(.2)'}, {opacity: 1, transform: 'scale(1.3)'}, {opacity: 0, transform: 'scale(.4)'}], {duration: 420, delay: 300 + s * 170, fill: 'both'}); }
+  } else if (b.k === 'nba' || b.k === 'clubs' || b.k === 'titles'){
+    var L = b.L || [], cls = b.k === 'titles' ? 'pfx-chip gold' : 'pfx-chip';
+    if (b.k === 'titles'){ var tr = add('<svg viewBox="0 0 64 64" class="pfx-cup"><path d="M18 8h28v12c0 10-6 17-14 17S18 30 18 20z" fill="#fbbf24"/><path d="M18 12H8c0 9 5 14 12 14M46 12h10c0 9-5 14-12 14" fill="none" stroke="#fbbf24" stroke-width="4"/><rect x="28" y="37" width="8" height="10" fill="#f59e0b"/><rect x="20" y="47" width="24" height="7" rx="2" fill="#b45309"/></svg>'); tr.firstChild.animate([{transform: 'translateY(40%) scale(.3) rotate(-20deg)', opacity: 0}, {transform: 'translateY(0) scale(1.15) rotate(6deg)', opacity: 1}, {transform: 'scale(1) rotate(0)', opacity: 1}], {duration: 900, easing: E, fill: 'both'}); pfxBurst(sc, S, 36, ['#fbbf24', '#fde68a', acc, '#fff']); }
+    L.forEach(function(nm, i){
+      var ch = add('<span>' + esc(nm) + '</span>', cls); ch.style.top = (b.k === 'titles' ? 54 : 12) + i * (b.k === 'titles' ? 10 : 13) + '%';
+      if (b.k !== 'titles') ch.firstChild.style.borderColor = i === L.length - 1 ? acc : 'rgba(255,255,255,.5)';
+      ch.animate([{transform: 'translate(' + (D[0] * 140) + '%,' + (D[1] * 140) + '%)', opacity: 0}, {transform: 'none', opacity: 1}], {duration: 520, delay: 120 + i * 150, easing: E, fill: 'both'});
+    });
+  } else if (b.k === 'nick'){
+    var e6 = add('<div class="pfx-bub">' + esc(b.n) + '</div>'); e6.firstChild.style.background = acc;
+    e6.firstChild.animate([{transform: 'scale(0)', opacity: 0}, {transform: 'scale(1.2)', opacity: 1}, {transform: 'scale(1)', opacity: 1}], {duration: 700, easing: 'cubic-bezier(.3,1.6,.5,1)', fill: 'both'});
+    card.animate([{transform: 'rotate(0)'}, {transform: 'rotate(-4deg)'}, {transform: 'rotate(4deg)'}, {transform: 'rotate(0)'}], {duration: 700, delay: 300});
+  } else if (b.k === 'fam'){
+    var e7 = add('<svg viewBox="0 0 100 100" class="pfx-tree"><path d="M50 90V55M50 55L25 30M50 55L75 30" stroke="' + acc + '" stroke-width="4" fill="none"/><circle cx="50" cy="55" r="7" fill="#fff"/><circle cx="25" cy="30" r="9" fill="' + acc + '"/><circle cx="75" cy="30" r="9" fill="' + acc + '"/></svg>');
+    e7.firstChild.animate([{opacity: 0, transform: 'scale(.4)'}, {opacity: 1, transform: 'scale(1)'}], {duration: 700, easing: E, fill: 'both'});
+  } else if (b.k === 'nowiki'){
+    var e8 = add('<div class="pfx-q">?</div>'); e8.firstChild.animate([{transform: 'rotate(-30deg) scale(.2)', opacity: 0}, {transform: 'rotate(10deg) scale(1.2)', opacity: 1}, {transform: 'none', opacity: 1}], {duration: 900, easing: E, fill: 'both'});
+    card.animate([{filter: 'blur(0)'}, {filter: 'blur(3px) grayscale(1)'}, {filter: 'blur(0)'}], {duration: 1400});
+  } else {
+    pfxBurst(sc, S, 22, fl.concat([acc]));
+    card.animate([{transform: 'scale(1)'}, {transform: 'scale(1.06)'}, {transform: 'scale(1)'}], {duration: 700, easing: E});
+  }
+  PFX.dots.innerHTML = S.B.map(function(x){ return '<i' + (x === b ? ' class="on"' : '') + '></i>'; }).join('');
+}
+function pfxNext(){
+  if (!PFX) return; clearTimeout(PFX.tm); var S = PFX.S, i = S.B.indexOf(PFX.beat) + 1;
+  if (i >= S.B.length){ PFX.cap.innerHTML += ''; PFX.tm = null; PFX.root.classList.add('end'); return; }
+  PFX.beat = S.B[i]; try { pfxBeat(PFX.beat, S); } catch (e){}
+  PFX.tm = setTimeout(pfxNext, PFX.beat.k === 'titles' || PFX.beat.k === 'clubs' || PFX.beat.k === 'nba' ? 2300 : 1900);
+}
+function pfxStop(){ if (!PFX) return; clearTimeout(PFX.tm); document.removeEventListener('keydown', PFX.key); if (PFX.root.parentNode) PFX.root.parentNode.removeChild(PFX.root); try { PFX.src.style.visibility = ''; } catch (e){} PFX = null; }
+function pfxPlay(el){
+  var id = el.getAttribute('data-pid'), p = pfxPlayer(id); if (!p) return;
+  pfxStop();
+  var root = document.createElement('div'); root.className = 'pfx'; root.setAttribute('role', 'dialog'); root.setAttribute('aria-label', (p.full || p.name) + ': faktai iš Vikipedijos');
+  root.innerHTML = '<div class="pfx-bd"></div><div class="pfx-st"><div class="pfx-cw"></div><div class="pfx-sc"></div></div><div class="pfx-cap" aria-live="polite"></div><div class="pfx-dots"></div><div class="pfx-act"><button type="button" class="pfx-x" aria-label="Uždaryti">✕</button><a class="pfx-go" href="#zaidejas-' + id + '">Žaidėjo profilis →</a></div><p class="pfx-src">Faktai: Vikipedija ir Wikidata</p>';
+  document.body.appendChild(root);
+  var cw = root.querySelector('.pfx-cw'), cl = el.cloneNode(true); cl.removeAttribute('href'); cl.classList.remove('sm'); cw.appendChild(cl);
+  PFX = {root: root, sc: root.querySelector('.pfx-sc'), cap: root.querySelector('.pfx-cap'), dots: root.querySelector('.pfx-dots'), card: cw, src: el, beat: null};
+  PFX.key = function(e){ if (e.key === 'Escape') pfxStop(); else if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); pfxNext(); } };
+  document.addEventListener('keydown', PFX.key);
+  root.querySelector('.pfx-bd').addEventListener('click', pfxStop);
+  root.querySelector('.pfx-x').addEventListener('click', pfxStop);
+  root.querySelector('.pfx-go').addEventListener('click', function(){ setTimeout(pfxStop, 0); });
+  root.querySelector('.pfx-st').addEventListener('click', function(){ if (PFX && PFX.root.classList.contains('end')) { PFX.root.classList.remove('end'); PFX.beat = null; pfxNext(); } else pfxNext(); });
+  var r = el.getBoundingClientRect(), st = root.querySelector('.pfx-st').getBoundingClientRect();
+  root.querySelector('.pfx-st').animate([{transform: 'translate(' + (r.left + r.width / 2 - st.left - st.width / 2) + 'px,' + (r.top + r.height / 2 - st.top - st.height / 2) + 'px) scale(' + (r.width / st.width) + ')'}, {transform: 'none'}], {duration: 480, easing: 'cubic-bezier(.2,.8,.2,1)'});
+  root.querySelector('.pfx-bd').animate([{opacity: 0}, {opacity: 1}], {duration: 300, fill: 'both'});
+  PFX.cap.innerHTML = '<b>' + esc(p.full || p.name) + '</b><span>Kraunami faktai…</span>';
+  pfxData().then(function(D){
+    if (!PFX || PFX.src !== el) return;
+    var S = pfxBeats(p, D[id] || {w: 0}); PFX.S = S;
+    if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches){ PFX.cap.innerHTML = S.B.map(function(b){ return '<b>' + esc(b.t) + '</b><span>' + esc(b.x) + '</span>'; }).join(''); root.classList.add('end', 'still'); return; }
+    PFX.tm = setTimeout(pfxNext, 420);
+  });
+}
+document.addEventListener('click', function(e){
+  if (e.defaultPrevented || e.button) return;
+  var n = e.target; if (n.closest && n.closest('.pfx')) return;
+  var c = n.closest && n.closest('.mtc[data-pid]'); if (!c) return;
+  e.preventDefault(); e.stopPropagation();
+  try { pfxPlay(c); } catch (x){ pfxStop(); }
+}, true);
+
 /* ---------- player cards (MyTeam style) ---------- */
 var TIERS = [
   [97, "dm", "Tamsioji materija"], [93, "go", "Galaktikos opalas"], [89, "pd", "Rožinis deimantas"], [84, "di", "Deimantas"],
@@ -1866,7 +2055,7 @@ function playerCard(p, opt){
   var o = ovrTable()[p.id] || 60, t = tierOf(o), a = (analysis().P || {})[p.id] || {};
   var nm = String(p.full || p.name).split(/\s+/), last = nm.length > 1 ? nm.slice(1).join(" ") : nm[0], first = nm.length > 1 ? nm[0] : "";
   var img = p.cd ? '<img class="pc-img" src="cards/' + p.id + '.webp" alt="" loading="lazy" decoding="async">' : '<svg class="pc-img pc-sil" viewBox="0 0 136 170" aria-hidden="true"><circle cx="68" cy="62" r="30"/><path d="M14 170 C16 122 40 104 68 104 C96 104 120 122 122 170 Z"/></svg>';
-  var tag = opt.link ? 'a href="#zaidejas-' + p.id + '"' : 'div';
+  var tag = (opt.link ? 'a href="#zaidejas-' + p.id + '"' : 'div') + ' data-pid="' + p.id + '"';
   return '<' + tag + ' class="mtc t-' + t[1] + (opt.sm ? ' sm' : '') + '" aria-label="' + esc((p.full || p.name) + ', reitingas ' + o + ', ' + t[2]) + '">' +
     '<span class="pc-bg"></span><span class="pc-shine"></span>' + img +
     '<span class="pc-ovr"><b>' + o + '</b><i>' + (POS_EN[p.pos] || p.pos) + '</i></span>' +
