@@ -2140,6 +2140,11 @@ var SIC = [
   [/eurolyga/i, '#f97316', '<path d="M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20zm-1 2.1A8 8 0 0 0 4.1 11H8a14 14 0 0 1 3-6.9zm2 0A14 14 0 0 1 16 11h3.9A8 8 0 0 0 13 4.1zM4.1 13A8 8 0 0 0 11 19.9 14 14 0 0 1 8 13zm11.9 0a14 14 0 0 1-3 6.9 8 8 0 0 0 6.9-6.9z"/>']
 ];
 function canvaDecor(root){
+  try { var LD = typeof liveData === 'function' ? liveData() : null;
+    if (LD && LD.games && LD.games.length && LD.games.every(function(g){ return g.done; })){
+      (root || document).querySelectorAll('.lv-b').forEach(function(b){ if (b.textContent === 'GYVAI'){ b.textContent = 'BAIGTAS'; b.style.animation = 'none'; b.style.background = '#16a34a'; } });
+      (root || document).querySelectorAll('h3.sect, .lv-b ~ small').forEach(function(h){ h.childNodes.forEach(function(n){ if (n.nodeType === 3) n.nodeValue = n.nodeValue.replace(/ turas gyvai/, ' turas baigtas').replace(/turas vyksta/, 'turas baigtas'); }); });
+    } } catch (e){}
   (root || document).querySelectorAll('main h3.sect:not([data-ic])').forEach(function(h){
     h.setAttribute('data-ic', '1');
     var t = (h.firstChild && h.firstChild.nodeType === 3 ? h.firstChild.nodeValue : h.textContent).trim();
