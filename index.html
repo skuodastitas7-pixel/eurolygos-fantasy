@@ -1599,7 +1599,8 @@ aside section::before{content:"";position:absolute;left:0;right:0;top:0;height:3
 aside section .big{font-style:italic;font-weight:900}
 .rres.rwin{--sc:var(--cv-g);box-shadow:0 0 0 1px color-mix(in srgb,var(--cv-g) 40%,transparent),0 0 24px -10px var(--cv-g)!important}
 .rres.rlose{--sc:var(--cv-r);box-shadow:0 0 0 1px color-mix(in srgb,var(--cv-r) 40%,transparent),0 0 24px -10px var(--cv-r)!important}
-.rres .rv{display:block;margin:6px 0 2px;font-size:34px;line-height:1;font-style:italic;font-weight:900;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.rres .rv small{font-size:.42em;font-style:normal;font-weight:800;margin-left:6px;letter-spacing:.04em;opacity:.85}
+.rres .rv{display:block;margin:6px 0 8px;font-size:32px;line-height:1.15;white-space:nowrap;font-style:italic;font-weight:900;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
 .rres.rwin .rv{color:var(--cv-g)}
 .rres.rlose .rv{color:var(--cv-r)}
 .nextbox{--sc:var(--red)}
@@ -2106,7 +2107,7 @@ function canvaDecor(root){
   (root || document).querySelectorAll('.rres:not([data-rv])').forEach(function(sec){
     sec.setAttribute('data-rv', '1'); var d = sec.querySelector('.data p') || sec.querySelector('.data'); if (!d) return;
     var m = d.textContent.match(/([\d\s]+,?\d*)\s*FPTS/); if (!m) return;
-    var b = document.createElement('span'); b.className = 'rv'; b.textContent = m[1].trim() + ' FPTS'; var big = sec.querySelector('.big'); if (big) big.insertAdjacentElement('afterend', b);
+    var b = document.createElement('span'); b.className = 'rv'; b.innerHTML = esc(m[1].trim()) + '<small>FPTS</small>'; var big = sec.querySelector('.big'); if (big) big.insertAdjacentElement('afterend', b);
   });
 }
 (function(){ var v = document.getElementById('view') || document.body; try { new MutationObserver(function(){ canvaDecor(v); }).observe(v, {childList: true, subtree: true}); } catch (e){} if (document.readyState !== 'loading') canvaDecor(); else document.addEventListener('DOMContentLoaded', function(){ canvaDecor(); }); })();
