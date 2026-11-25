@@ -1555,6 +1555,59 @@ html.landing footer,html.landing .foot{display:none!important}
 .pfx-src{position:relative;margin:0;font:500 11px/1 var(--f-body,system-ui);color:rgba(255,255,255,.55)}
 .pfx.end .pfx-st::after{content:"Paspausk, kad kartotum";position:absolute;left:0;right:0;bottom:-2px;text-align:center;font:600 11px/1 var(--f-body,system-ui);color:rgba(255,255,255,.7)}
 @media (max-height:640px){.pfx-st{width:min(50vw,200px)}.pfx-cw .mtc{--w:min(50vw,200px)!important}.pfx{gap:8px}}
+/* ===== 2026-11-25 Canva dizaino kryptis: sportinė transliacija, neoniniai akcentai ===== */
+:root{--cv-v:#7c3aed;--cv-v2:#a78bfa;--cv-g:#22c55e;--cv-r:#ef4444;--cv-y:#f5b301}
+h3.sect{font-style:italic;font-weight:800;letter-spacing:.005em}
+h3.sect::before{width:5px;background:linear-gradient(180deg,var(--cv-v2),var(--cv-v));box-shadow:0 0 10px color-mix(in srgb,var(--cv-v) 70%,transparent)}
+h3.sect .sic{align-self:center;display:inline-grid;place-items:center;width:26px;height:26px;border-radius:8px;background:color-mix(in srgb,var(--sc,var(--cv-v)) 18%,transparent);color:var(--sc,var(--cv-v2));flex:none;margin-left:-2px}
+h3.sect .sic svg{width:16px;height:16px}
+:root:not([data-theme="light"]) main section,:root:not([data-theme="light"]) .lead{background:linear-gradient(180deg,color-mix(in srgb,var(--cv-v) 5%,var(--card)) 0%,var(--card) 55%);border:1px solid color-mix(in srgb,var(--cv-v) 22%,var(--rule))}
+:root:not([data-theme="light"]) main section section{background:none;border:0}
+/* hero */
+.herox .headline{font-style:italic;font-weight:900;letter-spacing:-.015em}
+.hx-k span{position:relative;padding:34px 16px 10px;min-width:96px;align-items:center;text-align:center;border-radius:14px;background:linear-gradient(180deg,color-mix(in srgb,var(--c) 20%,transparent),color-mix(in srgb,var(--c) 6%,transparent))}
+.hx-k span::before{content:"";position:absolute;top:10px;left:50%;width:20px;height:20px;transform:translateX(-50%);background:var(--c);-webkit-mask:var(--hi) center/contain no-repeat;mask:var(--hi) center/contain no-repeat}
+.hx-k span:nth-child(1){--hi:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 2h12v3h3v3a5 5 0 0 1-5 5h-.3A6 6 0 0 1 13 15.9V19h4v3H7v-3h4v-3.1A6 6 0 0 1 8.3 13H8a5 5 0 0 1-5-5V5h3zm0 5H5v1a3 3 0 0 0 1 2.2zm12 0v3.2A3 3 0 0 0 19 8V7z'/%3E%3C/svg%3E")}
+.hx-k span:nth-child(2){--hi:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M3 17l6-6 4 4 6-7v4h2V4h-8v2h4.6L13 12.2l-4-4-7.4 7.4z'/%3E%3C/svg%3E")}
+.hx-k span:nth-child(3){--hi:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M2 7l5 4 5-7 5 7 5-4-2 12H4zm2 14h16v2H4z'/%3E%3C/svg%3E")}
+.hx-k span:nth-child(4){--hi:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M7 2h2v2h6V2h2v2h3a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3zm-2 7v11h14V9zm2 2h3v3H7zm5 0h3v3h-3z'/%3E%3C/svg%3E")}
+.hx-k b{font-size:24px;font-style:italic;font-weight:900}
+@media (min-width:760px){
+  .herox{grid-template-columns:auto minmax(0,1fr)!important}
+  .herox .hx-l{display:flex!important;order:-1;padding:16px 20px;border-radius:16px;background:radial-gradient(circle at 50% 35%,color-mix(in srgb,var(--c) 35%,transparent),transparent 70%),color-mix(in srgb,var(--c) 10%,var(--card));border:1px solid color-mix(in srgb,var(--c) 45%,transparent);box-shadow:0 0 28px -6px color-mix(in srgb,var(--c) 55%,transparent)}
+}
+/* live round */
+.lv h3.sect .lv-b{box-shadow:0 0 12px color-mix(in srgb,var(--cv-r) 60%,transparent)}
+.lv-gi{min-width:168px;padding:10px 12px;background:linear-gradient(160deg,color-mix(in srgb,var(--cv-v) 10%,var(--paper)),var(--paper))}
+.lv-gi.done{box-shadow:0 0 0 1px color-mix(in srgb,var(--cv-g) 35%,transparent),0 0 16px -8px var(--cv-g)}
+.lv-gc em{font-size:17px;font-style:italic}
+.lv table td:nth-child(3) b,.lv table td:nth-child(3){color:var(--cv-g)}
+:root[data-theme="light"] .lv table td:nth-child(3),:root[data-theme="light"] .lv table td:nth-child(3) b{color:#15803d}
+.lv table td:nth-child(3) b{font-style:italic;font-weight:900}
+.lv table td:last-child{color:var(--cv-v2);font-weight:800}
+/* forecast bars */
+.fcx .fx-b i{background:linear-gradient(90deg,color-mix(in srgb,var(--c) 70%,#000),var(--c))!important;box-shadow:0 0 12px -3px var(--c)}
+.fcx li.top{box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--c) 45%,transparent)}
+.fcx .fx-v b{font-style:italic;font-weight:900}
+/* activity */
+ol.act li{transition:transform .15s}
+ol.act li:hover{transform:translateX(3px)}
+.actg{display:inline-block;padding:4px 10px;border-radius:999px;background:color-mix(in srgb,var(--cv-v) 16%,transparent);color:var(--cv-v2)}
+/* sidebar cards */
+aside section{position:relative;overflow:hidden}
+aside section::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:linear-gradient(90deg,var(--sc,var(--cv-v)),transparent)}
+aside section .big{font-style:italic;font-weight:900}
+.rres.rwin{--sc:var(--cv-g);box-shadow:0 0 0 1px color-mix(in srgb,var(--cv-g) 40%,transparent),0 0 24px -10px var(--cv-g)!important}
+.rres.rlose{--sc:var(--cv-r);box-shadow:0 0 0 1px color-mix(in srgb,var(--cv-r) 40%,transparent),0 0 24px -10px var(--cv-r)!important}
+.rres .rv{display:block;margin:6px 0 2px;font-size:34px;line-height:1;font-style:italic;font-weight:900;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.rres.rwin .rv{color:var(--cv-g)}
+.rres.rlose .rv{color:var(--cv-r)}
+.nextbox{--sc:var(--red)}
+.nextbox .big{text-shadow:0 0 18px color-mix(in srgb,var(--red) 45%,transparent)}
+.rwtabs .tog{font-style:italic}
+/* bump chart + review */
+.excerpt{font-style:italic}
+.elsum .tdl li::marker{color:var(--cv-v2);font-weight:800}
 </style>
 </head>
 <body>
@@ -2021,6 +2074,42 @@ document.addEventListener('click', function(e){
   e.preventDefault(); e.stopPropagation();
   try { pfxPlay(c); } catch (x){ pfxStop(); }
 }, true);
+
+/* Canva dizaino kryptis: sekcijų ikonos ir rezultatų skaičiai */
+var SIC = [
+  [/gyvai/i, '#ef4444', '<path d="M12 8a4 4 0 1 1 0 8 4 4 0 0 1 0-8zm-7.1-3.1 1.4 1.4a8 8 0 0 0 0 11.4l-1.4 1.4a10 10 0 0 1 0-14.2zm14.2 0a10 10 0 0 1 0 14.2l-1.4-1.4a8 8 0 0 0 0-11.4z"/>'],
+  [/^Lentelė|lentelėje/i, '#a78bfa', '<path d="M3 4h18v4H3zm0 6h18v4H3zm0 6h18v4H3z"/>'],
+  [/prognoz/i, '#60a5fa', '<path d="M4 19h16v2H2V3h2zm3-3V9h3v7zm5 0V5h3v11zm5 0v-4h3v4z"/>'],
+  [/veikla/i, '#22c55e', '<path d="M4 7h11l-3-3 1.4-1.4L19 8.2l-5.6 5.6L12 12.4l3-3H4zm16 10H9l3 3-1.4 1.4L5 15.8l5.6-5.6 1.4 1.4-3 3h11z"/>'],
+  [/^\d+ turas$/i, '#6e97ff', '<path d="M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20zm1 5h-2v6l5 3 1-1.7-4-2.3z"/>'],
+  [/akimirk/i, '#f5b301', '<path d="M12 2l3 6.5 7 .8-5.2 4.8L18.2 21 12 17.3 5.8 21l1.4-6.9L2 9.3l7-.8z"/>'],
+  [/galios/i, '#a78bfa', '<path d="M13 2 4 14h7l-1 8 9-12h-7z"/>'],
+  [/nugalėtoj/i, '#22c55e', '<path d="M6 2h12v3h3v3a5 5 0 0 1-5 5h-.3A6 6 0 0 1 13 15.9V19h4v3H7v-3h4v-3.1A6 6 0 0 1 8.3 13H8a5 5 0 0 1-5-5V5h3z"/>'],
+  [/pralaimėtoj/i, '#ef4444', '<path d="M3 5l6 6 4-4 8 8v-4h2v8h-8v-2h4.6L13 10.2l-4 4-7.4-7.4z"/>'],
+  [/lyderiai/i, '#f5b301', '<path d="M2 7l5 4 5-7 5 7 5-4-2 12H4zm2 14h16v2H4z"/>'],
+  [/rekord/i, '#f97316', '<path d="M12 2c1 4 6 6 6 12a6 6 0 0 1-12 0c0-3 2-5 3-6 0 2 1 3 2 3 0-4-1-6 1-9z"/>'],
+  [/lažyb/i, '#f5b301', '<path d="M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20zm1 4h-2v1.1A3 3 0 0 0 11.5 13h1a1 1 0 0 1 0 2H9v2h2v1h2v-1.1a3 3 0 0 0-.5-5.9h-1a1 1 0 0 1 0-2H15V7h-2z"/>'],
+  [/apžvalg/i, '#60a5fa', '<path d="M5 3h14v18l-7-4-7 4z"/>'],
+  [/žaidėjai|stebim/i, '#22c55e', '<path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-5 0-9 2.5-9 6v2h18v-2c0-3.5-4-6-9-6z"/>'],
+  [/eurolyga/i, '#f97316', '<path d="M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20zm-1 2.1A8 8 0 0 0 4.1 11H8a14 14 0 0 1 3-6.9zm2 0A14 14 0 0 1 16 11h3.9A8 8 0 0 0 13 4.1zM4.1 13A8 8 0 0 0 11 19.9 14 14 0 0 1 8 13zm11.9 0a14 14 0 0 1-3 6.9 8 8 0 0 0 6.9-6.9z"/>']
+];
+function canvaDecor(root){
+  (root || document).querySelectorAll('main h3.sect:not([data-ic])').forEach(function(h){
+    h.setAttribute('data-ic', '1');
+    var t = (h.firstChild && h.firstChild.nodeType === 3 ? h.firstChild.nodeValue : h.textContent).trim();
+    for (var i = 0; i < SIC.length; i++) if (SIC[i][0].test(t)){
+      var s = document.createElement('span'); s.className = 'sic'; s.style.setProperty('--sc', SIC[i][1]);
+      s.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">' + SIC[i][2] + '</svg>';
+      h.insertBefore(s, h.firstChild); var sec = h.closest('aside section'); if (sec && !sec.classList.contains('rres')) sec.style.setProperty('--sc', SIC[i][1]); break;
+    }
+  });
+  (root || document).querySelectorAll('.rres:not([data-rv])').forEach(function(sec){
+    sec.setAttribute('data-rv', '1'); var d = sec.querySelector('.data p') || sec.querySelector('.data'); if (!d) return;
+    var m = d.textContent.match(/([\d\s]+,?\d*)\s*FPTS/); if (!m) return;
+    var b = document.createElement('span'); b.className = 'rv'; b.textContent = m[1].trim() + ' FPTS'; var big = sec.querySelector('.big'); if (big) big.insertAdjacentElement('afterend', b);
+  });
+}
+(function(){ var v = document.getElementById('view') || document.body; try { new MutationObserver(function(){ canvaDecor(v); }).observe(v, {childList: true, subtree: true}); } catch (e){} if (document.readyState !== 'loading') canvaDecor(); else document.addEventListener('DOMContentLoaded', function(){ canvaDecor(); }); })();
 
 /* ---------- player cards (MyTeam style) ---------- */
 var TIERS = [
