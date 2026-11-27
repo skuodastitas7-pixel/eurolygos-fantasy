@@ -1637,6 +1637,28 @@ main section .big{font-style:italic;font-weight:900}
 .mtc:hover{box-shadow:0 10px 26px -10px color-mix(in srgb,var(--cv-v) 70%,transparent),inset 0 0 0 2px rgba(255,255,255,.35)}
 nav.pnav a,nav.secnav a{transition:background .15s}
 :root:not([data-theme="light"]) aside.side a[aria-current],:root:not([data-theme="light"]) nav a.on[aria-current="page"]{background:linear-gradient(135deg,color-mix(in srgb,var(--cv-v) 45%,transparent),color-mix(in srgb,var(--cv-v) 18%,transparent))}
+/* player page tidy */
+.pptabs{display:flex;gap:4px;padding:4px;margin:22px 0 20px;border:1px solid var(--rule);border-radius:14px;background:var(--paper);overflow-x:auto;scrollbar-width:none;position:sticky;top:8px;z-index:5;box-shadow:0 6px 18px rgba(20,20,40,.06)}
+.pptabs::-webkit-scrollbar{display:none}
+.pptabs button{flex:1 0 auto;border:0;background:transparent;font:600 14px/1 var(--f-data);color:var(--ink-2);padding:11px 16px;border-radius:10px;cursor:pointer;white-space:nowrap;font-style:normal}
+.pptabs button small{font-weight:500;opacity:.65;margin-left:6px;font-size:12px}
+.pptabs button[aria-selected="true"]{background:var(--ink);color:var(--paper)}
+.pptabs button:not([aria-selected="true"]):hover{background:rgba(127,127,160,.12);color:var(--ink)}
+.pppanel[hidden]{display:none!important}
+.pppanel > section{margin-top:0!important;margin-bottom:22px!important}
+.pp .an-tx{gap:0!important;border:1px solid var(--rule);border-radius:14px;background:var(--paper);overflow:hidden;max-width:none}
+.pp .an-tx p{display:grid;grid-template-columns:118px minmax(0,1fr);gap:4px 16px;padding:13px 16px!important;border:0!important;border-radius:0!important;border-top:1px solid var(--rule)!important;background:transparent!important;line-height:1.55}
+.pp .an-tx p:first-child{border-top:0!important}
+.pp .an-tx p > b:first-child{display:block;margin:2px 0 0!important;font-size:11px!important;letter-spacing:.08em;color:var(--ink-2)!important}
+.pp .an-tx p > b:first-child::after{content:none}
+.pp .an-tx p:nth-child(odd){background:rgba(127,127,160,.04)!important}
+@media (max-width:719px){.pp .an-tx p{grid-template-columns:minmax(0,1fr)}.pptabs{top:4px;border-radius:12px}.pptabs button{padding:10px 12px;font-size:13px}}
+details.ppnote{margin:10px 0 0}
+details.ppnote > summary{cursor:pointer;list-style:none;display:inline-flex;align-items:center;gap:6px;font:600 12px/1 var(--f-data);color:var(--ink-2);padding:6px 10px;border:1px solid var(--rule);border-radius:999px}
+details.ppnote > summary::-webkit-details-marker{display:none}
+details.ppnote > summary::before{content:"i";display:inline-grid;place-items:center;width:15px;height:15px;border-radius:50%;background:var(--ink-2);color:var(--paper);font-size:10px;font-style:italic;font-family:Georgia,serif}
+details.ppnote[open] > summary{margin-bottom:6px}
+details.ppnote p.note{margin:0}
 </style>
 </head>
 <body>
@@ -7191,7 +7213,60 @@ function settingsApply(){
   document.body.classList.toggle('dense', lsGet('ef-dense') === '1');
   document.body.classList.toggle('nomotion', lsGet('ef-motion') === '1');
 }
+/* player page: tabs, tidy analysis, collapsed notes */
+var PP_TABS = [["apz", "Apžvalga", /Fantasy analiz|FPTS per turus/], ["stat", "Statistika", /Pažangi|Rungtynių statistika|išskaidymas/], ["turai", "Turai", /Kiekvienas turas|Kiek atnešė|Ėjimai/], ["karj", "Karjera", /karjera|sezon/i]];
+function ppTab(sec){ var h = sec.querySelector(':scope > h3.sect'), t = h ? secTitle(h) : ''; for (var i = 0; i < PP_TABS.length; i++) if (PP_TABS[i][2].test(t)) return PP_TABS[i][0]; return 'stat'; }
+function ppPlace(view){
+  var bar = view.querySelector('.pptabs'); if (!bar) return;
+  Array.prototype.slice.call(view.children).forEach(function(c){
+    if (c.tagName !== 'SECTION') return;
+    var k = ppTab(c), pn = view.querySelector('.pppanel[data-k="' + k + '"]'); if (pn) pn.appendChild(c); ppNotes(c);
+  });
+  PP_TABS.forEach(function(t){ var pn = view.querySelector('.pppanel[data-k="' + t[0] + '"]'), b = bar.querySelector('[data-k="' + t[0] + '"]'); if (b) b.hidden = !pn.children.length; });
+}
+function ppNotes(sec){
+  sec.querySelectorAll('p.note').forEach(function(n){
+    if (n.closest('details.ppnote') || n.textContent.length < 70) return;
+    var d = document.createElement('details'); d.className = 'ppnote'; d.innerHTML = '<summary>Kaip skaityti</summary>';
+    n.parentNode.insertBefore(d, n); d.appendChild(n);
+  });
+}
+function ppShow(k, scroll){
+  var view = document.getElementById('view'); S.ppTab = k;
+  view.querySelectorAll('.pptabs button').forEach(function(b){ b.setAttribute('aria-selected', b.getAttribute('data-k') === k ? 'true' : 'false'); });
+  view.querySelectorAll('.pppanel').forEach(function(p){ p.hidden = p.getAttribute('data-k') !== k; });
+  if (k === 'apz') try { drawPlayer(); } catch (e){}
+  if (scroll){ var bar = view.querySelector('.pptabs'); if (bar && bar.getBoundingClientRect().top < 0) window.scrollTo({top: window.scrollY + bar.getBoundingClientRect().top - 10}); }
+}
+function ppTidy(){
+  var view = document.getElementById('view'), head = view.querySelector('.pphead'); if (!head || view.querySelector('.pptabs')) return;
+  view.classList.add('pp');
+  var nv = view.querySelector('.pnav'); if (nv) nv.remove();
+  var an = view.querySelector('section.an .an-tx');
+  if (an) an.querySelectorAll('p').forEach(function(p){
+    var b = p.querySelector(':scope > b:first-child'); if (!b) return;
+    if (/^Mūsų lygoje/i.test(b.textContent)){ p.remove(); return; }
+    b.removeAttribute('style'); b.textContent = b.textContent.replace(/\.\s*$/, '');
+    var v = document.createElement('span'); v.className = 'ppv';
+    while (b.nextSibling) v.appendChild(b.nextSibling);
+    v.innerHTML = v.innerHTML.replace(/^\s+/, ''); p.appendChild(v);
+  });
+  var bar = document.createElement('div'); bar.className = 'pptabs'; bar.setAttribute('role', 'tablist');
+  bar.innerHTML = PP_TABS.map(function(t){ return '<button type="button" role="tab" data-k="' + t[0] + '">' + t[1] + '</button>'; }).join('');
+  head.insertAdjacentElement('afterend', bar);
+  var after = bar;
+  PP_TABS.forEach(function(t){ var p = document.createElement('div'); p.className = 'pppanel'; p.setAttribute('data-k', t[0]); p.setAttribute('role', 'tabpanel'); after.insertAdjacentElement('afterend', p); after = p; });
+  ppPlace(view);
+  bar.addEventListener('click', function(e){ var b = e.target.closest('button[data-k]'); if (b) ppShow(b.getAttribute('data-k'), true); });
+  var hs = (location.hash || '').split('~')[1], k = S.ppTab || 'apz';
+  if (hs){ var el = document.getElementById(hs), pn = el && el.closest('.pppanel'); if (pn) k = pn.getAttribute('data-k'); }
+  if (bar.querySelector('[data-k="' + k + '"]').hidden) k = 'apz';
+  ppShow(k);
+  try { if (PPMO) PPMO.disconnect(); PPMO = new MutationObserver(function(){ if (view.querySelector('.pptabs')) ppPlace(view); }); PPMO.observe(view, {childList: true}); } catch (e){}
+}
+var PPMO = null;
 function postRender(r){
+  if (r.indexOf('zaidejas-') !== 0){ var vv = document.getElementById('view'); if (vv) vv.classList.remove('pp'); if (PPMO){ PPMO.disconnect(); PPMO = null; } }
   try { hotBar(); } catch (e){}
   if (r === 'nauja-lyga') try { nlUpdate(); } catch (e){}
   if (r.indexOf('apzvalga-') === 0 && S.reviews){ lsSet('ef-rvseen', String(S.data.rounds_played)); reviewUnread(); }
@@ -7203,7 +7278,7 @@ function postRender(r){
     var sec = h3.parentNode; if (!sec.id) sec.id = secSlug(h3, used);
     if (!h3.querySelector('.anch')){ var a = document.createElement('a'); a.className = 'anch'; a.href = '#' + current() + '~' + sec.id; a.textContent = '#'; a.title = 'Nuoroda į šią skiltį'; a.setAttribute('aria-label', 'Nuoroda į skiltį'); h3.appendChild(a); }
   });
-  if (r.indexOf('analitika') === 0) secNav(r); else pageNav(r);
+  if (r.indexOf('analitika') === 0) secNav(r); else if (r.indexOf('zaidejas-') === 0){ try { ppTidy(); } catch (e){ console.error(e); } } else pageNav(r);
   pnavSpy();
   /* share button by the page title */
   var h2 = document.querySelector('#view h2.page');
