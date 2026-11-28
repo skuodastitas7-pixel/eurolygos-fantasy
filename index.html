@@ -1719,6 +1719,8 @@ section.scol:not(.open) > :not(h3){display:none!important}
 section.scol:not(.open){padding-bottom:14px!important}
 section.scol.open > h3.sect{margin-bottom:12px}
 .ppcutL tbody tr:nth-child(n+13){display:none}
+ol.act > li[hidden],p.actg[hidden],ol.act[hidden],.actmore[hidden]{display:none!important}
+.actf small{opacity:.6;margin-left:4px}
 </style>
 </head>
 <body>
@@ -2577,7 +2579,7 @@ view.addEventListener("click", function(e){
   var tg = t.closest ? t.closest("[data-sel]") : null;
   if (tg){ S.sel = tg.getAttribute("data-sel"); drawBump(); syncToggles(); }
   var pt = t.closest ? t.closest("[data-pt]") : null;
-  if (pt){ S.pt = pt.getAttribute("data-pt"); try { history.replaceState(null, "", S.pt === "all" ? "#zaidejai" : "#zaidejai-" + S.pt); } catch (e2) {} syncPressed("data-pt", S.pt); drawPlayers(); }
+  if (pt){ S.pt = pt.getAttribute("data-pt"); if (S.pt === "all") S.ptAll = true; try { history.replaceState(null, "", S.pt === "all" ? "#zaidejai" : "#zaidejai-" + S.pt); } catch (e2) {} syncPressed("data-pt", S.pt); drawPlayers(); }
   var ek = t.closest ? t.closest("[data-elk]") : null;
   if (ek){ S.elk = ek.getAttribute("data-elk"); syncPressed("data-elk", S.elk); var et = document.getElementById("elt"); if (et) et.innerHTML = elTable(); }
   var anb = t.closest ? t.closest("[data-anv],[data-anp],[data-anmore]") : null;
@@ -3413,7 +3415,7 @@ function plLegend(d){
 function pagePlayers(sel){
   var d = S.data;
   S.pmode = "rounds";
-  S.pt = sel && M[sel] ? sel : "all";
+  S.pt = sel && M[sel] ? sel : (S.ptAll || window.innerWidth >= 720 ? "all" : (myTeam() && M[myTeam()] ? myTeam() : d.standings[0].id));
   S.pv = S.pv || "chart";
   var n = 0; d.standings.forEach(function(s){ n += d.rosters[s.id].length; });
   var h = '<p class="kicker">' + n + ' žaidėjų · ' + nturai(d.rounds_played) + '</p><h2 class="page">Žaidėjų taškai per turus</h2>' + playersTabs("rounds") +
@@ -7607,7 +7609,7 @@ function secFold(r){
   var view = document.getElementById('view'); if (ppKind() || /^(analitika|apzvalga-|nauja-lyga|taisykles|pagalba|apie)/.test(r)) return;
   var secs = Array.prototype.filter.call(view.querySelectorAll('section'), function(s){ return s.querySelector(':scope > h3.sect') && !s.parentElement.closest('section') && !s.closest('details,[hidden],.lead'); });
   var tall = document.body.scrollHeight > window.innerHeight * 6;
-  if (secs.length >= 5 && tall) secs.forEach(function(sec, i){
+  if (secs.length >= 4 && tall) secs.forEach(function(sec, i){
     if (i < (r === 'lentele' ? 4 : 2) || sec.querySelector('svg:not(.tlogo):not([width="18"]), canvas, .pcgrid') || sec.classList.contains('scol')) return;
     var h = sec.querySelector(':scope > h3.sect'), key = r + '|' + sec.id;
     sec.classList.add('scol'); if (SC_OPEN[key]) sec.classList.add('open');
@@ -7628,6 +7630,36 @@ function secLong(sec){
 }
 function secOpen(el){ var s = el && el.closest && el.closest('section.scol'); if (s && !s.classList.contains('open')){ s.classList.add('open'); var h = s.querySelector(':scope > h3.sect'); if (h) h.setAttribute('aria-expanded', 'true'); SC_OPEN[current() + '|' + s.id] = true; secLong(s); } }
 document.addEventListener('click', function(e){ var j = e.target.closest && e.target.closest('a[data-jump]'); if (j) secOpen(document.getElementById(j.getAttribute('data-jump'))); }, true);
+/* activity feed: type filter and paging by round */
+var ACT = {t: 'all', n: 6};
+function actTidy(){
+  var sec = document.querySelector('#view section'); if (!sec || sec.querySelector('.actf')) return;
+  var gs = [], cur = null;
+  Array.prototype.forEach.call(sec.children, function(c){ if (c.classList.contains('actg')){ cur = {h: c, ol: null}; gs.push(cur); } else if (c.tagName === 'OL' && cur) cur.ol = c; });
+  if (!gs.length) return;
+  var T = [['all', 'Visi'], ['tr', 'Mainai'], ['fa', 'Laisvieji agentai'], ['cd', 'Kortelės'], ['res', 'Turų rezultatai']];
+  var cnt = {all: 0, tr: 0, fa: 0, cd: 0, res: 0};
+  sec.querySelectorAll('ol.act > li').forEach(function(li){ cnt.all++; var k = /win|last/.test(li.className) ? 'res' : li.className; if (cnt[k] != null) cnt[k]++; });
+  var bar = document.createElement('div'); bar.className = 'filters actf'; bar.setAttribute('role', 'group'); bar.setAttribute('aria-label', 'Įvykių tipas');
+  bar.innerHTML = T.map(function(t){ return '<button type="button" class="tog" data-act-t="' + t[0] + '" aria-pressed="' + (ACT.t === t[0]) + '">' + t[1] + ' <small>' + cnt[t[0]] + '</small></button>'; }).join('');
+  var f0 = sec.querySelector('.filters'); (f0 || sec.firstChild).insertAdjacentElement(f0 ? 'afterend' : 'beforebegin', bar);
+  var more = document.createElement('button'); more.type = 'button'; more.className = 'tog ppmore actmore'; sec.appendChild(more);
+  function apply(){
+    var shown = 0;
+    gs.forEach(function(g){
+      var vis = 0;
+      if (g.ol) Array.prototype.forEach.call(g.ol.children, function(li){ var k = /win|last/.test(li.className) ? 'res' : li.className; var on = ACT.t === 'all' || k === ACT.t; li.hidden = !on; if (on) vis++; });
+      var ok = vis > 0 && shown < ACT.n; if (vis > 0) shown++;
+      g.h.hidden = !ok; if (g.ol) g.ol.hidden = !ok;
+    });
+    var total = gs.filter(function(g){ return g.ol && Array.prototype.some.call(g.ol.children, function(li){ return !li.hidden; }); }).length;
+    more.hidden = total <= ACT.n; more.textContent = 'Rodyti ankstesnius (' + (total - ACT.n) + ')';
+    bar.querySelectorAll('[data-act-t]').forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-act-t') === ACT.t ? 'true' : 'false'); });
+  }
+  bar.addEventListener('click', function(e){ var b = e.target.closest('[data-act-t]'); if (!b) return; ACT.t = b.getAttribute('data-act-t'); ACT.n = 6; apply(); });
+  more.addEventListener('click', function(){ ACT.n += 8; apply(); });
+  apply();
+}
 function postRender(r){
   try { aiInit(); } catch (e){}
   if (!/^(zaidejas|klubas|komanda)-/.test(r)){ var vv = document.getElementById('view'); if (vv) vv.classList.remove('pp'); if (PPMO){ PPMO.disconnect(); PPMO = null; } }
@@ -7644,6 +7676,7 @@ function postRender(r){
   });
   if (r.indexOf('analitika') === 0) secNav(r); else if (/^(zaidejas|klubas|komanda)-/.test(r)){ try { ppTidy(); } catch (e){ console.error(e); } } else pageNav(r);
   try { secFold(r); } catch (e){ console.error(e); }
+  if (r.indexOf('veikla') === 0) try { actTidy(); } catch (e){ console.error(e); }
   pnavSpy();
   /* share button by the page title */
   var h2 = document.querySelector('#view h2.page');
