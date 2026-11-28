@@ -7621,8 +7621,9 @@ function secFold(r){
   var view = document.getElementById('view'); if (ppKind() || /^(apzvalga-|nauja-lyga|taisykles|pagalba|apie)/.test(r)) return;
   var secs = Array.prototype.filter.call(view.querySelectorAll('section'), function(s){ return s.querySelector(':scope > h3.sect') && !s.parentElement.closest('section') && !s.closest('details,[hidden],.lead'); });
   var tall = document.body.scrollHeight > window.innerHeight * 6;
+  var firstRd = secs.filter(function(x){ return /^(Po|Prieš) \d+ tur/.test(secTitle(x.querySelector(':scope > h3.sect')).trim()); })[0];
   if (secs.length >= 4 && tall) secs.forEach(function(sec, i){
-    if (i < (r === 'lentele' ? 4 : 2) || sec.querySelector('svg:not(.tlogo):not([width="18"]), canvas, .pcgrid') || sec.classList.contains('scol')) return;
+    if (i < (r === 'lentele' ? 4 : 2) || sec === firstRd || sec.querySelector('svg:not(.tlogo):not([width="18"]), canvas, .pcgrid') || sec.classList.contains('scol')) return;
     var h = sec.querySelector(':scope > h3.sect'), key = r + '|' + sec.id;
     sec.classList.add('scol'); if (SC_OPEN[key]) sec.classList.add('open');
     h.setAttribute('role', 'button'); h.setAttribute('tabindex', '0'); h.setAttribute('aria-expanded', sec.classList.contains('open') ? 'true' : 'false');
