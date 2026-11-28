@@ -1724,6 +1724,8 @@ ol.act > li[hidden],p.actg[hidden],ol.act[hidden],.actmore[hidden]{display:none!
 .ppai{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:16px 0 -6px}
 .ppai span{font:700 11px/1 var(--f-data);letter-spacing:.08em;text-transform:uppercase;color:#7c3aed}
 .ppai .tog{font-style:normal;text-align:left;white-space:normal;border-color:color-mix(in srgb,#7c3aed 35%,var(--rule))}
+.aitoast{position:fixed;left:12px;right:12px;bottom:calc(84px + env(safe-area-inset-bottom));z-index:2147483001;background:var(--ink);color:var(--paper);padding:12px 14px;border-radius:12px;font-size:14px;line-height:1.45;overflow-wrap:anywhere;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+#aibtn{text-decoration:none}
 </style>
 </head>
 <body>
@@ -7583,12 +7585,23 @@ function aiAsk(q){
       if (c === 'not_granted' || c === 'sampling_disabled' || c === 'not_declared'){ AI.sample = null; } })
     .then(function(){ msg.pending = false; if (!msg.content) msg.content = 'Sustabdyta.'; AI.busy = false; AI.ctl = null; aiRender(); });
 }
+function aiFallback(){
+  if (document.getElementById('aibtn')) return;
+  var inClaude = !!(window.claude && claude.use), url = 'https://claude.ai/artifact/BW5R8x2QyNnfsyCRYuV3S5';
+  var b = document.createElement('a'); b.id = 'aibtn'; b.setAttribute('aria-label', 'Klausti AI');
+  b.innerHTML = '<svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M12 2l1.9 5.6L19.5 9.5l-5.6 1.9L12 17l-1.9-5.6L4.5 9.5l5.6-1.9zM19 14l.9 2.6 2.6.9-2.6.9L19 21l-.9-2.6-2.6-.9 2.6-.9zM5 15l.7 1.8 1.8.7-1.8.7L5 20l-.7-1.8-1.8-.7 1.8-.7z"/></svg><span>Klausk AI</span>';
+  if (inClaude){ b.href = '#'; b.addEventListener('click', function(e){ e.preventDefault(); alertBox('AI asistentas šioje Claude programėlėje neveikia. Atidaryk svetainę naršyklėje per claude.ai nuorodą: ' + url); }); }
+  else { b.href = url + (location.hash || ''); b.target = '_blank'; b.rel = 'noopener'; b.title = 'AI veikia per claude.ai: atsidarys naujame lange'; }
+  document.body.appendChild(b);
+}
+function alertBox(t){ var x = document.createElement('div'); x.className = 'aitoast'; x.textContent = t; document.body.appendChild(x); setTimeout(function(){ x.remove(); }, 6000); }
 function aiInit(){
+  if (AI.sample === undefined && !(window.claude && claude.use)){ AI.sample = null; setTimeout(aiFallback, 0); return; }
   if (AI.sample !== undefined || !window.claude || !claude.use) return;
   AI.sample = null;
   claude.use('user').then(function(u){ if (u && u.id) return u.id().then(function(i){ AI.uid = i || null; }); }).catch(function(){});
   claude.use('sample').then(function(s){
-    if (!s) return; AI.sample = s;
+    if (!s){ aiFallback(); return; } AI.sample = s;
     return s.limits().then(function(l){ AI.tools = l && l.tools ? l.tools.maxCount : 0; AI.img = l && l.images ? l.images : null; }, function(){ AI.tools = false; });
   }).then(function(){ if (!AI.sample) return; aiBuild(); document.getElementById('aibtn').hidden = AI.open; try { ppAiBtns(); } catch (e){} var at = document.querySelector('#aipanel .aiatt'); if (at) at.hidden = !AI.img; if (AI.img) document.querySelector('#aipanel .aifile').accept = AI.img.mediaTypes.join(','); }).catch(function(){});
 }
