@@ -1624,7 +1624,7 @@ aside section .big{font-style:italic;font-weight:900}
 /* ===== 2026-11-25 Canva kryptis visai svetainei ===== */
 h2.page,.headline{font-style:italic;font-weight:900;letter-spacing:-.015em}
 .kicker{color:var(--cv-v2)!important;letter-spacing:.08em}
-:root:not([data-theme="light"]) .deck{color:#b8c2da}
+:root[data-theme="dark"] .deck{color:#b8c2da}@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .deck{color:#b8c2da}}
 table.ag thead th{font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;font-weight:800;color:var(--ink-2);border-bottom:2px solid color-mix(in srgb,var(--cv-v) 45%,var(--rule))!important}
 table.ag tbody tr{transition:background .12s}
 table.ag tbody tr:hover{background:color-mix(in srgb,var(--cv-v) 9%,transparent)}
@@ -8799,6 +8799,7 @@ function fixInk(root){
       best = c; if (inkCR(c, bg) >= need) break;
     }
     if (inkCR(fg, [0,0,0]) && dark && inkLum(fg) > .8) best = [15, 23, 42];
+    if (inkCR(best, bg) < need){ var W = [255, 255, 255], D = [15, 23, 42]; best = inkCR(W, bg) > inkCR(D, bg) ? W : D; }
     e.style.setProperty('color', 'rgb(' + best.map(Math.round).join(',') + ')', 'important'); e.setAttribute('data-ink', '1');
   }
 }
