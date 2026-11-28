@@ -1721,6 +1721,9 @@ section.scol.open > h3.sect{margin-bottom:12px}
 .ppcutL tbody tr:nth-child(n+13){display:none}
 ol.act > li[hidden],p.actg[hidden],ol.act[hidden],.actmore[hidden]{display:none!important}
 .actf small{opacity:.6;margin-left:4px}
+.ppai{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:16px 0 -6px}
+.ppai span{font:700 11px/1 var(--f-data);letter-spacing:.08em;text-transform:uppercase;color:#7c3aed}
+.ppai .tog{font-style:normal;text-align:left;white-space:normal;border-color:color-mix(in srgb,#7c3aed 35%,var(--rule))}
 </style>
 </head>
 <body>
@@ -7338,6 +7341,14 @@ function ppLong(view){
     (t.closest('.tbl') || t).insertAdjacentElement('afterend', b);
   });
 }
+function ppAiBtns(){
+  var view = document.getElementById('view'), kind = ppKind(), bar = view.querySelector('.pptabs'); if (!bar || view.querySelector('.ppai')) return;
+  if (AI.sample){ var nmEl = view.querySelector('h2.page'), nm = nmEl ? (nmEl.childNodes[0] && nmEl.childNodes[0].nodeType === 3 ? nmEl.childNodes[0].textContent : nmEl.textContent).trim() : '';
+    var Q = {zaidejas: ['Ar verta turėti ' + nm + '? Įvertink jo formą, vaidmenį, tvarkaraštį ir prognozę.', 'Ką daryti su ' + nm + ' 15 turui?'], klubas: ['Kurie ' + nm + ' žaidėjai verti dėmesio fantasy ir kodėl?'], komanda: ['Kaip pagerinti komandą ' + nm + '? Kapitonas, mainai, laisvieji agentai.']}[kind] || [];
+    var ab = document.createElement('div'); ab.className = 'ppai'; ab.innerHTML = '<span>Klausk AI:</span>' + Q.map(function(q){ return '<button type="button" class="tog" data-aiq="' + esc(q.replace(/15 turui/, EL().next_round + ' turui')) + '">' + esc(q.replace(/15 turui/, EL().next_round + ' turui')) + '</button>'; }).join('');
+    ab.addEventListener('click', function(e){ var b = e.target.closest('[data-aiq]'); if (!b) return; aiToggle(true); aiAsk(b.getAttribute('data-aiq')); });
+    bar.insertAdjacentElement('beforebegin', ab); }
+}
 function ppTidy(){
   var view = document.getElementById('view'), kind = ppKind(), head = view.querySelector('.pphead,.phead'); if (!kind || !head || view.querySelector('.pptabs')) return;
   var cfg = PP_CFG[kind]; view.classList.add('pp');
@@ -7355,6 +7366,7 @@ function ppTidy(){
   var bar = document.createElement('div'); bar.className = 'pptabs'; bar.setAttribute('role', 'tablist'); bar.setAttribute('data-kind', kind);
   bar.innerHTML = cfg.map(function(t){ return '<button type="button" role="tab" data-k="' + t[0] + '">' + t[1] + '</button>'; }).join('');
   anchor.insertAdjacentElement('afterend', bar);
+  ppAiBtns();
   var after = bar;
   cfg.forEach(function(t){ var p = document.createElement('div'); p.className = 'pppanel'; p.setAttribute('data-k', t[0]); p.setAttribute('role', 'tabpanel'); after.insertAdjacentElement('afterend', p); after = p; });
   ppPlace(view); ppLong(view);
@@ -7578,7 +7590,7 @@ function aiInit(){
   claude.use('sample').then(function(s){
     if (!s) return; AI.sample = s;
     return s.limits().then(function(l){ AI.tools = l && l.tools ? l.tools.maxCount : 0; AI.img = l && l.images ? l.images : null; }, function(){ AI.tools = false; });
-  }).then(function(){ if (!AI.sample) return; aiBuild(); document.getElementById('aibtn').hidden = AI.open; var at = document.querySelector('#aipanel .aiatt'); if (at) at.hidden = !AI.img; if (AI.img) document.querySelector('#aipanel .aifile').accept = AI.img.mediaTypes.join(','); }).catch(function(){});
+  }).then(function(){ if (!AI.sample) return; aiBuild(); document.getElementById('aibtn').hidden = AI.open; try { ppAiBtns(); } catch (e){} var at = document.querySelector('#aipanel .aiatt'); if (at) at.hidden = !AI.img; if (AI.img) document.querySelector('#aipanel .aifile').accept = AI.img.mediaTypes.join(','); }).catch(function(){});
 }
 function aiInbox(v){ var k = 'ef-ai-inbox'; if (v){ lsSet(k, JSON.stringify(v)); return v; } try { return JSON.parse(lsGet(k) || '[]') || []; } catch (e){ return []; } }
 function aiInboxBtn(){ var b = document.querySelector('#aipanel .aiinb'); if (!b) return; var n = aiInbox().filter(function(x){ return !x.sent; }).length; b.hidden = !n; b.textContent = 'Komisarui (' + n + ')'; }
@@ -7606,7 +7618,7 @@ function aiPrev(){
 /* long pages: fold later sections and cut very long tables */
 var SC_OPEN = {};
 function secFold(r){
-  var view = document.getElementById('view'); if (ppKind() || /^(analitika|apzvalga-|nauja-lyga|taisykles|pagalba|apie)/.test(r)) return;
+  var view = document.getElementById('view'); if (ppKind() || /^(apzvalga-|nauja-lyga|taisykles|pagalba|apie)/.test(r)) return;
   var secs = Array.prototype.filter.call(view.querySelectorAll('section'), function(s){ return s.querySelector(':scope > h3.sect') && !s.parentElement.closest('section') && !s.closest('details,[hidden],.lead'); });
   var tall = document.body.scrollHeight > window.innerHeight * 6;
   if (secs.length >= 4 && tall) secs.forEach(function(sec, i){
