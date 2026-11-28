@@ -1666,7 +1666,7 @@ tr.st5{display:table-row!important;font-size:inherit!important;font-weight:inher
 #aibtn{position:fixed;right:20px;bottom:20px;z-index:60;display:inline-flex;align-items:center;gap:8px;border:0;border-radius:999px;padding:12px 18px 12px 14px;font:700 14px/1 var(--f-data);font-style:normal;color:#fff;background:linear-gradient(135deg,#6d28d9,#db2777);box-shadow:0 10px 28px rgba(109,40,217,.35);cursor:pointer}
 #aibtn:hover{transform:translateY(-1px);box-shadow:0 14px 32px rgba(109,40,217,.45)}
 #aibtn[hidden],#aipanel[hidden]{display:none!important}
-#aipanel{position:fixed;right:20px;bottom:20px;z-index:1000;width:min(440px,calc(100vw - 40px));height:min(680px,calc(100vh - 40px));display:flex;flex-direction:column;background:var(--paper);border:1px solid var(--rule);border-radius:18px;box-shadow:0 24px 60px rgba(20,20,40,.25);overflow:hidden}
+#aipanel{position:fixed;right:20px;bottom:20px;z-index:2147483000;width:min(440px,calc(100vw - 40px));height:min(680px,calc(100vh - 40px));display:flex;flex-direction:column;background:var(--paper);border:1px solid var(--rule);border-radius:18px;box-shadow:0 24px 60px rgba(20,20,40,.25);overflow:hidden}
 #aipanel header{display:flex;align-items:center;gap:8px;padding:12px 14px;background:linear-gradient(135deg,#6d28d9,#db2777);color:#fff}
 #aipanel header div{flex:1;display:flex;flex-direction:column;gap:2px}
 #aipanel header b{font:700 15px/1.1 var(--f-data)}
@@ -1693,7 +1693,17 @@ tr.st5{display:table-row!important;font-size:inherit!important;font-weight:inher
 .aiform textarea{flex:1;resize:none;border:1px solid var(--rule);border-radius:12px;padding:10px 12px;font:inherit;font-size:15px;background:transparent;color:var(--ink);max-height:140px}
 .aisend{border:0;border-radius:12px;padding:0 16px;font:700 14px/1 var(--f-data);font-style:normal;color:#fff;background:#6d28d9;cursor:pointer}
 @media (max-width:719px){#aibtn{right:12px;bottom:calc(74px + env(safe-area-inset-bottom));padding:11px}#aibtn span{display:none}
-#aipanel{right:0;left:0;bottom:0;top:0;width:auto;height:auto;border-radius:0;border:0}body.aiopen{overflow:hidden}}
+#aipanel{right:0;left:0;bottom:0;top:0;width:auto;height:auto;border-radius:0;border:0}body.aiopen{overflow:hidden}body.aiopen .tabbar{display:none!important}#aipanel{height:100dvh}}
+.aiatt{border:1px solid var(--rule);background:transparent;color:var(--ink-2);border-radius:12px;padding:0 10px;cursor:pointer;display:grid;place-items:center}
+.aiatt:hover{color:#6d28d9;border-color:#6d28d9}
+.aiprev{display:flex;gap:8px;padding:10px 10px 0;border-top:1px solid var(--rule);flex-wrap:wrap}
+.aiprev[hidden]{display:none}
+.aipv{position:relative}
+.aipv img{width:64px;height:64px;object-fit:cover;border-radius:10px;border:1px solid var(--rule);display:block}
+.aipv button{position:absolute;top:-6px;right:-6px;width:22px;height:22px;border-radius:50%;border:0;background:var(--ink);color:var(--paper);font-size:14px;line-height:1;cursor:pointer}
+.aithumbs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px}
+.aithumbs img{max-width:160px;max-height:160px;border-radius:10px;display:block}
+#aipanel.aidrag{outline:3px dashed #6d28d9;outline-offset:-8px}
 </style>
 </head>
 <body>
@@ -7323,7 +7333,7 @@ function ppTidy(){
 }
 var PPMO = null;
 /* ---------- AI asistentas (Claude per artifact sample capability) ---------- */
-var AI = {open: false, turns: [], busy: false, ctl: null, sample: undefined, tools: false};
+var AI = {open: false, turns: [], busy: false, ctl: null, sample: undefined, tools: false, img: null, files: []};
 function aiR(x, k){ return x == null || isNaN(x) ? null : Math.round(x * (k || 10)) / (k || 10); }
 function aiNorm(s){ return String(s || '').normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim(); }
 function aiOwner(p){ return p.cur ? {id: p.cur, team: team(p.cur), manager: who(p.cur)} : 'laisvasis agentas'; }
@@ -7464,18 +7474,23 @@ function aiBuild(){
   b.hidden = true; document.body.appendChild(b);
   var p = document.createElement('section'); p.id = 'aipanel'; p.hidden = true; p.setAttribute('aria-label', 'AI asistentas');
   p.innerHTML = '<header><div><b>AI asistentas</b><small>Eurolyga, fantasy, istorija</small></div><button type="button" class="aix" data-ai="new" title="Naujas pokalbis">Naujas</button><button type="button" class="aix" data-ai="close" aria-label="Uždaryti">×</button></header>' +
-    '<div class="aimsgs" aria-live="polite"></div><form class="aiform"><textarea rows="1" placeholder="Užduok klausimą..." aria-label="Klausimas"></textarea><button type="submit" class="aisend">Siųsti</button></form>';
+    '<div class="aimsgs" aria-live="polite"></div><div class="aiprev" hidden></div><form class="aiform"><button type="button" class="aiatt" data-ai="att" title="Įkelti nuotrauką" aria-label="Įkelti nuotrauką" hidden><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M21 19V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2zM8.5 13.5l2.5 3 3.5-4.5 4.5 6H5l3.5-4.5zM8 9.5A1.5 1.5 0 1 1 8 6.5a1.5 1.5 0 0 1 0 3z"/></svg></button><input type="file" class="aifile" accept="image/*" multiple hidden><textarea rows="1" placeholder="Užduok klausimą..." aria-label="Klausimas"></textarea><button type="submit" class="aisend">Siųsti</button></form>';
   document.body.appendChild(p);
   b.addEventListener('click', function(){ aiToggle(true); });
   p.addEventListener('click', function(e){
     var t = e.target.closest('[data-ai]');
-    if (t){ var a = t.getAttribute('data-ai'); if (a === 'close') aiToggle(false); else if (a === 'new'){ if (AI.ctl) AI.ctl.abort(); AI.turns = []; aiRender(); } else if (a === 'stop'){ if (AI.ctl) AI.ctl.abort(); } else if (a === 'q') aiAsk(t.textContent); return; }
+    if (t){ var a = t.getAttribute('data-ai'); if (a === 'close') aiToggle(false); else if (a === 'new'){ if (AI.ctl) AI.ctl.abort(); AI.turns = []; aiRender(); } else if (a === 'stop'){ if (AI.ctl) AI.ctl.abort(); } else if (a === 'q') aiAsk(t.textContent); else if (a === 'att') p.querySelector('.aifile').click(); else if (a === 'rm'){ AI.files.splice(+t.getAttribute('data-i'), 1); aiPrev(); } return; }
     var l = e.target.closest('.aimsgs a[href^="#"]'); if (l && window.innerWidth < 720) aiToggle(false);
   });
   var ta = p.querySelector('textarea');
   ta.addEventListener('input', function(){ ta.style.height = 'auto'; ta.style.height = Math.min(140, ta.scrollHeight) + 'px'; });
   ta.addEventListener('keydown', function(e){ if (e.key === 'Enter' && !e.shiftKey){ e.preventDefault(); p.querySelector('form').requestSubmit(); } });
-  p.querySelector('form').addEventListener('submit', function(e){ e.preventDefault(); var v = ta.value.trim(); if (!v || AI.busy) return; ta.value = ''; ta.style.height = 'auto'; aiAsk(v); });
+  p.querySelector('.aifile').addEventListener('change', function(e){ aiAddFiles(e.target.files); e.target.value = ''; });
+  ta.addEventListener('paste', function(e){ var fs = Array.prototype.filter.call((e.clipboardData && e.clipboardData.files) || [], function(f){ return /^image\//.test(f.type); }); if (fs.length && AI.img){ e.preventDefault(); aiAddFiles(fs); } });
+  p.addEventListener('dragover', function(e){ if (AI.img){ e.preventDefault(); p.classList.add('aidrag'); } });
+  p.addEventListener('dragleave', function(e){ if (e.target === p) p.classList.remove('aidrag'); });
+  p.addEventListener('drop', function(e){ p.classList.remove('aidrag'); if (!AI.img) return; e.preventDefault(); aiAddFiles(e.dataTransfer.files); });
+  p.querySelector('form').addEventListener('submit', function(e){ e.preventDefault(); var v = ta.value.trim(); if (!v && AI.files.length) v = 'Kas šioje nuotraukoje? Įvertink ją Eurolygos fantasy požiūriu.'; if (!v || AI.busy) return; ta.value = ''; ta.style.height = 'auto'; aiAsk(v); });
   aiRender();
 }
 function aiToggle(on){ var p = aiEl(); if (!p) return; AI.open = on; p.hidden = !on; document.getElementById('aibtn').hidden = on || !AI.sample; document.body.classList.toggle('aiopen', on); if (on) setTimeout(function(){ p.querySelector('textarea').focus(); }, 50); }
@@ -7488,24 +7503,26 @@ function aiRender(){
     return;
   }
   box.innerHTML = AI.turns.map(function(t, i){
-    if (t.role === 'user') return '<div class="aim u">' + esc(t.content) + '</div>';
+    if (t.role === 'user') return '<div class="aim u">' + (t.thumbs && t.thumbs.length ? '<div class="aithumbs">' + t.thumbs.map(function(u){ return '<img src="' + u + '" alt="Įkelta nuotrauka">'; }).join('') + '</div>' : '') + esc(t.content) + '</div>';
     return '<div class="aim a' + (t.err ? ' err' : '') + '">' + (t.content ? aiMd(t.content) : '<p class="aithink">' + esc(t.status || 'Galvoju') + '<i></i><i></i><i></i></p>') + (t.pending ? '<button type="button" class="tog aistop" data-ai="stop">Stabdyti</button>' : '') + '</div>';
   }).join('');
   box.scrollTop = box.scrollHeight;
 }
-var AI_ERR = {not_granted: 'Leidimas naudoti Claude nesuteiktas.', sampling_disabled: 'Claude šioje paskyroje nepasiekiamas.', rate_limited: 'Per daug užklausų arba pasiektas naudojimo limitas. Pabandyk vėliau.', session_expired: 'Reikia iš naujo prisijungti prie Claude.', refused: 'Į šį klausimą atsakyti negaliu. Pabandyk suformuluoti kitaip.', prompt_too_large: 'Pokalbis per ilgas. Pradėk naują.', empty_completion: 'Atsakymas tuščias. Pabandyk paklausti trumpiau.'};
+var AI_ERR = {image_rejected: 'Nuotraukos nepavyko nusiųsti: per didelė arba netinkamo formato.', images_unavailable: 'Šiame vaizde nuotraukų siųsti negalima.', not_granted: 'Leidimas naudoti Claude nesuteiktas.', sampling_disabled: 'Claude šioje paskyroje nepasiekiamas.', rate_limited: 'Per daug užklausų arba pasiektas naudojimo limitas. Pabandyk vėliau.', session_expired: 'Reikia iš naujo prisijungti prie Claude.', refused: 'Į šį klausimą atsakyti negaliu. Pabandyk suformuluoti kitaip.', prompt_too_large: 'Pokalbis per ilgas. Pradėk naują.', empty_completion: 'Atsakymas tuščias. Pabandyk paklausti trumpiau.'};
 function aiAsk(q){
   if (AI.busy || !AI.sample) return;
   AI.busy = true; AI.ctl = new AbortController();
-  AI.turns.push({role: 'user', content: q});
+  var files = AI.files.slice(); AI.files = []; aiPrev();
+  AI.turns.push({role: 'user', content: q, thumbs: files.map(function(f){ return URL.createObjectURL(f); }), nimg: files.length});
   var msg = {role: 'assistant', content: '', pending: true, status: 'Galvoju'}; AI.turns.push(msg); aiRender();
-  var hist = AI.turns.filter(function(t){ return t !== msg && !t.err && t.content; }).slice(-10).map(function(t){ return {role: t.role, content: t.content}; });
+  var hist = AI.turns.filter(function(t){ return t !== msg && !t.err && t.content; }).slice(-10).map(function(t, i, arr){ return {role: t.role, content: t.content + (t.nimg && i < arr.length - 1 ? '\n[Prie šios žinutės buvo ' + t.nimg + ' nuotrauka(-os); jos nebematomos, remkis savo ankstesniu atsakymu.]' : '')}; });
   while (hist.length && hist[0].role !== 'user') hist.shift();
   var input = [{role: 'user', content: aiRules() + (AI.tools ? '' : '\n\nDuomenys (įrankių nėra):\n' + JSON.stringify(AI_TOOLS[6].execute({})).slice(0, 6000))}].concat(hist);
   var names = {search_players: 'Ieškau žaidėjų', player_detail: 'Žiūriu žaidėjo duomenis', club_detail: 'Žiūriu klubo duomenis', euroleague_standings: 'Tikrinu Eurolygos lentelę', round_games: 'Tikrinu turo rungtynes', injuries: 'Tikrinu traumas', fantasy_league: 'Tikrinu lygos lentelę', fantasy_team: 'Žiūriu komandos sudėtį', trade_eval: 'Skaičiuoju mainus', el_history: 'Ieškau Eurolygos istorijoje'};
   var tools = AI.tools ? AI_TOOLS.slice(0, AI.tools).map(function(t){ return {name: t.name, description: t.description, inputSchema: t.inputSchema || {type: 'object', properties: {}}, execute: function(inp){ msg.status = names[t.name] || 'Renku duomenis'; if (!msg.content) aiRender(); return t.execute(inp || {}); }}; }) : undefined;
   var opts = {signal: AI.ctl.signal, modelTier: 'complex', onText: function(u){ msg.content = u.text; aiRender(); }};
   if (tools) opts.tools = tools; else opts.cache = false;
+  if (files.length){ opts.images = files; input[0] = {role: 'user', content: input[0].content + '\n- Jei pridėta nuotrauka (ekrano kopija iš BasketNews ar kitos programėlės, sudėtis, statistika, lažybų kuponas, rungtynių kadras), pirma atpažink, kas joje, perskaityk vardus ir skaičius, tada patikrink juos įrankiais ir atsakyk į klausimą.'}; }
   AI.sample(input, opts).then(function(r){ msg.content = r.text.replace(/\u2014/g, ','); if (r.truncated) msg.content += '\n\n(Atsakymas nutrūko.)'; })
     .catch(function(e){ var c = e && e.code; msg.content = (e && e.text) || ''; if (c !== 'cancelled'){ msg.err = !msg.content; msg.content += (msg.content ? '\n\n' : '') + (AI_ERR[c] || 'Nepavyko gauti atsakymo. Pabandyk dar kartą.'); }
       if (c === 'not_granted' || c === 'sampling_disabled' || c === 'not_declared'){ AI.sample = null; } })
@@ -7516,8 +7533,18 @@ function aiInit(){
   AI.sample = null;
   claude.use('sample').then(function(s){
     if (!s) return; AI.sample = s;
-    return s.limits().then(function(l){ AI.tools = l && l.tools ? l.tools.maxCount : 0; }, function(){ AI.tools = false; });
-  }).then(function(){ if (!AI.sample) return; aiBuild(); document.getElementById('aibtn').hidden = AI.open; }).catch(function(){});
+    return s.limits().then(function(l){ AI.tools = l && l.tools ? l.tools.maxCount : 0; AI.img = l && l.images ? l.images : null; }, function(){ AI.tools = false; });
+  }).then(function(){ if (!AI.sample) return; aiBuild(); document.getElementById('aibtn').hidden = AI.open; var at = document.querySelector('#aipanel .aiatt'); if (at) at.hidden = !AI.img; if (AI.img) document.querySelector('#aipanel .aifile').accept = AI.img.mediaTypes.join(','); }).catch(function(){});
+}
+function aiAddFiles(list){
+  if (!AI.img) return; var max = AI.img.maxCount || 4;
+  Array.prototype.forEach.call(list || [], function(f){ if (AI.files.length >= max) return; if (AI.img.mediaTypes.indexOf(f.type) < 0 || f.size > AI.img.maxInputBytes) return; AI.files.push(f); });
+  aiPrev(); var ta = document.querySelector('#aipanel textarea'); if (ta) ta.focus();
+}
+function aiPrev(){
+  var b = document.querySelector('#aipanel .aiprev'); if (!b) return;
+  b.hidden = !AI.files.length;
+  b.innerHTML = AI.files.map(function(f, i){ return '<span class="aipv"><img src="' + URL.createObjectURL(f) + '" alt=""><button type="button" data-ai="rm" data-i="' + i + '" aria-label="Pašalinti nuotrauką">×</button></span>'; }).join('');
 }
 function postRender(r){
   try { aiInit(); } catch (e){}
