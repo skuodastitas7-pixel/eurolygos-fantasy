@@ -3,6 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Eurolygos fantasy lyga: lentelė, turai, mainai, prognozės, koeficientai, žaidėjų ir klubų statistika, Eurolygos istorija ir AI asistentas.">
+<meta property="og:title" content="Eurolygos fantasy lyga">
+<meta property="og:description" content="Lentelė, turai, mainai, prognozės ir koeficientai. Draugų Eurolygos fantasy lygos svetainė.">
+<meta property="og:image" content="https://skuodastitas7-pixel.github.io/eurolygos-fantasy/thumb.jpg">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="artifact-thumbnail" href="thumb.jpg">
 <title>Eurolygos fantasy lyga</title>
 <link rel="icon" type="image/png" href="brand/icon.png">
 <link rel="apple-touch-icon" href="brand/icon180.png">
@@ -608,7 +615,7 @@ table.cmp th .pphoto{display:block;margin:0 0 6px auto}table.cmp th .pphoto.ini{
 .wl-t a{text-decoration:none}
 .wl-t .sub{display:block;font-weight:400;font-size:12px;color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 a.wl-v{font-weight:800;font-size:15px;text-decoration:none;padding:3px 9px;border-radius:99px;font-variant-numeric:tabular-nums}
-.wl-s.w a.wl-v{background:#16a34a;color:#fff}
+.wl-s.w a.wl-v{background:#15803d;color:#fff}
 .wl-s.l a.wl-v{background:color-mix(in srgb,#ef4444 22%,transparent);color:#ef4444}
 .wl-g{text-align:right;font-weight:700;font-variant-numeric:tabular-nums;line-height:1.1}
 .wl-g small{display:block;font-size:10.5px;font-weight:400;color:var(--ink-2);text-transform:uppercase;letter-spacing:.05em}
@@ -1191,7 +1198,7 @@ section[id]{scroll-margin-top:60px}
 .tcpos{border:1px solid color-mix(in srgb,#ef4444 50%,var(--rule));background:color-mix(in srgb,#ef4444 10%,transparent);border-radius:12px;padding:12px 14px;max-width:820px}.tcpos p{margin:6px 0 0;font-size:14px}
 
 .navg{display:none}
-@media (min-width:1100px){nav.main .navg{display:block;margin:14px 14px 2px;font-family:var(--f-data);font-size:10.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-2);opacity:.75}nav.main .navg:first-of-type{margin-top:4px}nav.main a{padding:7px 14px}}
+@media (min-width:1100px){nav.main .navg{display:block;margin:14px 14px 2px;font-family:var(--f-data);font-size:10.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-2);opacity:1}nav.main .navg:first-of-type{margin-top:4px}nav.main a{padding:7px 14px}}
 .tsh-gl{grid-column:1/-1;margin:8px 0 0;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}.tsh-g a[aria-current]{background:var(--red);color:var(--on-red,#fff)}
 .pnav{position:sticky;top:0;z-index:40;display:flex;align-items:center;gap:6px;overflow-x:auto;scrollbar-width:none;padding:8px 2px;margin:2px 0 14px;background:color-mix(in srgb,var(--paper) 94%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--rule)}
 .pnav::-webkit-scrollbar{display:none}
@@ -2745,7 +2752,7 @@ function drawTeamRounds(){
   function y(v){ return mt + ph - v / top * ph; }
   function f(v){ return Math.round(v * 10) / 10; }
   var slot = pw / rs.length, bw = Math.max(6, Math.min(40, slot * 0.62));
-  var s = '<svg class="trc" width="' + W + '" height="' + H + '" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Taškai kiekviename ture ir lygos vidurkis">';
+  var s = '<svg class="trc" width="' + W + '" height="' + H + '" viewBox="0 0 ' + W + ' ' + H + '" role="group" aria-label="Taškai kiekviename ture ir lygos vidurkis">';
   for (var v = 0; v <= top; v += step) s += '<line class="' + (v ? 'g' : 'z') + '" x1="' + ml + '" x2="' + (ml + pw) + '" y1="' + f(y(v)) + '" y2="' + f(y(v)) + '"/><text x="' + (ml - 6) + '" y="' + f(y(v) + 3.5) + '" text-anchor="end">' + v + '</text>';
   rs.forEach(function(r, i){
     var v = r.scores[id], p = r.places[id], cx = ml + slot * (i + 0.5);
@@ -3298,7 +3305,7 @@ function drawBump(){
   hist.forEach(function(hh){ hh.order.forEach(function(id, i){ (pts[id] = pts[id] || []).push([hh.round, i + 1]); }); });
   var have = {}; hist.forEach(function(hh){ have[hh.round] = true; });
   function path(a){ var q = ''; for (var i = 0; i < a.length; i++){ var X = x(a[i][0]), Y = y(a[i][1]); if (!i) q += 'M' + X + ' ' + Y; else { var px = x(a[i-1][0]), py = y(a[i-1][1]), mx = (px + X) / 2; q += 'C' + mx + ' ' + py + ' ' + mx + ' ' + Y + ' ' + X + ' ' + Y; } } return q; }
-  var s = '<svg class="bump2" viewBox="0 0 ' + W + ' ' + H + '" width="' + W + '" height="' + H + '" role="img" aria-label="Komandų vietos lentelėje po kiekvieno turo, paryškinta ' + esc(team(sel)) + '">';
+  var s = '<svg class="bump2" viewBox="0 0 ' + W + ' ' + H + '" width="' + W + '" height="' + H + '" role="group" aria-label="Komandų vietos lentelėje po kiekvieno turo, paryškinta ' + esc(team(sel)) + '">';
   s += '<rect class="podium" x="' + ml + '" y="' + (y(1) - 13) + '" width="' + (W - ml - mr) + '" height="' + (y(3) - y(1) + 26) + '" rx="10"/>';
   for (var p = 1; p <= NT(); p++){
     s += '<line class="grid" x1="' + ml + '" x2="' + (W - mr) + '" y1="' + y(p) + '" y2="' + y(p) + '" opacity=".35"/>';
@@ -4894,7 +4901,15 @@ function pageELAnalysis(){
     '</div></div><div id="an-list">' + anList() + '</div></section>';
   /* method */
   var pm = d.proj_meta, bt = pm.backtest, hr = pm.healthy;
-  h += '<section><h3 class="sect">Kaip skaičiuojama</h3><div class="an-tx">' +
+  var m2 = pm.model2;
+  if (m2) h += '<section><h3 class="sect">Kaip skaičiuojama</h3><div class="an-tx">' +
+    '<p><b>Modelis.</b> Prognozė išmokyta iš ' + m2.seasons + ' Eurolygos sezonų (' + m2.years + ') visų žaidėjų rungtynių žurnalų: ' + m2.rows.toLocaleString('lt-LT') + ' atvejų, kai sezono viduryje reikėjo nuspėti, kiek žaidėjas surinks iki sezono pabaigos. Modelis sveria sezono vidurkį, paskutinių 5 rungtynių formą, minutes ir jų pokytį, ankstesnių dviejų sezonų vidurkius, amžių ir sužaistų rungtynių skaičių. Mažai sužaidusių žaidėjų vidurkis stipriau traukiamas link ankstesnių sezonų ir pozicijos normos.</p>' +
+    '<p><b>Kiekvienas turas atskirai.</b> Kiekvienam likusiam turui (' + EL().next_round + '–38) prognozė koreguojama pagal aikštę (namie ' + pctSigned(m2.home - 1) + ', išvykoje ' + pctSigned(m2.away - 1) + ') ir varžovo gynybą prieš tą poziciją, tada dauginama iš tikimybės žaisti. Tikimybė žaisti: kaip dažnai žaidėjas žaidė pastaruosiuose turuose, o jei jis BasketNews traumų sąraše, pagal statusą (nežais 0, abejotinas 25 %, neaišku 50 %, tikėtina 85 %). Ilgos traumos su žinomu grįžimo turu įskaitomos visam likusiam sezonui.</p>' +
+    '<p><b>Patikrinimas.</b> Modelis išbandytas su trimis sezonais, kurių jis nematė mokydamasis: po 14 turo nuspėtas likusio sezono vidurkis. Vidutinė paklaida ' + m2.bt.map(function(b){ return b[0] + ' ' + nf2(b[2]) + ' FPTS (sezono vidurkio ' + nf2(b[1]) + ')'; }).join(', ') + '. Paskutinių 5 rungtynių forma viena pati yra prastesnė prognozė nei sezono vidurkis, todėl ji sveria nedaug.</p>' +
+    '<p><b>Komandos.</b> Komandos prognozė: geriausia sudėtis iš žaidėjų prognozių. Ji padauginta iš ' + nf2(m2.calib) + ', nes tikri lygos rezultatai paskutiniuose turuose tiek didesni: vadybininkai prieš turą pakeičia nežaidžiančius žaidėjus. Iš šių prognozių skaičiuojami koeficientai, patarimai ir mainų skaičiuoklė.</p>' +
+    '<p><b>Verdiktai.</b> ' + verdictTag("cap") + ' komandos žaidėjas tarp dešimties geriausių prognozių. ' + verdictTag("core") + ' komandos žaidėjas tarp 60 geriausių prognozių, kurio forma ir minutės nekrenta. ' + verdictTag("hold") + ' komandos žaidėjas tarp 130 geriausių prognozių. ' + verdictTag("sell") + ' komandos žaidėjas už 130 geriausių prognozių ribos arba už 60 geriausių ribos su krentančia forma ar minutėmis. ' + verdictTag("buy") + ' laisvasis agentas tarp 100 geriausių prognozių. ' + verdictTag("watch") + ' laisvasis agentas, kurio forma ar minutės kyla. ' + verdictTag("skip") + ' kiti laisvieji agentai. ' + verdictTag("out") + ' pagal BasketNews traumų sąrašą kitame ture nežais.</p>' +
+    '<p><b>Žymos.</b> Forma kyla ar krenta: paskutinių trijų turų vidurkis bent 5 FPTS ir bent ketvirtadaliu didesnis ar mažesnis už sezono vidurkį. Minutės auga ar mažėja: per paskutinius tris turus bent 4 minutėmis daugiau ar mažiau nei per sezoną. Efektyvus: per minutę surenka bent ketvirtadaliu daugiau nei vidutinis tos pozicijos žaidėjas. Palankus ar sunkus tvarkaraštis: kitų trijų varžovų poveikis bent 4 % į vieną ar kitą pusę.</p></div></section>';
+  else h += '<section><h3 class="sect">Kaip skaičiuojama</h3><div class="an-tx">' +
     '<p><b>Prognozė.</b> Tikėtini žaidėjo FPTS kitame ture: tikimybė žaisti × FPTS, jei žais. FPTS, jei žais: tikėtinos minutės × FPTS per minutę × varžovo poveikis. Tikėtinos minutės: sužaistų rungtynių minučių vidurkis, kuriame kiekvienos senesnės rungtynės sveria 10 % mažiau. FPTS per minutę: žaidėjo rodiklis, priartintas prie pozicijos vidurkio (gynėjų ' + nf2(pm.rates.G) + ', puolėjų ' + nf2(pm.rates.F) + ', centrų ' + nf2(pm.rates.C) + ') taip, lyg jis būtų sužaidęs dar ' + pm.params.k_fpm + ' minučių po vidutinį rodiklį: kuo mažiau sužaista, tuo labiau.</p>' +
     '<p><b>Tikimybė žaisti.</b> Kaip dažnai šį sezoną kitame ture žaidė panašaus vaidmens žaidėjai po tokių pačių pastarųjų turų. Sužaidęs paskutinį turą pagrindinis žaidėjas (bent 18 min.) kitame ture žaidžia ' + pct(hr.reg) + ' atvejų, rotacijos žaidėjas (10–18 min.) ' + pct(hr.rot) + ', retai žaidžiantis ' + pct(hr.fringe) + '; praleidus paskutinį turą tikimybė daug mažesnė. Jei žaidėjas yra BasketNews traumų sąraše, naudojamas sąrašas: nežais 0, abejotinas 20 %, neaišku iki 50 %, pasiruošęs bent 90 %. Ilgos traumos su žinomu grįžimo turu įskaitomos ir sezono koeficientuose.</p>' +
     '<p><b>Varžovo poveikis.</b> Kiek fantasy taškų varžovas leidžia surinkti tos pozicijos žaidėjams, palyginti su lygos vidurkiu. Kol sužaista mažai, skirtumas mažinamas: po ' + pm.params.g0 + ' rungtynių įskaitoma pusė jo. Namie prognozė didinama ' + pctSigned(pm.params.home - 1) + ', išvykoje tiek pat mažinama.</p>' +
@@ -5106,14 +5121,23 @@ function teamsForecastHtml(){
   allPlayers().forEach(function(p){ by[p.id] = p; });
   var ids = d.standings.map(function(s){ return s.id; }).sort(function(a, b){ return d.advice[a].rank_next - d.advice[b].rank_next || (a < b ? -1 : 1); });
   return '<section><h3 class="sect">Optimalių sudėčių prognozė ' + R + ' turui</h3><div class="tbl"><table class="ag"><thead><tr><th class="c">#</th><th>Komanda</th><th>Optimali sudėtis</th><th class="num">Likęs sezonas</th><th>Kapitonas</th><th>Pirmiausia atsisakyti → paimti</th></tr></thead><tbody>' +
-    (function(){ var mx = Math.max.apply(null, ids.map(function(t){ return d.advice[t].next; })) || 1; return ids.map(function(t, i){
-      var ad = d.advice[t], c = by[ad.cap[0]], m = ad.moves[0], cp = A.P[c.id].proj;
+    (function(){ var mx = Math.max.apply(null, ids.map(function(t){ return d.advice[t].next; })) || 1, UQ = uniqMoves(d, ids); return ids.map(function(t, i){
+      var ad = d.advice[t], c = by[ad.cap[0]], m = UQ[t], cp = A.P[c.id].proj;
       return '<tr class="tcl" style="--c:' + tcol(t) + '">' + rkRank(ad.rank_next - 1) + tmCell(t, esc(M[t].first)) + '<td><span class="hbar tm"><i style="width:' + (ad.next / mx * 100).toFixed(1) + '%;background:color-mix(in srgb,' + tcol(t) + ' 55%,transparent)"></i><em>' + nf1(ad.next) + '</em></span></td><td class="num">' + nf1(ad.season) + '<span class="sub">' + ad.rank_season + ' vieta</span></td>' +
         '<td><a class="cpx" href="#zaidejas-' + c.id + '">' + pFace(c, 36) + '<span class="cx2"><b>' + esc(c.name) + ' <i class="cbd">C</i></b><small>' + nf1(cp) + ' × 2 = ' + nf1(cp * 2) + '</small></span></a></td>' +
         '<td>' + (m ? '<span class="swx"><a class="o" href="#zaidejas-' + m.drop + '" title="Atsisakyti">' + pFace(by[m.drop], 26) + esc(by[m.drop].name) + '</a><span class="arr">→</span><a class="i" href="#zaidejas-' + m.add + '" title="Paimti">' + pFace(by[m.add], 26) + esc(by[m.add].name) + '</a></span><span class="swm"><span class="eff p" style="--a:22%">' + plusN(m.season) + '</span>per turą · <span class="psx">' + POS[by[m.drop].pos] + '</span></span>' : '<span class="muted">nėra ko keisti</span>') + '</td></tr>';
-    }).join(""); })() + '</tbody></table></div><p class="note">Optimali sudėtis: kiek pagal prognozes surinktų geriausiai sudėta komanda ' + R + ' ture (kapitonas ×2, suolas ×0,5). Likęs sezonas: tas pats per vieną turą iki sezono pabaigos, įskaitant žinomus traumų terminus. Pirmiausia atsisakyti: žaidėjas, kurį pakeitus tos pačios pozicijos laisvuoju agentu (gynėjas į gynėją, puolėjas į puolėją, centras į centrą) sudėtis sustiprėtų labiausiai; žalias ženkliukas rodo, kiek per turą pridėtų likusį sezoną. Išsamūs patarimai: komandos puslapyje.</p></section>';
+    }).join(""); })() + '</tbody></table></div><p class="note">Optimali sudėtis: kiek pagal prognozes surinktų geriausiai sudėta komanda ' + R + ' ture (kapitonas ×2, suolas ×0,5). Likęs sezonas: tas pats per vieną turą iki sezono pabaigos, įskaitant žinomus traumų terminus. Pirmiausia atsisakyti: žaidėjas, kurį pakeitus tos pačios pozicijos laisvuoju agentu (gynėjas į gynėją, puolėjas į puolėją, centras į centrą) sudėtis sustiprėtų labiausiai; žalias ženkliukas rodo, kiek per turą pridėtų likusį sezoną. Išsamūs patarimai: komandos puslapyje. Kiekvienas laisvasis agentas siūlomas tik vienai komandai, kuriai jis naudingiausias, nes draft lygoje jį gali paimti tik viena.</p></section>';
 }
 
+/* one free agent can go to one team only: give each FA to the team it helps most, then the next best for the rest */
+function uniqMoves(d, ids){
+  var all = [];
+  ids.forEach(function(t){ (d.advice[t].moves || []).forEach(function(m, k){ if (m.season > 0) all.push([t, m, k]); }); });
+  all.sort(function(a, b){ return b[1].season - a[1].season || a[2] - b[2]; });
+  var out = {}, used = {};
+  all.forEach(function(x){ if (out[x[0]] || used[x[1].add]) return; out[x[0]] = x[1]; used[x[1].add] = 1; });
+  return out;
+}
 /* ---------- trade calculator: best legal lineup before and after a trade ---------- */
 function bestLineupValue(players, val){
   var ps = players.slice().sort(function(a, b){ return val(b) - val(a) || (a.id < b.id ? -1 : 1); });
@@ -7154,7 +7178,7 @@ function pageHelp(){
   h += sect('Žodynėlis', GLOSSARY.length + ' terminai', '<dl class="gloss">' + GLOSSARY.map(function(z){ return '<dt>' + esc(z[0]) + '</dt><dd>' + esc(z[1]) + '</dd>'; }).join('') + '</dl>');
   return h;
 }
-var CHANGES = [["2026-11-28", "Naujas prognozių modelis: išmokytas iš 9 Eurolygos sezonų (2016–2026) žaidėjų rungtynių žurnalų, vertina sezono vidurkį, formą, minutes, ankstesnius sezonus, amžių, namų ir išvykos rungtynes, varžovo gynybą, traumas ir tikimybę žaisti kiekviename likusiame ture. Istoriniame teste paklaida apie 15 % mažesnė nei imant sezono vidurkį. Mainų skaičiuoklė, patarimai ir koeficientai perskaičiuoti."], ["2026-11-14", "Programėlė telefonui ir kompiuteriui (įdiegiama iš savo adreso), apatinė skyrių juosta telefone, lygos veiklos srautas, nauji turo ir lentelės paveikslėliai, bendras turo ir lentelės paveikslėlis."], ["2026-11-12", "Galios reitingas su istorija, turo akimirkos pagrindiniame puslapyje, karštų naujienų juosta, stebimi žaidėjai, grafikų kūrėjas, apžvalgų numeriai ir skaitymo laikas, apžvalgos komandų puslapiuose, formos juosta."], ["2026-11-11", "Kitos lygos: paraiška vienos nuorodos ir kelių klausimų pagrindu, užšifruotos lygos ir lygų perjungiklis (kiekviena lyga matoma tik su jos kodu)."], ["2026-11-11", "Paieškoje rasi istorinius žaidėjus, klubus ir komandų sezonus; nauji klubų visų laikų profiliai."], ["2026-11-11", "Visų Eurolygos rungtynių nuo 2000–2001 sezono žurnalai per fantasy prizmę: kiekvienų rungtynių puslapis su FPTS, sezonų ir komandų rungtynių sąrašai, žaidėjų rungtynių žurnalai ir visų laikų rekordai."], ["2026-11-11", "Istorijos žaidėjų profiliuose trūkstama šalis, ūgis ir gimimo data papildyti iš Vikipedijos, pridėtos nuorodos į Vikipedijos straipsnius."], ["2026-11-11", "Istorijoje: kiekvieno sezono komandų puslapiai su visa sudėtimi, 3 079 žaidėjų profiliai su nuotraukomis ir MyTeam kortelėmis, klubų logotipai."], ["2026-11-11", "Eurolygos istorija nuo 2000–2001 sezono per fantasy prizmę (Sofascore), karjeros lentelės žaidėjų puslapiuose."], ["2026-11-11", "Analitikoje: skilčių juosta kiekviename skirtuke ir „Visos skiltys“ su paieška per visus skirtukus."], ["2026-11-11", "Atviros lažybos su gyva tikimybe; Analitikos skirtukų juosta vėl telpa į rėmelį."], ["2026-11-11", "Sudėties patikra, statistikos kategorijos, sezono rekordai ir Survivor, ženkliukai lentelėje, žaidimai ir spėjimai, drafto rekordai, FPTS išskaidymas žaidėjų puslapiuose."], ["2026-11-11", "Įmokos (po 150 €) ir sezono prizai (400, 230, 110 €) pinigų balanse, taisyklėse ir koeficientuose."], ["2026-11-11", "Eurolygos lentelės prognozė, rungtynių linijos, klubų kelionės ir statistika, PIR lyderiai, daugiau koeficientų rinkų, pinigų skiltis, apžvalgų turinys ir nuorodos į pastraipas, pagalbos, „Apie“ ir šis puslapis."], ["2026-11-11", "Prognozės perskaičiuotos su visu Eurolygos tvarkaraščiu; išbandyti teisėjų ir žaidėjų sąveikos priedai."], ["2026-11-10", "Teisėjų poveikio modelis, žaidėjų sąveikos aikštėje modelis, Triple Captain ir Bench Boost planas, lygos pokalbis."], ["2026-11-09", "Paieška, lygos logotipas, analitikos skyrius su dešimtimis naujų lentelių."], ["2026-11-08", "Atšaukti mainai paslėpti, atnaujintas traumų ir mainų puslapių dizainas."]];
+var CHANGES = [["2026-11-28", "Naujas prognozių modelis: išmokytas iš 9 Eurolygos sezonų (2016–2026) žaidėjų rungtynių žurnalų, vertina sezono vidurkį, formą, minutes, ankstesnius sezonus, amžių, namų ir išvykos rungtynes, varžovo gynybą, traumas ir tikimybę žaisti kiekviename likusiame ture. Istoriniame teste paklaida apie 13 % mažesnė nei imant sezono vidurkį. Mainų skaičiuoklė, patarimai ir koeficientai perskaičiuoti."], ["2026-11-14", "Programėlė telefonui ir kompiuteriui (įdiegiama iš savo adreso), apatinė skyrių juosta telefone, lygos veiklos srautas, nauji turo ir lentelės paveikslėliai, bendras turo ir lentelės paveikslėlis."], ["2026-11-12", "Galios reitingas su istorija, turo akimirkos pagrindiniame puslapyje, karštų naujienų juosta, stebimi žaidėjai, grafikų kūrėjas, apžvalgų numeriai ir skaitymo laikas, apžvalgos komandų puslapiuose, formos juosta."], ["2026-11-11", "Kitos lygos: paraiška vienos nuorodos ir kelių klausimų pagrindu, užšifruotos lygos ir lygų perjungiklis (kiekviena lyga matoma tik su jos kodu)."], ["2026-11-11", "Paieškoje rasi istorinius žaidėjus, klubus ir komandų sezonus; nauji klubų visų laikų profiliai."], ["2026-11-11", "Visų Eurolygos rungtynių nuo 2000–2001 sezono žurnalai per fantasy prizmę: kiekvienų rungtynių puslapis su FPTS, sezonų ir komandų rungtynių sąrašai, žaidėjų rungtynių žurnalai ir visų laikų rekordai."], ["2026-11-11", "Istorijos žaidėjų profiliuose trūkstama šalis, ūgis ir gimimo data papildyti iš Vikipedijos, pridėtos nuorodos į Vikipedijos straipsnius."], ["2026-11-11", "Istorijoje: kiekvieno sezono komandų puslapiai su visa sudėtimi, 3 079 žaidėjų profiliai su nuotraukomis ir MyTeam kortelėmis, klubų logotipai."], ["2026-11-11", "Eurolygos istorija nuo 2000–2001 sezono per fantasy prizmę (Sofascore), karjeros lentelės žaidėjų puslapiuose."], ["2026-11-11", "Analitikoje: skilčių juosta kiekviename skirtuke ir „Visos skiltys“ su paieška per visus skirtukus."], ["2026-11-11", "Atviros lažybos su gyva tikimybe; Analitikos skirtukų juosta vėl telpa į rėmelį."], ["2026-11-11", "Sudėties patikra, statistikos kategorijos, sezono rekordai ir Survivor, ženkliukai lentelėje, žaidimai ir spėjimai, drafto rekordai, FPTS išskaidymas žaidėjų puslapiuose."], ["2026-11-11", "Įmokos (po 150 €) ir sezono prizai (400, 230, 110 €) pinigų balanse, taisyklėse ir koeficientuose."], ["2026-11-11", "Eurolygos lentelės prognozė, rungtynių linijos, klubų kelionės ir statistika, PIR lyderiai, daugiau koeficientų rinkų, pinigų skiltis, apžvalgų turinys ir nuorodos į pastraipas, pagalbos, „Apie“ ir šis puslapis."], ["2026-11-11", "Prognozės perskaičiuotos su visu Eurolygos tvarkaraščiu; išbandyti teisėjų ir žaidėjų sąveikos priedai."], ["2026-11-10", "Teisėjų poveikio modelis, žaidėjų sąveikos aikštėje modelis, Triple Captain ir Bench Boost planas, lygos pokalbis."], ["2026-11-09", "Paieška, lygos logotipas, analitikos skyrius su dešimtimis naujų lentelių."], ["2026-11-08", "Atšaukti mainai paslėpti, atnaujintas traumų ir mainų puslapių dizainas."]];
 var PLANNED = ["Komentarai, reakcijos ir balsavimai po apžvalgomis (reikia bendros duomenų bazės, kurios vieša svetainė dabar neturi).", "Virtualios lažybos su kreditais ir rungtynių spėjimų konkursas tarp narių.", "Vadybininkų profiliai su mėgstamu klubu ir šūkiu (laukiame narių atsakymų).", "Pusės sezono ir sezono pabaigos apžvalgų archyvas.", "Lygos taisyklių pakeitimų istorija ir ginčų sprendimo tvarka (komisaro sprendimai)."];
 function pageChanges(){
   var h = '<p class="kicker">Svetainė · versija ' + SITE_VER + '</p><h2 class="page">Kas naujo</h2><p class="deck">Svetainės atnaujinimų žurnalas ir planuojami dalykai.</p>';
@@ -8769,9 +8793,9 @@ function fixInk(root){
     var big = parseFloat(cs.fontSize) >= 18 || (parseFloat(cs.fontSize) >= 14 && +cs.fontWeight >= 700), need = big ? 3.1 : 4.6;
     if (inkCR(fg, bg) >= need) continue;
     var dark = inkLum(bg) > .18, best = fg, t;
-    for (t = 0.15; t <= 1.001; t += 0.15){
+    for (t = 0.1; t <= 1.001; t += 0.1){
       var tgt = dark ? [15, 23, 42] : [255, 255, 255];
-      var c = [0, 1, 2].map(function(k){ return fg[k] + (tgt[k] - fg[k]) * t; });
+      var c = [0, 1, 2].map(function(k){ return fg[k] + (tgt[k] - fg[k]) * Math.min(1, t); });
       best = c; if (inkCR(c, bg) >= need) break;
     }
     if (inkCR(fg, [0,0,0]) && dark && inkLum(fg) > .8) best = [15, 23, 42];
