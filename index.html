@@ -7333,7 +7333,7 @@ function ppTidy(){
 }
 var PPMO = null;
 /* ---------- AI asistentas (Claude per artifact sample capability) ---------- */
-var AI = {open: false, turns: [], busy: false, ctl: null, sample: undefined, tools: false, img: null, files: []};
+var AI = {open: false, turns: [], busy: false, ctl: null, sample: undefined, tools: false, img: null, files: [], uid: null};
 function aiR(x, k){ return x == null || isNaN(x) ? null : Math.round(x * (k || 10)) / (k || 10); }
 function aiNorm(s){ return String(s || '').normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim(); }
 function aiOwner(p){ return p.cur ? {id: p.cur, team: team(p.cur), manager: who(p.cur)} : 'laisvasis agentas'; }
@@ -7422,6 +7422,15 @@ var AI_TOOLS = [
       var pos = function(arr){ return arr.map(function(p){ return p.pos; }).sort().join(''); };
       return {positions_match: pos(give) === pos(get), a: ev(ta, give, get), b: tb ? ev(tb, get, give) : null};
     }},
+  {name: 'save_insight', description: 'Išsaugo naudotojo pateiktą NAUJĄ informaciją (trauma, sudėties ar rotacijos naujiena, mainai, klaida svetainės duomenyse, pasiūlymas svetainei, faktas iš įkeltos nuotraukos), kurią komisaras panaudos atnaujindamas svetainę. Prieš saugodamas palygink su svetainės duomenimis įrankiais ir nurodyk statusą. Nesaugok klausimų, nuomonių be fakto ir to, kas svetainėje jau yra teisinga.',
+    inputSchema: {type: 'object', properties: {category: {type: 'string', enum: ['trauma', 'sudetis_rotacija', 'mainai', 'duomenu_klaida', 'pasiulymas', 'kita']}, subject: {type: 'string', description: 'žaidėjo, klubo ar komandos id / pavadinimas, arba svetainės skiltis'}, claim: {type: 'string', description: 'trumpai, ką naudotojas teigia (lietuviškai)'}, evidence: {type: 'string', description: 'naudotojo nurodytas šaltinis arba kas matyti nuotraukoje'}, site_value: {type: 'string', description: 'ką šiuo metu rodo svetainės duomenys'}, status: {type: 'string', enum: ['patvirtinta_duomenimis', 'nauja_neprieštarauja', 'prieštarauja_duomenims']}, confidence: {type: 'number', description: '0-1'}}, required: ['category', 'claim', 'status']},
+    execute: function(a){
+      var id = 'i' + Date.now().toString(36) + Math.random().toString(36).slice(2, 8), lu = AI.turns.filter(function(t){ return t.role === 'user'; }).slice(-1)[0] || {};
+      var doc = {t: Date.now(), league: LG.cur || 'main', round_next: EL().next_round, category: String(a.category || 'kita').slice(0, 30), subject: String(a.subject || '').slice(0, 120), claim: String(a.claim || '').slice(0, 600),
+        evidence: String(a.evidence || '').slice(0, 600), site_value: String(a.site_value || '').slice(0, 400), status: String(a.status || '').slice(0, 40), confidence: Math.max(0, Math.min(1, Number(a.confidence) || 0.5)), user: AI.uid || null,
+        question: String(lu.content || '').slice(0, 600), had_image: !!lu.nimg};
+      doc.id = id; var q = aiInbox(); if (q.some(function(x){ return x.claim === doc.claim; })) return {saved: false, reason: 'jau išsaugota'}; q.push(doc); aiInbox(q.slice(-40)); setTimeout(aiInboxBtn, 0); return {saved: true};
+    }},
   {name: 'el_history', description: 'Eurolygos istorija 2000-2027 (Sofascore): kind=season grąžina sezono čempioną, komandų rekordus ir geriausius žaidėjus pagal fantasy vidurkį; kind=player žaidėjo karjerą pagal sezonus; kind=team klubo rekordus per visus sezonus; kind=top_games geriausius vieno mačo fantasy pasirodymus.',
     inputSchema: {type: 'object', properties: {kind: {type: 'string', enum: ['season', 'player', 'team', 'top_games']}, query: {type: 'string', description: 'sezonas (pvz. 22/23), žaidėjo ar klubo vardas'}}, required: ['kind']},
     execute: function(a){
@@ -7452,7 +7461,7 @@ function aiRules(){
     'FPTS: ' + SCORING.map(function(r){ return r[0] + ' ' + r[1]; }).join('; ') + '.\n' +
     'Prognozės svetainėje: modelis išmokytas iš 2016-2026 Eurolygos žaidėjų žurnalų (vidurkis, forma, minutės, ankstesni sezonai, amžius, namai/išvyka, varžovo gynyba, traumos, tikimybė žaisti).\n' +
     'Darbo taisyklės:\n- Prieš atsakydamas apie konkrečius žaidėjus, klubus, lygos komandas ar istoriją, gauk duomenis įrankiais; nespėliok skaičių. Jei duomenų nėra, pasakyk tai.\n- Galvok kaip geriausias fantasy analitikas: minutės ir vaidmuo, forma prieš vidurkį (mažos imties regresija), tvarkaraštis, traumos, rotacija, kapitono vertė, pozicijų reikalavimai.\n' +
-    '- Atsakyk lietuviškai, trumpai: pirma eilutė yra atsakymas ar rekomendacija, tada 2-6 punktai su svarbiausiais skaičiais. Be įžangų ir pakartojimų. Nenaudok ilgojo brūkšnio.\n- Žaidėją ar klubą minėdamas pirmą kartą, rašyk nuorodą Markdown formatu: [Vardas Pavardė](#zaidejas-<id>), klubą [Klubas](#klubas-<kodas mažosiomis be diakritikų>), lygos komandą [Pavadinimas](#komanda-<id>).\n- Nekritikuok BasketNews. Nekalbėk apie pinigų tikėtiną vertę.';
+    '- Atsakyk lietuviškai, trumpai: pirma eilutė yra atsakymas ar rekomendacija, tada 2-6 punktai su svarbiausiais skaičiais. Be įžangų ir pakartojimų. Nenaudok ilgojo brūkšnio.\n- Žaidėją ar klubą minėdamas pirmą kartą, rašyk nuorodą Markdown formatu: [Vardas Pavardė](#zaidejas-<id>), klubą [Klubas](#klubas-<kodas mažosiomis be diakritikų>), lygos komandą [Pavadinimas](#komanda-<id>).\n- Nekritikuok BasketNews. Nekalbėk apie pinigų tikėtiną vertę.' + ('\n- Jei naudotojas pateikia naujos informacijos (trauma, rotacija, mainai, klaida svetainėje, pasiūlymas, faktai nuotraukoje), patikrink ją įrankiais ir išsaugok su save_insight, nurodydamas, ką rodo svetainė. Atsakyme vienu sakiniu paminėk, kad informacija išsaugota ir ją galima perduoti komisarui mygtuku „Komisarui“ viršuje. Neišsaugok to paties dukart.');
 }
 function aiMd(t){
   var h = esc(t).replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>').replace(/\[([^\]]+)\]\((#[a-z0-9~_-]+)\)/gi, '<a href="$2">$1</a>');
@@ -7473,13 +7482,13 @@ function aiBuild(){
   var b = document.createElement('button'); b.id = 'aibtn'; b.type = 'button'; b.setAttribute('aria-label', 'Klausti AI'); b.innerHTML = '<svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M12 2l1.9 5.6L19.5 9.5l-5.6 1.9L12 17l-1.9-5.6L4.5 9.5l5.6-1.9zM19 14l.9 2.6 2.6.9-2.6.9L19 21l-.9-2.6-2.6-.9 2.6-.9zM5 15l.7 1.8 1.8.7-1.8.7L5 20l-.7-1.8-1.8-.7 1.8-.7z"/></svg><span>Klausk AI</span>';
   b.hidden = true; document.body.appendChild(b);
   var p = document.createElement('section'); p.id = 'aipanel'; p.hidden = true; p.setAttribute('aria-label', 'AI asistentas');
-  p.innerHTML = '<header><div><b>AI asistentas</b><small>Eurolyga, fantasy, istorija</small></div><button type="button" class="aix" data-ai="new" title="Naujas pokalbis">Naujas</button><button type="button" class="aix" data-ai="close" aria-label="Uždaryti">×</button></header>' +
+  p.innerHTML = '<header><div><b>AI asistentas</b><small>Eurolyga, fantasy, istorija</small></div><button type="button" class="aix aiinb" data-ai="inbox" title="Perduoti surinktą informaciją komisarui" hidden>Komisarui</button><button type="button" class="aix" data-ai="new" title="Naujas pokalbis">Naujas</button><button type="button" class="aix" data-ai="close" aria-label="Uždaryti">×</button></header>' +
     '<div class="aimsgs" aria-live="polite"></div><div class="aiprev" hidden></div><form class="aiform"><button type="button" class="aiatt" data-ai="att" title="Įkelti nuotrauką" aria-label="Įkelti nuotrauką" hidden><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M21 19V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2zM8.5 13.5l2.5 3 3.5-4.5 4.5 6H5l3.5-4.5zM8 9.5A1.5 1.5 0 1 1 8 6.5a1.5 1.5 0 0 1 0 3z"/></svg></button><input type="file" class="aifile" accept="image/*" multiple hidden><textarea rows="1" placeholder="Užduok klausimą..." aria-label="Klausimas"></textarea><button type="submit" class="aisend">Siųsti</button></form>';
   document.body.appendChild(p);
   b.addEventListener('click', function(){ aiToggle(true); });
   p.addEventListener('click', function(e){
     var t = e.target.closest('[data-ai]');
-    if (t){ var a = t.getAttribute('data-ai'); if (a === 'close') aiToggle(false); else if (a === 'new'){ if (AI.ctl) AI.ctl.abort(); AI.turns = []; aiRender(); } else if (a === 'stop'){ if (AI.ctl) AI.ctl.abort(); } else if (a === 'q') aiAsk(t.textContent); else if (a === 'att') p.querySelector('.aifile').click(); else if (a === 'rm'){ AI.files.splice(+t.getAttribute('data-i'), 1); aiPrev(); } return; }
+    if (t){ var a = t.getAttribute('data-ai'); if (a === 'close') aiToggle(false); else if (a === 'new'){ if (AI.ctl) AI.ctl.abort(); AI.turns = []; aiRender(); } else if (a === 'stop'){ if (AI.ctl) AI.ctl.abort(); } else if (a === 'q') aiAsk(t.textContent); else if (a === 'att') p.querySelector('.aifile').click(); else if (a === 'inbox') aiInboxSend(); else if (a === 'rm'){ AI.files.splice(+t.getAttribute('data-i'), 1); aiPrev(); } return; }
     var l = e.target.closest('.aimsgs a[href^="#"]'); if (l && window.innerWidth < 720) aiToggle(false);
   });
   var ta = p.querySelector('textarea');
@@ -7491,7 +7500,7 @@ function aiBuild(){
   p.addEventListener('dragleave', function(e){ if (e.target === p) p.classList.remove('aidrag'); });
   p.addEventListener('drop', function(e){ p.classList.remove('aidrag'); if (!AI.img) return; e.preventDefault(); aiAddFiles(e.dataTransfer.files); });
   p.querySelector('form').addEventListener('submit', function(e){ e.preventDefault(); var v = ta.value.trim(); if (!v && AI.files.length) v = 'Kas šioje nuotraukoje? Įvertink ją Eurolygos fantasy požiūriu.'; if (!v || AI.busy) return; ta.value = ''; ta.style.height = 'auto'; aiAsk(v); });
-  aiRender();
+  aiRender(); aiInboxBtn();
 }
 function aiToggle(on){ var p = aiEl(); if (!p) return; AI.open = on; p.hidden = !on; document.getElementById('aibtn').hidden = on || !AI.sample; document.body.classList.toggle('aiopen', on); if (on) setTimeout(function(){ p.querySelector('textarea').focus(); }, 50); }
 function aiRender(){
@@ -7515,10 +7524,10 @@ function aiAsk(q){
   var files = AI.files.slice(); AI.files = []; aiPrev();
   AI.turns.push({role: 'user', content: q, thumbs: files.map(function(f){ return URL.createObjectURL(f); }), nimg: files.length});
   var msg = {role: 'assistant', content: '', pending: true, status: 'Galvoju'}; AI.turns.push(msg); aiRender();
-  var hist = AI.turns.filter(function(t){ return t !== msg && !t.err && t.content; }).slice(-10).map(function(t, i, arr){ return {role: t.role, content: t.content + (t.nimg && i < arr.length - 1 ? '\n[Prie šios žinutės buvo ' + t.nimg + ' nuotrauka(-os); jos nebematomos, remkis savo ankstesniu atsakymu.]' : '')}; });
+  var hist = AI.turns.filter(function(t){ return t !== msg && !t.err && !t.info && t.content; }).slice(-10).map(function(t, i, arr){ return {role: t.role, content: t.content + (t.nimg && i < arr.length - 1 ? '\n[Prie šios žinutės buvo ' + t.nimg + ' nuotrauka(-os); jos nebematomos, remkis savo ankstesniu atsakymu.]' : '')}; });
   while (hist.length && hist[0].role !== 'user') hist.shift();
   var input = [{role: 'user', content: aiRules() + (AI.tools ? '' : '\n\nDuomenys (įrankių nėra):\n' + JSON.stringify(AI_TOOLS[6].execute({})).slice(0, 6000))}].concat(hist);
-  var names = {search_players: 'Ieškau žaidėjų', player_detail: 'Žiūriu žaidėjo duomenis', club_detail: 'Žiūriu klubo duomenis', euroleague_standings: 'Tikrinu Eurolygos lentelę', round_games: 'Tikrinu turo rungtynes', injuries: 'Tikrinu traumas', fantasy_league: 'Tikrinu lygos lentelę', fantasy_team: 'Žiūriu komandos sudėtį', trade_eval: 'Skaičiuoju mainus', el_history: 'Ieškau Eurolygos istorijoje'};
+  var names = {search_players: 'Ieškau žaidėjų', player_detail: 'Žiūriu žaidėjo duomenis', club_detail: 'Žiūriu klubo duomenis', euroleague_standings: 'Tikrinu Eurolygos lentelę', round_games: 'Tikrinu turo rungtynes', injuries: 'Tikrinu traumas', fantasy_league: 'Tikrinu lygos lentelę', fantasy_team: 'Žiūriu komandos sudėtį', trade_eval: 'Skaičiuoju mainus', save_insight: 'Perduodu informaciją komisarui', el_history: 'Ieškau Eurolygos istorijoje'};
   var tools = AI.tools ? AI_TOOLS.slice(0, AI.tools).map(function(t){ return {name: t.name, description: t.description, inputSchema: t.inputSchema || {type: 'object', properties: {}}, execute: function(inp){ msg.status = names[t.name] || 'Renku duomenis'; if (!msg.content) aiRender(); return t.execute(inp || {}); }}; }) : undefined;
   var opts = {signal: AI.ctl.signal, modelTier: 'complex', onText: function(u){ msg.content = u.text; aiRender(); }};
   if (tools) opts.tools = tools; else opts.cache = false;
@@ -7531,10 +7540,24 @@ function aiAsk(q){
 function aiInit(){
   if (AI.sample !== undefined || !window.claude || !claude.use) return;
   AI.sample = null;
+  claude.use('user').then(function(u){ if (u && u.id) return u.id().then(function(i){ AI.uid = i || null; }); }).catch(function(){});
   claude.use('sample').then(function(s){
     if (!s) return; AI.sample = s;
     return s.limits().then(function(l){ AI.tools = l && l.tools ? l.tools.maxCount : 0; AI.img = l && l.images ? l.images : null; }, function(){ AI.tools = false; });
   }).then(function(){ if (!AI.sample) return; aiBuild(); document.getElementById('aibtn').hidden = AI.open; var at = document.querySelector('#aipanel .aiatt'); if (at) at.hidden = !AI.img; if (AI.img) document.querySelector('#aipanel .aifile').accept = AI.img.mediaTypes.join(','); }).catch(function(){});
+}
+function aiInbox(v){ var k = 'ef-ai-inbox'; if (v){ lsSet(k, JSON.stringify(v)); return v; } try { return JSON.parse(lsGet(k) || '[]') || []; } catch (e){ return []; } }
+function aiInboxBtn(){ var b = document.querySelector('#aipanel .aiinb'); if (!b) return; var n = aiInbox().filter(function(x){ return !x.sent; }).length; b.hidden = !n; b.textContent = 'Komisarui (' + n + ')'; }
+var AI_CAT = {trauma: 'Trauma', sudetis_rotacija: 'Sudėtis/rotacija', mainai: 'Mainai', duomenu_klaida: 'Duomenų klaida', pasiulymas: 'Pasiūlymas', kita: 'Kita'};
+var AI_ST = {patvirtinta_duomenimis: 'patvirtinta svetainės duomenimis', nauja_neprieštarauja: 'nauja, duomenims neprieštarauja', prieštarauja_duomenims: 'prieštarauja svetainės duomenims'};
+function aiInboxSend(){
+  var q = aiInbox(), items = q.filter(function(x){ return !x.sent; }); if (!items.length) return;
+  var txt = '#AI-info ' + (LG.cur ? 'KU lyga' : 'pagrindinė lyga') + ', ' + new Date().toLocaleString('lt-LT', {timeZone: 'Europe/Vilnius'}) + '\n' + items.map(function(x, i){
+    return (i + 1) + '. [' + (AI_CAT[x.category] || x.category) + '] ' + (x.subject ? x.subject + ': ' : '') + x.claim + (x.evidence ? ' | šaltinis: ' + x.evidence : '') + (x.site_value ? ' | svetainėje: ' + x.site_value : '') + ' | ' + (AI_ST[x.status] || x.status) + ', tikimybė ' + Math.round((x.confidence || 0) * 100) + ' %' + (x.had_image ? ' | iš nuotraukos' : '');
+  }).join('\n');
+  var done = function(ok){ items.forEach(function(x){ x.sent = Date.now(); }); aiInbox(q); aiInboxBtn();
+    AI.turns.push({role: 'assistant', content: (ok ? '**Nukopijuota.** Įklijuok šį tekstą lygos Messenger grupėje arba tiesiai komisarui: jis bus patikrintas ir panaudotas kitą kartą atnaujinant svetainę.' : '**Nepavyko nukopijuoti automatiškai.** Pažymėk ir nukopijuok tekstą žemiau, tada įklijuok lygos Messenger grupėje.') + '\n\n' + txt, info: true}); aiRender(); };
+  try { navigator.clipboard.writeText(txt).then(function(){ done(true); }, function(){ done(false); }); } catch (e){ done(false); }
 }
 function aiAddFiles(list){
   if (!AI.img) return; var max = AI.img.maxCount || 4;
