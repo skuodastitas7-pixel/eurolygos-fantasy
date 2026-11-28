@@ -1711,6 +1711,14 @@ tr.st5{display:table-row!important;font-size:inherit!important;font-weight:inher
 .aithumbs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px}
 .aithumbs img{max-width:160px;max-height:160px;border-radius:10px;display:block}
 #aipanel.aidrag{outline:3px dashed #6d28d9;outline-offset:-8px}
+section.scol > h3.sect{cursor:pointer;user-select:none;margin-bottom:0}
+section.scol > h3.sect::after{content:"";margin-left:auto;width:9px;height:9px;border-right:2px solid var(--ink-2);border-bottom:2px solid var(--ink-2);transform:rotate(45deg);transition:transform .15s;flex:none;align-self:center}
+section.scol.open > h3.sect::after{transform:rotate(-135deg)}
+section.scol > h3.sect{display:flex;align-items:center;gap:8px}
+section.scol:not(.open) > :not(h3){display:none!important}
+section.scol:not(.open){padding-bottom:14px!important}
+section.scol.open > h3.sect{margin-bottom:12px}
+.ppcutL tbody tr:nth-child(n+13){display:none}
 </style>
 </head>
 <body>
@@ -7593,6 +7601,33 @@ function aiPrev(){
   b.hidden = !AI.files.length;
   b.innerHTML = AI.files.map(function(f, i){ return '<span class="aipv"><img src="' + URL.createObjectURL(f) + '" alt=""><button type="button" data-ai="rm" data-i="' + i + '" aria-label="Pašalinti nuotrauką">×</button></span>'; }).join('');
 }
+/* long pages: fold later sections and cut very long tables */
+var SC_OPEN = {};
+function secFold(r){
+  var view = document.getElementById('view'); if (ppKind() || /^(analitika|apzvalga-|nauja-lyga|taisykles|pagalba|apie)/.test(r)) return;
+  var secs = Array.prototype.filter.call(view.querySelectorAll('section'), function(s){ return s.querySelector(':scope > h3.sect') && !s.parentElement.closest('section') && !s.closest('details,[hidden],.lead'); });
+  var tall = document.body.scrollHeight > window.innerHeight * 6;
+  if (secs.length >= 5 && tall) secs.forEach(function(sec, i){
+    if (i < (r === 'lentele' ? 4 : 2) || sec.querySelector('svg:not(.tlogo):not([width="18"]), canvas, .pcgrid') || sec.classList.contains('scol')) return;
+    var h = sec.querySelector(':scope > h3.sect'), key = r + '|' + sec.id;
+    sec.classList.add('scol'); if (SC_OPEN[key]) sec.classList.add('open');
+    h.setAttribute('role', 'button'); h.setAttribute('tabindex', '0'); h.setAttribute('aria-expanded', sec.classList.contains('open') ? 'true' : 'false');
+    var tg = function(e){ if (e && e.target.closest('a,button:not(h3)')) return; var on = sec.classList.toggle('open'); SC_OPEN[key] = on; h.setAttribute('aria-expanded', on ? 'true' : 'false'); if (on) secLong(sec); };
+    h.addEventListener('click', tg); h.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); tg(); } });
+  });
+  if (tall) secs.forEach(function(sec){ if (!sec.classList.contains('scol') || sec.classList.contains('open')) secLong(sec); });
+}
+function secLong(sec){
+  sec.querySelectorAll('table').forEach(function(t){
+    var rows = t.tBodies[0] ? t.tBodies[0].rows : []; if (rows.length <= 20 || t.getAttribute('data-long') || t.closest('.tcw')) return;
+    t.setAttribute('data-long', '1'); t.classList.add('ppcutL');
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'tog ppmore'; b.textContent = 'Rodyti visas ' + rows.length + ' eilutes';
+    b.addEventListener('click', function(){ var on = t.classList.toggle('ppcutL'); b.textContent = on ? 'Rodyti visas ' + rows.length + ' eilutes' : 'Rodyti mažiau'; });
+    (t.closest('.tbl') || t).insertAdjacentElement('afterend', b);
+  });
+}
+function secOpen(el){ var s = el && el.closest && el.closest('section.scol'); if (s && !s.classList.contains('open')){ s.classList.add('open'); var h = s.querySelector(':scope > h3.sect'); if (h) h.setAttribute('aria-expanded', 'true'); SC_OPEN[current() + '|' + s.id] = true; secLong(s); } }
+document.addEventListener('click', function(e){ var j = e.target.closest && e.target.closest('a[data-jump]'); if (j) secOpen(document.getElementById(j.getAttribute('data-jump'))); }, true);
 function postRender(r){
   try { aiInit(); } catch (e){}
   if (!/^(zaidejas|klubas|komanda)-/.test(r)){ var vv = document.getElementById('view'); if (vv) vv.classList.remove('pp'); if (PPMO){ PPMO.disconnect(); PPMO = null; } }
@@ -7608,6 +7643,7 @@ function postRender(r){
     if (!h3.querySelector('.anch')){ var a = document.createElement('a'); a.className = 'anch'; a.href = '#' + current() + '~' + sec.id; a.textContent = '#'; a.title = 'Nuoroda į šią skiltį'; a.setAttribute('aria-label', 'Nuoroda į skiltį'); h3.appendChild(a); }
   });
   if (r.indexOf('analitika') === 0) secNav(r); else if (/^(zaidejas|klubas|komanda)-/.test(r)){ try { ppTidy(); } catch (e){ console.error(e); } } else pageNav(r);
+  try { secFold(r); } catch (e){ console.error(e); }
   pnavSpy();
   /* share button by the page title */
   var h2 = document.querySelector('#view h2.page');
@@ -7616,7 +7652,7 @@ function postRender(r){
   document.querySelectorAll('#view .tbl').forEach(function(t){ t.classList.toggle('scrx', t.scrollWidth > t.clientWidth + 4); });
   /* anchor scroll */
   var hs = (location.hash || '').split('~')[1];
-  if (hs){ var el = document.getElementById(hs); if (el) setTimeout(function(){ el.scrollIntoView({block: 'start'}); el.classList.add('srch-flash'); setTimeout(function(){ el.classList.remove('srch-flash'); }, 1600); }, 30); }
+  if (hs){ var el = document.getElementById(hs); secOpen(el); if (el) setTimeout(function(){ el.scrollIntoView({block: 'start'}); el.classList.add('srch-flash'); setTimeout(function(){ el.classList.remove('srch-flash'); }, 1600); }, 30); }
   if (r.indexOf('eurolyga-prognoze') === 0 || r === 'koeficientai') calcRun();
 }
 document.addEventListener('click', function(e){
